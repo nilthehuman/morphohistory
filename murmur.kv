@@ -1,0 +1,12 @@
+#kivy 2.1
+<Disc>
+    drag_rectangle: self.x, self.y, self.width, self.height
+    drag_timeout: 10000000
+    drag_distance: 0
+    size_hint: None, None  #size hints are kind of stupid
+    canvas:
+        Color:
+            rgb: self.color
+        Ellipse:
+            size: self.width, self.height
+            pos: self.pos
