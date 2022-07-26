@@ -21,11 +21,11 @@ class Cell:
 class Paradigm:
     """A 3D or 5D matrix of competing noun of verb forms for a given morphosyntactic context."""
     def __str__(self):
-        def descend(x):
-            if type(x) is not list:
-                return str(x)
+        def descend(xs):
+            if type(xs) is not list:
+                return str(xs)
             else:
-                below = [descend(y) for y in x]
+                below = [descend(x) for x in xs]
                 below = filter(lambda s: bool(len(s)), below)
                 return '[' + ', '.join(below) + ']'
         return descend(self.para)
@@ -67,7 +67,7 @@ class NounParadigm(Paradigm):
     @staticmethod
     def morphosyntactic_properties(i, j, k):
         """Get the set of features describing a cell's context.
-        (Gregory Stump's exact term if I'm not mistaken)."""
+        (Gregory Stump's exact term if I'm not mistaken.)"""
         assert (i < 2 and j < 7 and k < 18)
         numbers = {
             0 : 'sg',
@@ -132,6 +132,35 @@ class VerbParadigm(Paradigm):
     def fill_cell(self, cell, i, j, k, l, m):
         """Assign a single cell."""
         self.para[i][j][k][l][m] = cell
+
+    @staticmethod
+    def morphosyntactic_properties(i, j, k, l, m):
+        """Get the set of features describing a cell's context.
+        (Gregory Stump's exact term if I'm not mistaken.)"""
+        assert (i < 3 and j < 2 and k < 2 and l < 2 and m < 3)
+        persons = {
+            0 : '1',
+            1 : '2',
+            2 : '3'
+        }
+        numbers = {
+            0 : 'sg',
+            1 : 'pl'
+        }
+        defnesses = {
+            0 : 'def',
+            1 : 'indef'
+        }
+        tenses = {
+            0 : 'pres',
+            1 : 'past'
+        }
+        moods = {
+            0 : 'ind',
+            1 : 'cond',
+            2 : 'subj'
+        }
+        return "{%s, %s, %s, %s, %s}" % (persons[i], numbers[j], defnesses[k], tenses[l], moods[m])
 
     def nudge(self, amount, i, j, k, l, m):
         """Adjust the weights in a single cell."""
