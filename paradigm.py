@@ -113,13 +113,13 @@ class NounParadigm(Paradigm):
     def propagate(self, amount, i, j, k):
         """Spread a weight change down each dimension in the paradigm."""
         delta = clamp(self.para[i][j][k].importance * amount)
-        for i_ in range(0,2):
+        for i_ in range(2):
             if i_ != i:
                 self.nudge(delta, i_, j, k)
-        for j_ in range(0,7):
+        for j_ in range(7):
             if j_ != j:
                 self.nudge(delta, i, j_, k)
-        for k_ in range(0,18):
+        for k_ in range(18):
             if k_ != k:
                 self.nudge(delta, i, j, k_)
 
@@ -171,18 +171,18 @@ class VerbParadigm(Paradigm):
     def propagate(self, amount, i, j, k, l, m):
         """Spread a weight change down each dimension in the paradigm."""
         delta = clamp(self.para[i][j][k][l][m].importance * amount)
-        for i_ in range(0,3):
+        for i_ in range(3):
             if i_ != i:
                 self.nudge(delta, i_, j, k, l, m)
-        for j_ in range(0,2):
+        for j_ in range(2):
             if j_ != j:
                 self.nudge(delta, i, j_, k, l, m)
-        for k_ in range(0,2):
+        for k_ in range(2):
             if k_ != k:
                 self.nudge(delta, i, j, k_, l, m)
-        for l_ in range(0,2):
+        for l_ in range(2):
             if l_ != l:
                 self.nudge(delta, i, j, k, l_, m)
-        for m_ in range(0,3):
+        for m_ in range(3):
             if m_ != m:
                 self.nudge(delta, i, j, k, l, m_)
