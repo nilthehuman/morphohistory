@@ -7,6 +7,7 @@ from kivy.app import App
 from kivy.clock import Clock
 from kivy.core.window import Window
 from kivy.graphics import Color, Ellipse, Line
+from kivy.properties import ColorProperty
 from kivy.uix.behaviors import DragBehavior
 from kivy.uix.label import Label
 from kivy.uix.widget import Widget
@@ -56,14 +57,17 @@ class SimulationThread(Thread):
 #        self.simul_thread = SimulationThread(1, "SimulThread", 1)
 #        self.simul_thread.start() # test
 
+# inherit from Speaker?
 class Disc(DragBehavior, Widget):
+    color = ColorProperty()
+
     def __init__(self, n, color, pos, **kwargs):
-        self.color = color
         super().__init__(**kwargs)
+        self.color = color # to be removed
         self.pos = pos
         self.size = 20, 20
         self.n = n
-        self.speaker = Speaker()
+        self.speaker = Speaker.fromweight(n/100.)
         self.nametag = NameTag(text=str(n)) # + TODO.name_tag())
         self.nametag_on = False
         Window.bind(mouse_pos=self.on_mouse_pos)
@@ -82,11 +86,20 @@ class Disc(DragBehavior, Widget):
                 debug("Turning on nametag for", self.n)
                 Window.add_widget(self.nametag)
                 self.nametag_on = True
-                self.color = 1, 1, 1  # experiment
         elif self.nametag_on:
             debug("Turning off nametag for", self.n)
             Window.remove_widget(self.nametag)
             self.nametag_on = False
+
+    def update_color(self):
+        yellow = (1.0, 1.0, 0.0)
+        purple = (1.0, 0.0, 1.0)
+        w = self.speaker.principal_weight()
+        self.color = [sum(x) for x in zip([(1-w) * y for y in yellow], [w * p for p in purple])]
+
+    def talk_to(self, hearer):
+        self.speaker.talk_to(hearer.speaker)
+        self.update_color()
 
 class NameTag(Label):
     def __init__(self, **kwargs):
@@ -120,7 +133,8 @@ class Agora(Widget):
         self.talk_line = Line(points=[pick[0].pos[0]+10, pick[0].pos[1]+10, pick[1].pos[0]+10, pick[1].pos[1]+10], width=2)
         self.canvas.add(Color(0.2, 0.0, 0.8))
         self.canvas.add(self.talk_line)
-        return True
+        pick[0].talk_to(pick[1])
+        return True # keep going
 
 class MurmurApp(App):
     def build(self):

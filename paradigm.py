@@ -60,6 +60,10 @@ class NounParadigm(Paradigm):
     def __init__(self, weight_a=0.5):
         self.para = [[[NounCell(i, j, k, weight_a) for k in range(18)] for j in range(7)] for i in range(2)]
 
+    def __getitem__(self, n):
+        return self.para[n]
+
+    # unnecessary if __getitem__ is a thing?
     def fill_cell(self, cell, i, j, k):
         """Assign a single cell."""
         self.para[i][j][k] = cell
@@ -106,7 +110,7 @@ class NounParadigm(Paradigm):
 
     def nudge(self, amount, i, j, k):
         """Adjust the weights in a single cell."""
-        assert(0 <= amount and amount <= 1)
+        assert(-1 <= amount and amount <= 1)
         assert(i < 2 and j < 7 and k < 18)
         self.para[i][j][k].weight_a = clamp(self.para[i][j][k].weight_a + amount)
 
