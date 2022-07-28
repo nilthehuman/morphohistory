@@ -1,4 +1,39 @@
 #kivy 2.1
+
+<TopBoxLayout>
+    orientation: 'horizontal'
+    size: root.width, root.height
+    spacing: 0
+    canvas:
+        Color:
+            rgb: 0, 0.08, 0.12
+        Rectangle:
+            pos: self.pos
+            size: self.size
+    DemoAgora:
+        size_hint: 0.75, 1
+    ButtonLayout:
+        size_hint: 0.25, 1
+
+<ButtonLayout>
+    orientation: 'vertical'
+    padding: [20, 100, 20, 100]
+    spacing: 40
+    canvas:
+        Color:
+            rgb: 0.05, 0.18, 0.22
+        Rectangle:
+            pos: self.pos
+            size: self.size
+    Button:
+        size_hint: 1, 1
+        text: 'start or something'
+    StartStopSimButton:
+        size_hint: 1, 1
+
+<StartStopSimButton>
+    text: self.text
+
 <Disc>
     drag_rectangle: self.x, self.y, self.width, self.height
     drag_timeout: 10000000
@@ -11,7 +46,7 @@
             size: self.width, self.height
             pos: self.pos
 
-<NameTag>:
+<NameTag>
     size: self.texture_size[0] + 5, self.texture_size[1] + 5
     size_hint: None, None
     canvas.before:

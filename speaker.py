@@ -9,9 +9,10 @@ class Speaker:
     """A simulated individual within the speaking community."""
     def __init__(self, para=NounParadigm()):
         self.para = para
-        self.experience = 10.0 # experiment!! reset to 1
-        self.para.fill_cell(NounCell(number=0, possessor=0, case=0, weight_a=self.para.para[0][0][0].weight_a, form_a='Harkivból', form_b='Harkivből', importance=0.2), 0, 0, 0)
-        print(str(self.para.para[0][0][0]))
+        self.experience = 1.0
+        # temporary hack, for demo purposes
+        self.para[0][0][0] = NounCell(number=0, possessor=0, case=0,
+            weight_a=self.para.para[0][0][0].weight_a, form_a='Harkivból', form_b='Harkivből', importance=0.2)
 
     @classmethod
     def fromweight(cls, weight_a):
@@ -21,7 +22,7 @@ class Speaker:
     def principal_weight(self):
         """Which way the speaker is leaning, summed up in a single float."""
         sum_w = 0
-        sum_imp = 0.000001 # avoid div by zero
+        sum_imp = 0
         for i in range(2):
             for j in range(7):
                 for k in range(18):
@@ -34,17 +35,21 @@ class Speaker:
         return str(self.para[0][0][0])
 
     def talk_to(self, hearer):
-        i = randrange(2)
-        j = randrange(7)
-        k = randrange(18)
+        i, j, k = -1, -1, -1
+        # pick a non-empty cell to share with the hearer
+        while True:
+            i = randrange(2)
+            j = randrange(7)
+            k = randrange(18)
+            if len(self.para.para[i][j][k].form_a):
+                break
         weights = [self.para.para[i][j][k].weight_a, 1 - self.para.para[i][j][k].weight_a]
         is_form_a = choices([True, False], weights=weights)
         hearer.hear_noun(i, j, k, is_form_a[0])
 
     def hear_noun(self, i, j, k, is_form_a):
         form = self.para.para[i][j][k].form_a if is_form_a else self.para.para[i][j][k].form_b
-        if len(form):
-            print("I just heard", form)
+        debug("I just heard", form)
         # we might want to use exponential decay instead
         delta = (-1 if is_form_a else 1) / (self.experience + 1)
         self.para.nudge(delta, i, j, k)

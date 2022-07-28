@@ -61,12 +61,8 @@ class NounParadigm(Paradigm):
         self.para = [[[NounCell(i, j, k, weight_a) for k in range(18)] for j in range(7)] for i in range(2)]
 
     def __getitem__(self, n):
+        """Return a single cell (assignable)."""
         return self.para[n]
-
-    # unnecessary if __getitem__ is a thing?
-    def fill_cell(self, cell, i, j, k):
-        """Assign a single cell."""
-        self.para[i][j][k] = cell
 
     @staticmethod
     def morphosyntactic_properties(i, j, k):
