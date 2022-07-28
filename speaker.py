@@ -1,4 +1,4 @@
-"""Bare-bones simulated players that use one-word sentences to interact with each other."""
+"""Bare-bones simulated speakers that use one-word sentences to interact with each other."""
 
 from paradigm import NounParadigm, VerbParadigm
 
@@ -13,11 +13,12 @@ class Speaker:
         me = cls(NounParadigm(weight_a))
         return me
 
-    def alignment():
-        return self.para[0][0][0].weight_a
+    def name_tag():
+        return str(self.para[0][0][0])
 
     def hear_noun(self, i, j, k, form_a):
         self.para.nudge((-1 if form_a else 1) / self.experience, i, j, k)
         self.para.propagate(self.experience)
 
     def say_noun(self, hearer, i, j, k, form_a):
+        pass
