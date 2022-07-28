@@ -18,6 +18,13 @@ class Cell:
             return "(%s, %g * \"%s\" + %g * \"%s\")" % \
             (self.get_morphosyntactic_properties(), self.weight_a, self.form_a, 1.0-self.weight_a, self.form_b)
 
+    def to_str_short(self):
+        if 0 == len(self.form_a):
+            return ''
+        else:
+            return "%g*\"%s\" + %g*\"%s\"" % \
+            (self.weight_a, self.form_a, 1.0-self.weight_a, self.form_b)
+
 class Paradigm:
     """A 3D or 5D matrix of competing noun of verb forms for a given morphosyntactic context."""
     def __str__(self):

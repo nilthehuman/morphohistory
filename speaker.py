@@ -31,8 +31,8 @@ class Speaker:
                         sum_imp = sum_imp + self.para.para[i][j][k].importance
         return sum_w / sum_imp
 
-    def name_tag():
-        return str(self.para[0][0][0])
+    def name_tag(self):
+        return self.para[0][0][0].to_str_short()
 
     def talk_to(self, hearer):
         i, j, k = -1, -1, -1

@@ -83,7 +83,6 @@ class StartStopSimButton(Button):
             self.sim = None
             self.text = self.start_text
 
-# inherit from Speaker?
 class Disc(DragBehavior, Widget):
     color = ColorProperty()
 
@@ -94,17 +93,12 @@ class Disc(DragBehavior, Widget):
         self.n = n
         self.speaker = Speaker.fromweight(weight_a)
         self.update_color()
-        self.nametag = NameTag(text=str(n)) # + TODO.name_tag())
+        self.nametag = NameTag(text=str(n) + ': ' + self.speaker.name_tag())
         self.nametag_on = False
         Window.bind(mouse_pos=self.on_mouse_pos)
 
     def on_pos(self, *args):
         pass #print(self.x, self.y)
-
-    #def on_touch_down(self, touch):
-    #    super().on_touch_down(touch)
-    #    if (self.collide_point(touch.pos[0], touch.pos[1])):
-    #        print("mine!", self.n)
 
     def on_mouse_pos(self, window, pos):
         if (self.collide_point(*pos)):
