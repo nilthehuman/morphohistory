@@ -24,6 +24,8 @@ from speaker import Speaker
 
 # Adapted from kivy.org/doc/stable/api-kivy.core.window.html
 class KeyeventHandler(Widget):
+    """Handles hotkeys to the application's basic features."""
+
     sim = None
     
     def __init__(self, **kwargs):
@@ -49,28 +51,17 @@ class KeyeventHandler(Widget):
             return True
         return False
 
-# not sure if this is the way to go
-class SimulationThread(Thread):
-    def __init__(self):
-        Thread.__init__(self)
-#        super().__init__(threadID, name, counter)
-    def run(self):
-        print ("Starting " + self.name)
-        sleep(5)
-        print (self.name)
-        print ("Exiting " + self.name)
-
-# usage:
-#        self.simul_thread = SimulationThread(1, "SimulThread", 1)
-#        self.simul_thread.start() # test
-
 class TopBoxLayout(BoxLayout):
+    """The root widget. Holds both the Arena and the control buttons on the right."""
     pass
 
 class ButtonLayout(BoxLayout):
+    """The control buttons at the right edge of the screen."""
     pass
 
 class StartStopSimButton(Button):
+    """Runs or halts the simulation process."""
+
     sim = None
     start_text = 'Csapassad neki!'
     stop_text = 'Várj egy kicsit,\nlégy oly kedves!'
@@ -89,7 +80,9 @@ class StartStopSimButton(Button):
             self.sim = None
             self.text = self.start_text
 
-class Disc(DragBehavior, Widget):
+class SpeakerDot(DragBehavior, Widget):
+    """The visual representation of a single speaker on the GUI."""
+
     color = ColorProperty()
 
     def __init__(self, n, pos, weight_a, **kwargs):
@@ -102,9 +95,6 @@ class Disc(DragBehavior, Widget):
         self.nametag = NameTag(text=str(n) + ': ' + self.speaker.name_tag())
         self.nametag_on = False
         Window.bind(mouse_pos=self.on_mouse_pos)
-
-    def on_pos(self, *args):
-        pass #print(self.x, self.y)
 
     def on_mouse_pos(self, window, pos):
         if (self.collide_point(*pos)):
@@ -128,6 +118,8 @@ class Disc(DragBehavior, Widget):
         self.update_color()
 
 class NameTag(Label):
+    """A kind of tooltip that shows how biased a speaker is at the moment."""
+
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
         Window.bind(mouse_pos=self.on_mouse_pos)
@@ -136,11 +128,14 @@ class NameTag(Label):
         self.pos = pos
 
 class Agora(Widget):
+    """A collection of simulated speakers talking to each other."""
+
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
         self.talk_line = None
 
     def simulate(self, dt):
+        """Perform one iteration: pick two individuals to talk to each other."""
         debug("Starting simulation")
         pairs = [(s, t) for (s, t) in product(self.children, self.children) if s != t]
         inv_dist_sq = lambda p, q: 1 / ((p[0] - q[0])**2 + (p[1] - q[1])**2)
@@ -156,6 +151,8 @@ class Agora(Widget):
         return True # keep going
 
 class DemoAgora(Agora):
+    """A 10x10 grid of speakers, pure A in the top left corner, pure B at bottom right and everything else in between."""
+
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
         # ugh, this is pretty ughly, but the widget still has default size at this point...
@@ -166,7 +163,7 @@ class DemoAgora(Agora):
             for col in range(10):
                 weight_a = 0.05 * (row + col)
                 pos = self.width * 0.1 + self.width * 0.09 * col - 10, self.height * 0.9 - self.height * 0.09 * row - 10
-                self.add_widget(Disc(row*10 + col, pos, weight_a))
+                self.add_widget(SpeakerDot(row*10 + col, pos, weight_a))
         self.unbind(size=self.populate)
 
 class MurmurApp(App):
