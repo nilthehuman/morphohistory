@@ -24,6 +24,8 @@ from speaker import Speaker
 
 # Adapted from kivy.org/doc/stable/api-kivy.core.window.html
 class KeyeventHandler(Widget):
+    sim = None
+    
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
         self.keyboard = Window.request_keyboard(self.on_keyboard_closed, self)
@@ -35,7 +37,11 @@ class KeyeventHandler(Widget):
 
     def on_keypressed(self, keyboard, keycode, text, modifiers):
         if keycode[1] == 'g':
-            event = Clock.schedule_interval(App.get_running_app().root.children[1].simulate, 0.1)
+            if not self.sim:
+                self.sim = Clock.schedule_interval(App.get_running_app().root.children[1].simulate, 0.1)
+            else:
+                self.sim.cancel()
+                self.sim = None
             return True
         elif keycode[1] == 'q':
             debug("Exiting app")
