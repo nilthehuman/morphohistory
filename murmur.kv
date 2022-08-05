@@ -11,13 +11,14 @@
             pos: self.pos
             size: self.size
     DemoAgora:
-        size_hint: 0.75, 1
+        size_hint: None, None
+        size: 600, 600
     ButtonLayout:
-        size_hint: 0.25, 1
+        width: 200
 
 <ButtonLayout>
     orientation: 'vertical'
-    padding: [20, 100, 20, 100]
+    padding: [20, 200, 20, 200]
     spacing: 40
     canvas:
         Color:
@@ -25,11 +26,14 @@
         Rectangle:
             pos: self.pos
             size: self.size
+    #AnchorLayout: # use this if centering stops working for some reason
     Button:
-        size_hint: 1, 1
+        size_hint: None, None
+        size: 160, 80
         text: 'start or something'
     StartStopSimButton:
-        size_hint: 1, 1
+        size_hint: None, None
+        size: 160, 80
 
 <StartStopSimButton>
     text: self.text
