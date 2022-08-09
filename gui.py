@@ -7,15 +7,18 @@ from kivy.app import App
 from kivy.clock import Clock
 from kivy.core.window import Window
 from kivy.graphics import Color, Ellipse, Line
-from kivy.properties import ColorProperty
+from kivy.properties import ColorProperty, ObjectProperty
 from kivy.uix.behaviors import DragBehavior
 from kivy.uix.boxlayout import BoxLayout
 from kivy.uix.button import Button
+from kivy.uix.floatlayout import FloatLayout
 from kivy.uix.label import Label
+from kivy.uix.popup import Popup
 from kivy.uix.widget import Widget
 
 from itertools import product
 from logging import debug
+from os.path import isfile, join
 from random import choices
 from threading import Thread
 from time import sleep
@@ -34,7 +37,7 @@ class KeyeventHandler(Widget):
         self.keyboard.bind(on_key_down=self.on_keypressed)
 
     def on_keyboard_closed(self):
-        self.keyboard.unbind(on_key_down=self._on_keyboard_down)
+        self.keyboard.unbind(on_key_down=self.on_keypressed)
         self.keyboard = None
 
     def on_keypressed(self, keyboard, keycode, text, modifiers):
@@ -56,8 +59,38 @@ class TopBoxLayout(BoxLayout):
     pass
 
 class ButtonLayout(BoxLayout):
-    """The control buttons at the right edge of the screen."""
+    """The bar with control buttons at the right edge of the screen."""
     pass
+
+class SaveToFilePopup(FloatLayout):
+    """TODO..."""
+    save = ObjectProperty(None)
+    cancel = ObjectProperty(None)
+    text_input = ObjectProperty(None)
+
+class SaveToFileButton(Button):
+    """Opens a popup window for writing the current configuration of the Arena to file."""
+    def __init__(self, **kwargs):
+        super().__init__(**kwargs)
+        self.bind(on_press=self.show_save_popup)
+
+    def show_save_popup(self, *args):
+        content = SaveToFilePopup(save=self.save, cancel=self.dismiss_popup)
+        self.popup = Popup(title="Agora mentése", content=content, size_hint=(0.4, 0.4))
+        self.popup.open() 
+
+    def dismiss_popup(self):
+        self.popup.dismiss()
+
+    def save(self, path, filename):
+        fullpath = join(path, filename)
+        savebutton = self.popup.ids.container.children[0].ids.save_button
+        if isfile(fullpath) and savebutton.text != "Felulir?":
+            savebutton.text = "Felulir?"
+            return
+        with open(fullpath, 'w') as stream:
+            stream.write("alma")
+        self.dismiss_popup()
 
 class StartStopSimButton(Button):
     """Runs or halts the simulation process."""

@@ -11,9 +11,11 @@
             pos: self.pos
             size: self.size
     DemoAgora:
+        id: agora
         size_hint: None, None
         size: 600, 600
     ButtonLayout:
+        id: button_layout
         width: 200
 
 <ButtonLayout>
@@ -27,13 +29,49 @@
             pos: self.pos
             size: self.size
     #AnchorLayout: # use this if centering stops working for some reason
-    Button:
+    SaveToFileButton:
+        id: save_to_file_button
         size_hint: None, None
         size: 160, 80
-        text: 'start or something'
+        text: 'Mentsd ezt el!'
     StartStopSimButton:
         size_hint: None, None
         size: 160, 80
+
+<SaveToFilePopup>
+    text_input: text_input
+    canvas.before:
+        Color:
+            rgb: 0.05, 0, 0.2
+        Rectangle:
+            pos: self.pos
+            size: self.size
+    BoxLayout:
+        size: root.size
+        pos: root.pos
+        orientation: "vertical"
+        FileChooserListView:
+            id: filechooser
+            on_selection: text_input.text = self.selection and self.selection[0] or ''
+        TextInput:
+            id: text_input
+            height: 30
+            size_hint_y: None
+            multiline: False
+        BoxLayout:
+            orientation: "horizontal"
+            size_hint_y: None
+            height: 30
+            Button:
+                id: save_button
+                text: "Mentsed"
+                on_release: root.save(filechooser.path, text_input.text)
+            Button:
+                text: "Hagyjad"
+                on_release: root.cancel()
+
+<SaveToFileButton>
+    text: self.text
 
 <StartStopSimButton>
     text: self.text
