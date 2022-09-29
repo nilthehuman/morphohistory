@@ -76,8 +76,8 @@ class SaveToFileButton(Button):
 
     def show_save_popup(self, *args):
         content = SaveToFilePopup(save=self.save, cancel=self.dismiss_popup)
-        self.popup = Popup(title="Agora mentése", content=content, size_hint=(0.4, 0.4))
-        self.popup.open() 
+        self.popup = Popup(title="Agora mentése", content=content, size_hint=(0.4, 0.6))
+        self.popup.open()
 
     def dismiss_popup(self):
         self.popup.dismiss()
@@ -85,11 +85,11 @@ class SaveToFileButton(Button):
     def save(self, path, filename):
         fullpath = join(path, filename)
         savebutton = self.popup.ids.container.children[0].ids.save_button
-        if isfile(fullpath) and savebutton.text != "Felulir?":
-            savebutton.text = "Felulir?"
+        if isfile(fullpath) and savebutton.text != "Felülír?":
+            savebutton.text = "Felülír?"
             return
         with open(fullpath, 'w') as stream:
-            stream.write("alma")
+            stream.write("alma") # TODO output agora description
         self.dismiss_popup()
 
 class StartStopSimButton(Button):
