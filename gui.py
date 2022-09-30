@@ -16,14 +16,13 @@ from kivy.uix.label import Label
 from kivy.uix.popup import Popup
 from kivy.uix.widget import Widget
 
-from itertools import product
 from logging import debug
 from os.path import isfile, join
 from random import choices
 from threading import Thread
 from time import sleep
 
-from speaker import Speaker
+from speaker import Speaker, Agora
 
 # Adapted from kivy.org/doc/stable/api-kivy.core.window.html
 class KeyeventHandler(Widget):
@@ -160,30 +159,24 @@ class NameTag(Label):
     def on_mouse_pos(self, window, pos):
         self.pos = pos
 
-class Agora(Widget):
-    """A collection of simulated speakers talking to each other."""
+class AgoraWidget(Widget, Agora):
+    """An agora of speakers visualized."""
 
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
         self.talk_line = None
+        self.pick = []
 
     def simulate(self, dt):
-        """Perform one iteration: pick two individuals to talk to each other."""
-        debug("Starting simulation")
-        pairs = [(s, t) for (s, t) in product(self.children, self.children) if s != t]
-        inv_dist_sq = lambda p, q: 1 / ((p[0] - q[0])**2 + (p[1] - q[1])**2)
-        inv_dist_squared = [ inv_dist_sq(s.pos, t.pos) for (s, t) in pairs ]
-        pick = choices(pairs, weights=inv_dist_squared, k=1)[0]
-        debug(pick[0].n, "picked to talk to", pick[1].n)
+        super().simulate(dt)
         if self.talk_line:
             self.canvas.remove(self.talk_line)
-        self.talk_line = Line(points=[pick[0].pos[0]+10, pick[0].pos[1]+10, pick[1].pos[0]+10, pick[1].pos[1]+10], width=2)
+        self.talk_line = Line(points=[self.pick[0].pos[0]+10, self.pick[0].pos[1]+10, self.pick[1].pos[0]+10, self.pick[1].pos[1]+10], width=2)
         self.canvas.add(Color(0.2, 0.0, 0.8))
         self.canvas.add(self.talk_line)
-        pick[0].talk_to(pick[1])
-        return True # keep going
+        self.pick[0].talk_to(self.pick[1])
 
-class DemoAgora(Agora):
+class DemoAgoraWidget(AgoraWidget):
     """A 10x10 grid of speakers, pure A in the top left corner, pure B at bottom right and everything else in between."""
 
     def __init__(self, **kwargs):

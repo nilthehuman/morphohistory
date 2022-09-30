@@ -1,5 +1,6 @@
 """Bare-bones simulated speakers that use one-word sentences to interact with each other."""
 
+from itertools import product
 from logging import debug
 from random import choices, randrange
 
@@ -55,3 +56,16 @@ class Speaker:
         self.para.nudge(delta, i, j, k)
         self.para.propagate(delta, i, j, k)
         self.experience = self.experience + 1
+
+class Agora:
+    """A collection of simulated speakers talking to each other."""
+
+    def simulate(self, dt):
+        """Perform one iteration: pick two individuals to talk to each other."""
+        debug("Starting simulation")
+        pairs = [(s, t) for (s, t) in product(self.children, self.children) if s != t]
+        inv_dist_sq = lambda p, q: 1 / ((p[0] - q[0])**2 + (p[1] - q[1])**2)
+        inv_dist_squared = [ inv_dist_sq(s.pos, t.pos) for (s, t) in pairs ]
+        self.pick = choices(pairs, weights=inv_dist_squared, k=1)[0]
+        debug(self.pick[0].n, "picked to talk to", self.pick[1].n)
+        return True # keep going
