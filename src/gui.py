@@ -3,6 +3,8 @@
 import kivy
 kivy.require('2.1.0')
 
+from kivy.config import Config
+Config.set('input', 'mouse', 'mouse,multitouch_on_demand')
 from kivy.app import App
 from kivy.clock import Clock
 from kivy.core.window import Window
