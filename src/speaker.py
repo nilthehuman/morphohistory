@@ -3,6 +3,7 @@
 from itertools import product
 from logging import debug
 from random import choices, randrange
+import time  # TODO remove
 
 from paradigm import NounCell, VerbCell, NounParadigm, VerbParadigm
 
@@ -60,12 +61,34 @@ class Speaker:
 class Agora:
     """A collection of simulated speakers talking to each other."""
 
-    def simulate(self, dt):
+    def __init__(self):
+        self.speaker_pairs = None
+        self.inv_dist_squared = None
+
+    # TODO: stop referring to self.children
+    def simulate(self, dt, graphics=True): # TODO: do dt number of iterations?
         """Perform one iteration: pick two individuals to talk to each other."""
-        debug("Starting simulation")
-        pairs = [(s, t) for (s, t) in product(self.children, self.children) if s != t]
+        debug("Iterating simulation")
+        if not self.speaker_pairs:
+            self.speaker_pairs = list([(s, t) for (s, t) in product(self.children, self.children) if s != t])
         inv_dist_sq = lambda p, q: 1 / ((p[0] - q[0])**2 + (p[1] - q[1])**2)
-        inv_dist_squared = [ inv_dist_sq(s.pos, t.pos) for (s, t) in pairs ]
-        self.pick = choices(pairs, weights=inv_dist_squared, k=1)[0]
+        if not self.inv_dist_squared:
+            self.inv_dist_squared = list([ inv_dist_sq(s.pos, t.pos) for (s, t) in self.speaker_pairs ])
+        self.pick = choices(self.speaker_pairs, weights=self.inv_dist_squared, k=1)[0]
         debug(self.pick[0].n, "picked to talk to", self.pick[1].n)
+        self.pick[0].talk_to(self.pick[1])
         return True # keep going
+
+    def is_stable(self):
+        """When to stop the simulation"""
+        return all(abs(c.speaker.principal_weight()) < 0.1 for c in self.children)
+
+    def simulate_till_stable(self):
+        """Keep running the simulation until the stability condition is reached."""
+        # Make sure we stop eventually no matter what
+        print(time.time())
+        for i in range(0, 10000):
+            if self.is_stable():
+                break
+            self.simulate(0, graphics=False)
+        print(time.time())

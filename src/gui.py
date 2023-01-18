@@ -114,6 +114,17 @@ class StartStopSimButton(Button):
             self.sim = None
             self.text = self.start_text
 
+class SkipToEndButton(Button):
+    """Runs or halts the simulation process."""
+
+    def __init__(self, **kwargs):
+        super().__init__(**kwargs)
+        self.bind(on_press=self.skip)
+
+    def skip(self, *args):
+        # TODO: stop already running simulation
+        App.get_running_app().root.children[1].simulate_till_stable()
+
 class SpeakerDot(DragBehavior, Widget):
     """The visual representation of a single speaker on the GUI."""
 
@@ -140,6 +151,8 @@ class SpeakerDot(DragBehavior, Widget):
             debug("Turning off nametag for", self.n)
             Window.remove_widget(self.nametag)
             self.nametag_on = False
+
+    #TODO: self.inv_dist_squared = None when any dot is moved!
 
     def update_color(self):
         yellow = (1.0, 1.0, 0.0)
@@ -169,14 +182,14 @@ class AgoraWidget(Widget, Agora):
         self.talk_line = None
         self.pick = []
 
-    def simulate(self, dt):
+    def simulate(self, dt, graphics=True):
         super().simulate(dt)
-        if self.talk_line:
-            self.canvas.remove(self.talk_line)
-        self.talk_line = Line(points=[self.pick[0].pos[0]+10, self.pick[0].pos[1]+10, self.pick[1].pos[0]+10, self.pick[1].pos[1]+10], width=2)
-        self.canvas.add(Color(0.2, 0.0, 0.8))
-        self.canvas.add(self.talk_line)
-        self.pick[0].talk_to(self.pick[1])
+        if graphics:
+            if self.talk_line:
+                self.canvas.remove(self.talk_line)
+            self.talk_line = Line(points=[self.pick[0].pos[0]+10, self.pick[0].pos[1]+10, self.pick[1].pos[0]+10, self.pick[1].pos[1]+10], width=2)
+            self.canvas.add(Color(0.2, 0.0, 0.8))
+            self.canvas.add(self.talk_line)
 
 class DemoAgoraWidget(AgoraWidget):
     """A 10x10 grid of speakers, pure A in the top left corner, pure B at bottom right and everything else in between."""
