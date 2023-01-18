@@ -20,7 +20,7 @@
 
 <ButtonLayout>
     orientation: 'vertical'
-    padding: [20, 200, 20, 200]
+    padding: [20, 100, 20, 100]
     spacing: 40
     canvas:
         Color:
@@ -37,6 +37,13 @@
     StartStopSimButton:
         size_hint: None, None
         size: 160, 80
+    Slider:
+        id: speed_slider
+        min: 0
+        max: 100
+        value: 80
+        step: 1
+        orientation: 'horizontal'
 
 <SaveToFilePopup>
     text_input: text_input

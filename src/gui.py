@@ -22,7 +22,6 @@ from logging import debug
 from os.path import isfile, join
 from random import choices
 from threading import Thread
-from time import sleep
 
 from speaker import Speaker, Agora
 
@@ -107,7 +106,8 @@ class StartStopSimButton(Button):
 
     def start(self, *args):
         if not self.sim:
-            self.sim = Clock.schedule_interval(App.get_running_app().root.children[1].simulate, 0.1)
+            slowdown = App.get_running_app().root.ids.button_layout.ids.speed_slider.value
+            self.sim = Clock.schedule_interval(App.get_running_app().root.children[1].simulate, 1.0 - 0.01 * slowdown)
             self.text = self.stop_text
         else:
             self.sim.cancel()
