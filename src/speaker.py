@@ -9,16 +9,17 @@ from paradigm import NounCell, VerbCell, NounParadigm, VerbParadigm
 
 class Speaker:
     """A simulated individual within the speaking community."""
-    def __init__(self, para=NounParadigm()):
+    def __init__(self, para=NounParadigm(), is_broadcaster=False):
         self.para = para
         self.experience = 1.0
-        # temporary hack, for demo purposes
+        self.is_broadcaster = is_broadcaster
+        # TODO: temporary hack, for demo purposes
         self.para[0][0][0] = NounCell(number=0, possessor=0, case=0,
             weight_a=self.para.para[0][0][0].weight_a, form_a='Harkivból', form_b='Harkivből', importance=0.2)
 
     @classmethod
-    def fromweight(cls, weight_a):
-        me = cls(NounParadigm(weight_a))
+    def fromweight(cls, weight_a, is_broadcaster=False):
+        me = cls(NounParadigm(weight_a), is_broadcaster)
         return me
 
     def principal_weight(self):
@@ -74,9 +75,18 @@ class Agora:
         inv_dist_sq = lambda p, q: 1 / ((p[0] - q[0])**2 + (p[1] - q[1])**2)
         if not self.inv_dist_squared:
             self.inv_dist_squared = list([ inv_dist_sq(s.pos, t.pos) for (s, t) in self.speaker_pairs ])
-        self.pick = choices(self.speaker_pairs, weights=self.inv_dist_squared, k=1)[0]
-        debug(self.pick[0].n, "picked to talk to", self.pick[1].n)
-        self.pick[0].talk_to(self.pick[1])
+        while True:
+            self.pick = choices(self.speaker_pairs, weights=self.inv_dist_squared, k=1)[0]
+            if (not self.pick[1].speaker.is_broadcaster):
+                break
+            else:
+                print("no talking to broadcaster")
+        print(self.pick[0].n, "picked to talk to", self.pick[1].n)
+        if self.pick[0].speaker.is_broadcaster:
+            for c in self.children:
+                self.pick[0].talk_to(c)
+        else:
+            self.pick[0].talk_to(self.pick[1])
         return True # keep going
 
     def is_stable(self):

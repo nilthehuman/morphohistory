@@ -23,6 +23,8 @@ from os.path import isfile, join
 from random import choices
 from threading import Thread
 
+from math import sin, cos, pi
+
 from speaker import Speaker, Agora
 
 # Adapted from kivy.org/doc/stable/api-kivy.core.window.html
@@ -130,12 +132,12 @@ class SpeakerDot(DragBehavior, Widget):
 
     color = ColorProperty()
 
-    def __init__(self, n, pos, weight_a, **kwargs):
+    def __init__(self, n, pos, weight_a, is_broadcaster=False, **kwargs):
         super().__init__(**kwargs)
         self.pos = pos
         self.size = 20, 20
         self.n = n
-        self.speaker = Speaker.fromweight(weight_a)
+        self.speaker = Speaker.fromweight(weight_a, is_broadcaster)
         self.update_color()
         self.nametag = NameTag(text=str(n) + ': ' + self.speaker.name_tag())
         self.nametag_on = False
@@ -192,7 +194,7 @@ class AgoraWidget(Widget, Agora):
             self.canvas.add(Color(0.2, 0.0, 0.8))
             self.canvas.add(self.talk_line)
 
-class DemoAgoraWidget(AgoraWidget):
+class DemoAgoraWidget1(AgoraWidget):
     """A 10x10 grid of speakers, pure A in the top left corner, pure B at bottom right and everything else in between."""
 
     def __init__(self, **kwargs):
@@ -206,6 +208,43 @@ class DemoAgoraWidget(AgoraWidget):
                 weight_a = 0.05 * (row + col)
                 pos = self.width * 0.1 + self.width * 0.09 * col - 10, self.height * 0.9 - self.height * 0.09 * row - 10
                 self.add_widget(SpeakerDot(row*10 + col, pos, weight_a))
+        self.unbind(size=self.populate)
+
+class DemoAgoraWidget2(AgoraWidget):
+    """A 10x10 grid of speakers, neutral majority on the outside, biased minority on the inside."""
+
+    def __init__(self, **kwargs):
+        super().__init__(**kwargs)
+        # ugh, this is pretty ughly, but the widget still has default size at this point...
+        self.bind(size=self.populate)
+
+    def populate(self, *args):
+        for row in range(10):
+            for col in range(10):
+                pos = self.width * 0.1 + self.width * 0.09 * col - 10, self.height * 0.9 - self.height * 0.09 * row - 10
+                if (3 <= row and row <= 6 and 3 <= col and col <= 6):
+                    self.add_widget(SpeakerDot(row*10 + col, pos, 1.0))
+                else:
+                    self.add_widget(SpeakerDot(row*10 + col, pos, 0.5))
+        self.unbind(size=self.populate)
+
+class DemoAgoraWidget3(AgoraWidget):
+    """A circle of neutral speakers around a biased broadcaster."""
+
+    def __init__(self, **kwargs):
+        super().__init__(**kwargs)
+        # ugh, this is pretty ughly, but the widget still has default size at this point...
+        self.bind(size=self.populate)
+
+    def populate(self, *args):
+        for n in range(16):
+            x = sin(2 * pi * float(n) / 16) * 150
+            y = cos(2 * pi * float(n) / 16) * 150
+            pos = (300 + x, 300 + y)
+            self.add_widget(SpeakerDot(n, pos, 0.5))
+        broadcaster = SpeakerDot(16, (300, 300), 0.0, True)
+        broadcaster.color = (0.2, 0.9, 0.1)
+        self.add_widget(broadcaster)
         self.unbind(size=self.populate)
 
 class MurmurApp(App):
