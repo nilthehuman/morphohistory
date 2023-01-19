@@ -163,7 +163,7 @@ class SpeakerDot(DragBehavior, Widget):
 
     def talk_to(self, hearer):
         self.speaker.talk_to(hearer.speaker)
-        self.update_color()
+        hearer.update_color()
 
 class NameTag(Label):
     """A kind of tooltip that shows how biased a speaker is at the moment."""
