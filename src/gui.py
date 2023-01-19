@@ -164,8 +164,12 @@ class SpeakerDot(DragBehavior, Widget):
         self.color = [sum(x) for x in zip([(1-w) * y for y in yellow], [w * p for p in purple])]
 
     def talk_to(self, hearer):
-        self.speaker.talk_to(hearer.speaker)
-        hearer.update_color()
+        if not hearer.speaker.is_broadcaster: # broadcasters are deaf
+            self.speaker.talk_to(hearer.speaker)
+            hearer.update_color()
+        else:
+            #assert False # why does this even happen I don't get it
+            pass
 
 class NameTag(Label):
     """A kind of tooltip that shows how biased a speaker is at the moment."""
@@ -187,12 +191,13 @@ class AgoraWidget(Widget, Agora):
 
     def simulate(self, dt, graphics=True):
         super().simulate(dt)
-        if graphics:
-            if self.talk_line:
-                self.canvas.remove(self.talk_line)
-            self.talk_line = Line(points=[self.pick[0].pos[0]+10, self.pick[0].pos[1]+10, self.pick[1].pos[0]+10, self.pick[1].pos[1]+10], width=2)
-            self.canvas.add(Color(0.2, 0.0, 0.8))
-            self.canvas.add(self.talk_line)
+        if not graphics:
+            return
+        if self.talk_line:
+            self.canvas.remove(self.talk_line)
+        self.talk_line = Line(points=[self.pick[0].pos[0]+10, self.pick[0].pos[1]+10, self.pick[1].pos[0]+10, self.pick[1].pos[1]+10], width=2)
+        self.canvas.add(Color(0.2, 0.0, 0.8))
+        self.canvas.add(self.talk_line)
 
 class DemoAgoraWidget1(AgoraWidget):
     """A 10x10 grid of speakers, pure A in the top left corner, pure B at bottom right and everything else in between."""

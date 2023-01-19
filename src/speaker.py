@@ -63,30 +63,34 @@ class Agora:
     """A collection of simulated speakers talking to each other."""
 
     def __init__(self):
+        self.pick_queue = None
         self.speaker_pairs = None
         self.inv_dist_squared = None
 
     # TODO: stop referring to self.children
     def simulate(self, dt, graphics=True): # TODO: do dt number of iterations?
-        """Perform one iteration: pick two individuals to talk to each other."""
+        """Perform one iteration: pick two individuals to talk to each other
+        and update the hearer's state based on the speaker's."""
         debug("Iterating simulation")
-        if not self.speaker_pairs:
-            self.speaker_pairs = list([(s, t) for (s, t) in product(self.children, self.children) if s != t])
-        inv_dist_sq = lambda p, q: 1 / ((p[0] - q[0])**2 + (p[1] - q[1])**2)
-        if not self.inv_dist_squared:
-            self.inv_dist_squared = list([ inv_dist_sq(s.pos, t.pos) for (s, t) in self.speaker_pairs ])
-        while True:
-            self.pick = choices(self.speaker_pairs, weights=self.inv_dist_squared, k=1)[0]
-            if (not self.pick[1].speaker.is_broadcaster):
-                break
-            else:
-                print("no talking to broadcaster")
-        print(self.pick[0].n, "picked to talk to", self.pick[1].n)
-        if self.pick[0].speaker.is_broadcaster:
-            for c in self.children:
-                self.pick[0].talk_to(c)
+        if self.pick_queue:
+            # a broadcaster is speaking
+            self.pick = self.pick_queue.pop()
         else:
-            self.pick[0].talk_to(self.pick[1])
+            if not self.speaker_pairs:
+                self.speaker_pairs = list([(s, t) for (s, t) in product(self.children, self.children) if s != t])
+            inv_dist_sq = lambda p, q: 1 / ((p[0] - q[0])**2 + (p[1] - q[1])**2)
+            if not self.inv_dist_squared:
+                self.inv_dist_squared = list([ inv_dist_sq(s.pos, t.pos) for (s, t) in self.speaker_pairs ])
+            while True:
+                self.pick = choices(self.speaker_pairs, weights=self.inv_dist_squared, k=1)[0]
+                if (not self.pick[1].speaker.is_broadcaster):
+                    break
+            if self.pick[0].speaker.is_broadcaster:
+                speaker = self.pick[0]
+                self.pick_queue = [ (speaker, c) for c in self.children if c != speaker ]
+                self.pick = self.pick_queue.pop()
+        debug(self.pick[0].n, "picked to talk to", self.pick[1].n)
+        self.pick[0].talk_to(self.pick[1])
         return True # keep going
 
     def is_stable(self):
@@ -96,9 +100,9 @@ class Agora:
     def simulate_till_stable(self):
         """Keep running the simulation until the stability condition is reached."""
         # Make sure we stop eventually no matter what
-        print(time.time())
+        debug("Simulation until stable started:", time.time())
         for i in range(0, 10000):
             if self.is_stable():
                 break
             self.simulate(0, graphics=False)
-        print(time.time())
+        debug("Simulation until stable finished:", time.time())
