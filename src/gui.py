@@ -145,6 +145,7 @@ class SpeakerDot(DragBehavior, Widget):
         if (self.collide_point(*pos)):
             if not self.nametag_on:
                 debug("Turning on nametag for", self.n)
+                self.nametag.text = str(self.n) + ': ' + self.speaker.name_tag()
                 Window.add_widget(self.nametag)
                 self.nametag_on = True
         elif self.nametag_on:
