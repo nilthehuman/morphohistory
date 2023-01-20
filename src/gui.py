@@ -264,6 +264,27 @@ class DemoAgoraWidget3(AgoraWidget):
         self.add_widget(broadcaster)
         self.unbind(size=self.populate)
 
+class DemoAgoraWidget4(AgoraWidget):
+    """A circle of neutral speakers around a biased broadcaster."""
+
+    def __init__(self, **kwargs):
+        super().__init__(**kwargs)
+        # ugh, this is pretty ughly, but the widget still has default size at this point...
+        self.bind(size=self.populate)
+
+    def populate(self, *args):
+        for n in range(16):
+            x = sin(2 * pi * float(n) / 16) * 100
+            y = cos(2 * pi * float(n) / 16) * 100
+            pos = (300 + x, 300 + y)
+            self.add_widget(SpeakerDot(n, pos, 1.0))
+        for n in range(24):
+            x = sin(2 * pi * float(n) / 24) * 200
+            y = cos(2 * pi * float(n) / 24) * 200
+            pos = (300 + x, 300 + y)
+            self.add_widget(SpeakerDot(n, pos, 0.0))
+        self.unbind(size=self.populate)
+
 class MurmurApp(App):
     def build(self):
         KeyeventHandler()
