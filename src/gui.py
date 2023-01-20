@@ -23,7 +23,7 @@ from os.path import isfile, join
 from random import choices
 from threading import Thread
 
-from math import sin, cos, pi
+from math import sqrt, sin, cos, pi
 
 from speaker import Speaker, Agora
 
@@ -186,18 +186,30 @@ class AgoraWidget(Widget, Agora):
 
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
-        self.talk_line = None
+        self.talk_arrow = None
         self.pick = []
 
     def simulate(self, dt, graphics=True):
         super().simulate(dt)
         if not graphics:
             return
-        if self.talk_line:
-            self.canvas.remove(self.talk_line)
-        self.talk_line = Line(points=[self.pick[0].pos[0]+10, self.pick[0].pos[1]+10, self.pick[1].pos[0]+10, self.pick[1].pos[1]+10], width=2)
+        if self.talk_arrow:
+            self.canvas.remove(self.talk_arrow)
+        speaker_x = self.pick[0].pos[0]+10
+        speaker_y = self.pick[0].pos[1]+10
+        hearer_x  = self.pick[1].pos[0]+10
+        hearer_y  = self.pick[1].pos[1]+10
+        length = sqrt((hearer_x - speaker_x)**2 + (hearer_y - speaker_y)**2)
+        sin_a = (hearer_y - speaker_y) / length
+        cos_a = (hearer_x - speaker_x) / length
+        self.talk_arrow = Line(points=[speaker_x, speaker_y,
+                                       hearer_x, hearer_y,
+                                       hearer_x - 12.0*cos_a - 8.0*sin_a, hearer_y - 12.0*sin_a + 8.0*cos_a,
+                                       hearer_x, hearer_y,
+                                       hearer_x - 12.0*cos_a + 8.0*sin_a, hearer_y - 12.0*sin_a - 8.0*cos_a],
+                                       width=2)
         self.canvas.add(Color(0.2, 0.0, 0.8))
-        self.canvas.add(self.talk_line)
+        self.canvas.add(self.talk_arrow)
 
 class DemoAgoraWidget1(AgoraWidget):
     """A 10x10 grid of speakers, pure A in the top left corner, pure B at bottom right and everything else in between."""
