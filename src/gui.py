@@ -19,11 +19,10 @@ from kivy.uix.popup import Popup
 from kivy.uix.widget import Widget
 
 from logging import debug
+from math import sqrt, sin, cos, pi
 from os.path import isfile, join
 from random import choices
 from threading import Thread
-
-from math import sqrt, sin, cos, pi
 
 from speaker import Speaker, Agora
 
@@ -65,7 +64,7 @@ class ButtonLayout(BoxLayout):
     pass
 
 class SaveToFilePopup(FloatLayout):
-    """TODO..."""
+    """A popup window for picking a location to save the Arena to file."""
     save = ObjectProperty(None)
     cancel = ObjectProperty(None)
     text_input = ObjectProperty(None)
@@ -87,8 +86,8 @@ class SaveToFileButton(Button):
     def save(self, path, filename):
         fullpath = join(path, filename)
         savebutton = self.popup.ids.container.children[0].ids.save_button
-        if isfile(fullpath) and savebutton.text != "Felülír?":
-            savebutton.text = "Felülír?"
+        if isfile(fullpath) and savebutton.text != "Felülírjam?":
+            savebutton.text = "Felülírjam?"
             return
         with open(fullpath, 'w') as stream:
             stream.write("alma") # TODO output agora description
