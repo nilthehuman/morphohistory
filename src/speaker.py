@@ -3,7 +3,7 @@
 from itertools import product
 from logging import debug
 from random import choices, randrange
-import time  # TODO remove
+from time import time
 
 from paradigm import NounCell, VerbCell, NounParadigm, VerbParadigm
 
@@ -100,9 +100,9 @@ class Agora:
     def simulate_till_stable(self):
         """Keep running the simulation until the stability condition is reached."""
         # Make sure we stop eventually no matter what
-        debug("Simulation until stable started:", time.time())
+        debug("Simulation until stable started:", time())
         for i in range(0, 10000):
             if self.is_stable():
                 break
             self.simulate(0, graphics=False)
-        debug("Simulation until stable finished:", time.time())
+        debug("Simulation until stable finished:", time())
