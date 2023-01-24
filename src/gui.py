@@ -44,7 +44,7 @@ class KeyeventHandler(Widget):
     def on_keypressed(self, keyboard, keycode, text, modifiers):
         if keycode[1] == 'g':
             if not self.sim:
-                self.sim = Clock.schedule_interval(App.get_running_app().root.children[1].simulate, 0.1)
+                self.sim = Clock.schedule_interval(App.get_running_app().root.ids.agora.simulate, 0.1)
             else:
                 self.sim.cancel()
                 self.sim = None
@@ -108,7 +108,7 @@ class StartStopSimButton(Button):
     def start(self, *args):
         if not self.sim:
             slowdown = App.get_running_app().root.ids.button_layout.ids.speed_slider.value
-            self.sim = Clock.schedule_interval(App.get_running_app().root.children[1].simulate, 1.0 - 0.01 * slowdown)
+            self.sim = Clock.schedule_interval(App.get_running_app().root.ids.agora.simulate, 1.0 - 0.01 * slowdown)
             self.text = self.stop_text
         else:
             self.sim.cancel()
@@ -124,7 +124,7 @@ class SkipToEndButton(Button):
 
     def skip(self, *args):
         # TODO: stop already running simulation
-        App.get_running_app().root.children[1].simulate_till_stable()
+        App.get_running_app().root.ids.agora.simulate_till_stable()
 
 class SpeakerDot(DragBehavior, Widget):
     """The visual representation of a single speaker on the GUI."""
