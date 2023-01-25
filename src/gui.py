@@ -90,7 +90,7 @@ class SaveToFileButton(Button):
             savebutton.text = "Felülírjam?"
             return
         with open(fullpath, 'w') as stream:
-            stream.write(dumps(App.get_running_app().root.ids.agora.speakers))
+            stream.write(dumps(App.get_running_app().root.ids.agora.speakers, indent=1, default=lambda x: x.to_json()))
         self.dismiss_popup()
 
 class StartStopSimButton(Button):

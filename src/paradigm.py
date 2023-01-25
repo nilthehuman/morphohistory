@@ -18,6 +18,9 @@ class Cell:
             return "(%s, %g * \"%s\" + %g * \"%s\")" % \
             (self.get_morphosyntactic_properties(), self.weight_a, self.form_a, 1.0-self.weight_a, self.form_b)
 
+    def to_json(self):
+        return self.__dict__
+
     def to_str_short(self):
         if 0 == len(self.form_a):
             return ''
@@ -36,6 +39,9 @@ class Paradigm:
                 below = filter(lambda s: bool(len(s)), below)
                 return '[' + ', '.join(below) + ']'
         return descend(self.para)
+
+    def to_json(self):
+        return self.__dict__
 
 class NounCell(Cell):
     """A single cell in a noun paradigm for a given morphosyntactic context."""

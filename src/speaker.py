@@ -23,16 +23,26 @@ class Speaker:
         self.n = n
         self.pos = pos
         self.para = NounParadigm(weight_a)
-        self.experience = 1.0
         self.is_broadcaster = is_broadcaster
+        self.experience = 1.0
         # TODO: temporary hack, for demo purposes
         self.para[0][0][0] = NounCell(number=0, possessor=0, case=0,
             weight_a=self.para.para[0][0][0].weight_a, form_a='havernak', form_b='havernek', importance=0.2)
 
     @classmethod
+    def fromspeaker(cls, other):
+        me = cls(other.n, other.pos, other.para, other.is_broadcaster)
+        me.experience = other.experience
+        return me
+
+    @classmethod
     def fromweight(cls, n, pos, weight_a, is_broadcaster=False):
         me = cls(n, pos, NounParadigm(weight_a), is_broadcaster)
         return me
+
+    def to_json(self):
+        speaker_only = Speaker.fromspeaker(self)
+        return speaker_only.__dict__
 
     def principal_weight(self):
         """Which way the speaker is leaning, summed up in a single float."""
