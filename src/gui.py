@@ -56,7 +56,7 @@ class KeyeventHandler(Widget):
         return False
 
 class TopBoxLayout(BoxLayout):
-    """The root widget. Holds both the Arena and the control buttons on the right."""
+    """The root widget. Holds both the Agora and the control buttons on the right."""
     pass
 
 class ButtonLayout(BoxLayout):
@@ -64,13 +64,14 @@ class ButtonLayout(BoxLayout):
     pass
 
 class SaveToFilePopup(FloatLayout):
-    """A popup window for picking a location to save the Arena to file."""
+    """A popup window for picking a location to save the Agora to file."""
     save = ObjectProperty(None)
     cancel = ObjectProperty(None)
     text_input = ObjectProperty(None)
 
 class SaveToFileButton(Button):
-    """Opens a popup window for writing the current configuration of the Arena to file."""
+    """Opens a popup window for writing the current configuration of the Agora to file."""
+
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
         self.bind(on_press=self.show_save_popup)
