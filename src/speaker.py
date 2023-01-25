@@ -9,17 +9,29 @@ from paradigm import NounCell, VerbCell, NounParadigm, VerbParadigm
 
 class Speaker:
     """A simulated individual within the speaking community."""
-    def __init__(self, para=NounParadigm(), is_broadcaster=False):
+    def __init__(self, n, pos, para=NounParadigm(), is_broadcaster=False):
+        self.n = n
+        self.pos = pos
         self.para = para
         self.experience = 1.0
         self.is_broadcaster = is_broadcaster
         # TODO: temporary hack, for demo purposes
         self.para[0][0][0] = NounCell(number=0, possessor=0, case=0,
-            weight_a=self.para.para[0][0][0].weight_a, form_a='Harkivból', form_b='Harkivből', importance=0.2)
+            weight_a=self.para.para[0][0][0].weight_a, form_a='havernak', form_b='havernek', importance=0.2)
+
+    def init_from_weight(self, n, pos, weight_a, is_broadcaster=False):
+        self.n = n
+        self.pos = pos
+        self.para = NounParadigm(weight_a)
+        self.experience = 1.0
+        self.is_broadcaster = is_broadcaster
+        # TODO: temporary hack, for demo purposes
+        self.para[0][0][0] = NounCell(number=0, possessor=0, case=0,
+            weight_a=self.para.para[0][0][0].weight_a, form_a='havernak', form_b='havernek', importance=0.2)
 
     @classmethod
-    def fromweight(cls, weight_a, is_broadcaster=False):
-        me = cls(NounParadigm(weight_a), is_broadcaster)
+    def fromweight(cls, n, pos, weight_a, is_broadcaster=False):
+        me = cls(n, pos, NounParadigm(weight_a), is_broadcaster)
         return me
 
     def principal_weight(self):
@@ -38,6 +50,9 @@ class Speaker:
         return self.para[0][0][0].to_str_short()
 
     def talk_to(self, hearer):
+        if hearer.is_broadcaster: # broadcasters are deaf
+            #assert False # why does this even happen I don't get it
+            return
         i, j, k = -1, -1, -1
         # pick a non-empty cell to share with the hearer
         while True:
@@ -63,11 +78,14 @@ class Agora:
     """A collection of simulated speakers talking to each other."""
 
     def __init__(self):
-        self.pick_queue = None
+        self.speakers = []
         self.speaker_pairs = None
         self.inv_dist_squared = None
+        self.pick_queue = None
 
-    # TODO: stop referring to self.children
+    def add_speaker(self, speaker):
+        self.speakers.append(speaker)
+
     def simulate(self, dt, graphics=True): # TODO: do dt number of iterations?
         """Perform one iteration: pick two individuals to talk to each other
         and update the hearer's state based on the speaker's."""
@@ -77,17 +95,17 @@ class Agora:
             self.pick = self.pick_queue.pop()
         else:
             if not self.speaker_pairs:
-                self.speaker_pairs = list([(s, t) for (s, t) in product(self.children, self.children) if s != t])
+                self.speaker_pairs = list([(s, t) for (s, t) in product(self.speakers, self.speakers) if s != t])
             inv_dist_sq = lambda p, q: 1 / ((p[0] - q[0])**2 + (p[1] - q[1])**2)
             if not self.inv_dist_squared:
                 self.inv_dist_squared = list([ inv_dist_sq(s.pos, t.pos) for (s, t) in self.speaker_pairs ])
             while True:
                 self.pick = choices(self.speaker_pairs, weights=self.inv_dist_squared, k=1)[0]
-                if (not self.pick[1].speaker.is_broadcaster):
+                if (not self.pick[1].is_broadcaster):
                     break
-            if self.pick[0].speaker.is_broadcaster:
+            if self.pick[0].is_broadcaster:
                 speaker = self.pick[0]
-                self.pick_queue = [ (speaker, c) for c in self.children if c != speaker ]
+                self.pick_queue = [ (speaker, s) for s in self.speakers if s != speaker ]
                 self.pick = self.pick_queue.pop()
         debug(self.pick[0].n, "picked to talk to", self.pick[1].n)
         self.pick[0].talk_to(self.pick[1])
@@ -95,7 +113,7 @@ class Agora:
 
     def is_stable(self):
         """When to stop the simulation"""
-        return all(abs(c.speaker.principal_weight()) < 0.1 for c in self.children)
+        return all(abs(s.principal_weight()) < 0.1 for s in self.speakers)
 
     def simulate_till_stable(self):
         """Keep running the simulation until the stability condition is reached."""

@@ -18,11 +18,11 @@ from kivy.uix.label import Label
 from kivy.uix.popup import Popup
 from kivy.uix.widget import Widget
 
+from json import dumps, loads
 from logging import debug
 from math import sqrt, sin, cos, pi
 from os.path import isfile, join
 from random import choices
-from threading import Thread
 
 from speaker import Speaker, Agora
 
@@ -90,7 +90,7 @@ class SaveToFileButton(Button):
             savebutton.text = "Felülírjam?"
             return
         with open(fullpath, 'w') as stream:
-            stream.write("alma") # TODO output agora description
+            stream.write(dumps(App.get_running_app().root.ids.agora.speakers))
         self.dismiss_popup()
 
 class StartStopSimButton(Button):
@@ -126,19 +126,19 @@ class SkipToEndButton(Button):
         # TODO: stop already running simulation
         App.get_running_app().root.ids.agora.simulate_till_stable()
 
-class SpeakerDot(DragBehavior, Widget):
+class SpeakerDot(Speaker, DragBehavior, Widget):
     """The visual representation of a single speaker on the GUI."""
 
     color = ColorProperty()
 
     def __init__(self, n, pos, weight_a, is_broadcaster=False, **kwargs):
-        super().__init__(**kwargs)
-        self.pos = pos
+        #super().__init__(**kwargs)
+        DragBehavior.__init__(self, **kwargs)
+        Widget.__init__(self, **kwargs)
+        Speaker.init_from_weight(self, n, pos, weight_a, is_broadcaster)
         self.size = 20, 20
-        self.n = n
-        self.speaker = Speaker.fromweight(weight_a, is_broadcaster)
         self.update_color()
-        self.nametag = NameTag(text=str(n) + ': ' + self.speaker.name_tag())
+        self.nametag = NameTag(text=str(n) + ': ' + self.name_tag())
         self.nametag_on = False
         Window.bind(mouse_pos=self.on_mouse_pos)
 
@@ -146,7 +146,7 @@ class SpeakerDot(DragBehavior, Widget):
         if (self.collide_point(*pos)):
             if not self.nametag_on:
                 debug("Turning on nametag for", self.n)
-                self.nametag.text = str(self.n) + ': ' + self.speaker.name_tag()
+                self.nametag.text = str(self.n) + ': ' + self.name_tag()
                 Window.add_widget(self.nametag)
                 self.nametag_on = True
         elif self.nametag_on:
@@ -159,16 +159,12 @@ class SpeakerDot(DragBehavior, Widget):
     def update_color(self):
         yellow = (1.0, 1.0, 0.0)
         purple = (1.0, 0.0, 1.0)
-        w = self.speaker.principal_weight()
+        w = self.principal_weight()
         self.color = [sum(x) for x in zip([(1-w) * y for y in yellow], [w * p for p in purple])]
 
     def talk_to(self, hearer):
-        if not hearer.speaker.is_broadcaster: # broadcasters are deaf
-            self.speaker.talk_to(hearer.speaker)
-            hearer.update_color()
-        else:
-            #assert False # why does this even happen I don't get it
-            pass
+        Speaker.talk_to(self, hearer)
+        hearer.update_color()
 
 class NameTag(Label):
     """A kind of tooltip that shows how biased a speaker is at the moment."""
@@ -183,10 +179,16 @@ class NameTag(Label):
 class AgoraWidget(Widget, Agora):
     """An agora of speakers visualized."""
 
-    def __init__(self, **kwargs):
-        super().__init__(**kwargs)
+    def __init__(self, speakers=[], **kwargs):
+        Widget.__init__(self, **kwargs)
+        Agora.__init__(self)
+        self.speakers = speakers
         self.talk_arrow = None
         self.pick = []
+
+    def add_speakerdot(self, speakerdot):
+        self.speakers.append(speakerdot)
+        self.add_widget(speakerdot)
 
     def simulate(self, dt, graphics=True):
         super().simulate(dt)
@@ -223,7 +225,7 @@ class DemoAgoraWidget1(AgoraWidget):
             for col in range(10):
                 weight_a = 0.05 * (row + col)
                 pos = self.width * 0.1 + self.width * 0.09 * col - 10, self.height * 0.9 - self.height * 0.09 * row - 10
-                self.add_widget(SpeakerDot(row*10 + col, pos, weight_a))
+                self.add_speakerdot(SpeakerDot(row*10 + col, pos, weight_a))
         self.unbind(size=self.populate)
 
 class DemoAgoraWidget2(AgoraWidget):
@@ -239,9 +241,9 @@ class DemoAgoraWidget2(AgoraWidget):
             for col in range(10):
                 pos = self.width * 0.1 + self.width * 0.09 * col - 10, self.height * 0.9 - self.height * 0.09 * row - 10
                 if (3 <= row and row <= 6 and 3 <= col and col <= 6):
-                    self.add_widget(SpeakerDot(row*10 + col, pos, 1.0))
+                    self.add_speakerdot(SpeakerDot(row*10 + col, pos, 1.0))
                 else:
-                    self.add_widget(SpeakerDot(row*10 + col, pos, 0.5))
+                    self.add_speakerdot(SpeakerDot(row*10 + col, pos, 0.5))
         self.unbind(size=self.populate)
 
 class DemoAgoraWidget3(AgoraWidget):
@@ -257,10 +259,10 @@ class DemoAgoraWidget3(AgoraWidget):
             x = sin(2 * pi * float(n) / 16) * 150
             y = cos(2 * pi * float(n) / 16) * 150
             pos = (300 + x, 300 + y)
-            self.add_widget(SpeakerDot(n, pos, 0.5))
+            self.add_speakerdot(SpeakerDot(n, pos, 0.5))
         broadcaster = SpeakerDot(16, (300, 300), 0.0, True)
         broadcaster.color = (0.2, 0.9, 0.1)
-        self.add_widget(broadcaster)
+        self.add_speakerdot(broadcaster)
         self.unbind(size=self.populate)
 
 class DemoAgoraWidget4(AgoraWidget):
@@ -276,12 +278,12 @@ class DemoAgoraWidget4(AgoraWidget):
             x = sin(2 * pi * float(n) / 16) * 100
             y = cos(2 * pi * float(n) / 16) * 100
             pos = (300 + x, 300 + y)
-            self.add_widget(SpeakerDot(n, pos, 1.0))
+            self.add_speakerdot(SpeakerDot(n, pos, 1.0))
         for n in range(24):
             x = sin(2 * pi * float(n) / 24) * 200
             y = cos(2 * pi * float(n) / 24) * 200
             pos = (300 + x, 300 + y)
-            self.add_widget(SpeakerDot(n, pos, 0.0))
+            self.add_speakerdot(SpeakerDot(n, pos, 0.0))
         self.unbind(size=self.populate)
 
 class MurmurApp(App):
