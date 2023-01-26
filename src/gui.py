@@ -145,14 +145,14 @@ class StartStopSimButton(Button):
             self.sim = None
             self.text = self.start_text
 
-class SkipToEndButton(Button):
+class FastForwardButton(Button):
     """Runs or halts the simulation process."""
 
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
-        self.bind(on_press=self.skip)
+        self.bind(on_press=self.fastforward)
 
-    def skip(self, *args):
+    def fastforward(self, *args):
         # TODO: stop already running simulation
         App.get_running_app().root.ids.agora.clear_talk_arrow()
         App.get_running_app().root.ids.agora.simulate_till_stable()
