@@ -150,7 +150,7 @@ class StartStopSimButton(Button):
             self.text = self.start_text
 
 class FastForwardButton(Button):
-    """Runs or halts the simulation process."""
+    """Keeps running the simulation until a stable state is reached."""
 
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
@@ -196,7 +196,7 @@ class SpeakerDot(Speaker, DragBehavior, Widget):
 
     def on_mouse_pos(self, window, pos):
         if not self.parent:
-            # why do SpeakerDots stay alive after AgoraWidge.clear_widgets(), this is stupid
+            # why do SpeakerDots stay alive after AgoraWidget.clear_widgets(), this is stupid
             return
         if (self.collide_point(*pos)):
             if not self.nametag_on:
