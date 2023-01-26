@@ -154,6 +154,7 @@ class SkipToEndButton(Button):
 
     def skip(self, *args):
         # TODO: stop already running simulation
+        App.get_running_app().root.ids.agora.clear_talk_arrow()
         App.get_running_app().root.ids.agora.simulate_till_stable()
 
 class SpeakerDot(Speaker, DragBehavior, Widget):
@@ -233,10 +234,16 @@ class AgoraWidget(Widget, Agora):
         self.speakers.append(speakerdot)
         self.add_widget(speakerdot)
 
+    def clear_talk_arrow(self):
+        """Remove blue arrow from screen."""
+        if self.talk_arrow:
+            self.canvas.remove(self.talk_arrow)
+
     def clear_speakers(self):
         """Remove all simulated speakers."""
         self.clear_widgets()
         self.speakers = []
+        self.clear_talk_arrow()
 
     def load_speakers(self, speakers):
         """Add an an array of pre-built Speakers."""
@@ -248,8 +255,7 @@ class AgoraWidget(Widget, Agora):
         super().simulate(dt)
         if not graphics:
             return
-        if self.talk_arrow:
-            self.canvas.remove(self.talk_arrow)
+        self.clear_talk_arrow()
         speaker_x = self.pick[0].pos[0]+10
         speaker_y = self.pick[0].pos[1]+10
         hearer_x  = self.pick[1].pos[0]+10
