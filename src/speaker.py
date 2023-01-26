@@ -105,7 +105,7 @@ class Agora:
         debug("Iterating simulation")
         if self.pick_queue:
             # a broadcaster is speaking
-            self.pick = self.pick_queue.pop()
+            self.pick = self.pick_queue.pop(0)
         else:
             if not self.speaker_pairs:
                 self.speaker_pairs = list([(s, t) for (s, t) in product(self.speakers, self.speakers) if s != t])
@@ -119,7 +119,7 @@ class Agora:
             if self.pick[0].is_broadcaster:
                 speaker = self.pick[0]
                 self.pick_queue = [ (speaker, s) for s in self.speakers if s != speaker ]
-                self.pick = self.pick_queue.pop()
+                self.pick = self.pick_queue.pop(0)
         debug(self.pick[0].n, "picked to talk to", self.pick[1].n)
         self.pick[0].talk_to(self.pick[1])
         return True # keep going
