@@ -11,8 +11,11 @@ class Cell:
         self.form_b = form_b
         self.importance = importance
 
+    def __bool__(self):
+        return 0 != len(self.form_a)
+
     def __str__(self):
-        if 0 == len(self.form_a):
+        if not self:
             return ''
         else:
             return "(%s, %g * \"%s\" + %g * \"%s\")" % \
@@ -51,19 +54,36 @@ class Paradigm:
         return descend(self.para)
 
     def to_json(self):
-        return self.__dict__
+        # output non-empty cells only to save space
+        dense_para = []
+        assert len(self.para) <= 2
+        for num in self.para:
+            assert len(num) <= 7
+            dense_para.append([])
+            for poss in num:
+                assert len(num) <= 18
+                dense_para[-1].append([])
+                for cell in poss:
+                    if cell:
+                        dense_para[-1][-1].append(cell)
+        my_dict = { 'para': dense_para }
+        return my_dict
 
     @staticmethod
     def from_json(para_dict):
         assert list(para_dict.keys()) == ['para']
         para_list = para_dict['para']
         me = NounParadigm()
-        for i in range(0, 2):
+        assert len(para_list) <= 2
+        for n in para_list:
             list_below = para_list.pop(0)
-            for j in range(0, 7):
+            assert len(list_below) <= 7
+            for p in list_below:
                 list_below_below = list_below.pop(0)
-                for k in range(0, 18):
-                    me.para[i][j][k] = Cell.from_json(list_below_below.pop(0))
+                assert len(list_below_below) <= 18
+                for c in list_below_below:
+                    cell = Cell.from_json(list_below_below.pop(0))
+                    me.para[cell.number][cell.possessor][cell.case] = cell
         return me
 
 class NounCell(Cell):
