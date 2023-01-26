@@ -80,7 +80,7 @@ class Speaker:
         form = self.para.para[i][j][k].form_a if is_form_a else self.para.para[i][j][k].form_b
         debug("I just heard", form)
         # we might want to use exponential decay instead
-        delta = (-1 if is_form_a else 1) / (self.experience + 1)
+        delta = (1 if is_form_a else -1) / (self.experience + 1)
         self.para.nudge(delta, i, j, k)
         self.para.propagate(delta, i, j, k)
         self.experience = self.experience + 1
