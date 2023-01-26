@@ -74,6 +74,10 @@ class LoadFromFilePopup(FloatLayout):
     load = ObjectProperty(None)
     cancel = ObjectProperty(None)
 
+class FastForwardPopup(BoxLayout):
+    """A popup window to show the progress of a fast forward."""
+    cancel = ObjectProperty(None)
+
 class SaveToFileButton(Button):
     """Opens a popup window for writing the current configuration of the Agora to file."""
     def __init__(self, **kwargs):
@@ -154,8 +158,16 @@ class FastForwardButton(Button):
 
     def fastforward(self, *args):
         # TODO: stop already running simulation
+        content = FastForwardPopup(cancel=self.cancel_fast_forward)
+        self.popup = Popup(title="Folyamatban...", content=content, size_hint=(0.7, 0.5))
+        self.popup.open()
         App.get_running_app().root.ids.agora.clear_talk_arrow()
         App.get_running_app().root.ids.agora.simulate_till_stable()
+        #self.popup.dismiss()
+
+    def cancel_fast_forward(self, *args):
+        App.get_running_app().root.ids.agora.sim_cancelled = True
+        self.popup.dismiss()
 
 class SpeakerDot(Speaker, DragBehavior, Widget):
     """The visual representation of a single speaker on the GUI."""
@@ -275,6 +287,11 @@ class AgoraWidget(Widget, Agora):
                                        width=2)
         self.canvas.add(Color(0.2, 0.0, 0.8))
         self.canvas.add(self.talk_arrow)
+
+    def update_progressbar(self, sim_iteration):
+        ff_button = App.get_running_app().root.ids.button_layout.ids.fast_forward_button
+        progressbar = ff_button.popup.ids.container.children[0].ids.progressbar
+        progressbar.value = sim_iteration
 
 class DemoAgoraWidget1(AgoraWidget):
     """A 10x10 grid of speakers, pure A in the top left corner, pure B at bottom right and everything else in between."""

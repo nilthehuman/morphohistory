@@ -91,6 +91,7 @@ class Agora:
     def __init__(self):
         self.speakers = []
         self.clear_caches()
+        self.sim_cancelled = False
 
     def clear_caches(self):
         # cache variables for expensive calculations
@@ -130,12 +131,19 @@ class Agora:
         """When to stop the simulation"""
         return all(abs(s.principal_weight()) < 0.1 for s in self.speakers)
 
-    def simulate_till_stable(self):
+    def simulate_till_stable(self, graphics=True):
         """Keep running the simulation until the stability condition is reached."""
+        self.sim_iteration = 0
         debug("Simulation until stable started:", time())
         # Make sure we stop eventually no matter what
         for i in range(0, 10000):
+            if self.sim_cancelled:
+                self.sim_cancelled = False
+                break
             if self.is_stable():
                 break
             self.simulate(0, graphics=False)
+            self.sim_iteration = self.sim_iteration + 1
+            if graphics:
+                self.update_progressbar(self.sim_iteration)
         debug("Simulation until stable finished:", time())

@@ -44,6 +44,7 @@
         size_hint: None, None
         size: 160, 80
     FastForwardButton:
+        id: fast_forward_button
         size_hint: None, None
         size: 160, 50
         text: '>>'
@@ -115,6 +116,28 @@
 
 <SaveToFileButton>
     text: self.text
+
+<FastForwardPopup>
+    canvas.before:
+        Color:
+            rgb: 0.05, 0, 0.2
+        Rectangle:
+            pos: self.pos
+            size: self.size
+    size: root.size
+    pos: root.pos
+    orientation: "vertical"
+    ProgressBar:
+        id: progressbar
+        max: 10000
+    Label:
+        orientation: "horizontal"
+        text: str(progressbar.value)
+    Button:
+        text: "Mindegy, hagyjad!"
+        size_hint: None, None
+        size: 150, 50
+        on_release: root.cancel()
 
 <LoadFromFileButton>
     text: self.text
