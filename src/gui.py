@@ -118,9 +118,9 @@ class LoadFromFileButton(Button):
         fullpath = fileselection[0]
         with open(fullpath, 'r') as stream:
             speaker_list = load(stream)
-            speakers = [Speaker.from_json(s) for s in speaker_list]
-            App.get_running_app().root.ids.agora.clear_speakers()
-            App.get_running_app().root.ids.agora.load_speakers(speakers)
+        speakers = [Speaker.from_json(s) for s in speaker_list]
+        App.get_running_app().root.ids.agora.clear_speakers()
+        App.get_running_app().root.ids.agora.load_speakers(speakers)
         self.dismiss_popup()
 
 class StartStopSimButton(Button):
