@@ -63,9 +63,7 @@ class Speaker:
         return self.para[0][0][0].to_str_short()
 
     def talk_to(self, hearer):
-        if hearer.is_broadcaster: # broadcasters are deaf
-            #assert False # why does this even happen I don't get it
-            return
+        assert not hearer.is_broadcaster # broadcasters are deaf
         i, j, k = -1, -1, -1
         # pick a non-empty cell to share with the hearer
         while True:
