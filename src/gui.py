@@ -183,15 +183,18 @@ class SpeakerDot(Speaker, DragBehavior, Widget):
         return me
 
     def on_mouse_pos(self, window, pos):
+        if not self.parent:
+            # why do SpeakerDots stay alive after AgoraWidge.clear_widgets(), this is stupid
+            return
         if (self.collide_point(*pos)):
             if not self.nametag_on:
                 debug("Turning on nametag for", self.n)
                 self.nametag.text = str(self.n) + ': ' + self.name_tag()
-                Window.add_widget(self.nametag)
+                self.parent.add_widget(self.nametag)
                 self.nametag_on = True
         elif self.nametag_on:
             debug("Turning off nametag for", self.n)
-            Window.remove_widget(self.nametag)
+            self.parent.remove_widget(self.nametag)
             self.nametag_on = False
 
     #TODO: self.inv_dist_squared = None when any dot is moved!
@@ -220,7 +223,7 @@ class NameTag(Label):
         self.pos = pos
 
 class AgoraWidget(Widget, Agora):
-    """An agora of speakers visualized."""
+    """An agora of speakers visualized on the screen."""
 
     def __init__(self, speakers=[], **kwargs):
         Widget.__init__(self, **kwargs)
