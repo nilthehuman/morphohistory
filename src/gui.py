@@ -24,7 +24,7 @@ from math import sqrt, sin, cos, pi
 from os.path import isfile, join
 from random import choices
 
-from speaker import Speaker, Agora
+from .speaker import Speaker, Agora
 
 # Adapted from kivy.org/doc/stable/api-kivy.core.window.html
 class KeyeventHandler(Widget):

@@ -6,7 +6,7 @@ from logging import debug
 from random import choices, randrange
 from time import time
 
-from paradigm import NounCell, VerbCell, Paradigm, NounParadigm, VerbParadigm
+from .paradigm import NounCell, VerbCell, Paradigm, NounParadigm, VerbParadigm
 
 class Speaker:
     """A simulated individual within the speaking community."""
