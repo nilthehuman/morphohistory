@@ -196,10 +196,13 @@ class SpeakerDot(Speaker, DragBehavior, Widget):
     #TODO: self.inv_dist_squared = None when any dot is moved!
 
     def update_color(self):
-        yellow = (1.0, 1.0, 0.0)
-        purple = (1.0, 0.0, 1.0)
-        w = self.principal_weight()
-        self.color = [sum(x) for x in zip([(1-w) * y for y in yellow], [w * p for p in purple])]
+        if self.is_broadcaster:
+            self.color = (0.2, 0.9, 0.1)
+        else:
+            yellow = (1.0, 1.0, 0.0)
+            purple = (1.0, 0.0, 1.0)
+            w = self.principal_weight()
+            self.color = [sum(x) for x in zip([(1-w) * y for y in yellow], [w * p for p in purple])]
 
     def talk_to(self, hearer):
         Speaker.talk_to(self, hearer)
@@ -312,7 +315,6 @@ class DemoAgoraWidget3(AgoraWidget):
             pos = (300 + x, 300 + y)
             self.add_speakerdot(SpeakerDot(n, pos, 0.5))
         broadcaster = SpeakerDot(16, (300, 300), 0.0, True)
-        broadcaster.color = (0.2, 0.9, 0.1)
         self.add_speakerdot(broadcaster)
         self.unbind(size=self.populate)
 
