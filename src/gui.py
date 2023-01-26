@@ -18,7 +18,7 @@ from kivy.uix.label import Label
 from kivy.uix.popup import Popup
 from kivy.uix.widget import Widget
 
-from json import dumps, loads
+from json import dumps, load
 from logging import debug
 from math import sqrt, sin, cos, pi
 from os.path import isfile, join
@@ -69,9 +69,13 @@ class SaveToFilePopup(FloatLayout):
     cancel = ObjectProperty(None)
     text_input = ObjectProperty(None)
 
+class LoadFromFilePopup(FloatLayout):
+    """A popup window for picking a file to load the Agora from."""
+    load = ObjectProperty(None)
+    cancel = ObjectProperty(None)
+
 class SaveToFileButton(Button):
     """Opens a popup window for writing the current configuration of the Agora to file."""
-
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
         self.bind(on_press=self.show_save_popup)
@@ -92,6 +96,31 @@ class SaveToFileButton(Button):
             return
         with open(fullpath, 'w') as stream:
             stream.write(dumps(App.get_running_app().root.ids.agora.speakers, indent=1, default=lambda x: x.to_json()))
+        self.dismiss_popup()
+
+class LoadFromFileButton(Button):
+    """Opens a popup window for loading an Agora configuration from file."""
+    def __init__(self, **kwargs):
+        super().__init__(**kwargs)
+        self.bind(on_press=self.show_load_popup)
+
+    def show_load_popup(self, *args):
+        content = LoadFromFilePopup(load=self.load, cancel=self.dismiss_popup)
+        self.popup = Popup(title="Agora betöltése", content=content, size_hint=(0.4, 0.6))
+        self.popup.open()
+
+    def dismiss_popup(self):
+        self.popup.dismiss()
+
+    def load(self, path, fileselection):
+        if not fileselection:
+            return
+        fullpath = fileselection[0]
+        with open(fullpath, 'r') as stream:
+            speaker_list = load(stream)
+            speakers = [Speaker.from_json(s) for s in speaker_list]
+            App.get_running_app().root.ids.agora.clear_speakers()
+            App.get_running_app().root.ids.agora.load_speakers(speakers)
         self.dismiss_popup()
 
 class StartStopSimButton(Button):
@@ -132,16 +161,25 @@ class SpeakerDot(Speaker, DragBehavior, Widget):
 
     color = ColorProperty()
 
-    def __init__(self, n, pos, weight_a, is_broadcaster=False, **kwargs):
-        #super().__init__(**kwargs)
+    def __init__(self, n, pos, para=None, is_broadcaster=False, experience=1.0, **kwargs):
+        if type(para) is float: # poor man's polymorphism
+            weight_a = para
+            Speaker.__init__(self, n, pos, None, is_broadcaster, experience)
+            Speaker.init_from_weight(self, weight_a)
+        else:
+            Speaker.__init__(self, n, pos, para, is_broadcaster, experience)
         DragBehavior.__init__(self, **kwargs)
         Widget.__init__(self, **kwargs)
-        Speaker.init_from_weight(self, n, pos, weight_a, is_broadcaster)
         self.size = 20, 20
         self.update_color()
         self.nametag = NameTag(text=str(n) + ': ' + self.name_tag())
         self.nametag_on = False
         Window.bind(mouse_pos=self.on_mouse_pos)
+
+    @classmethod
+    def fromspeaker(cls, speaker):
+        me = cls(speaker.n, speaker.pos, speaker.para, speaker.is_broadcaster, speaker.experience)
+        return me
 
     def on_mouse_pos(self, window, pos):
         if (self.collide_point(*pos)):
@@ -188,10 +226,22 @@ class AgoraWidget(Widget, Agora):
         self.pick = []
 
     def add_speakerdot(self, speakerdot):
+        """Add a virtual speaker to the simulated community."""
         self.speakers.append(speakerdot)
         self.add_widget(speakerdot)
 
+    def clear_speakers(self):
+        """Remove all simulated speakers."""
+        self.clear_widgets()
+        self.speakers = []
+
+    def load_speakers(self, speakers):
+        """Add an an array of pre-built Speakers."""
+        for s in speakers:
+            self.add_speakerdot(SpeakerDot.fromspeaker(s))
+
     def simulate(self, dt, graphics=True):
+        """Perform a single step of simulation: let one speaker talk to another."""
         super().simulate(dt)
         if not graphics:
             return

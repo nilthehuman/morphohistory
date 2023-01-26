@@ -1,30 +1,24 @@
 """Bare-bones simulated speakers that use one-word sentences to interact with each other."""
 
 from itertools import product
+from json import loads
 from logging import debug
 from random import choices, randrange
 from time import time
 
-from paradigm import NounCell, VerbCell, NounParadigm, VerbParadigm
+from paradigm import NounCell, VerbCell, Paradigm, NounParadigm, VerbParadigm
 
 class Speaker:
     """A simulated individual within the speaking community."""
-    def __init__(self, n, pos, para=NounParadigm(), is_broadcaster=False):
+    def __init__(self, n, pos, para=NounParadigm(), is_broadcaster=False, experience=1.0):
         self.n = n
         self.pos = pos
         self.para = para
-        self.experience = 1.0
+        self.experience = experience
         self.is_broadcaster = is_broadcaster
-        # TODO: temporary hack, for demo purposes
-        self.para[0][0][0] = NounCell(number=0, possessor=0, case=0,
-            weight_a=self.para.para[0][0][0].weight_a, form_a='havernak', form_b='havernek', importance=0.2)
 
-    def init_from_weight(self, n, pos, weight_a, is_broadcaster=False):
-        self.n = n
-        self.pos = pos
+    def init_from_weight(self, weight_a):
         self.para = NounParadigm(weight_a)
-        self.is_broadcaster = is_broadcaster
-        self.experience = 1.0
         # TODO: temporary hack, for demo purposes
         self.para[0][0][0] = NounCell(number=0, possessor=0, case=0,
             weight_a=self.para.para[0][0][0].weight_a, form_a='havernak', form_b='havernek', importance=0.2)
@@ -43,6 +37,15 @@ class Speaker:
     def to_json(self):
         speaker_only = Speaker.fromspeaker(self)
         return speaker_only.__dict__
+
+    @staticmethod
+    def from_json(speaker_dict):
+        para = Paradigm.from_json(speaker_dict['para'])
+        return Speaker(speaker_dict['n'],
+                       speaker_dict['pos'],
+                       para,
+                       speaker_dict['is_broadcaster'],
+                       speaker_dict['experience'])
 
     def principal_weight(self):
         """Which way the speaker is leaning, summed up in a single float."""

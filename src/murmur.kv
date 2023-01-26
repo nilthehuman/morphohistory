@@ -35,6 +35,11 @@
         size_hint: None, None
         size: 160, 80
         text: 'Mentsd ezt el!'
+    LoadFromFileButton:
+        id: load_from_file_button
+        size_hint: None, None
+        size: 160, 80
+        text: 'Tölts be egy agorát!'
     StartStopSimButton:
         size_hint: None, None
         size: 160, 80
@@ -83,7 +88,35 @@
                 text: "Hagyjad"
                 on_release: root.cancel()
 
+<LoadFromFilePopup>
+    canvas.before:
+        Color:
+            rgb: 0.05, 0, 0.2
+        Rectangle:
+            pos: self.pos
+            size: self.size
+    BoxLayout:
+        size: root.size
+        pos: root.pos
+        orientation: "vertical"
+        FileChooserListView:
+            id: filechooser
+        BoxLayout:
+            orientation: "horizontal"
+            size_hint_y: None
+            height: 30
+            Button:
+                id: save_button
+                text: "Töltsd be"
+                on_release: root.load(filechooser.path, filechooser.selection)
+            Button:
+                text: "Hagyjad"
+                on_release: root.cancel()
+
 <SaveToFileButton>
+    text: self.text
+
+<LoadFromFileButton>
     text: self.text
 
 <StartStopSimButton>

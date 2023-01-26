@@ -21,6 +21,16 @@ class Cell:
     def to_json(self):
         return self.__dict__
 
+    @staticmethod
+    def from_json(cell_dict):
+        return NounCell(cell_dict['number'],
+                        cell_dict['possessor'],
+                        cell_dict['case'],
+                        cell_dict['weight_a'],
+                        cell_dict['form_a'],
+                        cell_dict['form_b'],
+                        cell_dict['importance'])
+
     def to_str_short(self):
         if 0 == len(self.form_a):
             return ''
@@ -29,7 +39,7 @@ class Cell:
             (self.weight_a, self.form_a, 1.0-self.weight_a, self.form_b)
 
 class Paradigm:
-    """A 3D or 5D matrix of competing noun of verb forms for a given morphosyntactic context."""
+    """A 3D or 5D matrix of competing noun of verb forms for given morphosyntactic contexts."""
     def __str__(self):
         def descend(xs):
             if type(xs) is not list:
@@ -42,6 +52,19 @@ class Paradigm:
 
     def to_json(self):
         return self.__dict__
+
+    @staticmethod
+    def from_json(para_dict):
+        assert list(para_dict.keys()) == ['para']
+        para_list = para_dict['para']
+        me = NounParadigm()
+        for i in range(0, 2):
+            list_below = para_list.pop(0)
+            for j in range(0, 7):
+                list_below_below = list_below.pop(0)
+                for k in range(0, 18):
+                    me.para[i][j][k] = Cell.from_json(list_below_below.pop(0))
+        return me
 
 class NounCell(Cell):
     """A single cell in a noun paradigm for a given morphosyntactic context."""
