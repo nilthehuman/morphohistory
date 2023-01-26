@@ -246,6 +246,7 @@ class AgoraWidget(Widget, Agora):
         """Remove all simulated speakers."""
         self.clear_widgets()
         self.speakers = []
+        self.clear_caches()
         self.clear_talk_arrow()
 
     def load_speakers(self, speakers):
