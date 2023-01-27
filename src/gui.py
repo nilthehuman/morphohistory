@@ -357,7 +357,7 @@ class DemoAgoraWidget3(AgoraWidget):
         self.unbind(size=self.populate)
 
 class DemoAgoraWidget4(AgoraWidget):
-    """A circle of neutral speakers around a biased broadcaster."""
+    """A smaller ring of A speakers inside a wider ring of B speakers."""
 
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
