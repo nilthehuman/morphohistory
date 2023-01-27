@@ -163,7 +163,7 @@ class FastForwardButton(Button):
         self.popup.open()
         App.get_running_app().root.ids.agora.clear_talk_arrow()
         App.get_running_app().root.ids.agora.simulate_till_stable()
-        #self.popup.dismiss()
+        self.popup.ids.container.children[0].ids.cancel_button.text = "Faja, köszi"
 
     def cancel_fast_forward(self, *args):
         App.get_running_app().root.ids.agora.sim_cancelled = True
