@@ -174,13 +174,13 @@ class SpeakerDot(Speaker, DragBehavior, Widget):
 
     color = ColorProperty()
 
-    def __init__(self, n, pos, para=None, is_broadcaster=False, experience=1.0, **kwargs):
+    def __init__(self, n, pos, para=None, experience=1.0, **kwargs):
         if type(para) is float: # poor man's polymorphism
             weight_a = para
-            Speaker.__init__(self, n, pos, None, is_broadcaster, experience)
+            Speaker.__init__(self, n, pos, None, False, experience)
             Speaker.init_from_weight(self, weight_a)
         else:
-            Speaker.__init__(self, n, pos, para, is_broadcaster, experience)
+            Speaker.__init__(self, n, pos, para, False, experience)
         DragBehavior.__init__(self, **kwargs)
         Widget.__init__(self, **kwargs)
         self.size = 20, 20
@@ -191,8 +191,11 @@ class SpeakerDot(Speaker, DragBehavior, Widget):
 
     @classmethod
     def fromspeaker(cls, speaker):
-        me = cls(speaker.n, speaker.pos, speaker.para, speaker.is_broadcaster, speaker.experience)
-        return me
+        # bit of an ugly hack but okay
+        if speaker.is_broadcaster:
+            return BroadcasterSpeakerDot(speaker.n, speaker.pos, speaker.para, speaker.experience)
+        else:
+            return SpeakerDot(speaker.n, speaker.pos, speaker.para, speaker.experience)
 
     def on_mouse_pos(self, window, pos):
         if not self.parent:
@@ -212,17 +215,25 @@ class SpeakerDot(Speaker, DragBehavior, Widget):
     #TODO: self.inv_dist_squared = None when any dot is moved!
 
     def update_color(self):
-        if self.is_broadcaster:
-            self.color = (0.2, 0.9, 0.1)
-        else:
-            yellow = (1.0, 1.0, 0.0)
-            purple = (1.0, 0.0, 1.0)
-            w = self.principal_weight()
-            self.color = [sum(x) for x in zip([(1-w) * y for y in yellow], [w * p for p in purple])]
+        yellow = (1.0, 1.0, 0.0)
+        purple = (1.0, 0.0, 1.0)
+        w = self.principal_weight()
+        self.color = [sum(x) for x in zip([(1-w) * y for y in yellow], [w * p for p in purple])]
 
     def talk_to(self, hearer):
         Speaker.talk_to(self, hearer)
         hearer.update_color()
+
+class BroadcasterSpeakerDot(SpeakerDot):
+    """The GUI representation of a broadcasting speaker who never listens to anyone."""
+
+    def __init__(self, n, pos, para=None, experience=1.0, **kwargs):
+        super().__init__(n, pos, para, experience, **kwargs)
+        self.is_broadcaster = True
+        self.update_color()
+
+    def update_color(self):
+        self.color = (0.2, 0.9, 0.1)
 
 class NameTag(Label):
     """A kind of tooltip that shows how biased a speaker is at the moment."""
@@ -341,7 +352,7 @@ class DemoAgoraWidget3(AgoraWidget):
             y = cos(2 * pi * float(n) / 16) * 150
             pos = (300 + x, 300 + y)
             self.add_speakerdot(SpeakerDot(n, pos, 0.5))
-        broadcaster = SpeakerDot(16, (300, 300), 0.0, True)
+        broadcaster = BroadcasterSpeakerDot(16, (300, 300), 0.0)
         self.add_speakerdot(broadcaster)
         self.unbind(size=self.populate)
 

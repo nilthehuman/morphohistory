@@ -157,6 +157,24 @@
             size: self.width, self.height
             pos: self.pos
 
+<BroadcasterSpeakerDot>
+    drag_rectangle: self.x, self.y, self.width, self.height
+    drag_timeout: 10000000
+    drag_distance: 0
+    size_hint: None, None  #size hints are kind of stupid
+    canvas:
+        Color:
+            rgb: self.color
+        PushMatrix
+        Rotate:
+            angle: 45
+            axis: (0, 0, 1)
+            origin: self.center
+        Rectangle:
+            size: [self.width, self.height]
+            pos: self.pos
+        PopMatrix
+
 <NameTag>
     size: self.texture_size[0] + 5, self.texture_size[1] + 5
     size_hint: None, None
