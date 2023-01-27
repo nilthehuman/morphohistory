@@ -368,6 +368,7 @@ class DemoAgoraWidget4(AgoraWidget):
 
 class MurmurApp(App):
     def build(self):
+        self.icon = "logo.png"
         KeyeventHandler()
         return TopBoxLayout()
 
