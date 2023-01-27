@@ -82,7 +82,7 @@ class SaveToFileButton(Button):
     """Opens a popup window for writing the current configuration of the Agora to file."""
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
-        self.bind(on_press=self.show_save_popup)
+        self.bind(on_release=self.show_save_popup)
 
     def show_save_popup(self, *args):
         content = SaveToFilePopup(save=self.save, cancel=self.dismiss_popup)
@@ -106,7 +106,7 @@ class LoadFromFileButton(Button):
     """Opens a popup window for loading an Agora configuration from file."""
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
-        self.bind(on_press=self.show_load_popup)
+        self.bind(on_release=self.show_load_popup)
 
     def show_load_popup(self, *args):
         content = LoadFromFilePopup(load=self.load, cancel=self.dismiss_popup)
@@ -137,7 +137,7 @@ class StartStopSimButton(Button):
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
         self.text = self.start_text
-        self.bind(on_press=self.start)
+        self.bind(on_release=self.start)
 
     def start(self, *args):
         if not self.sim:
@@ -154,7 +154,7 @@ class FastForwardButton(Button):
 
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
-        self.bind(on_press=self.fastforward)
+        self.bind(on_release=self.fastforward)
 
     def fastforward(self, *args):
         # TODO: stop already running simulation
