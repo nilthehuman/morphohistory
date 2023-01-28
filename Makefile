@@ -1,7 +1,7 @@
 .PHONY: init lint test clean
 
 init:
-	pip install -r requirements.txt
+	python3 -m pip install -r requirements.txt
 
 lint:
 	pylint src tests
@@ -17,4 +17,4 @@ clean:
 	rm -rf build/
 
 run:
-	python3 src/
+	python3 .
