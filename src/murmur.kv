@@ -10,14 +10,20 @@
         Rectangle:
             pos: self.pos
             size: self.size
-    DemoAgoraWidget4:
-        id: agora
-        size_hint: None, None
-        size: 600, 600
+    AnchorLayout:
+        anchor_x: 'center'
+        anchor_y: 'center'
+        size_hint: 1, 1
+        RelativeLayout:
+            size_hint: None, None
+            size: 600, 600
+            DemoAgoraWidget4:
+                id: agora
+                size_hint: 1, 1
     ButtonLayout:
         id: button_layout
-        size_hint: None, None
-        size: 200, 600
+        size_hint: None, 1
+        width: 200
 
 <ButtonLayout>
     orientation: 'vertical'
