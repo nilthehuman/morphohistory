@@ -264,6 +264,7 @@ class AgoraWidget(Widget, Agora):
         """Remove blue arrow from screen."""
         if self.talk_arrow:
             self.canvas.remove(self.talk_arrow)
+            self.talk_arrow = None
 
     def clear_speakers(self):
         """Remove all simulated speakers."""
