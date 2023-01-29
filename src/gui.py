@@ -316,7 +316,7 @@ class DemoAgoraWidget1(AgoraWidget):
     def populate(self, *args):
         for row in range(10):
             for col in range(10):
-                weight_a = 0.05 * (row + col)
+                weight_a = 1 / 18 * (row + col)
                 pos = self.width * 0.1 + self.width * 0.09 * col - 10, self.height * 0.9 - self.height * 0.09 * row - 10
                 self.add_speakerdot(SpeakerDot(row*10 + col, pos, weight_a))
         self.unbind(size=self.populate)
