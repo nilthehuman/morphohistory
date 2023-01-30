@@ -1,5 +1,6 @@
 """Bare-bones simulated speakers that use one-word sentences to interact with each other."""
 
+from copy import deepcopy
 from itertools import product
 from json import loads
 from logging import debug
@@ -25,7 +26,7 @@ class Speaker:
 
     @classmethod
     def fromspeaker(cls, other):
-        me = cls(other.n, other.pos, other.para, other.is_broadcaster)
+        me = cls(other.n, other.pos, deepcopy(other.para), other.is_broadcaster)
         me.experience = other.experience
         return me
 
@@ -93,14 +94,29 @@ class Agora:
         self.clear_caches()
         self.sim_cancelled = False
 
+    def save_starting_state(self):
+        # N.B. paradigms are deep copied by Speaker.fromspeaker
+        self.starting_speakers = [Speaker.fromspeaker(s) for s in self.speakers]
+
+    def reset(self):
+        self.clear_speakers()
+        self.load_speakers(self.starting_speakers)
+
     def clear_caches(self):
         # cache variables for expensive calculations
         self.speaker_pairs = None
         self.inv_dist_squared = None
         self.pick_queue = None
 
+    def clear_speakers(self):
+        self.speakers = []
+        self.clear_caches()
+
+    def load_speakers(self, speakers):
+        self.speakers = [Speaker.fromspeaker(s) for s in speakers]
+
     def add_speaker(self, speaker):
-        self.speakers.append(speaker)
+        self.speakers.append(Speaker.fromspeaker(speaker))
 
     def simulate(self, dt, graphics=True): # TODO: do dt number of iterations?
         """Perform one iteration: pick two individuals to talk to each other

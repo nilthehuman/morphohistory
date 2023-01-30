@@ -18,6 +18,7 @@ from kivy.uix.label import Label
 from kivy.uix.popup import Popup
 from kivy.uix.widget import Widget
 
+from copy import deepcopy
 from json import dumps, load
 from logging import debug
 from math import sqrt, sin, cos, pi
@@ -125,6 +126,7 @@ class LoadFromFileButton(Button):
         speakers = [Speaker.from_json(s) for s in speaker_list]
         Root().ids.agora.clear_speakers()
         Root().ids.agora.load_speakers(speakers)
+        Root().ids.agora.save_starting_state()
         self.dismiss_popup()
 
 class StartStopSimButton(Button):
@@ -148,6 +150,17 @@ class StartStopSimButton(Button):
             self.sim.cancel()
             self.sim = None
             self.text = self.start_text
+
+class RewindButton(Button):
+    """Restores the initial state of the Agora when loaded."""
+
+    def __init__(self, **kwargs):
+        super().__init__(**kwargs)
+        self.bind(on_release=self.rewind)
+
+    def rewind(self, *args):
+        # TODO: stop already running simulation
+        Root().ids.agora.reset()
 
 class FastForwardButton(Button):
     """Keeps running the simulation until a stable state is reached."""
@@ -193,9 +206,9 @@ class SpeakerDot(Speaker, DragBehavior, Widget):
     def fromspeaker(cls, speaker):
         # bit of an ugly hack but okay
         if speaker.is_broadcaster:
-            return BroadcasterSpeakerDot(speaker.n, speaker.pos, speaker.para, speaker.experience)
+            return BroadcasterSpeakerDot(speaker.n, speaker.pos, deepcopy(speaker.para), speaker.experience)
         else:
-            return SpeakerDot(speaker.n, speaker.pos, speaker.para, speaker.experience)
+            return SpeakerDot(speaker.n, speaker.pos, deepcopy(speaker.para), speaker.experience)
 
     def collide_point(self, x, y):
         abs_x_min = self.parent.parent.pos[0] + self.pos[0]
@@ -276,13 +289,12 @@ class AgoraWidget(Widget, Agora):
 
     def clear_speakers(self):
         """Remove all simulated speakers."""
+        super().clear_speakers()
         self.clear_widgets()
-        self.speakers = []
-        self.clear_caches()
         self.clear_talk_arrow()
 
     def load_speakers(self, speakers):
-        """Add an an array of pre-built Speakers."""
+        """Add an array of pre-built Speakers."""
         for s in speakers:
             self.add_speakerdot(SpeakerDot.fromspeaker(s))
 
@@ -328,6 +340,7 @@ class DemoAgoraWidget1(AgoraWidget):
                 pos = self.width * 0.1 + self.width * 0.09 * col - 10, self.height * 0.9 - self.height * 0.09 * row - 10
                 self.add_speakerdot(SpeakerDot(row*10 + col, pos, weight_a))
         self.unbind(size=self.populate)
+        self.save_starting_state()
 
 class DemoAgoraWidget2(AgoraWidget):
     """A 10x10 grid of speakers, neutral majority on the outside, biased minority on the inside."""
@@ -346,6 +359,7 @@ class DemoAgoraWidget2(AgoraWidget):
                 else:
                     self.add_speakerdot(SpeakerDot(row*10 + col, pos, 0.5))
         self.unbind(size=self.populate)
+        self.save_starting_state()
 
 class DemoAgoraWidget3(AgoraWidget):
     """A circle of neutral speakers around a biased broadcaster."""
@@ -364,6 +378,7 @@ class DemoAgoraWidget3(AgoraWidget):
         broadcaster = BroadcasterSpeakerDot(16, (300, 300), 0.0)
         self.add_speakerdot(broadcaster)
         self.unbind(size=self.populate)
+        self.save_starting_state()
 
 class DemoAgoraWidget4(AgoraWidget):
     """A smaller ring of A speakers inside a wider ring of B speakers."""
@@ -385,6 +400,7 @@ class DemoAgoraWidget4(AgoraWidget):
             pos = (300 + x, 300 + y)
             self.add_speakerdot(SpeakerDot(n, pos, 0.0))
         self.unbind(size=self.populate)
+        self.save_starting_state()
 
 def Root():
     return App.get_running_app().root

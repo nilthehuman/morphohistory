@@ -50,12 +50,20 @@
     StartStopSimButton:
         size_hint: None, None
         size: 160, 60
-    FastForwardButton:
-        id: fast_forward_button
-        size_hint: None, None
-        size: 160, 50
-        text: '>>'
-        font_size: 32
+    BoxLayout:
+        orientation: 'horizontal'
+        size_hint: 1, None
+        size: 160, 40
+        RewindButton:
+            id: rewind_button
+            size_hint: 1, 1
+            text: '<<'
+            font_size: 32
+        FastForwardButton:
+            id: fast_forward_button
+            size_hint: 1, 1
+            text: '>>'
+            font_size: 32
     Slider:
         id: speed_slider
         min: 0
