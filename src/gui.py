@@ -44,7 +44,7 @@ class KeyeventHandler(Widget):
     def on_keypressed(self, keyboard, keycode, text, modifiers):
         if keycode[1] == 'g':
             if not self.sim:
-                self.sim = Clock.schedule_interval(App.get_running_app().root.ids.agora.simulate, 0.1)
+                self.sim = Clock.schedule_interval(Root().ids.agora.simulate, 0.1)
             else:
                 self.sim.cancel()
                 self.sim = None
@@ -99,7 +99,7 @@ class SaveToFileButton(Button):
             savebutton.text = "Felülírjam?"
             return
         with open(fullpath, 'w') as stream:
-            stream.write(dumps(App.get_running_app().root.ids.agora.speakers, indent=1, default=lambda x: x.to_json()))
+            stream.write(dumps(Root().ids.agora.speakers, indent=1, default=lambda x: x.to_json()))
         self.dismiss_popup()
 
 class LoadFromFileButton(Button):
@@ -123,8 +123,8 @@ class LoadFromFileButton(Button):
         with open(fullpath, 'r') as stream:
             speaker_list = load(stream)
         speakers = [Speaker.from_json(s) for s in speaker_list]
-        App.get_running_app().root.ids.agora.clear_speakers()
-        App.get_running_app().root.ids.agora.load_speakers(speakers)
+        Root().ids.agora.clear_speakers()
+        Root().ids.agora.load_speakers(speakers)
         self.dismiss_popup()
 
 class StartStopSimButton(Button):
@@ -141,8 +141,8 @@ class StartStopSimButton(Button):
 
     def start(self, *args):
         if not self.sim:
-            slowdown = App.get_running_app().root.ids.button_layout.ids.speed_slider.value
-            self.sim = Clock.schedule_interval(App.get_running_app().root.ids.agora.simulate, 1.0 - 0.01 * slowdown)
+            slowdown = Root().ids.button_layout.ids.speed_slider.value
+            self.sim = Clock.schedule_interval(Root().ids.agora.simulate, 1.0 - 0.01 * slowdown)
             self.text = self.stop_text
         else:
             self.sim.cancel()
@@ -161,12 +161,12 @@ class FastForwardButton(Button):
         content = FastForwardPopup(cancel=self.cancel_fast_forward)
         self.popup = Popup(title="Folyamatban...", content=content, size_hint=(0.7, 0.5))
         self.popup.open()
-        App.get_running_app().root.ids.agora.clear_talk_arrow()
-        App.get_running_app().root.ids.agora.simulate_till_stable()
+        Root().ids.agora.clear_talk_arrow()
+        Root().ids.agora.simulate_till_stable()
         self.popup.ids.container.children[0].ids.cancel_button.text = "Faja, köszi"
 
     def cancel_fast_forward(self, *args):
-        App.get_running_app().root.ids.agora.sim_cancelled = True
+        Root().ids.agora.sim_cancelled = True
         self.popup.dismiss()
 
 class SpeakerDot(Speaker, DragBehavior, Widget):
@@ -250,8 +250,8 @@ class NameTag(Label):
         Window.bind(mouse_pos=self.on_mouse_pos)
 
     def on_mouse_pos(self, window, pos):
-        self.pos[0] = pos[0] - App.get_running_app().root.ids.rel_layout.pos[0]
-        self.pos[1] = pos[1] - App.get_running_app().root.ids.rel_layout.pos[1]
+        self.pos[0] = pos[0] - Root().ids.rel_layout.pos[0]
+        self.pos[1] = pos[1] - Root().ids.rel_layout.pos[1]
 
 class AgoraWidget(Widget, Agora):
     """An agora of speakers visualized on the screen."""
@@ -309,7 +309,7 @@ class AgoraWidget(Widget, Agora):
         self.canvas.add(self.talk_arrow)
 
     def update_progressbar(self, sim_iteration):
-        ff_button = App.get_running_app().root.ids.button_layout.ids.fast_forward_button
+        ff_button = Root().ids.button_layout.ids.fast_forward_button
         progressbar = ff_button.popup.ids.container.children[0].ids.progressbar
         progressbar.value = sim_iteration
 
@@ -385,6 +385,9 @@ class DemoAgoraWidget4(AgoraWidget):
             pos = (300 + x, 300 + y)
             self.add_speakerdot(SpeakerDot(n, pos, 0.0))
         self.unbind(size=self.populate)
+
+def Root():
+    return App.get_running_app().root
 
 class MurmurApp(App):
     def build(self):
