@@ -31,8 +31,6 @@ from .speaker import Speaker, Agora
 class KeyeventHandler(Widget):
     """Handles hotkeys to the application's basic features."""
 
-    sim = None
-    
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
         self.keyboard = Window.request_keyboard(self.on_keyboard_closed, self)
@@ -44,11 +42,7 @@ class KeyeventHandler(Widget):
 
     def on_keypressed(self, keyboard, keycode, text, modifiers):
         if keycode[1] == 'g':
-            if not self.sim:
-                self.sim = Clock.schedule_interval(Root().ids.agora.simulate, 0.1)
-            else:
-                self.sim.cancel()
-                self.sim = None
+            Root().ids.agora.start_sim()
             return True
         elif keycode[1] == 'q':
             debug("Exiting app")
@@ -142,14 +136,8 @@ class StartStopSimButton(Button):
         self.bind(on_release=self.start)
 
     def start(self, *args):
-        if not self.sim:
-            slowdown = Root().ids.button_layout.ids.speed_slider.value
-            self.sim = Clock.schedule_interval(Root().ids.agora.simulate, 1.0 - 0.01 * slowdown)
-            self.text = self.stop_text
-        else:
-            self.sim.cancel()
-            self.sim = None
-            self.text = self.start_text
+        Root().ids.agora.start_sim()
+        self.text = self.stop_text if Root().ids.agora.sim else self.start_text
 
 class RewindButton(Button):
     """Restores the initial state of the Agora when loaded."""
@@ -275,6 +263,7 @@ class AgoraWidget(Widget, Agora):
         self.speakers = speakers
         self.talk_arrow = None
         self.pick = []
+        self.sim = None
 
     def add_speakerdot(self, speakerdot):
         """Add a virtual speaker to the simulated community."""
@@ -297,6 +286,16 @@ class AgoraWidget(Widget, Agora):
         """Add an array of pre-built Speakers."""
         for s in speakers:
             self.add_speakerdot(SpeakerDot.fromspeaker(s))
+
+    def start_sim(self):
+        """Schedule simulation to repeat in Kivy scheduler."""
+        if not self.sim:
+            debug("Starting simulation...")
+            slowdown = Root().ids.button_layout.ids.speed_slider.value
+            self.sim = Clock.schedule_interval(Root().ids.agora.simulate, 1.0 - 0.01 * slowdown)
+        else:
+            self.sim.cancel()
+            self.sim = None
 
     def simulate(self, dt, graphics=True):
         """Perform a single step of simulation: let one speaker talk to another."""
