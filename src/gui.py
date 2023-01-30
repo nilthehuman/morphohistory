@@ -197,6 +197,13 @@ class SpeakerDot(Speaker, DragBehavior, Widget):
         else:
             return SpeakerDot(speaker.n, speaker.pos, speaker.para, speaker.experience)
 
+    def collide_point(self, x, y):
+        abs_x_min = self.parent.parent.pos[0] + self.pos[0]
+        abs_y_min = self.parent.parent.pos[1] + self.pos[1]
+        abs_x_max = abs_x_min + self.size[0]
+        abs_y_max = abs_y_min + self.size[1]
+        return abs_x_min <= x and x <= abs_x_max and abs_y_min <= y and y <= abs_y_max
+
     def on_mouse_pos(self, window, pos):
         if not self.parent:
             # why do SpeakerDots stay alive after AgoraWidget.clear_widgets(), this is stupid
@@ -243,7 +250,8 @@ class NameTag(Label):
         Window.bind(mouse_pos=self.on_mouse_pos)
 
     def on_mouse_pos(self, window, pos):
-        self.pos = pos
+        self.pos[0] = pos[0] - App.get_running_app().root.ids.rel_layout.pos[0]
+        self.pos[1] = pos[1] - App.get_running_app().root.ids.rel_layout.pos[1]
 
 class AgoraWidget(Widget, Agora):
     """An agora of speakers visualized on the screen."""
