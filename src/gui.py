@@ -437,7 +437,7 @@ def Root():
 
 class MurmurApp(App):
     def build(self):
-        self.icon = "logo.png"
+        self.icon = "assets/logo.png"
         KeyeventHandler()
         return TopBoxLayout()
 

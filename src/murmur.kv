@@ -141,7 +141,7 @@
 <FastForwardPopup>
     canvas.before:
         Color:
-            rgb: 0.05, 0, 0.2
+            rgb: 0.03, 0.1, 0.2
         Rectangle:
             pos: self.pos
             size: self.size
@@ -149,8 +149,16 @@
     pos: root.pos
     orientation: "vertical"
     ProgressBar:
+        canvas:
+            # code cribbed form stackoverflow.com/questions/51719374/how-to-change-color-of-progress-bar-kivy
+            BorderImage:
+                pos: self.x, self.center_y - 8
+                size: self.width * (self.value / self.max) if self.max else 0, 16
+                source: 'assets/progressbar.png'
         id: progressbar
         max: 10000
+        pos_hint: {'center_x': 0.5}
+        size_hint: 0.8, 0.8
     Label:
         orientation: "horizontal"
         text: str(progressbar.value)
