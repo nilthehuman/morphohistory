@@ -154,12 +154,17 @@
     Label:
         orientation: "horizontal"
         text: str(progressbar.value)
-    Button:
-        id: cancel_button
-        text: "Mindegy, hagyjad!"
-        size_hint: None, None
-        size: 150, 50
-        on_release: root.cancel()
+    AnchorLayout:
+        anchor_x: 'center'
+        anchor_y: 'bottom'
+        size_hint: 1, 1
+        Button:
+            id: cancel_button
+            text: "Mindegy, hagyjad!"
+            pos_hint_x: 1
+            size_hint: None, None
+            size: 150, 50
+            on_release: root.cancel()
 
 <LoadFromFileButton>
     text: self.text
