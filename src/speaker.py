@@ -182,7 +182,7 @@ class Agora:
 
     def is_stable(self):
         """When to stop the simulation"""
-        return all(abs(s.principal_weight()) < 0.1 for s in self.speakers)
+        return all(abs(s.principal_weight() - 0.5) > 0.4 for s in self.speakers)
 
     def simulate_till_stable(self):
         """Keep running the simulation until the stability condition is reached."""
