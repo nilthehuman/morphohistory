@@ -27,7 +27,6 @@ class Cell:
     @staticmethod
     def from_json(cell_dict):
         return NounCell(cell_dict['number'],
-                        cell_dict['possessor'],
                         cell_dict['case'],
                         cell_dict['weight_a'],
                         cell_dict['form_a'],
@@ -58,14 +57,11 @@ class Paradigm:
         dense_para = []
         assert len(self.para) <= 2
         for num in self.para:
-            assert len(num) <= 7
+            assert len(num) <= 18
             dense_para.append([])
-            for poss in num:
-                assert len(num) <= 18
-                dense_para[-1].append([])
-                for cell in poss:
-                    if cell:
-                        dense_para[-1][-1].append(cell)
+            for cell in num:
+                if cell:
+                    dense_para[-1].append(cell)
         my_dict = { 'para': dense_para }
         return my_dict
 
@@ -77,25 +73,21 @@ class Paradigm:
         assert len(para_list) <= 2
         while para_list:
             list_below = para_list.pop(0)
-            assert len(list_below) <= 7
+            assert len(list_below) <= 18
             while list_below:
-                list_below_below = list_below.pop(0)
-                assert len(list_below_below) <= 18
-                while list_below_below:
-                    cell = Cell.from_json(list_below_below.pop(0))
-                    me.para[cell.number][cell.possessor][cell.case] = cell
+                cell = Cell.from_json(list_below.pop(0))
+                me.para[cell.number][cell.case] = cell
         return me
 
 class NounCell(Cell):
     """A single cell in a noun paradigm for a given morphosyntactic context."""
-    def __init__(self, number=0, possessor=0, case=0, weight_a=0.5, form_a='', form_b='', importance=0.):
+    def __init__(self, number=0, case=0, weight_a=0.5, form_a='', form_b='', importance=0.):
         super().__init__(weight_a, form_a, form_b, importance)
         self.number = number
-        self.possessor = possessor
         self.case = case
 
     def get_morphosyntactic_properties(self):
-        return NounParadigm.morphosyntactic_properties(self.number, self.possessor, self.case)
+        return NounParadigm.morphosyntactic_properties(self.number, self.case)
 
 class VerbCell(Cell):
     """A single cell in a verb paradigm for a given morphosyntactic context."""
@@ -112,31 +104,22 @@ class VerbCell(Cell):
 
 class NounParadigm(Paradigm):
     """A 3D matrix representing the competing forms of a single noun.
-       Hungarian nouns inflect for number, possessor and case."""
+       Hungarian nouns inflect for number and case."""
     def __init__(self, weight_a=0.5):
-        self.para = [[[NounCell(i, j, k, weight_a) for k in range(18)] for j in range(7)] for i in range(2)]
+        self.para = [[NounCell(i, j, weight_a) for j in range(18)] for i in range(2)]
 
     def __getitem__(self, n):
         """Return a single cell (assignable)."""
         return self.para[n]
 
     @staticmethod
-    def morphosyntactic_properties(i, j, k):
+    def morphosyntactic_properties(i, j):
         """Get the set of features describing a cell's context.
         (Gregory Stump's exact term if I'm not mistaken.)"""
-        assert (i < 2 and j < 7 and k < 18)
+        assert (i < 2 and j < 18)
         numbers = {
             0 : 'sg',
             1 : 'pl'
-        }
-        possessors = {
-            0 : 'none',
-            1 : '1sg',
-            2 : '2sg',
-            3 : '3sg',
-            4 : '1pl',
-            5 : '2pl',
-            6 : '3pl'
         }
         cases = {
             0 : 'nom',
@@ -158,26 +141,23 @@ class NounParadigm(Paradigm):
            16 : 'del',
            17 : 'abl'
         }
-        return "{%s, %s, %s}" % (numbers[i], possessors[j], cases[k])
+        return "{%s, %s, %s}" % (numbers[i], cases[j])
 
-    def nudge(self, amount, i, j, k):
+    def nudge(self, amount, i, j):
         """Adjust the weights in a single cell."""
         assert(-1 <= amount and amount <= 1)
-        assert(i < 2 and j < 7 and k < 18)
-        self.para[i][j][k].weight_a = clamp(self.para[i][j][k].weight_a + amount)
+        assert(i < 2 and j < 18)
+        self.para[i][j].weight_a = clamp(self.para[i][j].weight_a + amount)
 
-    def propagate(self, amount, i, j, k):
+    def propagate(self, amount, i, j):
         """Spread a weight change down each dimension in the paradigm."""
-        delta = clamp(self.para[i][j][k].importance * amount)
+        delta = clamp(self.para[i][j].importance * amount)
         for i_ in range(2):
             if i_ != i:
-                self.nudge(delta, i_, j, k)
-        for j_ in range(7):
+                self.nudge(delta, i_, j)
+        for j_ in range(18):
             if j_ != j:
-                self.nudge(delta, i, j_, k)
-        for k_ in range(18):
-            if k_ != k:
-                self.nudge(delta, i, j, k_)
+                self.nudge(delta, i, j_)
 
 class VerbParadigm(Paradigm):
     """A 5D matrix representing the competing forms of a single verb.

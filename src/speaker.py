@@ -44,8 +44,8 @@ class Speaker:
     def init_from_weight(self, weight_a):
         self.para = NounParadigm(weight_a)
         # TODO: temporary hack, for demo purposes
-        self.para[0][0][0] = NounCell(number=0, possessor=0, case=0,
-            weight_a=self.para.para[0][0][0].weight_a, form_a='havernak', form_b='havernek', importance=0.2)
+        self.para[0][0] = NounCell(number=0, case=0, weight_a=self.para.para[0][0].weight_a,
+            form_a='havernak', form_b='havernek', importance=0.2)
 
     @classmethod
     def fromspeaker(cls, other):
@@ -78,38 +78,36 @@ class Speaker:
         sum_w = 0
         sum_imp = 0
         for i in range(2):
-            for j in range(7):
-                for k in range(18):
-                    if len(self.para.para[i][j][k].form_a):
-                        sum_w = sum_w + self.para.para[i][j][k].weight_a * self.para.para[i][j][k].importance
-                        sum_imp = sum_imp + self.para.para[i][j][k].importance
+            for j in range(18):
+                if len(self.para.para[i][j].form_a):
+                    sum_w = sum_w + self.para.para[i][j].weight_a * self.para.para[i][j].importance
+                    sum_imp = sum_imp + self.para.para[i][j].importance
         self.principal_weight_cached = sum_w / sum_imp
         return self.principal_weight_cached
 
     def name_tag(self):
-        return self.para[0][0][0].to_str_short()
+        return self.para[0][0].to_str_short()
 
     def talk_to(self, hearer):
         assert not hearer.is_broadcaster # broadcasters are deaf
-        i, j, k = -1, -1, -1
+        i, j = -1, -1
         # pick a non-empty cell to share with the hearer
         while True:
             i = RAND.next() % 2
-            j = RAND.next() % 7
-            k = RAND.next() % 18
-            if len(self.para.para[i][j][k].form_a):
+            j = RAND.next() % 18
+            if self.para.para[i][j].form_a:
                 break
-        cum_weights = [self.para.para[i][j][k].weight_a, 1]
+        cum_weights = [self.para.para[i][j].weight_a, 1]
         is_form_a = RAND.choices([True, False], cum_weights=cum_weights)
-        hearer.hear_noun(i, j, k, is_form_a[0])
+        hearer.hear_noun(i, j, is_form_a[0])
 
-    def hear_noun(self, i, j, k, is_form_a):
-        form = self.para.para[i][j][k].form_a if is_form_a else self.para.para[i][j][k].form_b
+    def hear_noun(self, i, j, is_form_a):
+        form = self.para.para[i][j].form_a if is_form_a else self.para.para[i][j].form_b
         debug("I just heard", form)
         # we might want to use exponential decay instead
         delta = (1 if is_form_a else -1) / (self.experience + 1)
-        self.para.nudge(delta, i, j, k)
-        self.para.propagate(delta, i, j, k)
+        self.para.nudge(delta, i, j)
+        self.para.propagate(delta, i, j)
         self.experience = self.experience + 1
         self.principal_weight_cached = None
 
