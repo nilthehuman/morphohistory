@@ -204,7 +204,7 @@ class SpeakerDot(Speaker, DragBehavior, Widget):
         if not self.parent:
             # why do SpeakerDots stay alive after AgoraWidget.clear_widgets(), this is stupid
             return
-        if not self.parent.update_graphics:
+        if not self.parent.graphics_on:
             return
         pos = tuple(p - dp for (p, dp) in zip(pos, self.parent.parent.pos))
         if (self.collide_point(*pos)):
@@ -229,7 +229,7 @@ class SpeakerDot(Speaker, DragBehavior, Widget):
 
     def talk_to(self, hearer):
         Speaker.talk_to(self, hearer)
-        if self.parent.update_graphics:
+        if self.parent.graphics_on:
             hearer.update_color()
 
 class BroadcasterSpeakerDot(SpeakerDot):
@@ -264,7 +264,7 @@ class AgoraWidget(Widget, Agora):
         self.sim = None
         self.pick = []
         self.talk_arrow = None
-        self.update_graphics = True
+        self.graphics_on = True
 
     def add_speakerdot(self, speakerdot):
         """Add a virtual speaker to the simulated community."""
@@ -301,26 +301,48 @@ class AgoraWidget(Widget, Agora):
     def simulate(self, *_):
         """Perform a single step of simulation: let one speaker talk to another."""
         super().simulate(*_)
-        if not self.update_graphics:
+        self.update_talk_arrow()
+
+    def simulate_till_stable(self):
+        """Keep running the simulation until the stability condition is reached."""
+        graphics_on_before = self.graphics_on
+        self.graphics_on = False
+        super().simulate_till_stable()
+        self.pick = None
+        self.graphics_on = graphics_on_before
+        self.update_speakerdot_colors()
+
+    def update_talk_arrow(self):
+        """Redraw the blue arrow between the current speaker and the current hearer."""
+        if not self.graphics_on:
             return
         self.clear_talk_arrow()
-        speaker_x = self.pick[0].pos[0]+10
-        speaker_y = self.pick[0].pos[1]+10
-        hearer_x  = self.pick[1].pos[0]+10
-        hearer_y  = self.pick[1].pos[1]+10
-        length = sqrt((hearer_x - speaker_x)**2 + (hearer_y - speaker_y)**2)
-        sin_a = (hearer_y - speaker_y) / length
-        cos_a = (hearer_x - speaker_x) / length
-        self.talk_arrow = Line(points=[speaker_x, speaker_y,
-                                       hearer_x, hearer_y,
-                                       hearer_x - 12.0*cos_a - 8.0*sin_a, hearer_y - 12.0*sin_a + 8.0*cos_a,
-                                       hearer_x, hearer_y,
-                                       hearer_x - 12.0*cos_a + 8.0*sin_a, hearer_y - 12.0*sin_a - 8.0*cos_a],
-                                       width=2)
-        self.canvas.add(Color(0.2, 0.0, 0.8))
-        self.canvas.add(self.talk_arrow)
+        if self.pick:
+            speaker_x = self.pick[0].pos[0]+10
+            speaker_y = self.pick[0].pos[1]+10
+            hearer_x  = self.pick[1].pos[0]+10
+            hearer_y  = self.pick[1].pos[1]+10
+            length = sqrt((hearer_x - speaker_x)**2 + (hearer_y - speaker_y)**2)
+            sin_a = (hearer_y - speaker_y) / length
+            cos_a = (hearer_x - speaker_x) / length
+            self.talk_arrow = Line(points=[speaker_x, speaker_y,
+                                           hearer_x, hearer_y,
+                                           hearer_x - 12.0*cos_a - 8.0*sin_a, hearer_y - 12.0*sin_a + 8.0*cos_a,
+                                           hearer_x, hearer_y,
+                                           hearer_x - 12.0*cos_a + 8.0*sin_a, hearer_y - 12.0*sin_a - 8.0*cos_a],
+                                           width=2)
+            self.canvas.add(Color(0.2, 0.0, 0.8))
+            self.canvas.add(self.talk_arrow)
+
+    def update_speakerdot_colors(self):
+        """Set the colors of all speakers according to their current state."""
+        if not self.graphics_on:
+            return
+        for s in self.speakers:
+            s.update_color()
 
     def update_progressbar(self, sim_iteration):
+        """Display number of simulation cycles performed in the progress bar popup."""
         ff_button = Root().ids.button_layout.ids.fast_forward_button
         progressbar = ff_button.popup.ids.container.children[0].ids.progressbar
         progressbar.value = sim_iteration

@@ -87,24 +87,27 @@ class Speaker:
         self.experience = self.experience + 1
 
 class Agora:
-    """A collection of simulated speakers talking to each other."""
+    """A collection of simulated speakers influencing each other."""
 
     def __init__(self):
         self.speakers = []
         self.clear_caches()
         self.sim_cancelled = False
-        self.update_graphics = False
+        self.graphics_on = False
 
     def save_starting_state(self):
+        """Stash a snapshot of the current list of speakers."""
         # N.B. paradigms are deep copied by Speaker.fromspeaker
         self.starting_speakers = [Speaker.fromspeaker(s) for s in self.speakers]
 
     def reset(self):
+        """Restore earlier speaker snapshot."""
         self.clear_speakers()
         self.load_speakers(self.starting_speakers)
 
     def clear_caches(self):
-        # cache variables for expensive calculations
+        """Invalidate cache variables."""
+        # variables for expensive calculations
         self.speaker_pairs = None
         self.inv_dist_squared = None
         self.pick_queue = None
@@ -155,8 +158,6 @@ class Agora:
 
     def simulate_till_stable(self):
         """Keep running the simulation until the stability condition is reached."""
-        update_graphics_before = self.update_graphics
-        self.update_graphics = False
         debug("Simulation until stable started:", time())
         # Make sure we stop eventually no matter what
         for self.sim_iteration in range(0, 10000):
@@ -166,7 +167,5 @@ class Agora:
             if self.is_stable():
                 break
             self.simulate()
-            if self.update_graphics:
-                self.update_progressbar(self.sim_iteration + 1)
+            self.update_progressbar(self.sim_iteration + 1)
         debug("Simulation until stable finished:", time())
-        self.update_graphics = update_graphics_before
