@@ -83,7 +83,7 @@ class SaveToFileButton(Button):
 
     def show_save_popup(self, *_):
         content = SaveToFilePopup(save=self.save, cancel=self.dismiss_popup)
-        self.popup = Popup(title="Agora mentése", content=content, size_hint=(0.4, 0.6))
+        self.popup = Popup(title="Agora mentése", content=content, size_hint=(None, None), size=(400, 430))
         self.popup.open()
 
     def dismiss_popup(self):
@@ -107,7 +107,7 @@ class LoadFromFileButton(Button):
 
     def show_load_popup(self, *_):
         content = LoadFromFilePopup(load=self.load, cancel=self.dismiss_popup)
-        self.popup = Popup(title="Agora betöltése", content=content, size_hint=(0.4, 0.6))
+        self.popup = Popup(title="Agora betöltése", content=content, size_hint=(None, None), size=(400, 430))
         self.popup.open()
 
     def dismiss_popup(self):
@@ -162,7 +162,7 @@ class FastForwardButton(Button):
     def fastforward(self, *_):
         # TODO: stop already running simulation
         content = FastForwardPopup(cancel=self.cancel_fast_forward)
-        self.popup = Popup(title="Folyamatban...", content=content, size_hint=(0.7, 0.5))
+        self.popup = Popup(title="Folyamatban...", content=content, size_hint=(None, None), size=(500, 250))
         self.popup.open()
         Root().ids.agora.clear_talk_arrow()
         Root().ids.agora.start_stop_sim(fastforward=True)

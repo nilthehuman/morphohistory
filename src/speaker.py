@@ -153,7 +153,7 @@ class Agora:
         self.speakers.append(Speaker.fromspeaker(speaker))
         self.clear_caches()
 
-    def simulate(self, *_):
+    def simulate(self, *_): # TODO: use threading to perform independent picks in parallel
         """Perform one iteration: pick two individuals to talk to each other
         and update the hearer's state based on the speaker's."""
         debug("Iterating simulation")
