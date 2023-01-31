@@ -108,6 +108,9 @@ class Agora:
         self.inv_dist_squared = None
         self.pick_queue = None
 
+    def clear_dist_cache(self):
+        self.inv_dist_squared = None
+
     def clear_speakers(self):
         self.speakers = []
         self.clear_caches()

@@ -190,6 +190,7 @@ class SpeakerDot(Speaker, DragBehavior, Widget):
         self.nametag = NameTag(text=str(n) + ': ' + self.name_tag())
         self.nametag_on = False
         Window.bind(mouse_pos=self.on_mouse_pos)
+        self.bind(pos=self.on_pos_changed)
 
     @classmethod
     def fromspeaker(cls, speaker):
@@ -215,7 +216,8 @@ class SpeakerDot(Speaker, DragBehavior, Widget):
             self.parent.remove_widget(self.nametag)
             self.nametag_on = False
 
-    #TODO: self.inv_dist_squared = None when any dot is moved!
+    def on_pos_changed(self, instance, value):
+        Root().ids.agora.clear_dist_cache()
 
     def update_color(self):
         yellow = (1.0, 1.0, 0.0)
