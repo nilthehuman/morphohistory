@@ -149,7 +149,7 @@ class RewindButton(Button):
         self.bind(on_release=self.rewind)
 
     def rewind(self, *_):
-        # TODO: stop already running simulation
+        Root().ids.agora.stop_sim()
         Root().ids.agora.reset()
 
 class FastForwardButton(Button):
@@ -160,7 +160,7 @@ class FastForwardButton(Button):
         self.bind(on_release=self.fastforward)
 
     def fastforward(self, *_):
-        # TODO: stop already running simulation
+        Root().ids.agora.stop_sim()
         content = FastForwardPopup(cancel=self.cancel_fast_forward)
         self.popup = Popup(title="Folyamatban...", content=content, size_hint=(None, None), size=(500, 250))
         self.popup.open()
@@ -170,7 +170,6 @@ class FastForwardButton(Button):
     def cancel_fast_forward(self, *_):
         if Root().ids.agora.sim:
             Root().ids.agora.sim_cancelled = True
-        self.popup.dismiss()
 
 class SpeakerDot(Speaker, DragBehavior, Widget):
     """The visual representation of a single speaker on the GUI."""
@@ -290,7 +289,7 @@ class AgoraWidget(Widget, Agora):
             self.add_speakerdot(SpeakerDot.fromspeaker(s))
 
     def start_stop_sim(self, fastforward=False):
-        """Schedule simulation to repeat in Kivy scheduler."""
+        """Schedule simulation to repeat in Kivy event loop."""
         if not self.sim:
             debug("Starting simulation...")
             if fastforward:
@@ -299,6 +298,11 @@ class AgoraWidget(Widget, Agora):
                 slowdown = Root().ids.button_layout.ids.speed_slider.value
                 self.sim = Clock.schedule_interval(self.simulate, 1.0 - 0.01 * slowdown)
         else:
+            self.stop_sim()
+
+    def stop_sim(self, fastforward=False):
+        """Unschedule previously scheduled simulation callback."""
+        if self.sim:
             self.sim.cancel()
             self.sim = None
 
@@ -314,7 +318,7 @@ class AgoraWidget(Widget, Agora):
         done = super().simulate_till_stable(batch_size)
         self.graphics_on = graphics_on_before
         if done:
-            self.start_stop_sim()
+            self.stop_sim()
             ff_button = Root().ids.button_layout.ids.fast_forward_button
             ff_button.popup.dismiss()
             self.pick = None
