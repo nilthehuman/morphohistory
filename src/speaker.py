@@ -117,6 +117,7 @@ class Agora:
     def __init__(self):
         self.speakers = []
         self.clear_caches()
+        self.sim_iteration = None
         self.sim_cancelled = False
         self.graphics_on = False
 
@@ -178,22 +179,32 @@ class Agora:
                 self.pick = self.pick_queue.pop(0)
         debug(self.pick[0].n, "picked to talk to", self.pick[1].n)
         self.pick[0].talk_to(self.pick[1])
-        return True # keep going
+        #return True # keep going
 
     def is_stable(self):
         """When to stop the simulation"""
         return all(abs(s.principal_weight() - 0.5) > 0.4 for s in self.speakers)
 
-    def simulate_till_stable(self):
+    def simulate_till_stable(self, batch_size=None):
         """Keep running the simulation until the stability condition is reached."""
         debug("Simulation until stable started:", time())
-        # Make sure we stop eventually no matter what
-        for self.sim_iteration in range(0, 10000):
+        max_iteration = 10000
+        if not self.sim_iteration:
+            self.sim_iteration = 0
+        until = self.sim_iteration + batch_size + 1 if batch_size else max_iteration
+        for self.sim_iteration in range(self.sim_iteration + 1, until):
+            self.update_progressbar(self.sim_iteration)
+            # Make sure we stop eventually no matter what
+            if max_iteration <= self.sim_iteration:
+                self.sim_iteration = None
+                return True
             if self.sim_cancelled:
                 self.sim_cancelled = False
-                break
+                self.sim_iteration = None
+                return True
             if self.is_stable():
-                break
+                self.sim_iteration = None
+                return True
             self.simulate()
-            self.update_progressbar(self.sim_iteration + 1)
         debug("Simulation until stable finished:", time())
+        return False

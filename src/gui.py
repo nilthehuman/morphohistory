@@ -20,6 +20,7 @@ from kivy.uix.popup import Popup
 from kivy.uix.widget import Widget
 
 from copy import deepcopy
+from functools import partial
 from json import dumps, load
 from logging import debug
 from math import sqrt, sin, cos, pi
@@ -43,7 +44,7 @@ class KeyeventHandler(Widget):
 
     def on_keypressed(self, _keyboard, keycode, *_):
         if keycode[1] == 'g':
-            Root().ids.agora.start_sim()
+            Root().ids.agora.start_stop_sim()
             return True
         elif keycode[1] == 'q':
             debug("Exiting app")
@@ -137,7 +138,7 @@ class StartStopSimButton(Button):
         self.bind(on_release=self.start)
 
     def start(self, *_):
-        Root().ids.agora.start_sim()
+        Root().ids.agora.start_stop_sim()
         self.text = self.stop_text if Root().ids.agora.sim else self.start_text
 
 class RewindButton(Button):
@@ -160,17 +161,14 @@ class FastForwardButton(Button):
 
     def fastforward(self, *_):
         # TODO: stop already running simulation
-        self.done = False
         content = FastForwardPopup(cancel=self.cancel_fast_forward)
         self.popup = Popup(title="Folyamatban...", content=content, size_hint=(0.7, 0.5))
         self.popup.open()
         Root().ids.agora.clear_talk_arrow()
-        Root().ids.agora.simulate_till_stable()
-        self.done = True
-        self.popup.ids.container.children[0].ids.cancel_button.text = "Faja, köszi"
+        Root().ids.agora.start_stop_sim(fastforward=True)
 
     def cancel_fast_forward(self, *_):
-        if not self.done:
+        if Root().ids.agora.sim:
             Root().ids.agora.sim_cancelled = True
         self.popup.dismiss()
 
@@ -291,12 +289,15 @@ class AgoraWidget(Widget, Agora):
         for s in speakers:
             self.add_speakerdot(SpeakerDot.fromspeaker(s))
 
-    def start_sim(self):
+    def start_stop_sim(self, fastforward=False):
         """Schedule simulation to repeat in Kivy scheduler."""
         if not self.sim:
             debug("Starting simulation...")
-            slowdown = Root().ids.button_layout.ids.speed_slider.value
-            self.sim = Clock.schedule_interval(Root().ids.agora.simulate, 1.0 - 0.01 * slowdown)
+            if fastforward:
+                self.sim = Clock.schedule_interval(partial(self.simulate_till_stable, 100), 0.0)
+            else:
+                slowdown = Root().ids.button_layout.ids.speed_slider.value
+                self.sim = Clock.schedule_interval(self.simulate, 1.0 - 0.01 * slowdown)
         else:
             self.sim.cancel()
             self.sim = None
@@ -306,14 +307,18 @@ class AgoraWidget(Widget, Agora):
         super().simulate(*_)
         self.update_talk_arrow()
 
-    def simulate_till_stable(self):
+    def simulate_till_stable(self, batch_size=100, *_):
         """Keep running the simulation until the stability condition is reached."""
         graphics_on_before = self.graphics_on
         self.graphics_on = False
-        super().simulate_till_stable()
-        self.pick = None
+        done = super().simulate_till_stable(batch_size)
         self.graphics_on = graphics_on_before
-        self.update_speakerdot_colors()
+        if done:
+            self.start_stop_sim()
+            ff_button = Root().ids.button_layout.ids.fast_forward_button
+            ff_button.popup.dismiss()
+            self.pick = None
+            self.update_speakerdot_colors()
 
     def update_talk_arrow(self):
         """Redraw the blue arrow between the current speaker and the current hearer."""
