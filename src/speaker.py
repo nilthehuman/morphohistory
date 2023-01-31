@@ -39,6 +39,7 @@ class Speaker:
         self.para = para
         self.experience = experience
         self.is_broadcaster = is_broadcaster
+        self.principal_weight_cached = None
 
     def init_from_weight(self, weight_a):
         self.para = NounParadigm(weight_a)
@@ -72,6 +73,8 @@ class Speaker:
 
     def principal_weight(self):
         """Which way the speaker is leaning, summed up in a single float."""
+        if self.principal_weight_cached:
+            return self.principal_weight_cached
         sum_w = 0
         sum_imp = 0
         for i in range(2):
@@ -80,7 +83,8 @@ class Speaker:
                     if len(self.para.para[i][j][k].form_a):
                         sum_w = sum_w + self.para.para[i][j][k].weight_a * self.para.para[i][j][k].importance
                         sum_imp = sum_imp + self.para.para[i][j][k].importance
-        return sum_w / sum_imp
+        self.principal_weight_cached = sum_w / sum_imp
+        return self.principal_weight_cached
 
     def name_tag(self):
         return self.para[0][0][0].to_str_short()
@@ -107,6 +111,7 @@ class Speaker:
         self.para.nudge(delta, i, j, k)
         self.para.propagate(delta, i, j, k)
         self.experience = self.experience + 1
+        self.principal_weight_cached = None
 
 class Agora:
     """A collection of simulated speakers influencing each other."""
