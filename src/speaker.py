@@ -93,6 +93,7 @@ class Agora:
         self.speakers = []
         self.clear_caches()
         self.sim_cancelled = False
+        self.update_graphics = False
 
     def save_starting_state(self):
         # N.B. paradigms are deep copied by Speaker.fromspeaker
@@ -123,7 +124,7 @@ class Agora:
         self.speakers.append(Speaker.fromspeaker(speaker))
         self.clear_caches()
 
-    def simulate(self, dt, graphics=True): # TODO: do dt number of iterations?
+    def simulate(self, *_):
         """Perform one iteration: pick two individuals to talk to each other
         and update the hearer's state based on the speaker's."""
         debug("Iterating simulation")
@@ -152,19 +153,20 @@ class Agora:
         """When to stop the simulation"""
         return all(abs(s.principal_weight()) < 0.1 for s in self.speakers)
 
-    def simulate_till_stable(self, graphics=True):
+    def simulate_till_stable(self):
         """Keep running the simulation until the stability condition is reached."""
-        self.sim_iteration = 0
+        update_graphics_before = self.update_graphics
+        self.update_graphics = False
         debug("Simulation until stable started:", time())
         # Make sure we stop eventually no matter what
-        for i in range(0, 10000):
+        for self.sim_iteration in range(0, 10000):
             if self.sim_cancelled:
                 self.sim_cancelled = False
                 break
             if self.is_stable():
                 break
-            self.simulate(0, graphics=False)
-            self.sim_iteration = self.sim_iteration + 1
-            if graphics:
-                self.update_progressbar(self.sim_iteration)
+            self.simulate()
+            if self.update_graphics:
+                self.update_progressbar(self.sim_iteration + 1)
         debug("Simulation until stable finished:", time())
+        self.update_graphics = update_graphics_before

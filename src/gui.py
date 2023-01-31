@@ -41,7 +41,7 @@ class KeyeventHandler(Widget):
         self.keyboard.unbind(on_key_down=self.on_keypressed)
         self.keyboard = None
 
-    def on_keypressed(self, keyboard, keycode, text, modifiers):
+    def on_keypressed(self, _keyboard, keycode, *_):
         if keycode[1] == 'g':
             Root().ids.agora.start_sim()
             return True
@@ -80,7 +80,7 @@ class SaveToFileButton(Button):
         super().__init__(**kwargs)
         self.bind(on_release=self.show_save_popup)
 
-    def show_save_popup(self, *args):
+    def show_save_popup(self, *_):
         content = SaveToFilePopup(save=self.save, cancel=self.dismiss_popup)
         self.popup = Popup(title="Agora mentése", content=content, size_hint=(0.4, 0.6))
         self.popup.open()
@@ -104,7 +104,7 @@ class LoadFromFileButton(Button):
         super().__init__(**kwargs)
         self.bind(on_release=self.show_load_popup)
 
-    def show_load_popup(self, *args):
+    def show_load_popup(self, *_):
         content = LoadFromFilePopup(load=self.load, cancel=self.dismiss_popup)
         self.popup = Popup(title="Agora betöltése", content=content, size_hint=(0.4, 0.6))
         self.popup.open()
@@ -112,7 +112,7 @@ class LoadFromFileButton(Button):
     def dismiss_popup(self):
         self.popup.dismiss()
 
-    def load(self, path, fileselection):
+    def load(self, _path, fileselection):
         if not fileselection:
             return
         fullpath = fileselection[0]
@@ -136,7 +136,7 @@ class StartStopSimButton(Button):
         self.text = self.start_text
         self.bind(on_release=self.start)
 
-    def start(self, *args):
+    def start(self, *_):
         Root().ids.agora.start_sim()
         self.text = self.stop_text if Root().ids.agora.sim else self.start_text
 
@@ -147,7 +147,7 @@ class RewindButton(Button):
         super().__init__(**kwargs)
         self.bind(on_release=self.rewind)
 
-    def rewind(self, *args):
+    def rewind(self, *_):
         # TODO: stop already running simulation
         Root().ids.agora.reset()
 
@@ -158,7 +158,7 @@ class FastForwardButton(Button):
         super().__init__(**kwargs)
         self.bind(on_release=self.fastforward)
 
-    def fastforward(self, *args):
+    def fastforward(self, *_):
         # TODO: stop already running simulation
         content = FastForwardPopup(cancel=self.cancel_fast_forward)
         self.popup = Popup(title="Folyamatban...", content=content, size_hint=(0.7, 0.5))
@@ -167,7 +167,7 @@ class FastForwardButton(Button):
         Root().ids.agora.simulate_till_stable()
         self.popup.ids.container.children[0].ids.cancel_button.text = "Faja, köszi"
 
-    def cancel_fast_forward(self, *args):
+    def cancel_fast_forward(self, *_):
         Root().ids.agora.sim_cancelled = True
         self.popup.dismiss()
 
@@ -200,9 +200,11 @@ class SpeakerDot(Speaker, DragBehavior, Widget):
         else:
             return SpeakerDot(speaker.n, speaker.pos, deepcopy(speaker.para), speaker.experience)
 
-    def on_mouse_pos(self, window, pos):
+    def on_mouse_pos(self, _window, pos):
         if not self.parent:
             # why do SpeakerDots stay alive after AgoraWidget.clear_widgets(), this is stupid
+            return
+        if not self.parent.update_graphics:
             return
         pos = tuple(p - dp for (p, dp) in zip(pos, self.parent.parent.pos))
         if (self.collide_point(*pos)):
@@ -216,7 +218,7 @@ class SpeakerDot(Speaker, DragBehavior, Widget):
             self.parent.remove_widget(self.nametag)
             self.nametag_on = False
 
-    def on_pos_changed(self, instance, value):
+    def on_pos_changed(self, *_):
         Root().ids.agora.clear_dist_cache()
 
     def update_color(self):
@@ -227,7 +229,8 @@ class SpeakerDot(Speaker, DragBehavior, Widget):
 
     def talk_to(self, hearer):
         Speaker.talk_to(self, hearer)
-        hearer.update_color()
+        if self.parent.update_graphics:
+            hearer.update_color()
 
 class BroadcasterSpeakerDot(SpeakerDot):
     """The GUI representation of a broadcasting speaker who never listens to anyone."""
@@ -247,7 +250,7 @@ class NameTag(Label):
         super().__init__(**kwargs)
         Window.bind(mouse_pos=self.on_mouse_pos)
 
-    def on_mouse_pos(self, window, pos):
+    def on_mouse_pos(self, _window, pos):
         self.pos[0] = pos[0] - Root().ids.rel_layout.pos[0]
         self.pos[1] = pos[1] - Root().ids.rel_layout.pos[1]
 
@@ -258,9 +261,10 @@ class AgoraWidget(Widget, Agora):
         Widget.__init__(self, **kwargs)
         Agora.__init__(self)
         self.speakers = speakers
-        self.talk_arrow = None
-        self.pick = []
         self.sim = None
+        self.pick = []
+        self.talk_arrow = None
+        self.update_graphics = True
 
     def add_speakerdot(self, speakerdot):
         """Add a virtual speaker to the simulated community."""
@@ -294,10 +298,10 @@ class AgoraWidget(Widget, Agora):
             self.sim.cancel()
             self.sim = None
 
-    def simulate(self, dt, graphics=True):
+    def simulate(self, *_):
         """Perform a single step of simulation: let one speaker talk to another."""
-        super().simulate(dt)
-        if not graphics:
+        super().simulate(*_)
+        if not self.update_graphics:
             return
         self.clear_talk_arrow()
         speaker_x = self.pick[0].pos[0]+10
@@ -329,7 +333,7 @@ class DemoAgoraWidget1(AgoraWidget):
         # ugh, this is pretty ughly, but the widget still has default size at this point...
         self.bind(size=self.populate)
 
-    def populate(self, *args):
+    def populate(self, *_):
         for row in range(10):
             for col in range(10):
                 weight_a = 1 / 18 * (row + col)
@@ -346,7 +350,7 @@ class DemoAgoraWidget2(AgoraWidget):
         # ugh, this is pretty ughly, but the widget still has default size at this point...
         self.bind(size=self.populate)
 
-    def populate(self, *args):
+    def populate(self, *_):
         for row in range(10):
             for col in range(10):
                 pos = self.width * 0.1 + self.width * 0.09 * col - 10, self.height * 0.9 - self.height * 0.09 * row - 10
@@ -365,7 +369,7 @@ class DemoAgoraWidget3(AgoraWidget):
         # ugh, this is pretty ughly, but the widget still has default size at this point...
         self.bind(size=self.populate)
 
-    def populate(self, *args):
+    def populate(self, *_):
         for n in range(16):
             x = sin(2 * pi * float(n) / 16) * 150
             y = cos(2 * pi * float(n) / 16) * 150
@@ -384,7 +388,7 @@ class DemoAgoraWidget4(AgoraWidget):
         # ugh, this is pretty ughly, but the widget still has default size at this point...
         self.bind(size=self.populate)
 
-    def populate(self, *args):
+    def populate(self, *_):
         for n in range(16):
             x = sin(2 * pi * float(n) / 16) * 100
             y = cos(2 * pi * float(n) / 16) * 100
