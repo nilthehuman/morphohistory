@@ -75,13 +75,13 @@ class Paradigm:
         para_list = para_dict['para']
         me = NounParadigm()
         assert len(para_list) <= 2
-        for n in para_list:
+        while para_list:
             list_below = para_list.pop(0)
             assert len(list_below) <= 7
-            for p in list_below:
+            while list_below:
                 list_below_below = list_below.pop(0)
                 assert len(list_below_below) <= 18
-                for c in list_below_below:
+                while list_below_below:
                     cell = Cell.from_json(list_below_below.pop(0))
                     me.para[cell.number][cell.possessor][cell.case] = cell
         return me
