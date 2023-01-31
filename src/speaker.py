@@ -1,13 +1,35 @@
 """Bare-bones simulated speakers that use one-word sentences to interact with each other."""
 
+from bisect import bisect
 from copy import deepcopy
 from itertools import product
 from json import loads
 from logging import debug
-from random import choices, randrange
 from time import time
+try:
+    from simplerandom.iterators import MWC1
+    class RNG:
+        def __init__(self):
+            self.mwc = MWC1() # unseeded is fine
+        def next(self):
+            return next(self.mwc)
+        def choices(self, population, cum_weights):
+            assert len(population) == len(cum_weights)
+            scale = cum_weights[-1] + 0.0
+            r = next(self.mwc) / 2**32
+            # copied this trick from the original Lib/random.py
+            return [population[bisect(cum_weights, r * scale, 0, len(population) - 1)]]
+except ImportError:
+    from random import choices, randrange
+    class RNG:
+        def next(self):
+            return randrange(0, 2**32)
+        def choices(self, population, cum_weights):
+            return choices(population, cum_weights=cum_weights)
 
 from .paradigm import NounCell, VerbCell, Paradigm, NounParadigm, VerbParadigm
+
+RAND = RNG()
 
 class Speaker:
     """A simulated individual within the speaking community."""
@@ -68,13 +90,13 @@ class Speaker:
         i, j, k = -1, -1, -1
         # pick a non-empty cell to share with the hearer
         while True:
-            i = randrange(2)
-            j = randrange(7)
-            k = randrange(18)
+            i = RAND.next() % 2
+            j = RAND.next() % 7
+            k = RAND.next() % 18
             if len(self.para.para[i][j][k].form_a):
                 break
-        weights = [self.para.para[i][j][k].weight_a, 1 - self.para.para[i][j][k].weight_a]
-        is_form_a = choices([True, False], weights=weights)
+        cum_weights = [self.para.para[i][j][k].weight_a, 1]
+        is_form_a = RAND.choices([True, False], cum_weights=cum_weights)
         hearer.hear_noun(i, j, k, is_form_a[0])
 
     def hear_noun(self, i, j, k, is_form_a):
@@ -109,11 +131,11 @@ class Agora:
         """Invalidate cache variables."""
         # variables for expensive calculations
         self.speaker_pairs = None
-        self.inv_dist_squared = None
+        self.cum_weights = None
         self.pick_queue = None
 
     def clear_dist_cache(self):
-        self.inv_dist_squared = None
+        self.cum_weights = None
 
     def clear_speakers(self):
         self.speakers = []
@@ -138,10 +160,13 @@ class Agora:
             if not self.speaker_pairs:
                 self.speaker_pairs = list([(s, t) for (s, t) in product(self.speakers, self.speakers) if s != t])
             inv_dist_sq = lambda p, q: 1 / ((p[0] - q[0])**2 + (p[1] - q[1])**2)
-            if not self.inv_dist_squared:
-                self.inv_dist_squared = list([ inv_dist_sq(s.pos, t.pos) for (s, t) in self.speaker_pairs ])
+            if not self.cum_weights:
+                self.cum_weights = [0]
+                for (s, t) in self.speaker_pairs:
+                     self.cum_weights.append(inv_dist_sq(s.pos, t.pos) + self.cum_weights[-1])
+                self.cum_weights.pop(0)
             while True:
-                self.pick = choices(self.speaker_pairs, weights=self.inv_dist_squared, k=1)[0]
+                self.pick = RAND.choices(self.speaker_pairs, cum_weights=self.cum_weights)[0]
                 if (not self.pick[1].is_broadcaster):
                     break
             if self.pick[0].is_broadcaster:
