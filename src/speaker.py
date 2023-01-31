@@ -117,9 +117,11 @@ class Agora:
 
     def load_speakers(self, speakers):
         self.speakers = [Speaker.fromspeaker(s) for s in speakers]
+        self.clear_caches()
 
     def add_speaker(self, speaker):
         self.speakers.append(Speaker.fromspeaker(speaker))
+        self.clear_caches()
 
     def simulate(self, dt, graphics=True): # TODO: do dt number of iterations?
         """Perform one iteration: pick two individuals to talk to each other
