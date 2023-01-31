@@ -160,15 +160,18 @@ class FastForwardButton(Button):
 
     def fastforward(self, *_):
         # TODO: stop already running simulation
+        self.done = False
         content = FastForwardPopup(cancel=self.cancel_fast_forward)
         self.popup = Popup(title="Folyamatban...", content=content, size_hint=(0.7, 0.5))
         self.popup.open()
         Root().ids.agora.clear_talk_arrow()
         Root().ids.agora.simulate_till_stable()
+        self.done = True
         self.popup.ids.container.children[0].ids.cancel_button.text = "Faja, köszi"
 
     def cancel_fast_forward(self, *_):
-        Root().ids.agora.sim_cancelled = True
+        if not self.done:
+            Root().ids.agora.sim_cancelled = True
         self.popup.dismiss()
 
 class SpeakerDot(Speaker, DragBehavior, Widget):
