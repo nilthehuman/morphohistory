@@ -27,8 +27,9 @@
         width: 200
 
 <ButtonLayout>
-    orientation: 'vertical'
-    padding: [20, 100, 20, 100]
+    orientation: 'tb-lr'
+    cols: 1
+    padding: [20, 50, 20, 100]
     spacing: 40
     canvas:
         Color:
@@ -71,6 +72,9 @@
         value: 80
         step: 1
         orientation: 'horizontal'
+        size_hint: 1, None
+        height: 30
+        #background_width: 30 # set this when customizing appearance
 
 <SaveToFilePopup>
     text_input: text_input

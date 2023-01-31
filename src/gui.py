@@ -14,6 +14,7 @@ from kivy.uix.behaviors import DragBehavior
 from kivy.uix.boxlayout import BoxLayout
 from kivy.uix.button import Button
 from kivy.uix.floatlayout import FloatLayout
+from kivy.uix.gridlayout import GridLayout
 from kivy.uix.label import Label
 from kivy.uix.popup import Popup
 from kivy.uix.widget import Widget
@@ -54,7 +55,7 @@ class TopBoxLayout(BoxLayout):
     """The root widget. Holds both the Agora and the control buttons on the right."""
     pass
 
-class ButtonLayout(BoxLayout):
+class ButtonLayout(GridLayout):
     """The bar with control buttons at the right edge of the screen."""
     pass
 
