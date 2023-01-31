@@ -193,7 +193,6 @@ class Agora:
             self.sim_iteration = 0
         until = self.sim_iteration + batch_size + 1 if batch_size else max_iteration
         for self.sim_iteration in range(self.sim_iteration + 1, until):
-            self.update_progressbar(self.sim_iteration)
             # Make sure we stop eventually no matter what
             if max_iteration <= self.sim_iteration:
                 self.sim_iteration = None

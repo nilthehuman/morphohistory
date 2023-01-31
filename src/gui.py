@@ -323,6 +323,8 @@ class AgoraWidget(Widget, Agora):
             ff_button.popup.dismiss()
             self.pick = None
             self.update_speakerdot_colors()
+        else:
+            self.update_progressbar(self.sim_iteration)
 
     def update_talk_arrow(self):
         """Redraw the blue arrow between the current speaker and the current hearer."""
