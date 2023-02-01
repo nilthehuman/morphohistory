@@ -184,10 +184,15 @@ class Agora:
         #return True # keep going
 
     def all_biased(self):
-        """When to stop the simulation"""
+        """Criterion to stop the simulation: every speaker is sufficiently biased."""
         return all(abs(s.principal_weight() - 0.5) > 0.4 for s in self.speakers)
 
-    def simulate_till_stable(self, batch_size=None, is_stable=all_biased):
+    def all_biased_and_experienced(self):
+        """Criterion to stop the simulation: every speaker is sufficiently biased and experienced."""
+        stable = lambda x: abs(x.principal_weight() - 0.5) > 0.4 and x.experience > 10
+        return all(stable(s) for s in self.speakers)
+
+    def simulate_till_stable(self, batch_size=None, is_stable=all_biased_and_experienced):
         """Keep running the simulation until the stability condition is reached."""
         debug("Simulation until stable started:", time())
         max_iteration = 10000
