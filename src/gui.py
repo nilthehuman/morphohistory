@@ -86,6 +86,7 @@ class SaveToFileButton(Button):
         self.bind(on_release=self.show_save_popup)
 
     def show_save_popup(self, *_):
+        Root().ids.agora.stop_sim()
         content = SaveToFilePopup(save=self.save, cancel=self.dismiss_popup)
         self.popup = Popup(title="Agora mentése", content=content, size_hint=(None, None), size=(400, 430))
         self.popup.open()
@@ -110,6 +111,7 @@ class LoadFromFileButton(Button):
         self.bind(on_release=self.show_load_popup)
 
     def show_load_popup(self, *_):
+        Root().ids.agora.stop_sim()
         content = LoadFromFilePopup(load=self.load, cancel=self.dismiss_popup)
         self.popup = Popup(title="Agora betöltése", content=content, size_hint=(None, None), size=(400, 430))
         self.popup.open()
