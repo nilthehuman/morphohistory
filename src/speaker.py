@@ -193,12 +193,8 @@ class Agora:
         max_iteration = 10000
         if not self.sim_iteration:
             self.sim_iteration = 0
-        until = self.sim_iteration + batch_size + 1 if batch_size else max_iteration
+        until = self.sim_iteration + batch_size + 1 if batch_size else max_iteration + 1
         for self.sim_iteration in range(self.sim_iteration + 1, until):
-            # Make sure we stop eventually no matter what
-            if max_iteration <= self.sim_iteration:
-                self.sim_iteration = None
-                return True
             if self.sim_cancelled:
                 self.sim_cancelled = False
                 self.sim_iteration = None
@@ -207,5 +203,9 @@ class Agora:
                 self.sim_iteration = None
                 return True
             self.simulate()
+            # Make sure we stop eventually no matter what
+            if max_iteration < self.sim_iteration:
+                self.sim_iteration = None
+                return True
         debug("Simulation until stable finished:", time())
         return False
