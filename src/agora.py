@@ -126,7 +126,7 @@ class Agora:
                 return True
             self.simulate()
             # Make sure we stop eventually no matter what
-            if max_iteration < self.sim_iteration:
+            if max_iteration <= self.sim_iteration:
                 self.sim_iteration = None
                 return True
         debug("Simulation until stable finished:", time())
