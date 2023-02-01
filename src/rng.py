@@ -4,7 +4,7 @@ from bisect import bisect
 
 try:
     from simplerandom.iterators import MWC1
-    class RNG:
+    class _RNG:
         def __init__(self):
             self.mwc = MWC1() # unseeded is fine
         def next(self):
@@ -17,10 +17,10 @@ try:
             return [population[bisect(cum_weights, r * scale, 0, len(population) - 1)]]
 except ImportError:
     from random import choices, randrange
-    class RNG:
+    class _RNG:
         def next(self):
             return randrange(0, 2**32)
         def choices(self, population, cum_weights):
             return choices(population, cum_weights=cum_weights)
 
-RAND = RNG()
+RAND = _RNG()
