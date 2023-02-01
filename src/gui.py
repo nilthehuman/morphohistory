@@ -130,7 +130,7 @@ class LoadFromFileButton(Button):
         try:
             Root().ids.agora.load_from_file(fullpath)
             self.dismiss_popup()
-        except JSONDecodeError:
+        except (JSONDecodeError, TypeError):
             content = LoadFailedPopup(okay=self.dismiss_fail_popup)
             self.fail_popup = Popup(title="Sikertelen betöltés", content=content, size_hint=(None, None), size=SETTINGS.popup_size_fail)
             self.fail_popup.open()
