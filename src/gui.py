@@ -189,6 +189,7 @@ class SpeedSlider(Slider):
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
         self.bind(on_touch_move=self.adjust_sim_speed)
+        self.bind(on_touch_up=self.adjust_sim_speed)
 
     def adjust_sim_speed(self, *_):
         if Root().ids.agora.sim:
@@ -285,6 +286,7 @@ class AgoraWidget(Widget, Agora):
         Agora.__init__(self)
         self.speakers = speakers
         self.sim = None
+        self.slowdown_prev = None
         self.pick = []
         self.talk_arrow_shaft = None
         self.talk_arrow_tip = None
@@ -320,6 +322,7 @@ class AgoraWidget(Widget, Agora):
         assert not self.sim
         slowdown = Root().ids.button_layout.ids.speed_slider.value
         self.sim = Clock.schedule_interval(self.simulate, 1.0 - 0.01 * slowdown)
+        self.slowdown_prev = slowdown
 
     def start_stop_sim(self, fastforward=False):
         """Schedule or unschedule simulation based on current state."""
@@ -335,9 +338,11 @@ class AgoraWidget(Widget, Agora):
     def restart_sim(self, fastforward=False):
         """Reschedule simulation with different sleep timing."""
         if self.sim:
-            self.sim.cancel()
-            self.sim = None
-            self.start_sim()
+            slowdown = Root().ids.button_layout.ids.speed_slider.value
+            if self.slowdown_prev != slowdown:
+                self.sim.cancel()
+                self.sim = None
+                self.start_sim()
 
     def stop_sim(self, fastforward=False):
         """Unschedule previously scheduled simulation callback."""
