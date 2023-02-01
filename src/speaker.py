@@ -184,7 +184,6 @@ class Agora:
                 self.pick = self.pick_queue.pop(0)
         debug(self.pick['speaker'].n, "picked to talk to", self.pick['hearer'].n)
         self.pick['speaker'].talk(self.pick)
-        #return True # keep going
 
     def all_biased(self):
         """Criterion to stop the simulation: every speaker is sufficiently biased."""
