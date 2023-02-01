@@ -66,16 +66,17 @@
             size_hint: 1, 1
             text: '>>'
             font_size: 32
-    Slider:
+    SpeedSlider:
         id: speed_slider
-        min: 0
-        max: 100
-        value: 80
-        step: 1
-        orientation: 'horizontal'
-        size_hint: 1, None
-        height: 30
-        #background_width: 30 # set this when customizing appearance
+
+<SpeedSlider>
+    min: 0
+    max: 100
+    value: 80
+    step: 1
+    orientation: 'horizontal'
+    size_hint: 1, None
+    height: 30
 
 <SaveToFilePopup>
     text_input: text_input

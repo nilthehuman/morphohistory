@@ -17,6 +17,7 @@ from kivy.uix.floatlayout import FloatLayout
 from kivy.uix.gridlayout import GridLayout
 from kivy.uix.label import Label
 from kivy.uix.popup import Popup
+from kivy.uix.slider import Slider
 from kivy.uix.widget import Widget
 
 from copy import deepcopy
@@ -188,6 +189,17 @@ class FastForwardButton(Button):
         if Root().ids.agora.sim:
             Root().ids.agora.sim_cancelled = True
 
+class SpeedSlider(Slider):
+    """Used to set the idle time between simulation steps."""
+
+    def __init__(self, **kwargs):
+        super().__init__(**kwargs)
+        self.bind(on_touch_move=self.adjust_sim_speed)
+
+    def adjust_sim_speed(self, *_):
+        if Root().ids.agora.sim:
+            Root().ids.agora.restart_sim()
+
 class SpeakerDot(Speaker, DragBehavior, Widget):
     """The visual representation of a single speaker on the GUI."""
 
@@ -309,17 +321,29 @@ class AgoraWidget(Widget, Agora):
         for s in speakers:
             self.add_speakerdot(SpeakerDot.fromspeaker(s))
 
+    def start_sim(self):
+        """Schedule regular simulation in Kivy event loop at intervals specified by the slider."""
+        assert not self.sim
+        slowdown = Root().ids.button_layout.ids.speed_slider.value
+        self.sim = Clock.schedule_interval(self.simulate, 1.0 - 0.01 * slowdown)
+
     def start_stop_sim(self, fastforward=False):
-        """Schedule simulation to repeat in Kivy event loop."""
+        """Schedule or unschedule simulation based on current state."""
         if not self.sim:
             debug("Starting simulation...")
             if fastforward:
                 self.sim = Clock.schedule_interval(partial(self.simulate_till_stable, 100), 0.0)
             else:
-                slowdown = Root().ids.button_layout.ids.speed_slider.value
-                self.sim = Clock.schedule_interval(self.simulate, 1.0 - 0.01 * slowdown)
+                self.start_sim()
         else:
             self.stop_sim()
+
+    def restart_sim(self, fastforward=False):
+        """Reschedule simulation with different sleep timing."""
+        if self.sim:
+            self.sim.cancel()
+            self.sim = None
+            self.start_sim()
 
     def stop_sim(self, fastforward=False):
         """Unschedule previously scheduled simulation callback."""
