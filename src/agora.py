@@ -63,6 +63,13 @@ class Agora:
         self.speakers.append(Speaker.fromspeaker(speaker))
         self.clear_caches()
 
+    def dominant_form(self):
+        if all(s.principal_weight() > 0.5 for s in self.speakers):
+            return self.speakers[0].para[0][0].form_a
+        if all(s.principal_weight() < 0.5 for s in self.speakers):
+            return self.speakers[0].para[0][0].form_b
+        return None
+
     def simulate(self, *_): # TODO: use threading to perform independent picks in parallel
         """Perform one iteration: pick two individuals to talk to each other
         and update the hearer's state based on the speaker's."""
