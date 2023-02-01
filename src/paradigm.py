@@ -24,7 +24,7 @@ class Cell:
         return self.__dict__
 
     @staticmethod
-    def from_json(cell_dict):
+    def from_dict(cell_dict):
         return NounCell(cell_dict['number'],
                         cell_dict['case'],
                         cell_dict['weight_a'],
@@ -63,7 +63,7 @@ class Paradigm:
         return my_dict
 
     @staticmethod
-    def from_json(para_dict):
+    def from_dict(para_dict):
         assert list(para_dict.keys()) == ['para']
         para_list = para_dict['para']
         me = NounParadigm()
@@ -72,7 +72,7 @@ class Paradigm:
             list_below = para_list.pop(0)
             assert len(list_below) <= 18
             while list_below:
-                cell = Cell.from_json(list_below.pop(0))
+                cell = Cell.from_dict(list_below.pop(0))
                 me.para[cell.number][cell.case] = cell
         return me
 

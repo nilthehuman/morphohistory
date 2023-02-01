@@ -22,7 +22,7 @@ from kivy.uix.widget import Widget
 
 from copy import deepcopy
 from functools import partial
-from json import dumps, load, JSONDecodeError
+from json import JSONDecodeError
 from logging import debug
 from math import sqrt, sin, cos, pi
 from os.path import isfile, join
@@ -101,8 +101,7 @@ class SaveToFileButton(Button):
         if isfile(fullpath) and savebutton.text != "Felülírjam?":
             savebutton.text = "Felülírjam?"
             return
-        with open(fullpath, 'w') as stream:
-            stream.write(dumps(Root().ids.agora.speakers, indent=1, default=lambda x: x.to_json()))
+        Root().ids.agora.save_to_file(fullpath)
         self.dismiss_popup()
 
 class LoadFromFileButton(Button):
@@ -128,12 +127,7 @@ class LoadFromFileButton(Button):
             return
         fullpath = fileselection[0]
         try:
-            with open(fullpath, 'r') as stream:
-                speaker_list = load(stream)
-            speakers = [Speaker.from_json(s) for s in speaker_list]
-            Root().ids.agora.clear_speakers()
-            Root().ids.agora.load_speakers(speakers)
-            Root().ids.agora.save_starting_state()
+            Root().ids.agora.load_from_file(fullpath)
             self.dismiss_popup()
         except JSONDecodeError:
             content = LoadFailedPopup(okay=self.dismiss_fail_popup)

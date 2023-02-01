@@ -1,6 +1,7 @@
 """An evolving virtual community of speakers influencing each other stochastically."""
 
 from itertools import product
+from json import dumps, load
 from logging import debug
 from time import time
 
@@ -40,6 +41,18 @@ class Agora:
     def clear_speakers(self):
         self.speakers = []
         self.clear_caches()
+
+    def save_to_file(self, filepath):
+        with open(filepath, 'w') as stream:
+            stream.write(dumps(self.speakers, indent=1, default=lambda x: x.to_json()))
+
+    def load_from_file(self, filepath):
+        with open(filepath, 'r') as stream:
+            speaker_dicts = load(stream)
+        speakers = [Speaker.from_dict(s) for s in speaker_dicts]
+        self.clear_speakers()
+        self.load_speakers(speakers)
+        self.save_starting_state()
 
     def load_speakers(self, speakers):
         self.speakers = [Speaker.fromspeaker(s) for s in speakers]

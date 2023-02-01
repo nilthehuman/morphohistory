@@ -38,8 +38,8 @@ class Speaker:
         return speaker_only.__dict__
 
     @staticmethod
-    def from_json(speaker_dict):
-        para = Paradigm.from_json(speaker_dict['para'])
+    def from_dict(speaker_dict):
+        para = Paradigm.from_dict(speaker_dict['para'])
         return Speaker(speaker_dict['n'],
                        speaker_dict['pos'],
                        para,
