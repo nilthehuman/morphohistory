@@ -21,7 +21,7 @@ from kivy.uix.widget import Widget
 
 from copy import deepcopy
 from functools import partial
-from json import dumps, load
+from json import dumps, load, JSONDecodeError
 from logging import debug
 from math import sqrt, sin, cos, pi
 from os.path import isfile, join
@@ -71,6 +71,10 @@ class LoadFromFilePopup(FloatLayout):
     load = ObjectProperty(None)
     cancel = ObjectProperty(None)
 
+class LoadFailedPopup(BoxLayout):
+    """A popup window to let the user know their file could not be loaded."""
+    okay = ObjectProperty(None)
+
 class FastForwardPopup(BoxLayout):
     """A popup window to show the progress of a fast forward."""
     cancel = ObjectProperty(None)
@@ -113,17 +117,25 @@ class LoadFromFileButton(Button):
     def dismiss_popup(self):
         self.popup.dismiss()
 
+    def dismiss_fail_popup(self):
+        self.fail_popup.dismiss()
+
     def load(self, _path, fileselection):
         if not fileselection:
             return
         fullpath = fileselection[0]
-        with open(fullpath, 'r') as stream:
-            speaker_list = load(stream)
-        speakers = [Speaker.from_json(s) for s in speaker_list]
-        Root().ids.agora.clear_speakers()
-        Root().ids.agora.load_speakers(speakers)
-        Root().ids.agora.save_starting_state()
-        self.dismiss_popup()
+        try:
+            with open(fullpath, 'r') as stream:
+                speaker_list = load(stream)
+            speakers = [Speaker.from_json(s) for s in speaker_list]
+            Root().ids.agora.clear_speakers()
+            Root().ids.agora.load_speakers(speakers)
+            Root().ids.agora.save_starting_state()
+            self.dismiss_popup()
+        except JSONDecodeError:
+            content = LoadFailedPopup(okay=self.dismiss_fail_popup)
+            self.fail_popup = Popup(title="Sikertelen betöltés", content=content, size_hint=(None, None), size=(250, 200))
+            self.fail_popup.open()
 
 class StartStopSimButton(Button):
     """Runs or halts the simulation process."""

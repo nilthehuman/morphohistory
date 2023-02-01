@@ -136,6 +136,18 @@
                 text: "Hagyjad"
                 on_release: root.cancel()
 
+<LoadFailedPopup>
+    BoxLayout:
+        size: root.size
+        pos: root.pos
+        orientation: "vertical"
+        Label:
+            text: "Érvénytelen bemeneti fájl. :("
+        Button:
+            text: "Jól van, semmi cink"
+            size_hint_y: 0.5
+            on_release: root.okay()
+
 <SaveToFileButton>
     text: self.text
 
