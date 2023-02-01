@@ -1,11 +1,10 @@
 """Bare-bones simulated speakers that use one-word sentences to interact with each other."""
 
 from copy import deepcopy
-from json import loads
 from logging import debug
 
-from .paradigm import NounCell, VerbCell, Paradigm, NounParadigm, VerbParadigm
-from .rng import RAND
+from src.paradigm import NounCell, Paradigm, NounParadigm
+from src.rng import RAND
 
 class Speaker:
     """A simulated individual within the speaking community."""

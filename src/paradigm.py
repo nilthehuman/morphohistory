@@ -17,8 +17,7 @@ class Cell:
     def __str__(self):
         if not self:
             return ''
-        else:
-            return "(%s, %g * \"%s\" + %g * \"%s\")" % \
+        return "(%s, %g * \"%s\" + %g * \"%s\")" % \
             (self.get_morphosyntactic_properties(), self.weight_a, self.form_a, 1.0-self.weight_a, self.form_b)
 
     def to_json(self):
@@ -36,8 +35,7 @@ class Cell:
     def to_str_short(self):
         if 0 == len(self.form_a):
             return ''
-        else:
-            return "%g*\"%s\" + %g*\"%s\"" % \
+        return "%g*\"%s\" + %g*\"%s\"" % \
             (self.weight_a, self.form_a, 1.0-self.weight_a, self.form_b)
 
 class Paradigm:
@@ -46,10 +44,9 @@ class Paradigm:
         def descend(xs):
             if type(xs) is not list:
                 return str(xs)
-            else:
-                below = [descend(x) for x in xs]
-                below = filter(lambda s: bool(len(s)), below)
-                return '[' + ', '.join(below) + ']'
+            below = [descend(x) for x in xs]
+            below = filter(lambda s: bool(len(s)), below)
+            return '[' + ', '.join(below) + ']'
         return descend(self.para)
 
     def to_json(self):

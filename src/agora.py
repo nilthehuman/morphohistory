@@ -4,8 +4,8 @@ from itertools import product
 from logging import debug
 from time import time
 
-from .rng import RAND
-from .speaker import Speaker
+from src.rng import RAND
+from src.speaker import Speaker
 
 class Agora:
     """A collection of simulated speakers influencing each other."""
@@ -59,15 +59,17 @@ class Agora:
         else:
             if not self.speaker_pairs:
                 self.speaker_pairs = list([{'speaker': s, 'hearer': h} for (s, h) in product(self.speakers, self.speakers) if s != h])
-            inv_dist_sq = lambda p: 1 / ((p['speaker'].pos[0] - p['hearer'].pos[0])**2 + (p['speaker'].pos[1] - p['hearer'].pos[1])**2)
+            def inv_dist_sq(p):
+                dist_sq = ((p['speaker'].pos[0] - p['hearer'].pos[0])**2 + (p['speaker'].pos[1] - p['hearer'].pos[1])**2)
+                return 1 / dist_sq
             if not self.cum_weights:
                 self.cum_weights = [0]
                 for p in self.speaker_pairs:
-                     self.cum_weights.append(inv_dist_sq(p) + self.cum_weights[-1])
+                    self.cum_weights.append(inv_dist_sq(p) + self.cum_weights[-1])
                 self.cum_weights.pop(0)
             while True:
                 self.pick = RAND.choices(self.speaker_pairs, cum_weights=self.cum_weights)[0]
-                if (not self.pick['hearer'].is_broadcaster):
+                if not self.pick['hearer'].is_broadcaster:
                     break
             if self.pick['speaker'].is_broadcaster:
                 s = self.pick['speaker']
@@ -78,12 +80,14 @@ class Agora:
 
     def all_biased(self):
         """Criterion to stop the simulation: every speaker is sufficiently biased."""
-        stable = lambda x: x.is_broadcaster or abs(s.principal_weight() - 0.5) > 0.4
+        def stable(x):
+            return x.is_broadcaster or abs(s.principal_weight() - 0.5) > 0.4
         return all(stable(s) for s in self.speakers)
 
     def all_biased_and_experienced(self):
         """Criterion to stop the simulation: every speaker is sufficiently biased and experienced."""
-        stable = lambda x: x.is_broadcaster or abs(x.principal_weight() - 0.5) > 0.4 and x.experience > 10
+        def stable(x):
+            return x.is_broadcaster or abs(x.principal_weight() - 0.5) > 0.4 and x.experience > 10
         return all(stable(s) for s in self.speakers)
 
     def simulate_till_stable(self, batch_size=None, is_stable=all_biased_and_experienced):

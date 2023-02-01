@@ -8,7 +8,7 @@ Config.set('input', 'mouse', 'mouse,multitouch_on_demand')
 from kivy.app import App
 from kivy.clock import Clock
 from kivy.core.window import Window
-from kivy.graphics import Color, Ellipse, Line
+from kivy.graphics import Color, Line
 from kivy.properties import ColorProperty, ObjectProperty
 from kivy.uix.behaviors import DragBehavior
 from kivy.uix.boxlayout import BoxLayout
@@ -25,10 +25,9 @@ from json import dumps, load
 from logging import debug
 from math import sqrt, sin, cos, pi
 from os.path import isfile, join
-from random import choices
 
-from .agora import Agora
-from .speaker import Speaker
+from src.agora import Agora
+from src.speaker import Speaker
 
 # Adapted from kivy.org/doc/stable/api-kivy.core.window.html
 class KeyeventHandler(Widget):
@@ -211,7 +210,7 @@ class SpeakerDot(Speaker, DragBehavior, Widget):
         if not self.parent.graphics_on:
             return
         pos = tuple(p - dp for (p, dp) in zip(pos, self.parent.parent.pos))
-        if (self.collide_point(*pos)):
+        if self.collide_point(*pos):
             if not self.nametag_on:
                 debug("Turning on nametag for", self.n)
                 self.nametag.text = str(self.n) + ': ' + self.name_tag()
