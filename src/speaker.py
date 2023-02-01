@@ -5,10 +5,11 @@ from logging import debug
 
 from src.paradigm import NounCell, Paradigm, NounParadigm
 from src.rng import RAND
+from src.settings import SETTINGS
 
 class Speaker:
     """A simulated individual within the speaking community."""
-    def __init__(self, n, pos, para=NounParadigm(), is_broadcaster=False, experience=1.0):
+    def __init__(self, n, pos, para=NounParadigm(), is_broadcaster=False, experience=SETTINGS.experience_start):
         self.n = n
         self.pos = pos
         self.para = para

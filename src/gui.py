@@ -27,6 +27,7 @@ from logging import debug
 from math import sqrt, sin, cos, pi
 from os.path import isfile, join
 
+from src.settings import SETTINGS
 from src.agora import Agora
 from src.speaker import Speaker
 
@@ -89,7 +90,7 @@ class SaveToFileButton(Button):
     def show_save_popup(self, *_):
         Root().ids.agora.stop_sim()
         content = SaveToFilePopup(save=self.save, cancel=self.dismiss_popup)
-        self.popup = Popup(title="Agora mentése", content=content, size_hint=(None, None), size=(400, 430))
+        self.popup = Popup(title="Agora mentése", content=content, size_hint=(None, None), size=SETTINGS.popup_size_load)
         self.popup.open()
 
     def dismiss_popup(self):
@@ -113,7 +114,7 @@ class LoadFromFileButton(Button):
     def show_load_popup(self, *_):
         Root().ids.agora.stop_sim()
         content = LoadFromFilePopup(load=self.load, cancel=self.dismiss_popup)
-        self.popup = Popup(title="Agora betöltése", content=content, size_hint=(None, None), size=(400, 430))
+        self.popup = Popup(title="Agora betöltése", content=content, size_hint=(None, None), size=SETTINGS.popup_size_load)
         self.popup.open()
 
     def dismiss_popup(self):
@@ -131,7 +132,7 @@ class LoadFromFileButton(Button):
             self.dismiss_popup()
         except JSONDecodeError:
             content = LoadFailedPopup(okay=self.dismiss_fail_popup)
-            self.fail_popup = Popup(title="Sikertelen betöltés", content=content, size_hint=(None, None), size=(250, 200))
+            self.fail_popup = Popup(title="Sikertelen betöltés", content=content, size_hint=(None, None), size=SETTINGS.popup_size_fail)
             self.fail_popup.open()
 
 class StartStopSimButton(Button):
@@ -174,7 +175,7 @@ class FastForwardButton(Button):
     def fastforward(self, *_):
         Root().ids.agora.stop_sim()
         content = FastForwardPopup(cancel=self.cancel_fast_forward)
-        self.popup = Popup(title="Folyamatban...", content=content, size_hint=(None, None), size=(500, 250))
+        self.popup = Popup(title="Folyamatban...", content=content, size_hint=(None, None), size=SETTINGS.popup_size_progress)
         self.popup.open()
         Root().ids.agora.clear_talk_arrow()
         Root().ids.agora.start_stop_sim(fastforward=True)
@@ -200,7 +201,7 @@ class SpeakerDot(Speaker, DragBehavior, Widget):
 
     color = ColorProperty()
 
-    def __init__(self, n, pos, para=None, experience=1.0, **kwargs):
+    def __init__(self, n, pos, para=None, experience=SETTINGS.experience_start, **kwargs):
         if type(para) is float: # poor man's polymorphism
             weight_a = para
             Speaker.__init__(self, n, pos, None, False, experience)
@@ -209,7 +210,7 @@ class SpeakerDot(Speaker, DragBehavior, Widget):
             Speaker.__init__(self, n, pos, para, False, experience)
         DragBehavior.__init__(self, **kwargs)
         Widget.__init__(self, **kwargs)
-        self.size = 20, 20
+        self.size = SETTINGS.speakerdot_size
         self.update_color()
         self.nametag = NameTag(text=str(n) + ': ' + self.name_tag())
         self.nametag_on = False
@@ -246,10 +247,10 @@ class SpeakerDot(Speaker, DragBehavior, Widget):
         Root().ids.agora.clear_dist_cache()
 
     def update_color(self):
-        yellow = (1.0, 1.0, 0.0)
-        purple = (1.0, 0.0, 1.0)
+        color_A = SETTINGS.color_A
+        color_B = SETTINGS.color_B
         w = self.principal_weight()
-        self.color = [sum(x) for x in zip([w * y for y in yellow], [(1-w) * p for p in purple])]
+        self.color = [sum(x) for x in zip([w * c for c in color_A], [(1-w) * c for c in color_B])]
 
     def talk(self, pick):
         Speaker.talk(self, pick)
@@ -259,13 +260,13 @@ class SpeakerDot(Speaker, DragBehavior, Widget):
 class BroadcasterSpeakerDot(SpeakerDot):
     """The GUI representation of a broadcasting speaker who never listens to anyone."""
 
-    def __init__(self, n, pos, para=None, experience=1.0, **kwargs):
+    def __init__(self, n, pos, para=None, experience=SETTINGS.experience_start, **kwargs):
         super().__init__(n, pos, para, experience, **kwargs)
         self.is_broadcaster = True
         self.update_color()
 
     def update_color(self):
-        self.color = (0.2, 0.9, 0.1)
+        self.color = SETTINGS.color_broadcaster
 
 class NameTag(Label):
     """A kind of tooltip that shows how biased a speaker is at the moment."""
@@ -329,7 +330,8 @@ class AgoraWidget(Widget, Agora):
         if not self.sim:
             debug("Starting simulation...")
             if fastforward:
-                self.sim = Clock.schedule_interval(partial(self.simulate_till_stable, 100), 0.0)
+                batch_size = SETTINGS.sim_batch_size
+                self.sim = Clock.schedule_interval(partial(self.simulate_till_stable, batch_size), 0.0)
             else:
                 self.start_sim()
         else:
@@ -357,7 +359,7 @@ class AgoraWidget(Widget, Agora):
         super().simulate(*_)
         self.update_talk_arrow()
 
-    def simulate_till_stable(self, batch_size=100, *_):
+    def simulate_till_stable(self, batch_size=None, *_):
         """Keep running the simulation until the stability condition is reached."""
         graphics_on_before = self.graphics_on
         self.graphics_on = False
@@ -378,24 +380,29 @@ class AgoraWidget(Widget, Agora):
             return
         self.clear_talk_arrow()
         if self.pick:
-            speaker_x = self.pick['speaker'].pos[0] + 10
-            speaker_y = self.pick['speaker'].pos[1] + 10
-            hearer_x = self.pick['hearer'].pos[0] + 10
-            hearer_y = self.pick['hearer'].pos[1] + 10
+            dot_size = SETTINGS.speakerdot_size
+            speaker_x = self.pick['speaker'].pos[0] + 0.5 * dot_size[0]
+            speaker_y = self.pick['speaker'].pos[1] + 0.5 * dot_size[1]
+            hearer_x = self.pick['hearer'].pos[0] + 0.5 * dot_size[0]
+            hearer_y = self.pick['hearer'].pos[1] + 0.5 * dot_size[1]
             length = sqrt((hearer_x - speaker_x)**2 + (hearer_y - speaker_y)**2)
             sin_a = (hearer_y - speaker_y) / length
             cos_a = (hearer_x - speaker_x) / length
-            self.talk_arrow_shaft = Line(points=[speaker_x, speaker_y, hearer_x, hearer_y], width=2)
+            width = SETTINGS.arrow_width
+            self.talk_arrow_shaft = Line(points=[speaker_x, speaker_y, hearer_x, hearer_y], width=width)
             self.talk_arrow_tip = Line(points=[hearer_x - 12.0*cos_a - 8.0*sin_a, hearer_y - 12.0*sin_a + 8.0*cos_a,
                                                hearer_x, hearer_y,
                                                hearer_x - 12.0*cos_a + 8.0*sin_a, hearer_y - 12.0*sin_a - 8.0*cos_a],
-                                               width=2)
+                                               width=width)
+            color_arrow_shaft = None
             if self.pick['is_form_a']:
-                self.canvas.add(Color(0.85, 0.85, 0.0))
+                color_arrow_shaft = SETTINGS.color_A
             else:
-                self.canvas.add(Color(0.85, 0.0, 0.85))
+                color_arrow_shaft = SETTINGS.color_B
+            color_arrow_shaft = (0.85 * color_arrow_shaft[0], 0.85 * color_arrow_shaft[1], 0.85 * color_arrow_shaft[2])
+            self.canvas.add(Color(*color_arrow_shaft))
             self.canvas.add(self.talk_arrow_shaft)
-            self.canvas.add(Color(0.2, 0.0, 0.8))
+            self.canvas.add(Color(*SETTINGS.color_arrow_tip))
             self.canvas.add(self.talk_arrow_tip)
 
     def update_speakerdot_colors(self):

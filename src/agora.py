@@ -6,6 +6,7 @@ from logging import debug
 from time import time
 
 from src.rng import RAND
+from src.settings import SETTINGS
 from src.speaker import Speaker
 
 class Agora:
@@ -93,20 +94,25 @@ class Agora:
 
     def all_biased(self):
         """Criterion to stop the simulation: every speaker is sufficiently biased."""
+        assert Settings.bias_threshold > 0.5
         def stable(x):
-            return x.is_broadcaster or abs(s.principal_weight() - 0.5) > 0.4
+            if x.is_broadcaster:
+                return True
+            return abs(s.principal_weight() - 0.5) > SETTINGS.bias_threshold - 0.5
         return all(stable(s) for s in self.speakers)
 
     def all_biased_and_experienced(self):
         """Criterion to stop the simulation: every speaker is sufficiently biased and experienced."""
         def stable(x):
-            return x.is_broadcaster or abs(x.principal_weight() - 0.5) > 0.4 and x.experience > 10
+            if x.is_broadcaster:
+                return True
+            return abs(x.principal_weight() - 0.5) > SETTINGS.bias_threshold - 0.5 and x.experience > SETTINGS.experience_threshold
         return all(stable(s) for s in self.speakers)
 
     def simulate_till_stable(self, batch_size=None, is_stable=all_biased_and_experienced):
         """Keep running the simulation until the stability condition is reached."""
         debug("Simulation until stable started:", time())
-        max_iteration = 10000
+        max_iteration = SETTINGS.sim_max_iteration
         if not self.sim_iteration:
             self.sim_iteration = 0
         until = self.sim_iteration + batch_size + 1 if batch_size else max_iteration + 1
