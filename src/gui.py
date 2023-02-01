@@ -135,10 +135,13 @@ class StartStopSimButton(Button):
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
         self.text = self.start_text
-        self.bind(on_release=self.start)
+        self.bind(on_release=self.start_stop)
 
-    def start(self, *_):
+    def start_stop(self, *_):
         Root().ids.agora.start_stop_sim()
+        self.update_text()
+
+    def update_text(self):
         self.text = self.stop_text if Root().ids.agora.sim else self.start_text
 
 class RewindButton(Button):
@@ -305,6 +308,8 @@ class AgoraWidget(Widget, Agora):
         if self.sim:
             self.sim.cancel()
             self.sim = None
+            start_stop_button = Root().ids.button_layout.ids.start_stop_button
+            start_stop_button.update_text()
 
     def simulate(self, *_):
         """Perform a single step of simulation: let one speaker talk to another."""
