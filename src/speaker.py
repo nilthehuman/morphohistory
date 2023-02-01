@@ -73,15 +73,17 @@ class Speaker:
 
     def principal_weight(self):
         """Which way the speaker is leaning, summed up in a single float."""
+        return self.para.para[0][0].weight_a
+        # TODO: figure out why this function is slow
         if self.principal_weight_cached:
             return self.principal_weight_cached
         sum_w = 0
         sum_imp = 0
-        for i in range(2):
-            for j in range(18):
-                if len(self.para.para[i][j].form_a):
-                    sum_w = sum_w + self.para.para[i][j].weight_a * self.para.para[i][j].importance
-                    sum_imp = sum_imp + self.para.para[i][j].importance
+        for cases in self.para.para:
+            for cell in cases:
+                if cell.form_a:
+                    sum_w = sum_w + cell.weight_a * cell.importance
+                    sum_imp = sum_imp + cell.importance
         self.principal_weight_cached = sum_w / sum_imp
         return self.principal_weight_cached
 
@@ -181,11 +183,11 @@ class Agora:
         self.pick[0].talk_to(self.pick[1])
         #return True # keep going
 
-    def is_stable(self):
+    def all_biased(self):
         """When to stop the simulation"""
         return all(abs(s.principal_weight() - 0.5) > 0.4 for s in self.speakers)
 
-    def simulate_till_stable(self, batch_size=None):
+    def simulate_till_stable(self, batch_size=None, is_stable=all_biased):
         """Keep running the simulation until the stability condition is reached."""
         debug("Simulation until stable started:", time())
         max_iteration = 10000
@@ -201,7 +203,7 @@ class Agora:
                 self.sim_cancelled = False
                 self.sim_iteration = None
                 return True
-            if self.is_stable():
+            if is_stable and is_stable(self):
                 self.sim_iteration = None
                 return True
             self.simulate()
