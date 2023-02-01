@@ -230,10 +230,10 @@ class SpeakerDot(Speaker, DragBehavior, Widget):
         w = self.principal_weight()
         self.color = [sum(x) for x in zip([w * y for y in yellow], [(1-w) * p for p in purple])]
 
-    def talk_to(self, hearer):
-        Speaker.talk_to(self, hearer)
+    def talk(self, pick):
+        Speaker.talk(self, pick)
         if self.parent.graphics_on:
-            hearer.update_color()
+            pick['hearer'].update_color()
 
 class BroadcasterSpeakerDot(SpeakerDot):
     """The GUI representation of a broadcasting speaker who never listens to anyone."""
@@ -266,7 +266,8 @@ class AgoraWidget(Widget, Agora):
         self.speakers = speakers
         self.sim = None
         self.pick = []
-        self.talk_arrow = None
+        self.talk_arrow_shaft = None
+        self.talk_arrow_tip = None
         self.graphics_on = True
 
     def add_speakerdot(self, speakerdot):
@@ -276,9 +277,12 @@ class AgoraWidget(Widget, Agora):
 
     def clear_talk_arrow(self):
         """Remove blue arrow from screen."""
-        if self.talk_arrow:
-            self.canvas.remove(self.talk_arrow)
-            self.talk_arrow = None
+        if self.talk_arrow_shaft:
+            self.canvas.remove(self.talk_arrow_shaft)
+            self.talk_arrow_shaft = None
+        if self.talk_arrow_tip:
+            self.canvas.remove(self.talk_arrow_tip)
+            self.talk_arrow_tip = None
 
     def clear_speakers(self):
         """Remove all simulated speakers."""
@@ -337,21 +341,25 @@ class AgoraWidget(Widget, Agora):
             return
         self.clear_talk_arrow()
         if self.pick:
-            speaker_x = self.pick[0].pos[0]+10
-            speaker_y = self.pick[0].pos[1]+10
-            hearer_x  = self.pick[1].pos[0]+10
-            hearer_y  = self.pick[1].pos[1]+10
+            speaker_x = self.pick['speaker'].pos[0] + 10
+            speaker_y = self.pick['speaker'].pos[1] + 10
+            hearer_x = self.pick['hearer'].pos[0] + 10
+            hearer_y = self.pick['hearer'].pos[1] + 10
             length = sqrt((hearer_x - speaker_x)**2 + (hearer_y - speaker_y)**2)
             sin_a = (hearer_y - speaker_y) / length
             cos_a = (hearer_x - speaker_x) / length
-            self.talk_arrow = Line(points=[speaker_x, speaker_y,
-                                           hearer_x, hearer_y,
-                                           hearer_x - 12.0*cos_a - 8.0*sin_a, hearer_y - 12.0*sin_a + 8.0*cos_a,
-                                           hearer_x, hearer_y,
-                                           hearer_x - 12.0*cos_a + 8.0*sin_a, hearer_y - 12.0*sin_a - 8.0*cos_a],
-                                           width=2)
+            self.talk_arrow_shaft = Line(points=[speaker_x, speaker_y, hearer_x, hearer_y], width=2)
+            self.talk_arrow_tip = Line(points=[hearer_x - 12.0*cos_a - 8.0*sin_a, hearer_y - 12.0*sin_a + 8.0*cos_a,
+                                               hearer_x, hearer_y,
+                                               hearer_x - 12.0*cos_a + 8.0*sin_a, hearer_y - 12.0*sin_a - 8.0*cos_a],
+                                               width=2)
+            if self.pick['is_form_a']:
+                self.canvas.add(Color(0.85, 0.85, 0.0))
+            else:
+                self.canvas.add(Color(0.85, 0.0, 0.85))
+            self.canvas.add(self.talk_arrow_shaft)
             self.canvas.add(Color(0.2, 0.0, 0.8))
-            self.canvas.add(self.talk_arrow)
+            self.canvas.add(self.talk_arrow_tip)
 
     def update_speakerdot_colors(self):
         """Set the colors of all speakers according to their current state."""

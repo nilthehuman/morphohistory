@@ -90,7 +90,9 @@ class Speaker:
     def name_tag(self):
         return self.para[0][0].to_str_short()
 
-    def talk_to(self, hearer):
+    def talk(self, pick):
+        assert pick['speaker'] == self
+        hearer = pick['hearer']
         assert not hearer.is_broadcaster # broadcasters are deaf
         i, j = -1, -1
         # pick a non-empty cell to share with the hearer
@@ -101,6 +103,7 @@ class Speaker:
                 break
         cum_weights = [self.para.para[i][j].weight_a, 1]
         is_form_a = RAND.choices([True, False], cum_weights=cum_weights)
+        pick['is_form_a'] = is_form_a[0] # let the Agora know what we're saying
         hearer.hear_noun(i, j, is_form_a[0])
 
     def hear_noun(self, i, j, is_form_a):
@@ -164,23 +167,23 @@ class Agora:
             self.pick = self.pick_queue.pop(0)
         else:
             if not self.speaker_pairs:
-                self.speaker_pairs = list([(s, t) for (s, t) in product(self.speakers, self.speakers) if s != t])
-            inv_dist_sq = lambda p, q: 1 / ((p[0] - q[0])**2 + (p[1] - q[1])**2)
+                self.speaker_pairs = list([{'speaker': s, 'hearer': h} for (s, h) in product(self.speakers, self.speakers) if s != h])
+            inv_dist_sq = lambda p: 1 / ((p['speaker'].pos[0] - p['hearer'].pos[0])**2 + (p['speaker'].pos[1] - p['hearer'].pos[1])**2)
             if not self.cum_weights:
                 self.cum_weights = [0]
-                for (s, t) in self.speaker_pairs:
-                     self.cum_weights.append(inv_dist_sq(s.pos, t.pos) + self.cum_weights[-1])
+                for p in self.speaker_pairs:
+                     self.cum_weights.append(inv_dist_sq(p) + self.cum_weights[-1])
                 self.cum_weights.pop(0)
             while True:
                 self.pick = RAND.choices(self.speaker_pairs, cum_weights=self.cum_weights)[0]
-                if (not self.pick[1].is_broadcaster):
+                if (not self.pick['hearer'].is_broadcaster):
                     break
-            if self.pick[0].is_broadcaster:
-                speaker = self.pick[0]
-                self.pick_queue = [ (speaker, s) for s in self.speakers if s != speaker ]
+            if self.pick['speaker'].is_broadcaster:
+                s = self.pick['speaker']
+                self.pick_queue = [ {'speaker': s, 'hearer': h} for h in self.speakers if h != s ]
                 self.pick = self.pick_queue.pop(0)
-        debug(self.pick[0].n, "picked to talk to", self.pick[1].n)
-        self.pick[0].talk_to(self.pick[1])
+        debug(self.pick['speaker'].n, "picked to talk to", self.pick['hearer'].n)
+        self.pick['speaker'].talk(self.pick)
         #return True # keep going
 
     def all_biased(self):
