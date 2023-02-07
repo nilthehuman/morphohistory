@@ -28,9 +28,9 @@ from logging import debug
 from math import sqrt, sin, cos, pi
 from os.path import isfile, join
 
-from src.settings import SETTINGS
-from src.agora import Agora
-from src.speaker import Speaker
+from .settings import SETTINGS
+from .agora import Agora
+from .speaker import Speaker
 
 # Adapted from kivy.org/doc/stable/api-kivy.core.window.html
 class KeyeventHandler(Widget):

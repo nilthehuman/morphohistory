@@ -3,9 +3,9 @@
 from copy import deepcopy
 from logging import debug
 
-from src.paradigm import NounCell, Paradigm, NounParadigm
-from src.rng import RAND
-from src.settings import SETTINGS
+from .paradigm import NounCell, Paradigm, NounParadigm
+from .rng import RAND
+from .settings import SETTINGS
 
 class Speaker:
     """A simulated individual within the speaking community."""

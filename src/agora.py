@@ -5,9 +5,9 @@ from json import dumps, load
 from logging import debug
 from time import time
 
-from src.rng import RAND
-from src.settings import SETTINGS
-from src.speaker import Speaker
+from .rng import RAND
+from .settings import SETTINGS
+from .speaker import Speaker
 
 class Agora:
     """A collection of simulated speakers influencing each other."""
