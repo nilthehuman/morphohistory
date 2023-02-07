@@ -1,9 +1,10 @@
 """See if we have simplerandom available. If not, fall back on standard random."""
 
-from bisect import bisect
+# TODO: see if numpy is much faster (buffering a lot of random numbers ahead of time)
 
 try:
     from simplerandom.iterators import MWC1
+    from bisect import bisect
     class _RNG:
         def __init__(self):
             self.mwc = MWC1() # unseeded is fine
