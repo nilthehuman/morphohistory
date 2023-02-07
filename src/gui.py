@@ -18,6 +18,7 @@ from kivy.uix.gridlayout import GridLayout
 from kivy.uix.label import Label
 from kivy.uix.popup import Popup
 from kivy.uix.slider import Slider
+from kivy.uix.tabbedpanel import TabbedPanel
 from kivy.uix.widget import Widget
 
 from copy import deepcopy
@@ -54,7 +55,7 @@ class KeyeventHandler(Widget):
             return True
         return False
 
-class TopBoxLayout(BoxLayout):
+class TopTabbedPanel(TabbedPanel):
     """The root widget. Holds both the Agora and the control buttons on the right."""
     pass
 
@@ -502,7 +503,7 @@ class MurmurApp(App):
     def build(self):
         self.icon = "assets/logo.png"
         KeyeventHandler()
-        return TopBoxLayout()
+        return TopTabbedPanel()
 
 if __name__ == '__main__':
     MurmurApp().run()

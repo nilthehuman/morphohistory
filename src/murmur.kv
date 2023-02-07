@@ -1,30 +1,54 @@
 #kivy 2.1
 
-<TopBoxLayout>
-    orientation: 'horizontal'
-    size: root.width, root.height
-    spacing: 0
-    canvas:
-        Color:
-            rgb: 0, 0.08, 0.12
-        Rectangle:
-            pos: self.pos
-            size: self.size
-    AnchorLayout:
-        anchor_x: 'center'
-        anchor_y: 'center'
-        size_hint: 1, 1
-        RelativeLayout:
-            id: rel_layout
-            size_hint: None, None
-            size: 600, 600
-            DemoAgoraWidget4:
-                id: agora
+<TopTabbedPanel>
+    do_default_tab: False
+    tab_height: 30
+    tab_width: 120
+    background_color: 0.16, 0.2, 0.24
+    TabbedPanelItem:
+        text: "Szimulátor"
+        BoxLayout:
+            orientation: 'horizontal'
+            size: root.width, root.height
+            spacing: 0
+            canvas:
+                Color:
+                    rgb: 0, 0.08, 0.12
+                Rectangle:
+                    pos: self.pos
+                    size: self.size
+            AnchorLayout:
+                anchor_x: 'center'
+                anchor_y: 'center'
                 size_hint: 1, 1
-    ButtonLayout:
-        id: button_layout
-        size_hint: None, 1
-        width: 200
+                RelativeLayout:
+                    id: rel_layout
+                    size_hint: None, None
+                    size: 600, 600
+                    DemoAgoraWidget2:
+                        id: agora
+                        size_hint: 1, 1
+            ButtonLayout:
+                id: button_layout
+                size_hint: None, 1
+                width: 200
+    TabbedPanelItem:
+        text: "Beállítások"
+    TabbedPanelItem:
+        text: "Paradigma"
+        #BoxLayout:
+        #    orientation: 'vertical'
+        #    CheckBox:
+        #        text: "Csak egy cellát szimulálj, jó? köszi"
+        #        color: (0.2, 0.9, 0.2, 1.0)
+        #    TextInput:
+        #        text: "semmi"
+        #        disabled: False
+        #    TextInput:
+        #        text: "még annyi se"
+        #        disabled: True
+    TabbedPanelItem:
+        text: "Multiszim"
 
 <ButtonLayout>
     orientation: 'tb-lr'
