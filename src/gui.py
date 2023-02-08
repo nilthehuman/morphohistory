@@ -502,8 +502,11 @@ def Root():
 class MurmurApp(App):
     def build(self):
         self.icon = "assets/logo.png"
+        root = TopTabbedPanel()
+        Window.minimum_width = root.ids.rel_layout.width + root.ids.button_layout.width
+        Window.minimum_height = root.ids.rel_layout.height
         KeyeventHandler()
-        return TopTabbedPanel()
+        return root
 
 if __name__ == '__main__':
     MurmurApp().run()
