@@ -293,6 +293,7 @@ class AgoraWidget(Widget, Agora):
         self.talk_arrow_shaft = None
         self.talk_arrow_tip = None
         self.graphics_on = True
+        self.bind(size=self.update_grid) # TODO: update when setting is changed
 
     def add_speakerdot(self, speakerdot):
         """Add a virtual speaker to the simulated community."""
@@ -374,6 +375,64 @@ class AgoraWidget(Widget, Agora):
             self.update_speakerdot_colors()
         else:
             self.update_progressbar(self.sim_iteration)
+
+    def toggle_euclidean_grid(self, force_show=False):
+        """Show/hide a grid with circles behind the Agora to suggest the use of Euclidean distance."""
+        if not self.graphics_on:
+            return
+        if self.canvas.has_before and self.canvas.before.length():
+            if not force_show:
+                self.canvas.before.clear()
+        else:
+            self.toggle_manhattan_grid(force_show=True)
+            half_sqrt_2 = 1 / sqrt(2)
+            bottom = (0.5 - half_sqrt_2) * self.height
+            top    = (0.5 + half_sqrt_2) * self.height
+            left   = (0.5 - half_sqrt_2) * self.width
+            right  = (0.5 + half_sqrt_2) * self.width
+            self.canvas.before.add(Color(*SETTINGS.grid_color))
+            self.canvas.before.add(Line(points=[left, bottom, right, top], width=1))
+            self.canvas.before.add(Line(points=[left, top, right, bottom], width=1))
+            step = int(self.width / SETTINGS.grid_resolution)
+            for r in range(step, int(sqrt(2) * self.width/2), step):
+                self.canvas.before.add(Line(circle=(self.width/2, self.height/2, r), width=1))
+
+    def toggle_manhattan_grid(self, force_show=False):
+        """Show/hide a grey Cartesian grid behind the Agora to suggest the use of Manhattan distance."""
+        if not self.graphics_on:
+            return
+        if self.canvas.has_before and self.canvas.before.length():
+            if not force_show:
+                self.canvas.before.clear()
+        else:
+            half_sqrt_2 = 1 / sqrt(2)
+            bottom = (0.5 - half_sqrt_2) * self.height
+            top    = (0.5 + half_sqrt_2) * self.height
+            left   = (0.5 - half_sqrt_2) * self.width
+            right  = (0.5 + half_sqrt_2) * self.width
+            step_x = int(self.width  / SETTINGS.grid_resolution)
+            step_y = int(self.height / SETTINGS.grid_resolution)
+            self.canvas.before.add(Color(*SETTINGS.grid_color))
+            for x in range(0, int(half_sqrt_2 * self.width), step_x):
+                self.canvas.before.add(Line(points=[self.width/2 + x, bottom, self.width/2 + x, top], width=1))
+                self.canvas.before.add(Line(points=[self.width/2 - x, bottom, self.width/2 - x, top], width=1))
+            for y in range(0, int(half_sqrt_2 * self.height), step_y):
+                self.canvas.before.add(Line(points=[left, self.height/2 + y, right, self.height/2 + y], width=1))
+                self.canvas.before.add(Line(points=[left, self.height/2 - y, right, self.height/2 - y], width=1))
+
+    def update_grid(self, *_):
+        """Show/hide the grid behind the Agora."""
+        if not self.graphics_on:
+            return
+        if SETTINGS.sim_distance_metric == SETTINGS.DistanceMetric.CONSTANT:
+            if self.canvas.has_before and self.canvas.before.length():
+                self.canvas.before.clear()
+        elif SETTINGS.sim_distance_metric == SETTINGS.DistanceMetric.MANHATTAN:
+            self.toggle_manhattan_grid(force_show=True)
+        elif SETTINGS.sim_distance_metric == SETTINGS.DistanceMetric.EUCLIDEAN:
+            self.toggle_euclidean_grid(force_show=True)
+        else:
+            assert False
 
     def update_talk_arrow(self):
         """Redraw the blue arrow between the current speaker and the current hearer."""
