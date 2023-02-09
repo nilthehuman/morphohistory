@@ -436,7 +436,7 @@ class AgoraWidget(Widget, Agora):
 
     def update_talk_arrow(self):
         """Redraw the blue arrow between the current speaker and the current hearer."""
-        if not self.graphics_on:
+        if not self.graphics_on or not SETTINGS.draw_arrow:
             return
         self.clear_talk_arrow()
         if self.pick:

@@ -18,6 +18,7 @@ class _Settings:
         self.color_broadcaster = (0.2, 0.9, 0.1)
         self.color_arrow_tip = (0.2, 0.0, 0.8)
         self.arrow_width = 2
+        self.draw_arrow = True
         self.grid_color = (0.2, 0.2, 0.2)
         self.grid_resolution = 10
 
