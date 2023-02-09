@@ -102,8 +102,10 @@ class VerbCell(Cell):
 class NounParadigm(Paradigm):
     """A 3D matrix representing the competing forms of a single noun.
        Hungarian nouns inflect for number and case."""
-    def __init__(self, weight_a=0.5):
+    def __init__(self, weight_a=0.5, form_a='', form_b=''):
         self.para = [[NounCell(i, j, weight_a) for j in range(18)] for i in range(2)]
+        self.para[0][0].form_a = form_a
+        self.para[0][0].form_b = form_b
 
     def __getitem__(self, n):
         """Return a single cell (assignable)."""
@@ -138,7 +140,7 @@ class NounParadigm(Paradigm):
            16 : 'del',
            17 : 'abl'
         }
-        return "{%s, %s, %s}" % (numbers[i], cases[j])
+        return "{%s, %s}" % (numbers[i], cases[j])
 
     def nudge(self, amount, i, j):
         """Adjust the weights in a single cell."""

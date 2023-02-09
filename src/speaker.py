@@ -9,19 +9,13 @@ from .settings import SETTINGS
 
 class Speaker:
     """A simulated individual within the speaking community."""
-    def __init__(self, n, pos, para=NounParadigm(), is_broadcaster=False, experience=SETTINGS.experience_start):
+    def __init__(self, n, pos, para=None, is_broadcaster=False, experience=SETTINGS.experience_start):
         self.n = n
         self.pos = pos
         self.para = para
         self.experience = experience
         self.is_broadcaster = is_broadcaster
         self.principal_weight_cached = None
-
-    def init_from_weight(self, weight_a):
-        self.para = NounParadigm(weight_a)
-        # TODO: temporary hack, for demo purposes
-        self.para[0][0] = NounCell(number=0, case=0, weight_a=self.para.para[0][0].weight_a,
-            form_a='havernak', form_b='havernek', importance=0.2)
 
     @classmethod
     def fromspeaker(cls, other):
@@ -31,7 +25,8 @@ class Speaker:
 
     @classmethod
     def fromweight(cls, n, pos, weight_a, is_broadcaster=False):
-        me = cls(n, pos, NounParadigm(weight_a), is_broadcaster)
+        para = NounParadigm(weight_a, SETTINGS.default_form_a, SETTINGS.default_form_b)
+        me = cls(n, pos, para, is_broadcaster)
         return me
 
     def to_json(self):
