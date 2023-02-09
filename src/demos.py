@@ -106,3 +106,5 @@ class Rings16_24(DemoFactory):
                    HEIGHT * 0.5 + y - SETTINGS.speakerdot_size[1] * 0.5)
             speakers.append(Speaker.fromweight(16 + n, pos, 1.0))
         return speakers
+
+DEFAULT_DEMO = Rainbow9x9

@@ -30,6 +30,7 @@ from os.path import isfile, join
 
 from .settings import SETTINGS
 from .agora import Agora
+from .demos import DEFAULT_DEMO
 from .speaker import Speaker
 
 # Adapted from kivy.org/doc/stable/api-kivy.core.window.html
@@ -203,12 +204,7 @@ class SpeakerDot(Speaker, DragBehavior, Widget):
     color = ColorProperty()
 
     def __init__(self, n, pos, para=None, experience=SETTINGS.experience_start, **kwargs):
-        if type(para) is float: # poor man's polymorphism
-            weight_a = para
-            Speaker.__init__(self, n, pos, None, False, experience)
-            Speaker.init_from_weight(self, weight_a)
-        else:
-            Speaker.__init__(self, n, pos, para, False, experience)
+        Speaker.__init__(self, n, pos, para, False, experience)
         DragBehavior.__init__(self, **kwargs)
         Widget.__init__(self, **kwargs)
         self.size = SETTINGS.speakerdot_size
@@ -293,7 +289,7 @@ class AgoraWidget(Widget, Agora):
         self.talk_arrow_shaft = None
         self.talk_arrow_tip = None
         self.graphics_on = True
-        self.bind(size=self.update_grid) # TODO: update when setting is changed
+        self.bind(size=self.on_size)
 
     def add_speakerdot(self, speakerdot):
         """Add a virtual speaker to the simulated community."""
@@ -319,6 +315,14 @@ class AgoraWidget(Widget, Agora):
         """Add an array of pre-built Speakers."""
         for s in speakers:
             self.add_speakerdot(SpeakerDot.fromspeaker(s))
+
+    def on_size(self, *_):
+        """Finish initializing: draw the grid and load the default speaker population."""
+        self.update_grid() # TODO: update when setting is changed
+        speakers = DEFAULT_DEMO.get_speakers()
+        self.load_speakers(speakers)
+        self.save_starting_state()
+        self.unbind(size=self.on_size)
 
     def start_sim(self):
         """Schedule regular simulation in Kivy event loop at intervals specified by the slider."""
