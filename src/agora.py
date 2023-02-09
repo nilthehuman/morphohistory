@@ -126,15 +126,16 @@ class Agora:
 
     def all_biased(self):
         """Criterion to stop the simulation: every speaker is sufficiently biased."""
-        assert Settings.bias_threshold > 0.5
+        assert SETTINGS.bias_threshold > 0.5
         def stable(x):
             if x.is_broadcaster:
                 return True
-            return abs(s.principal_weight() - 0.5) > SETTINGS.bias_threshold - 0.5
+            return abs(x.principal_weight() - 0.5) > SETTINGS.bias_threshold - 0.5
         return all(stable(s) for s in self.speakers)
 
     def all_biased_and_experienced(self):
         """Criterion to stop the simulation: every speaker is sufficiently biased and experienced."""
+        assert SETTINGS.bias_threshold > 0.5
         def stable(x):
             if x.is_broadcaster:
                 return True
