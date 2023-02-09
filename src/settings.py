@@ -12,6 +12,10 @@ class _Settings:
         MANHATTAN = 2
         EUCLIDEAN = 3
 
+    class LearningModel(Enum):
+        HARMONIC = 1
+        RW = 2
+
     def __init__(self):
         self.color_A = (1.0, 1.0, 0.0)
         self.color_B = (1.0, 0.0, 1.0)
@@ -32,6 +36,7 @@ class _Settings:
         self.experience_threshold = 10
 
         self.sim_distance_metric = self.DistanceMetric.CONSTANT
+        #self.sim_learning_model = HARMONIC # TODO use this option
         self.sim_influence_self = False
         self.sim_batch_size = 100
         self.sim_max_iteration = 10000
