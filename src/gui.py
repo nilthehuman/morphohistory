@@ -490,10 +490,19 @@ class DemoAgoraWidget1(AgoraWidget):
         for row in range(10):
             for col in range(10):
                 weight_b = 1 / 18 * (row + col)
-                pos = self.width * 0.1 + self.width * 0.09 * col - 10, self.height * 0.9 - self.height * 0.09 * row - 10
-                self.add_speakerdot(SpeakerDot(row*10 + col, pos, 1 - weight_b))
+                pos = self.width * 0.05 + self.width * 0.1 * col - 10, self.height * 0.95 - self.height * 0.1 * row - 10
+                self.add_speakerdot(SpeakerDot(row * 10 + col, pos, 1 - weight_b))
         self.unbind(size=self.populate)
         self.save_starting_state()
+
+    #def populate_9x9(self, *_):
+    #    for row in range(9):
+    #        for col in range(9):
+    #            weight_b = 1 / 16 * (row + col)
+    #            pos = self.width * 0.1 + self.width * 0.1 * col - 10, self.height * 0.9 - self.height * 0.1 * row - 10
+    #            self.add_speakerdot(SpeakerDot(row * 10 + col, pos, 1 - weight_b))
+    #    self.unbind(size=self.populate)
+    #    self.save_starting_state()
 
 class DemoAgoraWidget2(AgoraWidget):
     """A 10x10 grid of speakers, neutral majority on the outside, biased minority on the inside."""
@@ -506,11 +515,11 @@ class DemoAgoraWidget2(AgoraWidget):
     def populate(self, *_):
         for row in range(10):
             for col in range(10):
-                pos = self.width * 0.1 + self.width * 0.09 * col - 10, self.height * 0.9 - self.height * 0.09 * row - 10
+                pos = self.width * 0.05 + self.width * 0.1 * col - 10, self.height * 0.95 - self.height * 0.1 * row - 10
                 if (3 <= row and row <= 6 and 3 <= col and col <= 6):
-                    self.add_speakerdot(SpeakerDot(row*10 + col, pos, 0.0))
+                    self.add_speakerdot(SpeakerDot(row * 10 + col, pos, 0.0))
                 else:
-                    self.add_speakerdot(SpeakerDot(row*10 + col, pos, 0.5))
+                    self.add_speakerdot(SpeakerDot(row * 10 + col, pos, 0.5))
         self.unbind(size=self.populate)
         self.save_starting_state()
 
@@ -524,11 +533,11 @@ class DemoAgoraWidget3(AgoraWidget):
 
     def populate(self, *_):
         for n in range(16):
-            x = sin(2 * pi * float(n) / 16) * 150
-            y = cos(2 * pi * float(n) / 16) * 150
-            pos = (300 + x, 300 + y)
+            x = sin(2 * pi * float(n) / 16) * 180
+            y = cos(2 * pi * float(n) / 16) * 180
+            pos = (300 + x - 10, 300 + y - 10)
             self.add_speakerdot(SpeakerDot(n, pos, 0.5))
-        broadcaster = BroadcasterSpeakerDot(16, (300, 300), 1.0)
+        broadcaster = BroadcasterSpeakerDot(16, (300 - 10, 300 - 10), 1.0)
         self.add_speakerdot(broadcaster)
         self.unbind(size=self.populate)
         self.save_starting_state()
@@ -543,15 +552,15 @@ class DemoAgoraWidget4(AgoraWidget):
 
     def populate(self, *_):
         for n in range(16):
-            x = sin(2 * pi * float(n) / 16) * 100
-            y = cos(2 * pi * float(n) / 16) * 100
-            pos = (300 + x, 300 + y)
+            x = sin(2 * pi * float(n) / 16) * 120
+            y = cos(2 * pi * float(n) / 16) * 120
+            pos = (300 + x - 10, 300 + y - 10)
             self.add_speakerdot(SpeakerDot(n, pos, 0.0))
         for n in range(24):
-            x = sin(2 * pi * float(n) / 24) * 200
-            y = cos(2 * pi * float(n) / 24) * 200
-            pos = (300 + x, 300 + y)
-            self.add_speakerdot(SpeakerDot(n, pos, 1.0))
+            x = sin(2 * pi * float(n) / 24) * 240
+            y = cos(2 * pi * float(n) / 24) * 240
+            pos = (300 + x - 10, 300 + y - 10)
+            self.add_speakerdot(SpeakerDot(16 + n, pos, 1.0))
         self.unbind(size=self.populate)
         self.save_starting_state()
 
