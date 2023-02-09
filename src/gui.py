@@ -339,7 +339,7 @@ class AgoraWidget(Widget, Agora):
         else:
             self.stop_sim()
 
-    def restart_sim(self, fastforward=False):
+    def restart_sim(self):
         """Reschedule simulation with different sleep timing."""
         if self.sim:
             slowdown = Root().ids.button_layout.ids.speed_slider.value
@@ -348,7 +348,7 @@ class AgoraWidget(Widget, Agora):
                 self.sim = None
                 self.start_sim()
 
-    def stop_sim(self, fastforward=False):
+    def stop_sim(self):
         """Unschedule previously scheduled simulation callback."""
         if self.sim:
             self.sim.cancel()
