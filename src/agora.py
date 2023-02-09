@@ -33,6 +33,11 @@ class Agora:
         self.sim_iteration = None
         self.sim_cancelled = False
         self.graphics_on = False
+        self.starting_speakers = None
+        self.speaker_pairs = None
+        self.cum_weights = None
+        self.pick = None
+        self.pick_queue = None
 
     def save_starting_state(self):
         """Stash a snapshot of the current list of speakers."""
