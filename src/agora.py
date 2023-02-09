@@ -9,6 +9,21 @@ from .rng import RAND
 from .settings import SETTINGS
 from .speaker import Speaker
 
+def inv_dist_sq_constant(_):
+    return 1
+
+def inv_dist_sq_manhattan(pair):
+    speaker = pair['speaker']
+    hearer = pair['hearer']
+    dist_sq = (abs(speaker.pos[0] - hearer.pos[0]) + abs(speaker.pos[1] - hearer.pos[1])) ** 2
+    return 1 / dist_sq
+
+def inv_dist_sq_euclidean(pair):
+    speaker = pair['speaker']
+    hearer = pair['hearer']
+    dist_sq = (speaker.pos[0] - hearer.pos[0]) ** 2 + (speaker.pos[1] - hearer.pos[1]) ** 2
+    return 1 / dist_sq
+
 class Agora:
     """A collection of simulated speakers influencing each other."""
 
@@ -80,10 +95,15 @@ class Agora:
         else:
             if not self.speaker_pairs:
                 self.speaker_pairs = list([{'speaker': s, 'hearer': h} for (s, h) in product(self.speakers, self.speakers) if s != h])
-            def inv_dist_sq(p):
-                dist_sq = ((p['speaker'].pos[0] - p['hearer'].pos[0])**2 + (p['speaker'].pos[1] - p['hearer'].pos[1])**2)
-                return 1 / dist_sq
             if not self.cum_weights:
+                if SETTINGS.sim_distance_metric == SETTINGS.DistanceMetric.CONSTANT:
+                    inv_dist_sq = inv_dist_sq_constant
+                elif SETTINGS.sim_distance_metric == SETTINGS.DistanceMetric.MANHATTAN:
+                    inv_dist_sq = inv_dist_sq_manhattan
+                elif SETTINGS.sim_distance_metric == SETTINGS.DistanceMetric.EUCLIDEAN:
+                    inv_dist_sq = inv_dist_sq_euclidean
+                else:
+                    assert False
                 self.cum_weights = [0]
                 for p in self.speaker_pairs:
                     self.cum_weights.append(inv_dist_sq(p) + self.cum_weights[-1])
