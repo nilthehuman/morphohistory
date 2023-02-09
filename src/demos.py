@@ -81,7 +81,7 @@ class NewsAnchor(DemoFactory):
             speakers.append(Speaker.fromweight(n, pos, 0.5))
         pos[0] = WIDTH * 0.5 - SETTINGS.speakerdot_size[0] * 0.5
         pos[1] = HEIGHT * 0.5 - SETTINGS.speakerdot_size[1] * 0.5
-        broadcaster = speakers.append(Speaker.fromweight(16, pos, 1.0, is_broadcaster=True))
+        speakers.append(Speaker.fromweight(16, pos, 1.0, is_broadcaster=True))
         return speakers
 
 class Rings16_24(DemoFactory):
