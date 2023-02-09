@@ -30,7 +30,7 @@ class _Settings:
         self.experience_start = 1
         self.experience_threshold = 10
 
-        self.sim_distance_metric = self.DistanceMetric.EUCLIDEAN
+        self.sim_distance_metric = self.DistanceMetric.CONSTANT
         self.sim_influence_self = False
         self.sim_batch_size = 100
         self.sim_max_iteration = 10000
