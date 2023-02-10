@@ -31,7 +31,9 @@ class Speaker:
 
     def to_json(self):
         speaker_only = Speaker.fromspeaker(self)
-        return speaker_only.__dict__
+        speaker_dict = speaker_only.__dict__
+        del speaker_dict['principal_weight_cached']
+        return speaker_dict
 
     @staticmethod
     def from_dict(speaker_dict):
