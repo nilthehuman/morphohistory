@@ -292,7 +292,7 @@ class AgoraWidget(Widget, Agora):
     def __init__(self, speakers=[], **kwargs):
         Widget.__init__(self, **kwargs)
         Agora.__init__(self)
-        self.speakers = speakers
+        self.state.speakers = speakers
         self.sim = None
         self.slowdown_prev = None
         self.pick = []
@@ -315,9 +315,14 @@ class AgoraWidget(Widget, Agora):
         super().reset()
         self.update_iteration_counter()
 
+    def load_from_file(self, filepath):
+        """Restore an Agora state previously written to file."""
+        super().load_from_file(filepath)
+        self.update_iteration_counter()
+
     def add_speakerdot(self, speakerdot):
         """Add a virtual speaker to the simulated community."""
-        self.speakers.append(speakerdot)
+        self.state.speakers.append(speakerdot)
         self.add_widget(speakerdot)
 
     def clear_talk_arrow(self):
@@ -458,7 +463,7 @@ class AgoraWidget(Widget, Agora):
     def update_iteration_counter(self):
         """Set the text on the button panel that shows how deep into the simulation we are."""
         iter_counter = Root().ids.button_layout.ids.iteration_counter
-        iter_counter.text = '%d iteráció' % self.sim_iteration_total
+        iter_counter.text = '%d iteráció' % self.state.sim_iteration_total
 
     def update_talk_arrow(self):
         """Redraw the blue arrow between the current speaker and the current hearer."""
@@ -495,7 +500,7 @@ class AgoraWidget(Widget, Agora):
         """Set the colors of all speakers according to their current state."""
         if not self.graphics_on:
             return
-        for s in self.speakers:
+        for s in self.state.speakers:
             s.update_color()
 
     def update_progressbar(self, sim_iteration):
