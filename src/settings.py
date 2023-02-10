@@ -23,7 +23,7 @@ class _Settings:
         self.color_arrow_tip = (0.2, 0.0, 0.8)
         self.arrow_width = 2
         self.draw_arrow = True
-        self.grid_color = (0.2, 0.2, 0.2)
+        self.grid_color = (0.15, 0.15, 0.15)
         self.grid_resolution = 10
 
         self.speakerdot_size = (20, 20)
