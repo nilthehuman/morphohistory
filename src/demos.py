@@ -6,8 +6,8 @@ from math import sin, cos, pi
 from .settings import SETTINGS
 from .speaker import Speaker
 
-WIDTH = 600
-HEIGHT = 600
+WIDTH, HEIGHT = SETTINGS.agora_size
+DOT_WIDTH, DOT_HEIGHT = SETTINGS.speakerdot_size
 
 class DemoFactory(ABC):
     """Interface for demo generating factory classes."""
@@ -23,8 +23,8 @@ class Rainbow9x9(DemoFactory):
         for row in range(9):
             for col in range(9):
                 weight_a = 1 - 1 / 16 * (row + col)
-                pos = (WIDTH * 0.1 + WIDTH * 0.1 * col - SETTINGS.speakerdot_size[0] * 0.5,
-                       HEIGHT * 0.9 - HEIGHT * 0.1 * row - SETTINGS.speakerdot_size[1] * 0.5)
+                pos = (WIDTH * 0.1 + WIDTH * 0.1 * col - DOT_WIDTH * 0.5,
+                       HEIGHT * 0.9 - HEIGHT * 0.1 * row - DOT_HEIGHT * 0.5)
                 speakers.append(Speaker.fromweight(row * 9 + col, pos, weight_a))
         return speakers
 
@@ -37,8 +37,8 @@ class Rainbow10x10(DemoFactory):
         for row in range(10):
             for col in range(10):
                 weight_a = 1 - 1 / 18 * (row + col)
-                pos = (WIDTH * 0.05 + WIDTH * 0.1 * col - SETTINGS.speakerdot_size[0] * 0.5,
-                       HEIGHT * 0.95 - HEIGHT * 0.1 * row - SETTINGS.speakerdot_size[1] * 0.5)
+                pos = (WIDTH * 0.05 + WIDTH * 0.1 * col - DOT_WIDTH * 0.5,
+                       HEIGHT * 0.95 - HEIGHT * 0.1 * row - DOT_HEIGHT * 0.5)
                 speakers.append(Speaker.fromweight(row * 10 + col, pos, weight_a))
         return speakers
 
@@ -50,8 +50,8 @@ class Synonymy(DemoFactory):
         pos = [None, None]
         for row in range(10):
             for col in range(10):
-                pos = (WIDTH * 0.05 + WIDTH * 0.1 * col - SETTINGS.speakerdot_size[0] * 0.5,
-                       HEIGHT * 0.95 - HEIGHT * 0.1 * row - SETTINGS.speakerdot_size[1] * 0.5)
+                pos = (WIDTH * 0.05 + WIDTH * 0.1 * col - DOT_WIDTH * 0.5,
+                       HEIGHT * 0.95 - HEIGHT * 0.1 * row - DOT_HEIGHT * 0.5)
                 speakers.append(Speaker.fromweight(row * 10 + col, pos, 0.5))
         return speakers
 
@@ -59,13 +59,14 @@ class SynonymyLarge(DemoFactory):
     """A 100x100 grid of speakers, all undecided: a case of perfect synonymy."""
 
     def get_speakers():
-        SETTINGS.speakerdot_size = (10, 10) # TODO: integrate settings into Agora, I think
+        SETTINGS.speakerdot_size = (12, 12) # TODO: integrate settings into Agora, I think
+        DOT_WIDTH, DOT_HEIGHT = SETTINGS.speakerdot_size
         speakers = []
         pos = [None, None]
         for row in range(30):
             for col in range(30):
-                pos = (WIDTH * 0.05 + WIDTH * 0.03103 * col - SETTINGS.speakerdot_size[0] * 0.5,
-                       HEIGHT * 0.95 - HEIGHT * 0.03103 * row - SETTINGS.speakerdot_size[1] * 0.5)
+                pos = (WIDTH * 0.05 + WIDTH * 0.03103 * col - DOT_WIDTH * 0.5,
+                       HEIGHT * 0.95 - HEIGHT * 0.03103 * row - DOT_HEIGHT * 0.5)
                 speakers.append(Speaker.fromweight(row * 30 + col, pos, 0.5))
         return speakers
 
@@ -77,8 +78,8 @@ class CoreVsPeriphery10x10(DemoFactory):
         pos = [None, None]
         for row in range(10):
             for col in range(10):
-                pos = (WIDTH * 0.05 + WIDTH * 0.1 * col - SETTINGS.speakerdot_size[0] * 0.5,
-                       HEIGHT * 0.95 - HEIGHT * 0.1 * row - SETTINGS.speakerdot_size[1] * 0.5)
+                pos = (WIDTH * 0.05 + WIDTH * 0.1 * col - DOT_WIDTH * 0.5,
+                       HEIGHT * 0.95 - HEIGHT * 0.1 * row - DOT_HEIGHT * 0.5)
                 if (3 <= row and row <= 6 and 3 <= col and col <= 6):
                     speakers.append(Speaker.fromweight(row * 10 + col, pos, 0.0))
                 else:
@@ -94,11 +95,11 @@ class NewsAnchor(DemoFactory):
         for n in range(16):
             x = sin(2 * pi * float(n) / 16) * WIDTH * 0.3
             y = cos(2 * pi * float(n) / 16) * HEIGHT * 0.3
-            pos = (WIDTH * 0.5 + x - SETTINGS.speakerdot_size[0] * 0.5,
-                   HEIGHT * 0.5 + y - SETTINGS.speakerdot_size[1] * 0.5)
+            pos = (WIDTH * 0.5 + x - DOT_WIDTH * 0.5,
+                   HEIGHT * 0.5 + y - DOT_HEIGHT * 0.5)
             speakers.append(Speaker.fromweight(n, pos, 0.5))
-        pos = (WIDTH * 0.5 - SETTINGS.speakerdot_size[0] * 0.5,
-               HEIGHT * 0.5 - SETTINGS.speakerdot_size[1] * 0.5)
+        pos = (WIDTH * 0.5 - DOT_WIDTH * 0.5,
+               HEIGHT * 0.5 - DOT_HEIGHT * 0.5)
         speakers.append(Speaker.fromweight(16, pos, 1.0, is_broadcaster=True))
         return speakers
 
@@ -110,14 +111,14 @@ class Rings16_24(DemoFactory):
         for n in range(16):
             x = sin(2 * pi * float(n) / 16) * WIDTH * 0.2
             y = cos(2 * pi * float(n) / 16) * HEIGHT * 0.2
-            pos = (WIDTH * 0.5 + x - SETTINGS.speakerdot_size[0] * 0.5,
-                   HEIGHT * 0.5 + y - SETTINGS.speakerdot_size[1] * 0.5)
+            pos = (WIDTH * 0.5 + x - DOT_WIDTH * 0.5,
+                   HEIGHT * 0.5 + y - DOT_HEIGHT * 0.5)
             speakers.append(Speaker.fromweight(n, pos, 0.0))
         for n in range(24):
             x = sin(2 * pi * float(n) / 24) * WIDTH * 0.4
             y = cos(2 * pi * float(n) / 24) * HEIGHT * 0.4
-            pos = (WIDTH * 0.5 + x - SETTINGS.speakerdot_size[0] * 0.5,
-                   HEIGHT * 0.5 + y - SETTINGS.speakerdot_size[1] * 0.5)
+            pos = (WIDTH * 0.5 + x - DOT_WIDTH * 0.5,
+                   HEIGHT * 0.5 + y - DOT_HEIGHT * 0.5)
             speakers.append(Speaker.fromweight(16 + n, pos, 1.0))
         return speakers
 
