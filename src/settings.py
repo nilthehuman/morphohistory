@@ -18,8 +18,8 @@ class _Settings:
 
     def __init__(self):
         self.agora_size = (600, 600)
-        self.color_A = (1.0, 1.0, 0.0)
-        self.color_B = (1.0, 0.0, 1.0)
+        self.color_a = (1.0, 1.0, 0.0)
+        self.color_b = (1.0, 0.0, 1.0)
         self.color_broadcaster = (0.2, 0.9, 0.1)
         self.color_arrow_tip = (0.2, 0.0, 0.8)
         self.arrow_width = 2
