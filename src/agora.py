@@ -71,18 +71,22 @@ class Agora:
         self.pick_queue = None
 
     def clear_dist_cache(self):
+        """Invalidate weights cache used for picking pairs."""
         self.cum_weights = None
 
     def clear_speakers(self):
+        """Remove all speakers from the Agora."""
         self.state.speakers = []
         self.state.sim_iteration_total = 0
         self.clear_caches()
 
     def save_to_file(self, filepath):
+        """Write current state to disk."""
         with open(filepath, 'w') as stream:
             stream.write(dumps(self.state, indent=1, default=lambda x: x.to_json()))
 
     def load_from_file(self, filepath):
+        """Restore an Agora state previously written to file."""
         with open(filepath, 'r') as stream:
             loaded_state = load(stream)
         speakers = [Speaker.from_dict(s) for s in loaded_state['speakers']]
@@ -92,10 +96,12 @@ class Agora:
         self.save_starting_state()
 
     def load_speakers(self, speakers):
+        """Replace current speaker community with a copy of the argument."""
         self.state.speakers = [Speaker.fromspeaker(s) for s in speakers]
         self.clear_caches()
 
     def add_speaker(self, speaker):
+        """Add a virtual speaker to the simulated community."""
         self.state.speakers.append(Speaker.fromspeaker(speaker))
         self.clear_caches()
 
