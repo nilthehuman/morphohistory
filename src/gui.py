@@ -10,6 +10,7 @@ from kivy.clock import Clock
 from kivy.core.window import Window
 from kivy.graphics import Color, Line
 from kivy.properties import ColorProperty, ObjectProperty
+from kivy.uix.anchorlayout import AnchorLayout
 from kivy.uix.behaviors import DragBehavior
 from kivy.uix.boxlayout import BoxLayout
 from kivy.uix.button import Button
@@ -18,6 +19,7 @@ from kivy.uix.gridlayout import GridLayout
 from kivy.uix.label import Label
 from kivy.uix.popup import Popup
 from kivy.uix.slider import Slider
+from kivy.uix.stencilview import StencilView
 from kivy.uix.tabbedpanel import TabbedPanel
 from kivy.uix.widget import Widget
 
@@ -58,6 +60,10 @@ class KeyeventHandler(Widget):
 
 class TopTabbedPanel(TabbedPanel):
     """The root widget. Holds both the Agora and the control buttons on the right."""
+    pass
+
+class AgoraLayout(AnchorLayout, StencilView):
+    """The main rectangular area on the simulation tab."""
     pass
 
 class ButtonLayout(GridLayout):

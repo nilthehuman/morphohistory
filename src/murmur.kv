@@ -11,16 +11,7 @@
             orientation: 'horizontal'
             size: root.width, root.height
             spacing: 0
-            canvas:
-                Color:
-                    rgb: 0, 0.08, 0.12
-                Rectangle:
-                    pos: self.pos
-                    size: self.size
-            AnchorLayout:
-                anchor_x: 'center'
-                anchor_y: 'center'
-                size_hint: 1, 1
+            AgoraLayout:
                 RelativeLayout:
                     id: rel_layout
                     size_hint: None, None
@@ -49,6 +40,17 @@
         #        disabled: True
     TabbedPanelItem:
         text: "Multiszim"
+
+<AgoraLayout>
+    anchor_x: 'center'
+    anchor_y: 'center'
+    size_hint: 1, 1
+    canvas:
+        Color:
+            rgb: 0, 0.08, 0.12
+        Rectangle:
+            pos: self.pos
+            size: self.size
 
 <ButtonLayout>
     orientation: 'tb-lr'
