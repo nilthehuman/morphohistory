@@ -31,7 +31,7 @@ class _Settings:
         self.popup_size_fail = (250, 200)
         self.popup_size_progress = (500, 250)
 
-        self.bias_threshold = 0.9
+        self.bias_threshold = 0.8
         self.experience_start = 1
         self.experience_threshold = 10
 
