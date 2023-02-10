@@ -1,7 +1,7 @@
 """The app's GUI built with the Kivy toolkit"""
 
-import kivy
-kivy.require('2.1.0')
+from kivy import require
+require('2.1.0')
 
 from kivy.config import Config
 Config.set('input', 'mouse', 'mouse,multitouch_on_demand')
@@ -30,10 +30,13 @@ from logging import debug
 from math import sqrt
 from os.path import isfile, join
 
-from .settings import SETTINGS
-from .agora import Agora
-from .demos import DEFAULT_DEMO
-from .speaker import Speaker
+from ..settings import SETTINGS
+from ..agora import Agora
+from ..demos import DEFAULT_DEMO
+from ..speaker import Speaker
+
+def Root():
+    return App.get_running_app().root
 
 # Adapted from kivy.org/doc/stable/api-kivy.core.window.html
 class KeyeventHandler(Widget):
@@ -508,18 +511,3 @@ class AgoraWidget(Widget, Agora):
         ff_button = Root().ids.button_layout.ids.fast_forward_button
         progressbar = ff_button.popup.ids.container.children[0].ids.progressbar
         progressbar.value = sim_iteration
-
-def Root():
-    return App.get_running_app().root
-
-class MurmurApp(App):
-    def build(self):
-        self.icon = "assets/logo.png"
-        root = TopTabbedPanel()
-        Window.minimum_width = root.ids.rel_layout.width + root.ids.button_layout.width
-        Window.minimum_height = root.ids.rel_layout.height
-        KeyeventHandler()
-        return root
-
-if __name__ == '__main__':
-    MurmurApp().run()
