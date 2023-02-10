@@ -109,6 +109,7 @@ class NounParadigm(Paradigm):
         self.para = [[NounCell(i, j, weight_a) for j in range(18)] for i in range(2)]
         self.para[0][0].form_a = form_a
         self.para[0][0].form_b = form_b
+        self.para[0][0].importance = 1.0
 
     def __getitem__(self, n):
         """Return a single cell (assignable)."""
