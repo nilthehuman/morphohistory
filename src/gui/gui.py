@@ -84,6 +84,11 @@ class LoadFromFilePopup(FloatLayout):
     load = ObjectProperty(None)
     cancel = ObjectProperty(None)
 
+class OverwritePopup(BoxLayout):
+    """A popup window to ask the user for confirmation cobbling an existing file."""
+    proceed = ObjectProperty(None)
+    cancel = ObjectProperty(None)
+
 class LoadFailedPopup(BoxLayout):
     """A popup window to let the user know their file could not be loaded."""
     okay = ObjectProperty(None)
@@ -111,12 +116,25 @@ class SaveToFileButton(Button):
 
     def save(self, path, filename):
         fullpath = join(path, filename)
-        savebutton = self.popup.ids.container.children[0].ids.save_button
-        if isfile(fullpath) and savebutton.text != "Felülírjam?":
-            savebutton.text = "Felülírjam?"
-            return
+        if isfile(fullpath):
+            content = OverwritePopup(proceed=self.proceed, cancel=self.dismiss_overwrite_popup)
+            self.overwrite_popup = Popup(title="Meglévő fájl", content=content,
+                                         size_hint=(None, None), size=SETTINGS.popup_size_fail)
+            self.overwrite_popup.open()
+        else:
+            root().ids.agora.save_to_file(fullpath)
+            self.dismiss_popup()
+
+    def proceed(self):
+        filechooser = self.popup.ids.container.children[0].ids.filechooser
+        text_input = self.popup.ids.container.children[0].ids.text_input
+        fullpath = join(filechooser.path, text_input.text)
         root().ids.agora.save_to_file(fullpath)
+        self.dismiss_overwrite_popup()
         self.dismiss_popup()
+
+    def dismiss_overwrite_popup(self):
+        self.overwrite_popup.dismiss()
 
 class LoadFromFileButton(Button):
     """Opens a popup window for loading an Agora configuration from file."""
