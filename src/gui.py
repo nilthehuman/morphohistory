@@ -204,6 +204,10 @@ class SpeedSlider(Slider):
         if Root().ids.agora.sim:
             Root().ids.agora.restart_sim()
 
+class IterationCounter(Label):
+    """Displays the number of iterations simulated so far."""
+    pass
+
 class SpeakerDot(Speaker, DragBehavior, Widget):
     """The visual representation of a single speaker on the GUI."""
 
@@ -297,6 +301,11 @@ class AgoraWidget(Widget, Agora):
         self.graphics_on = True
         self.bind(size=self.on_size)
 
+    def reset(self):
+        """Reset state to earlier speaker snapshot."""
+        super().reset()
+        self.update_iteration_counter()
+
     def add_speakerdot(self, speakerdot):
         """Add a virtual speaker to the simulated community."""
         self.speakers.append(speakerdot)
@@ -325,6 +334,7 @@ class AgoraWidget(Widget, Agora):
     def on_size(self, *_):
         """Finish initializing: draw the grid and load the default speaker population."""
         self.update_grid() # TODO: update when setting is changed
+        self.update_iteration_counter()
         speakers = DEFAULT_DEMO.get_speakers()
         self.load_speakers(speakers)
         self.save_starting_state()
@@ -370,6 +380,7 @@ class AgoraWidget(Widget, Agora):
         """Perform a single step of simulation: let one speaker talk to another."""
         super().simulate(*_)
         self.update_talk_arrow()
+        self.update_iteration_counter()
 
     def simulate_till_stable(self, batch_size=None, *_):
         """Keep running the simulation until the stability condition is reached."""
@@ -443,6 +454,11 @@ class AgoraWidget(Widget, Agora):
             self.toggle_euclidean_grid(force_show=True)
         else:
             assert False
+
+    def update_iteration_counter(self):
+        """Set the text on the button panel that shows how deep into the simulation we are."""
+        iter_counter = Root().ids.button_layout.ids.iteration_counter
+        iter_counter.text = '%d iteráció' % self.sim_iteration_total
 
     def update_talk_arrow(self):
         """Redraw the blue arrow between the current speaker and the current hearer."""

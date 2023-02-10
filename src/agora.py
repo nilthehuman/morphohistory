@@ -31,6 +31,7 @@ class Agora:
         self.speakers = []
         self.clear_caches()
         self.sim_iteration = None
+        self.sim_iteration_total = 0
         self.sim_cancelled = False
         self.graphics_on = False
         self.starting_speakers = None
@@ -48,6 +49,7 @@ class Agora:
         """Restore earlier speaker snapshot."""
         self.clear_speakers()
         self.load_speakers(self.starting_speakers)
+        self.sim_iteration_total = 0
 
     def clear_caches(self):
         """Invalidate cache variables."""
@@ -62,6 +64,7 @@ class Agora:
     def clear_speakers(self):
         self.speakers = []
         self.clear_caches()
+        self.sim_iteration_total = 0
 
     def save_to_file(self, filepath):
         with open(filepath, 'w') as stream:
@@ -123,6 +126,7 @@ class Agora:
                 self.pick = self.pick_queue.pop(0)
         debug(self.pick['speaker'].n, "picked to talk to", self.pick['hearer'].n)
         self.pick['speaker'].talk(self.pick)
+        self.sim_iteration_total += 1
 
     def all_biased(self):
         """Criterion to stop the simulation: every speaker is sufficiently biased."""
