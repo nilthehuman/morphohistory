@@ -301,6 +301,15 @@ class AgoraWidget(Widget, Agora):
         self.graphics_on = True
         self.bind(size=self.on_size)
 
+    def on_size(self, *_):
+        """Finish initializing: draw the grid and load the default speaker population."""
+        self.update_grid() # TODO: update when setting is changed
+        self.update_iteration_counter()
+        speakers = DEFAULT_DEMO.get_speakers()
+        self.load_speakers(speakers)
+        self.save_starting_state()
+        self.unbind(size=self.on_size)
+
     def reset(self):
         """Reset state to earlier speaker snapshot."""
         super().reset()
@@ -330,15 +339,6 @@ class AgoraWidget(Widget, Agora):
         """Add an array of pre-built Speakers."""
         for s in speakers:
             self.add_speakerdot(SpeakerDot.fromspeaker(s))
-
-    def on_size(self, *_):
-        """Finish initializing: draw the grid and load the default speaker population."""
-        self.update_grid() # TODO: update when setting is changed
-        self.update_iteration_counter()
-        speakers = DEFAULT_DEMO.get_speakers()
-        self.load_speakers(speakers)
-        self.save_starting_state()
-        self.unbind(size=self.on_size)
 
     def start_sim(self):
         """Schedule regular simulation in Kivy event loop at intervals specified by the slider."""
