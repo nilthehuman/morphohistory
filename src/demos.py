@@ -70,6 +70,22 @@ class SynonymyLarge(DemoFactory):
                 speakers.append(Speaker.fromweight(row * 30 + col, pos, 0.5))
         return speakers
 
+class CoreVsPeriphery9x9(DemoFactory):
+    """A 9x9 grid of speakers, neutral majority on the outside, biased minority on the inside."""
+
+    def get_speakers():
+        speakers = []
+        pos = [None, None]
+        for row in range(9):
+            for col in range(9):
+                pos = (WIDTH * 0.1 + WIDTH * 0.1 * col - DOT_WIDTH * 0.5,
+                       HEIGHT * 0.9 - HEIGHT * 0.1 * row - DOT_HEIGHT * 0.5)
+                if (3 <= row and row <= 5 and 3 <= col and col <= 5):
+                    speakers.append(Speaker.fromweight(row * 9 + col, pos, 0.0))
+                else:
+                    speakers.append(Speaker.fromweight(row * 9 + col, pos, 0.5))
+        return speakers
+
 class CoreVsPeriphery10x10(DemoFactory):
     """A 10x10 grid of speakers, neutral majority on the outside, biased minority on the inside."""
 
