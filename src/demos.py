@@ -55,6 +55,20 @@ class Synonymy(DemoFactory):
                 speakers.append(Speaker.fromweight(row * 10 + col, pos, 0.5))
         return speakers
 
+class SynonymyLarge(DemoFactory):
+    """A 100x100 grid of speakers, all undecided: a case of perfect synonymy."""
+
+    def get_speakers():
+        SETTINGS.speakerdot_size = (10, 10) # TODO: integrate settings into Agora, I think
+        speakers = []
+        pos = [None, None]
+        for row in range(30):
+            for col in range(30):
+                pos = (WIDTH * 0.05 + WIDTH * 0.03103 * col - SETTINGS.speakerdot_size[0] * 0.5,
+                       HEIGHT * 0.95 - HEIGHT * 0.03103 * row - SETTINGS.speakerdot_size[1] * 0.5)
+                speakers.append(Speaker.fromweight(row * 30 + col, pos, 0.5))
+        return speakers
+
 class CoreVsPeriphery10x10(DemoFactory):
     """A 10x10 grid of speakers, neutral majority on the outside, biased minority on the inside."""
 
