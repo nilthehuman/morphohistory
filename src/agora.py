@@ -82,12 +82,12 @@ class Agora:
 
     def save_to_file(self, filepath):
         """Write current state to disk."""
-        with open(filepath, 'w') as stream:
+        with open(filepath, 'w', encoding='utf-8') as stream:
             stream.write(dumps(self.state, indent=1, default=lambda x: x.to_json()))
 
     def load_from_file(self, filepath):
         """Restore an Agora state previously written to file."""
-        with open(filepath, 'r') as stream:
+        with open(filepath, 'r', encoding='utf-8') as stream:
             loaded_state = load(stream)
         speakers = [Speaker.from_dict(s) for s in loaded_state['speakers']]
         self.clear_speakers()
