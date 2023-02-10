@@ -1,10 +1,14 @@
 """The app's GUI built with the Kivy toolkit"""
 
-from kivy import require
-require('2.1.0')
+from copy import deepcopy
+from functools import partial
+from json import JSONDecodeError
+from logging import debug
+from math import sqrt
+from os.path import isfile, join
 
+from kivy import require as kivy_require
 from kivy.config import Config
-Config.set('input', 'mouse', 'mouse,multitouch_on_demand')
 from kivy.app import App
 from kivy.clock import Clock
 from kivy.core.window import Window
@@ -23,17 +27,13 @@ from kivy.uix.stencilview import StencilView
 from kivy.uix.tabbedpanel import TabbedPanel
 from kivy.uix.widget import Widget
 
-from copy import deepcopy
-from functools import partial
-from json import JSONDecodeError
-from logging import debug
-from math import sqrt
-from os.path import isfile, join
-
 from ..settings import SETTINGS
 from ..agora import Agora
 from ..demos import DEFAULT_DEMO
 from ..speaker import Speaker
+
+kivy_require('2.1.0')
+Config.set('input', 'mouse', 'mouse,multitouch_on_demand')
 
 def Root():
     return App.get_running_app().root
