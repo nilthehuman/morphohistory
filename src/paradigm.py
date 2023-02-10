@@ -45,7 +45,7 @@ class Paradigm:
     """A 3D or 5D matrix of competing noun of verb forms for given morphosyntactic contexts."""
     def __str__(self):
         def descend(xs):
-            if type(xs) is not list:
+            if not isinstance(xs, list):
                 return str(xs)
             below = [descend(x) for x in xs]
             below = filter(lambda s: bool(len(s)), below)
@@ -148,7 +148,7 @@ class NounParadigm(Paradigm):
 
     def nudge(self, amount, i, j):
         """Adjust the weights in a single cell."""
-        assert(-1 <= amount and amount <= 1)
+        assert(-1 <= amount <= 1)
         assert(i < 2 and j < 18)
         self.para[i][j].weight_a = clamp(self.para[i][j].weight_a + amount)
 
@@ -203,7 +203,7 @@ class VerbParadigm(Paradigm):
 
     def nudge(self, amount, i, j, k, l, m):
         """Adjust the weights in a single cell."""
-        assert(0 <= amount and amount <= 1)
+        assert(0 <= amount <= 1)
         assert(i < 3 and j < 2 and k < 2 and l < 2 and m < 3)
         self.para[i][j][k].weight_a = clamp(self.para[i][j][k][l][m].weight_a + amount)
 

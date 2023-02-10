@@ -80,7 +80,7 @@ class CoreVsPeriphery9x9(DemoFactory):
             for col in range(9):
                 pos = (WIDTH * 0.1 + WIDTH * 0.1 * col - DOT_WIDTH * 0.5,
                        HEIGHT * 0.9 - HEIGHT * 0.1 * row - DOT_HEIGHT * 0.5)
-                if (3 <= row and row <= 5 and 3 <= col and col <= 5):
+                if (3 <= row <= 5 and 3 <= col <= 5):
                     speakers.append(Speaker.fromweight(row * 9 + col, pos, 0.0))
                 else:
                     speakers.append(Speaker.fromweight(row * 9 + col, pos, 0.5))
@@ -96,7 +96,7 @@ class CoreVsPeriphery10x10(DemoFactory):
             for col in range(10):
                 pos = (WIDTH * 0.05 + WIDTH * 0.1 * col - DOT_WIDTH * 0.5,
                        HEIGHT * 0.95 - HEIGHT * 0.1 * row - DOT_HEIGHT * 0.5)
-                if (3 <= row and row <= 6 and 3 <= col and col <= 6):
+                if (3 <= row <= 6 and 3 <= col <= 6):
                     speakers.append(Speaker.fromweight(row * 10 + col, pos, 0.0))
                 else:
                     speakers.append(Speaker.fromweight(row * 10 + col, pos, 0.5))
