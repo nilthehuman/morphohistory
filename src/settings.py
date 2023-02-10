@@ -41,6 +41,7 @@ class _Settings:
         self.sim_distance_metric = self.DistanceMetric.CONSTANT
         #self.sim_learning_model = HARMONIC # TODO use this option
         self.sim_influence_self = False
+        #self.sim_reverse_preference = False # TODO use this option
         self.sim_batch_size = 100
         self.sim_max_iteration = 10000
 
