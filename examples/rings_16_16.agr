@@ -1,802 +1,773 @@
-[
- {
-  "n": 0,
-  "pos": [
-   290.0,
-   410.0
-  ],
-  "para": {
-   "para": [
-    [
-     {
-      "weight_a": 0.0,
-      "form_a": "havernak",
-      "form_b": "havernek",
-      "importance": 0.2,
-      "number": 0,
-      "case": 0
-     }
-    ],
-    []
-   ]
+{
+ "speakers": [
+  {
+   "n": 0,
+   "pos": [
+    290.0,
+    410.0
+   ],
+   "para": {
+    "para": [
+     [
+      {
+       "weight_a": 0.0,
+       "form_a": "havernak",
+       "form_b": "havernek",
+       "importance": 1.0,
+       "number": 0,
+       "case": 0
+      }
+     ],
+     []
+    ]
+   },
+   "experience": 1,
+   "is_broadcaster": false
   },
-  "experience": 1,
-  "is_broadcaster": false,
-  "principal_weight_cached": null
- },
- {
-  "n": 1,
-  "pos": [
-   335.9220118838108,
-   400.8655439013544
-  ],
-  "para": {
-   "para": [
-    [
-     {
-      "weight_a": 0.0,
-      "form_a": "havernak",
-      "form_b": "havernek",
-      "importance": 0.2,
-      "number": 0,
-      "case": 0
-     }
-    ],
-    []
-   ]
+  {
+   "n": 1,
+   "pos": [
+    335.9220118838108,
+    400.8655439013544
+   ],
+   "para": {
+    "para": [
+     [
+      {
+       "weight_a": 0.0,
+       "form_a": "havernak",
+       "form_b": "havernek",
+       "importance": 1.0,
+       "number": 0,
+       "case": 0
+      }
+     ],
+     []
+    ]
+   },
+   "experience": 1,
+   "is_broadcaster": false
   },
-  "experience": 1,
-  "is_broadcaster": false,
-  "principal_weight_cached": null
- },
- {
-  "n": 2,
-  "pos": [
-   374.8528137423857,
-   374.8528137423857
-  ],
-  "para": {
-   "para": [
-    [
-     {
-      "weight_a": 0.0,
-      "form_a": "havernak",
-      "form_b": "havernek",
-      "importance": 0.2,
-      "number": 0,
-      "case": 0
-     }
-    ],
-    []
-   ]
+  {
+   "n": 2,
+   "pos": [
+    374.8528137423857,
+    374.8528137423857
+   ],
+   "para": {
+    "para": [
+     [
+      {
+       "weight_a": 0.0,
+       "form_a": "havernak",
+       "form_b": "havernek",
+       "importance": 1.0,
+       "number": 0,
+       "case": 0
+      }
+     ],
+     []
+    ]
+   },
+   "experience": 1,
+   "is_broadcaster": false
   },
-  "experience": 1,
-  "is_broadcaster": false,
-  "principal_weight_cached": null
- },
- {
-  "n": 3,
-  "pos": [
-   400.8655439013544,
-   335.9220118838108
-  ],
-  "para": {
-   "para": [
-    [
-     {
-      "weight_a": 0.0,
-      "form_a": "havernak",
-      "form_b": "havernek",
-      "importance": 0.2,
-      "number": 0,
-      "case": 0
-     }
-    ],
-    []
-   ]
+  {
+   "n": 3,
+   "pos": [
+    400.8655439013544,
+    335.9220118838108
+   ],
+   "para": {
+    "para": [
+     [
+      {
+       "weight_a": 0.0,
+       "form_a": "havernak",
+       "form_b": "havernek",
+       "importance": 1.0,
+       "number": 0,
+       "case": 0
+      }
+     ],
+     []
+    ]
+   },
+   "experience": 1,
+   "is_broadcaster": false
   },
-  "experience": 1,
-  "is_broadcaster": false,
-  "principal_weight_cached": null
- },
- {
-  "n": 4,
-  "pos": [
-   410.0,
-   290.0
-  ],
-  "para": {
-   "para": [
-    [
-     {
-      "weight_a": 0.0,
-      "form_a": "havernak",
-      "form_b": "havernek",
-      "importance": 0.2,
-      "number": 0,
-      "case": 0
-     }
-    ],
-    []
-   ]
+  {
+   "n": 4,
+   "pos": [
+    410.0,
+    290.0
+   ],
+   "para": {
+    "para": [
+     [
+      {
+       "weight_a": 0.0,
+       "form_a": "havernak",
+       "form_b": "havernek",
+       "importance": 1.0,
+       "number": 0,
+       "case": 0
+      }
+     ],
+     []
+    ]
+   },
+   "experience": 1,
+   "is_broadcaster": false
   },
-  "experience": 1,
-  "is_broadcaster": false,
-  "principal_weight_cached": null
- },
- {
-  "n": 5,
-  "pos": [
-   400.8655439013544,
-   244.07798811618923
-  ],
-  "para": {
-   "para": [
-    [
-     {
-      "weight_a": 0.0,
-      "form_a": "havernak",
-      "form_b": "havernek",
-      "importance": 0.2,
-      "number": 0,
-      "case": 0
-     }
-    ],
-    []
-   ]
+  {
+   "n": 5,
+   "pos": [
+    400.8655439013544,
+    244.07798811618923
+   ],
+   "para": {
+    "para": [
+     [
+      {
+       "weight_a": 0.0,
+       "form_a": "havernak",
+       "form_b": "havernek",
+       "importance": 1.0,
+       "number": 0,
+       "case": 0
+      }
+     ],
+     []
+    ]
+   },
+   "experience": 1,
+   "is_broadcaster": false
   },
-  "experience": 1,
-  "is_broadcaster": false,
-  "principal_weight_cached": null
- },
- {
-  "n": 6,
-  "pos": [
-   374.8528137423857,
-   205.1471862576143
-  ],
-  "para": {
-   "para": [
-    [
-     {
-      "weight_a": 0.0,
-      "form_a": "havernak",
-      "form_b": "havernek",
-      "importance": 0.2,
-      "number": 0,
-      "case": 0
-     }
-    ],
-    []
-   ]
+  {
+   "n": 6,
+   "pos": [
+    374.8528137423857,
+    205.1471862576143
+   ],
+   "para": {
+    "para": [
+     [
+      {
+       "weight_a": 0.0,
+       "form_a": "havernak",
+       "form_b": "havernek",
+       "importance": 1.0,
+       "number": 0,
+       "case": 0
+      }
+     ],
+     []
+    ]
+   },
+   "experience": 1,
+   "is_broadcaster": false
   },
-  "experience": 1,
-  "is_broadcaster": false,
-  "principal_weight_cached": null
- },
- {
-  "n": 7,
-  "pos": [
-   335.9220118838108,
-   179.1344560986456
-  ],
-  "para": {
-   "para": [
-    [
-     {
-      "weight_a": 0.0,
-      "form_a": "havernak",
-      "form_b": "havernek",
-      "importance": 0.2,
-      "number": 0,
-      "case": 0
-     }
-    ],
-    []
-   ]
+  {
+   "n": 7,
+   "pos": [
+    335.9220118838108,
+    179.1344560986456
+   ],
+   "para": {
+    "para": [
+     [
+      {
+       "weight_a": 0.0,
+       "form_a": "havernak",
+       "form_b": "havernek",
+       "importance": 1.0,
+       "number": 0,
+       "case": 0
+      }
+     ],
+     []
+    ]
+   },
+   "experience": 1,
+   "is_broadcaster": false
   },
-  "experience": 1,
-  "is_broadcaster": false,
-  "principal_weight_cached": null
- },
- {
-  "n": 8,
-  "pos": [
-   290.0,
-   170.0
-  ],
-  "para": {
-   "para": [
-    [
-     {
-      "weight_a": 0.0,
-      "form_a": "havernak",
-      "form_b": "havernek",
-      "importance": 0.2,
-      "number": 0,
-      "case": 0
-     }
-    ],
-    []
-   ]
+  {
+   "n": 8,
+   "pos": [
+    290.0,
+    170.0
+   ],
+   "para": {
+    "para": [
+     [
+      {
+       "weight_a": 0.0,
+       "form_a": "havernak",
+       "form_b": "havernek",
+       "importance": 1.0,
+       "number": 0,
+       "case": 0
+      }
+     ],
+     []
+    ]
+   },
+   "experience": 1,
+   "is_broadcaster": false
   },
-  "experience": 1,
-  "is_broadcaster": false,
-  "principal_weight_cached": null
- },
- {
-  "n": 9,
-  "pos": [
-   244.07798811618923,
-   179.13445609864556
-  ],
-  "para": {
-   "para": [
-    [
-     {
-      "weight_a": 0.0,
-      "form_a": "havernak",
-      "form_b": "havernek",
-      "importance": 0.2,
-      "number": 0,
-      "case": 0
-     }
-    ],
-    []
-   ]
+  {
+   "n": 9,
+   "pos": [
+    244.07798811618923,
+    179.13445609864556
+   ],
+   "para": {
+    "para": [
+     [
+      {
+       "weight_a": 0.0,
+       "form_a": "havernak",
+       "form_b": "havernek",
+       "importance": 1.0,
+       "number": 0,
+       "case": 0
+      }
+     ],
+     []
+    ]
+   },
+   "experience": 1,
+   "is_broadcaster": false
   },
-  "experience": 1,
-  "is_broadcaster": false,
-  "principal_weight_cached": null
- },
- {
-  "n": 10,
-  "pos": [
-   205.1471862576143,
-   205.1471862576143
-  ],
-  "para": {
-   "para": [
-    [
-     {
-      "weight_a": 0.0,
-      "form_a": "havernak",
-      "form_b": "havernek",
-      "importance": 0.2,
-      "number": 0,
-      "case": 0
-     }
-    ],
-    []
-   ]
+  {
+   "n": 10,
+   "pos": [
+    205.1471862576143,
+    205.1471862576143
+   ],
+   "para": {
+    "para": [
+     [
+      {
+       "weight_a": 0.0,
+       "form_a": "havernak",
+       "form_b": "havernek",
+       "importance": 1.0,
+       "number": 0,
+       "case": 0
+      }
+     ],
+     []
+    ]
+   },
+   "experience": 1,
+   "is_broadcaster": false
   },
-  "experience": 1,
-  "is_broadcaster": false,
-  "principal_weight_cached": null
- },
- {
-  "n": 11,
-  "pos": [
-   179.13445609864561,
-   244.07798811618915
-  ],
-  "para": {
-   "para": [
-    [
-     {
-      "weight_a": 0.0,
-      "form_a": "havernak",
-      "form_b": "havernek",
-      "importance": 0.2,
-      "number": 0,
-      "case": 0
-     }
-    ],
-    []
-   ]
+  {
+   "n": 11,
+   "pos": [
+    179.13445609864561,
+    244.07798811618915
+   ],
+   "para": {
+    "para": [
+     [
+      {
+       "weight_a": 0.0,
+       "form_a": "havernak",
+       "form_b": "havernek",
+       "importance": 1.0,
+       "number": 0,
+       "case": 0
+      }
+     ],
+     []
+    ]
+   },
+   "experience": 1,
+   "is_broadcaster": false
   },
-  "experience": 1,
-  "is_broadcaster": false,
-  "principal_weight_cached": null
- },
- {
-  "n": 12,
-  "pos": [
-   170.0,
-   290.0
-  ],
-  "para": {
-   "para": [
-    [
-     {
-      "weight_a": 0.0,
-      "form_a": "havernak",
-      "form_b": "havernek",
-      "importance": 0.2,
-      "number": 0,
-      "case": 0
-     }
-    ],
-    []
-   ]
+  {
+   "n": 12,
+   "pos": [
+    170.0,
+    290.0
+   ],
+   "para": {
+    "para": [
+     [
+      {
+       "weight_a": 0.0,
+       "form_a": "havernak",
+       "form_b": "havernek",
+       "importance": 1.0,
+       "number": 0,
+       "case": 0
+      }
+     ],
+     []
+    ]
+   },
+   "experience": 1,
+   "is_broadcaster": false
   },
-  "experience": 1,
-  "is_broadcaster": false,
-  "principal_weight_cached": null
- },
- {
-  "n": 13,
-  "pos": [
-   179.13445609864561,
-   335.9220118838108
-  ],
-  "para": {
-   "para": [
-    [
-     {
-      "weight_a": 0.0,
-      "form_a": "havernak",
-      "form_b": "havernek",
-      "importance": 0.2,
-      "number": 0,
-      "case": 0
-     }
-    ],
-    []
-   ]
+  {
+   "n": 13,
+   "pos": [
+    179.13445609864561,
+    335.9220118838108
+   ],
+   "para": {
+    "para": [
+     [
+      {
+       "weight_a": 0.0,
+       "form_a": "havernak",
+       "form_b": "havernek",
+       "importance": 1.0,
+       "number": 0,
+       "case": 0
+      }
+     ],
+     []
+    ]
+   },
+   "experience": 1,
+   "is_broadcaster": false
   },
-  "experience": 1,
-  "is_broadcaster": false,
-  "principal_weight_cached": null
- },
- {
-  "n": 14,
-  "pos": [
-   205.1471862576143,
-   374.8528137423857
-  ],
-  "para": {
-   "para": [
-    [
-     {
-      "weight_a": 0.0,
-      "form_a": "havernak",
-      "form_b": "havernek",
-      "importance": 0.2,
-      "number": 0,
-      "case": 0
-     }
-    ],
-    []
-   ]
+  {
+   "n": 14,
+   "pos": [
+    205.1471862576143,
+    374.8528137423857
+   ],
+   "para": {
+    "para": [
+     [
+      {
+       "weight_a": 0.0,
+       "form_a": "havernak",
+       "form_b": "havernek",
+       "importance": 1.0,
+       "number": 0,
+       "case": 0
+      }
+     ],
+     []
+    ]
+   },
+   "experience": 1,
+   "is_broadcaster": false
   },
-  "experience": 1,
-  "is_broadcaster": false,
-  "principal_weight_cached": null
- },
- {
-  "n": 15,
-  "pos": [
-   244.07798811618915,
-   400.8655439013544
-  ],
-  "para": {
-   "para": [
-    [
-     {
-      "weight_a": 0.0,
-      "form_a": "havernak",
-      "form_b": "havernek",
-      "importance": 0.2,
-      "number": 0,
-      "case": 0
-     }
-    ],
-    []
-   ]
+  {
+   "n": 15,
+   "pos": [
+    244.07798811618915,
+    400.8655439013544
+   ],
+   "para": {
+    "para": [
+     [
+      {
+       "weight_a": 0.0,
+       "form_a": "havernak",
+       "form_b": "havernek",
+       "importance": 1.0,
+       "number": 0,
+       "case": 0
+      }
+     ],
+     []
+    ]
+   },
+   "experience": 1,
+   "is_broadcaster": false
   },
-  "experience": 1,
-  "is_broadcaster": false,
-  "principal_weight_cached": null
- },
- {
-  "n": 16,
-  "pos": [
-   290.0,
-   530.0
-  ],
-  "para": {
-   "para": [
-    [
-     {
-      "weight_a": 1.0,
-      "form_a": "havernak",
-      "form_b": "havernek",
-      "importance": 0.2,
-      "number": 0,
-      "case": 0
-     }
-    ],
-    []
-   ]
+  {
+   "n": 16,
+   "pos": [
+    290.0,
+    530.0
+   ],
+   "para": {
+    "para": [
+     [
+      {
+       "weight_a": 1.0,
+       "form_a": "havernak",
+       "form_b": "havernek",
+       "importance": 1.0,
+       "number": 0,
+       "case": 0
+      }
+     ],
+     []
+    ]
+   },
+   "experience": 1,
+   "is_broadcaster": false
   },
-  "experience": 1,
-  "is_broadcaster": false,
-  "principal_weight_cached": null
- },
- {
-  "n": 17,
-  "pos": [
-   381.84402376762154,
-   511.73108780270877
-  ],
-  "para": {
-   "para": [
-    [
-     {
-      "weight_a": 1.0,
-      "form_a": "havernak",
-      "form_b": "havernek",
-      "importance": 0.2,
-      "number": 0,
-      "case": 0
-     }
-    ],
-    []
-   ]
+  {
+   "n": 17,
+   "pos": [
+    381.84402376762154,
+    511.73108780270877
+   ],
+   "para": {
+    "para": [
+     [
+      {
+       "weight_a": 1.0,
+       "form_a": "havernak",
+       "form_b": "havernek",
+       "importance": 1.0,
+       "number": 0,
+       "case": 0
+      }
+     ],
+     []
+    ]
+   },
+   "experience": 1,
+   "is_broadcaster": false
   },
-  "experience": 1,
-  "is_broadcaster": false,
-  "principal_weight_cached": null
- },
- {
-  "n": 18,
-  "pos": [
-   459.7056274847714,
-   459.7056274847714
-  ],
-  "para": {
-   "para": [
-    [
-     {
-      "weight_a": 1.0,
-      "form_a": "havernak",
-      "form_b": "havernek",
-      "importance": 0.2,
-      "number": 0,
-      "case": 0
-     }
-    ],
-    []
-   ]
+  {
+   "n": 18,
+   "pos": [
+    459.7056274847714,
+    459.7056274847714
+   ],
+   "para": {
+    "para": [
+     [
+      {
+       "weight_a": 1.0,
+       "form_a": "havernak",
+       "form_b": "havernek",
+       "importance": 1.0,
+       "number": 0,
+       "case": 0
+      }
+     ],
+     []
+    ]
+   },
+   "experience": 1,
+   "is_broadcaster": false
   },
-  "experience": 1,
-  "is_broadcaster": false,
-  "principal_weight_cached": null
- },
- {
-  "n": 19,
-  "pos": [
-   511.73108780270877,
-   381.8440237676216
-  ],
-  "para": {
-   "para": [
-    [
-     {
-      "weight_a": 1.0,
-      "form_a": "havernak",
-      "form_b": "havernek",
-      "importance": 0.2,
-      "number": 0,
-      "case": 0
-     }
-    ],
-    []
-   ]
+  {
+   "n": 19,
+   "pos": [
+    511.73108780270877,
+    381.8440237676216
+   ],
+   "para": {
+    "para": [
+     [
+      {
+       "weight_a": 1.0,
+       "form_a": "havernak",
+       "form_b": "havernek",
+       "importance": 1.0,
+       "number": 0,
+       "case": 0
+      }
+     ],
+     []
+    ]
+   },
+   "experience": 1,
+   "is_broadcaster": false
   },
-  "experience": 1,
-  "is_broadcaster": false,
-  "principal_weight_cached": null
- },
- {
-  "n": 20,
-  "pos": [
-   530.0,
-   290.0
-  ],
-  "para": {
-   "para": [
-    [
-     {
-      "weight_a": 1.0,
-      "form_a": "havernak",
-      "form_b": "havernek",
-      "importance": 0.2,
-      "number": 0,
-      "case": 0
-     }
-    ],
-    []
-   ]
+  {
+   "n": 20,
+   "pos": [
+    530.0,
+    290.0
+   ],
+   "para": {
+    "para": [
+     [
+      {
+       "weight_a": 1.0,
+       "form_a": "havernak",
+       "form_b": "havernek",
+       "importance": 1.0,
+       "number": 0,
+       "case": 0
+      }
+     ],
+     []
+    ]
+   },
+   "experience": 1,
+   "is_broadcaster": false
   },
-  "experience": 1,
-  "is_broadcaster": false,
-  "principal_weight_cached": null
- },
- {
-  "n": 21,
-  "pos": [
-   511.73108780270877,
-   198.15597623237846
-  ],
-  "para": {
-   "para": [
-    [
-     {
-      "weight_a": 1.0,
-      "form_a": "havernak",
-      "form_b": "havernek",
-      "importance": 0.2,
-      "number": 0,
-      "case": 0
-     }
-    ],
-    []
-   ]
+  {
+   "n": 21,
+   "pos": [
+    511.73108780270877,
+    198.15597623237846
+   ],
+   "para": {
+    "para": [
+     [
+      {
+       "weight_a": 1.0,
+       "form_a": "havernak",
+       "form_b": "havernek",
+       "importance": 1.0,
+       "number": 0,
+       "case": 0
+      }
+     ],
+     []
+    ]
+   },
+   "experience": 1,
+   "is_broadcaster": false
   },
-  "experience": 1,
-  "is_broadcaster": false,
-  "principal_weight_cached": null
- },
- {
-  "n": 22,
-  "pos": [
-   459.7056274847714,
-   120.29437251522862
-  ],
-  "para": {
-   "para": [
-    [
-     {
-      "weight_a": 1.0,
-      "form_a": "havernak",
-      "form_b": "havernek",
-      "importance": 0.2,
-      "number": 0,
-      "case": 0
-     }
-    ],
-    []
-   ]
+  {
+   "n": 22,
+   "pos": [
+    459.7056274847714,
+    120.29437251522859
+   ],
+   "para": {
+    "para": [
+     [
+      {
+       "weight_a": 1.0,
+       "form_a": "havernak",
+       "form_b": "havernek",
+       "importance": 1.0,
+       "number": 0,
+       "case": 0
+      }
+     ],
+     []
+    ]
+   },
+   "experience": 1,
+   "is_broadcaster": false
   },
-  "experience": 1,
-  "is_broadcaster": false,
-  "principal_weight_cached": null
- },
- {
-  "n": 23,
-  "pos": [
-   381.8440237676216,
-   68.26891219729117
-  ],
-  "para": {
-   "para": [
-    [
-     {
-      "weight_a": 1.0,
-      "form_a": "havernak",
-      "form_b": "havernek",
-      "importance": 0.2,
-      "number": 0,
-      "case": 0
-     }
-    ],
-    []
-   ]
+  {
+   "n": 23,
+   "pos": [
+    381.8440237676216,
+    68.26891219729117
+   ],
+   "para": {
+    "para": [
+     [
+      {
+       "weight_a": 1.0,
+       "form_a": "havernak",
+       "form_b": "havernek",
+       "importance": 1.0,
+       "number": 0,
+       "case": 0
+      }
+     ],
+     []
+    ]
+   },
+   "experience": 1,
+   "is_broadcaster": false
   },
-  "experience": 1,
-  "is_broadcaster": false,
-  "principal_weight_cached": null
- },
- {
-  "n": 24,
-  "pos": [
-   290.00000000000006,
-   50.0
-  ],
-  "para": {
-   "para": [
-    [
-     {
-      "weight_a": 1.0,
-      "form_a": "havernak",
-      "form_b": "havernek",
-      "importance": 0.2,
-      "number": 0,
-      "case": 0
-     }
-    ],
-    []
-   ]
+  {
+   "n": 24,
+   "pos": [
+    290.00000000000006,
+    50.0
+   ],
+   "para": {
+    "para": [
+     [
+      {
+       "weight_a": 1.0,
+       "form_a": "havernak",
+       "form_b": "havernek",
+       "importance": 1.0,
+       "number": 0,
+       "case": 0
+      }
+     ],
+     []
+    ]
+   },
+   "experience": 1,
+   "is_broadcaster": false
   },
-  "experience": 1,
-  "is_broadcaster": false,
-  "principal_weight_cached": null
- },
- {
-  "n": 25,
-  "pos": [
-   198.15597623237846,
-   68.26891219729114
-  ],
-  "para": {
-   "para": [
-    [
-     {
-      "weight_a": 1.0,
-      "form_a": "havernak",
-      "form_b": "havernek",
-      "importance": 0.2,
-      "number": 0,
-      "case": 0
-     }
-    ],
-    []
-   ]
+  {
+   "n": 25,
+   "pos": [
+    198.15597623237846,
+    68.26891219729112
+   ],
+   "para": {
+    "para": [
+     [
+      {
+       "weight_a": 1.0,
+       "form_a": "havernak",
+       "form_b": "havernek",
+       "importance": 1.0,
+       "number": 0,
+       "case": 0
+      }
+     ],
+     []
+    ]
+   },
+   "experience": 1,
+   "is_broadcaster": false
   },
-  "experience": 1,
-  "is_broadcaster": false,
-  "principal_weight_cached": null
- },
- {
-  "n": 26,
-  "pos": [
-   120.29437251522862,
-   120.29437251522856
-  ],
-  "para": {
-   "para": [
-    [
-     {
-      "weight_a": 1.0,
-      "form_a": "havernak",
-      "form_b": "havernek",
-      "importance": 0.2,
-      "number": 0,
-      "case": 0
-     }
-    ],
-    []
-   ]
+  {
+   "n": 26,
+   "pos": [
+    120.29437251522859,
+    120.29437251522856
+   ],
+   "para": {
+    "para": [
+     [
+      {
+       "weight_a": 1.0,
+       "form_a": "havernak",
+       "form_b": "havernek",
+       "importance": 1.0,
+       "number": 0,
+       "case": 0
+      }
+     ],
+     []
+    ]
+   },
+   "experience": 1,
+   "is_broadcaster": false
   },
-  "experience": 1,
-  "is_broadcaster": false,
-  "principal_weight_cached": null
- },
- {
-  "n": 27,
-  "pos": [
-   68.26891219729123,
-   198.15597623237832
-  ],
-  "para": {
-   "para": [
-    [
-     {
-      "weight_a": 1.0,
-      "form_a": "havernak",
-      "form_b": "havernek",
-      "importance": 0.2,
-      "number": 0,
-      "case": 0
-     }
-    ],
-    []
-   ]
+  {
+   "n": 27,
+   "pos": [
+    68.26891219729123,
+    198.1559762323783
+   ],
+   "para": {
+    "para": [
+     [
+      {
+       "weight_a": 1.0,
+       "form_a": "havernak",
+       "form_b": "havernek",
+       "importance": 1.0,
+       "number": 0,
+       "case": 0
+      }
+     ],
+     []
+    ]
+   },
+   "experience": 1,
+   "is_broadcaster": false
   },
-  "experience": 1,
-  "is_broadcaster": false,
-  "principal_weight_cached": null
- },
- {
-  "n": 28,
-  "pos": [
-   50.0,
-   289.99999999999994
-  ],
-  "para": {
-   "para": [
-    [
-     {
-      "weight_a": 1.0,
-      "form_a": "havernak",
-      "form_b": "havernek",
-      "importance": 0.2,
-      "number": 0,
-      "case": 0
-     }
-    ],
-    []
-   ]
+  {
+   "n": 28,
+   "pos": [
+    50.0,
+    289.99999999999994
+   ],
+   "para": {
+    "para": [
+     [
+      {
+       "weight_a": 1.0,
+       "form_a": "havernak",
+       "form_b": "havernek",
+       "importance": 1.0,
+       "number": 0,
+       "case": 0
+      }
+     ],
+     []
+    ]
+   },
+   "experience": 1,
+   "is_broadcaster": false
   },
-  "experience": 1,
-  "is_broadcaster": false,
-  "principal_weight_cached": null
- },
- {
-  "n": 29,
-  "pos": [
-   68.2689121972912,
-   381.8440237676216
-  ],
-  "para": {
-   "para": [
-    [
-     {
-      "weight_a": 1.0,
-      "form_a": "havernak",
-      "form_b": "havernek",
-      "importance": 0.2,
-      "number": 0,
-      "case": 0
-     }
-    ],
-    []
-   ]
+  {
+   "n": 29,
+   "pos": [
+    68.26891219729123,
+    381.8440237676216
+   ],
+   "para": {
+    "para": [
+     [
+      {
+       "weight_a": 1.0,
+       "form_a": "havernak",
+       "form_b": "havernek",
+       "importance": 1.0,
+       "number": 0,
+       "case": 0
+      }
+     ],
+     []
+    ]
+   },
+   "experience": 1,
+   "is_broadcaster": false
   },
-  "experience": 1,
-  "is_broadcaster": false,
-  "principal_weight_cached": null
- },
- {
-  "n": 30,
-  "pos": [
-   120.29437251522856,
-   459.70562748477136
-  ],
-  "para": {
-   "para": [
-    [
-     {
-      "weight_a": 1.0,
-      "form_a": "havernak",
-      "form_b": "havernek",
-      "importance": 0.2,
-      "number": 0,
-      "case": 0
-     }
-    ],
-    []
-   ]
+  {
+   "n": 30,
+   "pos": [
+    120.29437251522856,
+    459.7056274847714
+   ],
+   "para": {
+    "para": [
+     [
+      {
+       "weight_a": 1.0,
+       "form_a": "havernak",
+       "form_b": "havernek",
+       "importance": 1.0,
+       "number": 0,
+       "case": 0
+      }
+     ],
+     []
+    ]
+   },
+   "experience": 1,
+   "is_broadcaster": false
   },
-  "experience": 1,
-  "is_broadcaster": false,
-  "principal_weight_cached": null
- },
- {
-  "n": 31,
-  "pos": [
-   198.1559762323783,
-   511.73108780270877
-  ],
-  "para": {
-   "para": [
-    [
-     {
-      "weight_a": 1.0,
-      "form_a": "havernak",
-      "form_b": "havernek",
-      "importance": 0.2,
-      "number": 0,
-      "case": 0
-     }
-    ],
-    []
-   ]
-  },
-  "experience": 1,
-  "is_broadcaster": false,
-  "principal_weight_cached": null
- }
-]
+  {
+   "n": 31,
+   "pos": [
+    198.1559762323783,
+    511.73108780270877
+   ],
+   "para": {
+    "para": [
+     [
+      {
+       "weight_a": 1.0,
+       "form_a": "havernak",
+       "form_b": "havernek",
+       "importance": 1.0,
+       "number": 0,
+       "case": 0
+      }
+     ],
+     []
+    ]
+   },
+   "experience": 1,
+   "is_broadcaster": false
+  }
+ ],
+ "sim_iteration_total": 0
+}
