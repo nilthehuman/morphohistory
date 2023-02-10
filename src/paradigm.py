@@ -5,11 +5,14 @@ def clamp(x):
 
 class Cell:
     """A weighted superposition of two word forms for the same morphosyntactic context."""
-    def __init__(self, weight_a=0.5, form_a='', form_b='', importance=0.):
+    def __init__(self, weight_a=0.5, form_a='', form_b='', importance=1.0):
         self.weight_a = weight_a
         self.form_a = form_a
         self.form_b = form_b
-        self.importance = importance
+        if not form_a and not form_b:
+            self.importance = 0
+        else:
+            self.importance = importance
 
     def __bool__(self):
         return 0 != len(self.form_a)
@@ -78,7 +81,7 @@ class Paradigm:
 
 class NounCell(Cell):
     """A single cell in a noun paradigm for a given morphosyntactic context."""
-    def __init__(self, number=0, case=0, weight_a=0.5, form_a='', form_b='', importance=0.):
+    def __init__(self, number=0, case=0, weight_a=0.5, form_a='', form_b='', importance=1.0):
         super().__init__(weight_a, form_a, form_b, importance)
         self.number = number
         self.case = case
@@ -88,7 +91,7 @@ class NounCell(Cell):
 
 class VerbCell(Cell):
     """A single cell in a verb paradigm for a given morphosyntactic context."""
-    def __init__(self, person=0, number=0, defness=0, tense=0, mood=0, weight_a=0.5, form_a='', form_b='', importance=0.):
+    def __init__(self, person=0, number=0, defness=0, tense=0, mood=0, weight_a=0.5, form_a='', form_b='', importance=1.0):
         super().__init__(weight_a, form_a, form_b, importance)
         self.person = person
         self.number = number
