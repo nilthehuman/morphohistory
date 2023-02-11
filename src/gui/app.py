@@ -3,7 +3,8 @@
 from kivy.app import App
 from kivy.core.window import Window
 
-from .gui import KeyeventHandler, TopTabbedPanel
+from .gui import TopTabbedPanel
+from .sim import KeyeventHandler
 
 class MurmurApp(App):
     def build(self):
