@@ -7,7 +7,7 @@ def test_always_pass():
 
 def test_default_NounParadigm():
     noun_para = NounParadigm()
-    assert noun_para[0][0].weight_a == 0.5
+    assert noun_para[0][0].bias_a == 0.5
     assert noun_para[0][0].form_a == ''
     assert noun_para[0][0].form_b == ''
     assert noun_para[0][0].importance == 1.0
