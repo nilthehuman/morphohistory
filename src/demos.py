@@ -1,6 +1,6 @@
 """An assortment of sample agoras for experimentation and demonstration purposes."""
 
-from abc import ABC
+from abc import ABC, abstractmethod
 from math import sin, cos, pi
 
 from .settings import SETTINGS
@@ -12,12 +12,15 @@ DOT_WIDTH, DOT_HEIGHT = SETTINGS.speakerdot_size
 class DemoFactory(ABC):
     """Interface for demo generating factory classes."""
 
+    @staticmethod
+    @abstractmethod
     def get_speakers():
         """Return the starting state of the speaker population."""
 
 class Rainbow9x9(DemoFactory):
     """A 9x9 grid of speakers, pure A in the top left corner, pure B at bottom right and everything else in between."""
 
+    @staticmethod
     def get_speakers():
         speakers = []
         for row in range(9):
@@ -31,6 +34,7 @@ class Rainbow9x9(DemoFactory):
 class Rainbow10x10(DemoFactory):
     """A 10x10 grid of speakers, pure A in the top left corner, pure B at bottom right and everything else in between."""
 
+    @staticmethod
     def get_speakers():
         speakers = []
         pos = [None, None]
@@ -45,6 +49,7 @@ class Rainbow10x10(DemoFactory):
 class Synonymy(DemoFactory):
     """A 10x10 grid of speakers, all undecided: a case of perfect synonymy."""
 
+    @staticmethod
     def get_speakers():
         speakers = []
         pos = [None, None]
@@ -58,6 +63,7 @@ class Synonymy(DemoFactory):
 class SynonymyLarge(DemoFactory):
     """A 100x100 grid of speakers, all undecided: a case of perfect synonymy."""
 
+    @staticmethod
     def get_speakers():
         SETTINGS.speakerdot_size = (12, 12) # TODO: integrate settings into Agora, I think
         DOT_WIDTH, DOT_HEIGHT = SETTINGS.speakerdot_size
@@ -73,6 +79,7 @@ class SynonymyLarge(DemoFactory):
 class CoreVsPeriphery9x9(DemoFactory):
     """A 9x9 grid of speakers, neutral majority on the outside, biased minority on the inside."""
 
+    @staticmethod
     def get_speakers():
         speakers = []
         pos = [None, None]
@@ -89,6 +96,7 @@ class CoreVsPeriphery9x9(DemoFactory):
 class CoreVsPeriphery10x10(DemoFactory):
     """A 10x10 grid of speakers, neutral majority on the outside, biased minority on the inside."""
 
+    @staticmethod
     def get_speakers():
         speakers = []
         pos = [None, None]
@@ -105,6 +113,7 @@ class CoreVsPeriphery10x10(DemoFactory):
 class NewsAnchor(DemoFactory):
     """A circle of neutral speakers around a biased broadcaster."""
 
+    @staticmethod
     def get_speakers():
         speakers = []
         pos = [None, None]
@@ -122,6 +131,7 @@ class NewsAnchor(DemoFactory):
 class Rings16_24(DemoFactory):
     """A smaller ring of A speakers inside a wider ring of B speakers."""
 
+    @staticmethod
     def get_speakers():
         speakers = []
         for n in range(16):

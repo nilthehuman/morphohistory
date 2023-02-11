@@ -1,9 +1,11 @@
 """A simple probabilistic model of Hungarian noun and verb paradigms and their internal mechanics."""
 
+from abc import ABC, abstractmethod
+
 def clamp(x):
     return max(0., min(1., x))
 
-class Cell:
+class Cell(ABC):
     """A weighted superposition of two word forms for the same morphosyntactic context."""
     def __init__(self, weight_a=0.5, form_a='', form_b='', importance=1.0):
         self.weight_a = weight_a
@@ -23,6 +25,10 @@ class Cell:
         return "(%s, %g * \"%s\" + %g * \"%s\")" % \
             (self.get_morphosyntactic_properties(), self.weight_a, self.form_a, 1.0-self.weight_a, self.form_b)
 
+    @abstractmethod
+    def get_morphosyntactic_properties(self):
+        """Returns a string listing the cell's features."""
+
     def to_json(self):
         return self.__dict__
 
@@ -41,8 +47,12 @@ class Cell:
         return "%g*\"%s\" + %g*\"%s\"" % \
             (self.weight_a, self.form_a, 1.0-self.weight_a, self.form_b)
 
-class Paradigm:
+class Paradigm(ABC):
     """A 3D or 5D matrix of competing noun of verb forms for given morphosyntactic contexts."""
+    def __getitem__(self, n):
+        """Return a row of cells (assignable)."""
+        return self.para[n]
+
     def __str__(self):
         def descend(xs):
             if not isinstance(xs, list):
@@ -51,6 +61,20 @@ class Paradigm:
             below = filter(lambda s: bool(len(s)), below)
             return '[' + ', '.join(below) + ']'
         return descend(self.para)
+
+    @staticmethod
+    @abstractmethod
+    def morphosyntactic_properties(i, j):
+        """Get the set of features describing a cell's context.
+        (Gregory Stump's exact term if I'm not mistaken.)"""
+
+    @abstractmethod
+    def nudge(self, amount, i, j):
+        """Adjust the weights in a single cell."""
+
+    @abstractmethod
+    def propagate(self, amount, i, j):
+        """Spread a weight change down each dimension in the paradigm."""
 
     def to_json(self):
         # output non-empty cells only to save space
@@ -87,6 +111,7 @@ class NounCell(Cell):
         self.case = case
 
     def get_morphosyntactic_properties(self):
+        """Returns a string listing the cell's features."""
         return NounParadigm.morphosyntactic_properties(self.number, self.case)
 
 class VerbCell(Cell):
@@ -100,6 +125,7 @@ class VerbCell(Cell):
         self.mood = mood
 
     def get_morphosyntactic_properties(self):
+        """Returns a string listing the cell's features."""
         return VerbParadigm.morphosyntactic_properties(self.person, self.number, self.defness, self.tense, self.mood)
 
 class NounParadigm(Paradigm):
@@ -110,10 +136,6 @@ class NounParadigm(Paradigm):
         self.para[0][0].form_a = form_a
         self.para[0][0].form_b = form_b
         self.para[0][0].importance = 1.0
-
-    def __getitem__(self, n):
-        """Return a single cell (assignable)."""
-        return self.para[n]
 
     @staticmethod
     def morphosyntactic_properties(i, j):
@@ -167,10 +189,6 @@ class VerbParadigm(Paradigm):
        Hungarian verbs inflect for person, number, object definiteness, tense and mood."""
     def __init__(self, weight_a=0.5):
         self.para = [[[[[VerbCell(i, j, k, l, m, weight_a) for m in range(3)] for l in range(2)] for k in range(2)] for j in range(2)] for i in range(3)]
-
-    def fill_cell(self, cell, i, j, k, l, m):
-        """Assign a single cell."""
-        self.para[i][j][k][l][m] = cell
 
     @staticmethod
     def morphosyntactic_properties(i, j, k, l, m):
