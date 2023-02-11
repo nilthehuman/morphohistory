@@ -242,6 +242,7 @@
     drag_rectangle: self.x, self.y, self.width, self.height
     drag_timeout: 10000000
     drag_distance: 0
+    # TODO: disallow dragging outside Agora area (drag_rectangle does not achieve this)
     size_hint: None, None  #size hints are kind of stupid
     canvas:
         Color:
@@ -251,10 +252,6 @@
             pos: self.pos
 
 <BroadcasterSpeakerDot>
-    drag_rectangle: self.x, self.y, self.width, self.height
-    drag_timeout: 10000000
-    drag_distance: 0
-    size_hint: None, None  #size hints are kind of stupid
     canvas:
         Color:
             rgb: self.color
