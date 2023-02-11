@@ -92,6 +92,7 @@ class SaveToFileButton(Button):
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
         self.popup = None
+        self.overwrite_popup = None
         self.bind(on_release=self.show_save_popup)
 
     def show_save_popup(self, *_):
@@ -190,7 +191,7 @@ class StartStopSimButton(Button):
         self.bind(on_release=self.start_stop)
 
     def start_stop(self, *_):
-        """Start the simulation if not already running, stop if already running."""
+        """Start or resume the simulation if not running, stop if already running."""
         _root().ids.agora.start_stop_sim()
         self.update_text()
 
@@ -267,9 +268,8 @@ class SpeakerDot(Speaker, DragBehavior, Widget):
         self.bind(pos=self.on_pos_changed)
 
     @classmethod
-    def fromspeaker(cls, speaker):
-        """Construct SpeakerDot from an existing Speaker."""
-        # bit of an ugly hack but okay
+    def fromspeaker(_cls, speaker):
+        """Copy an existing Speaker."""
         if speaker.is_broadcaster:
             return BroadcasterSpeakerDot(speaker.n, speaker.pos, deepcopy(speaker.para), speaker.experience)
         return SpeakerDot(speaker.n, speaker.pos, deepcopy(speaker.para), speaker.experience)
@@ -301,7 +301,7 @@ class SpeakerDot(Speaker, DragBehavior, Widget):
         """Refresh own color based on current paradigm bias."""
         color_a = SETTINGS.color_a
         color_b = SETTINGS.color_b
-        w = self.principal_weight()
+        w = self.principal_bias()
         self.color = [sum(x) for x in zip([w * c for c in color_a], [(1-w) * c for c in color_b])]
 
     def talk(self, pick):

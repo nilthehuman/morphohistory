@@ -25,10 +25,10 @@ class Rainbow9x9(_DemoFactory):
         speakers = []
         for row in range(9):
             for col in range(9):
-                weight_a = 1 - 1 / 16 * (row + col)
+                bias_a = 1 - 1 / 16 * (row + col)
                 pos = (_WIDTH * 0.1 + _WIDTH * 0.1 * col - _DOT_WIDTH * 0.5,
                        _HEIGHT * 0.9 - _HEIGHT * 0.1 * row - _DOT_HEIGHT * 0.5)
-                speakers.append(Speaker.fromweight(row * 9 + col, pos, weight_a))
+                speakers.append(Speaker.frombias(row * 9 + col, pos, bias_a))
         return speakers
 
 class Rainbow10x10(_DemoFactory):
@@ -40,10 +40,10 @@ class Rainbow10x10(_DemoFactory):
         pos = [None, None]
         for row in range(10):
             for col in range(10):
-                weight_a = 1 - 1 / 18 * (row + col)
+                bias_a = 1 - 1 / 18 * (row + col)
                 pos = (_WIDTH * 0.05 + _WIDTH * 0.1 * col - _DOT_WIDTH * 0.5,
                        _HEIGHT * 0.95 - _HEIGHT * 0.1 * row - _DOT_HEIGHT * 0.5)
-                speakers.append(Speaker.fromweight(row * 10 + col, pos, weight_a))
+                speakers.append(Speaker.frombias(row * 10 + col, pos, bias_a))
         return speakers
 
 class Synonymy(_DemoFactory):
@@ -57,7 +57,7 @@ class Synonymy(_DemoFactory):
             for col in range(10):
                 pos = (_WIDTH * 0.05 + _WIDTH * 0.1 * col - _DOT_WIDTH * 0.5,
                        _HEIGHT * 0.95 - _HEIGHT * 0.1 * row - _DOT_HEIGHT * 0.5)
-                speakers.append(Speaker.fromweight(row * 10 + col, pos, 0.5))
+                speakers.append(Speaker.frombias(row * 10 + col, pos, 0.5))
         return speakers
 
 class SynonymyLarge(_DemoFactory):
@@ -73,7 +73,7 @@ class SynonymyLarge(_DemoFactory):
             for col in range(30):
                 pos = (_WIDTH * 0.05 + _WIDTH * 0.03103 * col - _DOT_WIDTH * 0.5,
                        _HEIGHT * 0.95 - _HEIGHT * 0.03103 * row - _DOT_HEIGHT * 0.5)
-                speakers.append(Speaker.fromweight(row * 30 + col, pos, 0.5))
+                speakers.append(Speaker.frombias(row * 30 + col, pos, 0.5))
         return speakers
 
 class CoreVsPeriphery9x9(_DemoFactory):
@@ -88,9 +88,9 @@ class CoreVsPeriphery9x9(_DemoFactory):
                 pos = (_WIDTH * 0.1 + _WIDTH * 0.1 * col - _DOT_WIDTH * 0.5,
                        _HEIGHT * 0.9 - _HEIGHT * 0.1 * row - _DOT_HEIGHT * 0.5)
                 if (3 <= row <= 5 and 3 <= col <= 5):
-                    speakers.append(Speaker.fromweight(row * 9 + col, pos, 0.0))
+                    speakers.append(Speaker.frombias(row * 9 + col, pos, 0.0))
                 else:
-                    speakers.append(Speaker.fromweight(row * 9 + col, pos, 0.5))
+                    speakers.append(Speaker.frombias(row * 9 + col, pos, 0.5))
         return speakers
 
 class CoreVsPeriphery10x10(_DemoFactory):
@@ -105,9 +105,9 @@ class CoreVsPeriphery10x10(_DemoFactory):
                 pos = (_WIDTH * 0.05 + _WIDTH * 0.1 * col - _DOT_WIDTH * 0.5,
                        _HEIGHT * 0.95 - _HEIGHT * 0.1 * row - _DOT_HEIGHT * 0.5)
                 if (3 <= row <= 6 and 3 <= col <= 6):
-                    speakers.append(Speaker.fromweight(row * 10 + col, pos, 0.0))
+                    speakers.append(Speaker.frombias(row * 10 + col, pos, 0.0))
                 else:
-                    speakers.append(Speaker.fromweight(row * 10 + col, pos, 0.5))
+                    speakers.append(Speaker.frombias(row * 10 + col, pos, 0.5))
         return speakers
 
 class NewsAnchor(_DemoFactory):
@@ -122,10 +122,10 @@ class NewsAnchor(_DemoFactory):
             y = cos(2 * pi * float(n) / 16) * _HEIGHT * 0.3
             pos = (_WIDTH * 0.5 + x - _DOT_WIDTH * 0.5,
                    _HEIGHT * 0.5 + y - _DOT_HEIGHT * 0.5)
-            speakers.append(Speaker.fromweight(n, pos, 0.5))
+            speakers.append(Speaker.frombias(n, pos, 0.5))
         pos = (_WIDTH * 0.5 - _DOT_WIDTH * 0.5,
                _HEIGHT * 0.5 - _DOT_HEIGHT * 0.5)
-        speakers.append(Speaker.fromweight(16, pos, 1.0, is_broadcaster=True))
+        speakers.append(Speaker.frombias(16, pos, 1.0, is_broadcaster=True))
         return speakers
 
 class Rings16_24(_DemoFactory):
@@ -139,13 +139,13 @@ class Rings16_24(_DemoFactory):
             y = cos(2 * pi * float(n) / 16) * _HEIGHT * 0.2
             pos = (_WIDTH * 0.5 + x - _DOT_WIDTH * 0.5,
                    _HEIGHT * 0.5 + y - _DOT_HEIGHT * 0.5)
-            speakers.append(Speaker.fromweight(n, pos, 0.0))
+            speakers.append(Speaker.frombias(n, pos, 0.0))
         for n in range(24):
             x = sin(2 * pi * float(n) / 24) * _WIDTH * 0.4
             y = cos(2 * pi * float(n) / 24) * _HEIGHT * 0.4
             pos = (_WIDTH * 0.5 + x - _DOT_WIDTH * 0.5,
                    _HEIGHT * 0.5 + y - _DOT_HEIGHT * 0.5)
-            speakers.append(Speaker.fromweight(16 + n, pos, 1.0))
+            speakers.append(Speaker.frombias(16 + n, pos, 1.0))
         return speakers
 
 DEFAULT_DEMO = Rainbow9x9

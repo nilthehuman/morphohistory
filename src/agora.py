@@ -36,6 +36,7 @@ class Agora:
         sim_iteration_total: int = 0
 
         def to_json(self):
+            """Returns own state for JSON serialization."""
             return self.__dict__
 
     def __init__(self):
@@ -106,9 +107,9 @@ class Agora:
         self.clear_caches()
 
     def dominant_form(self):
-        if all(s.principal_weight() > 0.5 for s in self.state.speakers):
+        if all(s.principal_bias() > 0.5 for s in self.state.speakers):
             return self.state.speakers[0].para[0][0].form_a
-        if all(s.principal_weight() < 0.5 for s in self.state.speakers):
+        if all(s.principal_bias() < 0.5 for s in self.state.speakers):
             return self.state.speakers[0].para[0][0].form_b
         return None
 
@@ -132,8 +133,8 @@ class Agora:
                 else:
                     assert False
                 self.cum_weights = [0]
-                for p in self.speaker_pairs:
-                    self.cum_weights.append(inv_dist_sq(p) + self.cum_weights[-1])
+                for pair in self.speaker_pairs:
+                    self.cum_weights.append(inv_dist_sq(pair) + self.cum_weights[-1])
                 self.cum_weights.pop(0)
             while True:
                 self.pick = RAND.choices(self.speaker_pairs, cum_weights=self.cum_weights)[0]
@@ -150,19 +151,22 @@ class Agora:
     def all_biased(self):
         """Criterion to stop the simulation: every speaker is sufficiently biased."""
         assert SETTINGS.bias_threshold > 0.5
-        def stable(x):
-            if x.is_broadcaster:
+        def stable(speaker):
+            if speaker.is_broadcaster:
                 return True
-            return abs(x.principal_weight() - 0.5) > SETTINGS.bias_threshold - 0.5
+            bias_enough = abs(speaker.principal_bias() - 0.5) > SETTINGS.bias_threshold - 0.5
+            return bias_enough
         return all(stable(s) for s in self.state.speakers)
 
     def all_biased_and_experienced(self):
         """Criterion to stop the simulation: every speaker is sufficiently biased and experienced."""
         assert SETTINGS.bias_threshold > 0.5
-        def stable(x):
-            if x.is_broadcaster:
+        def stable(speaker):
+            if speaker.is_broadcaster:
                 return True
-            return abs(x.principal_weight() - 0.5) > SETTINGS.bias_threshold - 0.5 and x.experience > SETTINGS.experience_threshold
+            bias_enough = abs(speaker.principal_bias() - 0.5) > SETTINGS.bias_threshold - 0.5
+            experience_enough = speaker.experience > SETTINGS.experience_threshold
+            return bias_enough and experience_enough
         return all(stable(s) for s in self.state.speakers)
 
     def simulate_till_stable(self, batch_size=None, is_stable=all_biased_and_experienced):
