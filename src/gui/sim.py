@@ -266,6 +266,7 @@ class SpeakerDot(Speaker, DragBehavior, Widget):
         self.nametag_on = False
         Window.bind(mouse_pos=self.on_mouse_pos)
         self.bind(pos=self.on_pos_changed)
+        self.bind(on_touch_up=self.on_right_click)
 
     @classmethod
     def fromspeaker(_cls, speaker):
@@ -296,6 +297,13 @@ class SpeakerDot(Speaker, DragBehavior, Widget):
     def on_pos_changed(self, *_):
         """Invalidate the whole distance calculation cache when any speaker is moved."""
         _root().ids.agora.clear_dist_cache()
+
+    def on_right_click(self, _instance, touch):
+        """Remove this speaker when right clicked."""
+        if touch.button == 'right' and self.collide_point(*touch.pos):
+            _root().ids.agora.remove_speakerdot(self)
+        else:
+            pass # no need to propagate upwards to DragBehavior
 
     def update_color(self):
         """Refresh own color based on current paradigm bias."""
@@ -373,6 +381,13 @@ class AgoraWidget(Widget, Agora):
         """Add a virtual speaker to the simulated community."""
         self.state.speakers.append(speakerdot)
         self.add_widget(speakerdot)
+        self.clear_caches()
+
+    def remove_speakerdot(self, speakerdot):
+        """Remove a virtual speaker from the simulated community."""
+        self.remove_widget(speakerdot)
+        self.state.speakers.remove(speakerdot)
+        self.clear_caches()
 
     def clear_talk_arrow(self):
         """Remove blue arrow from screen."""
