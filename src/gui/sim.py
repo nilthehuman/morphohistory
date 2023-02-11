@@ -95,6 +95,7 @@ class SaveToFileButton(Button):
         self.bind(on_release=self.show_save_popup)
 
     def show_save_popup(self, *_):
+        """Open the main file saving dialogue popup."""
         _root().ids.agora.stop_sim()
         content = SaveToFilePopup(save=self.save, cancel=self.dismiss_popup)
         self.popup = Popup(title="Agora mentése", content=content,
@@ -102,20 +103,27 @@ class SaveToFileButton(Button):
         self.popup.open()
 
     def dismiss_popup(self):
+        """Close the main file saving dialogue popup."""
         self.popup.dismiss()
 
     def save(self, path, filename):
+        """Write current Agora state to file unless given filename exists."""
         fullpath = join(path, filename)
         if isfile(fullpath):
-            content = OverwritePopup(proceed=self.proceed, cancel=self.dismiss_overwrite_popup)
-            self.overwrite_popup = Popup(title="Meglévő fájl", content=content,
-                                         size_hint=(None, None), size=SETTINGS.popup_size_fail)
-            self.overwrite_popup.open()
+            self.show_overwrite_popup()
         else:
             _root().ids.agora.save_to_file(fullpath)
             self.dismiss_popup()
 
+    def show_overwrite_popup(self, *_):
+        """Open another popup to ask for permission to overwrite existing file."""
+        content = OverwritePopup(proceed=self.proceed, cancel=self.dismiss_overwrite_popup)
+        self.overwrite_popup = Popup(title="Meglévő fájl", content=content,
+                                     size_hint=(None, None), size=SETTINGS.popup_size_fail)
+        self.overwrite_popup.open()
+
     def proceed(self):
+        """Overwrite existing file anyway per user's request."""
         filechooser = self.popup.ids.container.children[0].ids.filechooser
         text_input = self.popup.ids.container.children[0].ids.text_input
         fullpath = join(filechooser.path, text_input.text)
@@ -124,6 +132,7 @@ class SaveToFileButton(Button):
         self.dismiss_popup()
 
     def dismiss_overwrite_popup(self):
+        """Close nested dialogue popup about overwriting existing file."""
         self.overwrite_popup.dismiss()
 
 class LoadFromFileButton(Button):
@@ -135,19 +144,15 @@ class LoadFromFileButton(Button):
         self.bind(on_release=self.show_load_popup)
 
     def show_load_popup(self, *_):
+        """Open the main file loading dialogue popup."""
         _root().ids.agora.stop_sim()
         content = LoadFromFilePopup(load=self.load, cancel=self.dismiss_popup)
         self.popup = Popup(title="Agora betöltése", content=content,
                            size_hint=(None, None), size=SETTINGS.popup_size_load)
         self.popup.open()
 
-    def dismiss_popup(self):
-        self.popup.dismiss()
-
-    def dismiss_fail_popup(self):
-        self.fail_popup.dismiss()
-
     def load(self, _path, fileselection):
+        """Read and set new Agora state from file."""
         if not fileselection:
             return
         fullpath = fileselection[0]
@@ -155,10 +160,22 @@ class LoadFromFileButton(Button):
             _root().ids.agora.load_from_file(fullpath)
             self.dismiss_popup()
         except (JSONDecodeError, TypeError):
-            content = LoadFailedPopup(okay=self.dismiss_fail_popup)
-            self.fail_popup = Popup(title="Sikertelen betöltés", content=content,
-                                    size_hint=(None, None), size=SETTINGS.popup_size_fail)
-            self.fail_popup.open()
+            self.show_fail_popup()
+
+    def dismiss_popup(self):
+        """Close the main file loading dialogue popup."""
+        self.popup.dismiss()
+
+    def show_fail_popup(self):
+        """Open another popup to let the user know the file could not be loaded."""
+        content = LoadFailedPopup(okay=self.dismiss_fail_popup)
+        self.fail_popup = Popup(title="Sikertelen betöltés", content=content,
+                                size_hint=(None, None), size=SETTINGS.popup_size_fail)
+        self.fail_popup.open()
+
+    def dismiss_fail_popup(self):
+        """Close nested dialogue popup about unsuccessful loading."""
+        self.fail_popup.dismiss()
 
 class StartStopSimButton(Button):
     """Runs or halts the simulation process."""
@@ -173,10 +190,12 @@ class StartStopSimButton(Button):
         self.bind(on_release=self.start_stop)
 
     def start_stop(self, *_):
+        """Start the simulation if not already running, stop if already running."""
         _root().ids.agora.start_stop_sim()
         self.update_text()
 
     def update_text(self):
+        """Toggle button text to show what the button will do next."""
         self.text = self.stop_text if _root().ids.agora.sim else self.start_text
 
 class RewindButton(Button):
@@ -187,6 +206,7 @@ class RewindButton(Button):
         self.bind(on_release=self.rewind)
 
     def rewind(self, *_):
+        """Reset the state of the simulation to the the original state."""
         _root().ids.agora.stop_sim()
         _root().ids.agora.reset()
 
@@ -199,6 +219,7 @@ class FastForwardButton(Button):
         self.bind(on_release=self.fastforward)
 
     def fastforward(self, *_):
+        """Perform many iterations of the simulation at once ignoring graphics."""
         _root().ids.agora.stop_sim()
         content = FastForwardPopup(cancel=self.cancel_fast_forward)
         self.popup = Popup(title="Folyamatban...", content=content,
@@ -208,6 +229,7 @@ class FastForwardButton(Button):
         _root().ids.agora.start_stop_sim(fastforward=True)
 
     def cancel_fast_forward(self, *_):
+        """Stop the running simulation early."""
         if _root().ids.agora.sim:
             _root().ids.agora.sim_cancelled = True
 
@@ -220,6 +242,7 @@ class SpeedSlider(Slider):
         self.bind(on_touch_up=self.adjust_sim_speed)
 
     def adjust_sim_speed(self, *_):
+        """Speed up or slow down the running graphical (non-fast-forward) simulation."""
         if _root().ids.agora.sim:
             _root().ids.agora.restart_sim()
 
@@ -245,12 +268,14 @@ class SpeakerDot(Speaker, DragBehavior, Widget):
 
     @classmethod
     def fromspeaker(cls, speaker):
+        """Construct SpeakerDot from an existing Speaker."""
         # bit of an ugly hack but okay
         if speaker.is_broadcaster:
             return BroadcasterSpeakerDot(speaker.n, speaker.pos, deepcopy(speaker.para), speaker.experience)
         return SpeakerDot(speaker.n, speaker.pos, deepcopy(speaker.para), speaker.experience)
 
     def on_mouse_pos(self, _window, pos):
+        """Show/hide NameTag on hover."""
         if not self.parent:
             # why do SpeakerDots stay alive after AgoraWidget.clear_widgets(), this is stupid
             return
@@ -269,15 +294,18 @@ class SpeakerDot(Speaker, DragBehavior, Widget):
             self.nametag_on = False
 
     def on_pos_changed(self, *_):
+        """Invalidate the whole distance calculation cache when any speaker is moved."""
         _root().ids.agora.clear_dist_cache()
 
     def update_color(self):
+        """Refresh own color based on current paradigm bias."""
         color_a = SETTINGS.color_a
         color_b = SETTINGS.color_b
         w = self.principal_weight()
         self.color = [sum(x) for x in zip([w * c for c in color_a], [(1-w) * c for c in color_b])]
 
     def talk(self, pick):
+        """Interact with and influence another Speaker in the Agora."""
         Speaker.talk(self, pick)
         if self.parent.graphics_on:
             pick['hearer'].update_color()
@@ -291,8 +319,10 @@ class BroadcasterSpeakerDot(SpeakerDot):
         self.update_color()
 
     def update_color(self):
+        """Set own color to special color to stand apart from the rest of the speakers."""
         self.color = SETTINGS.color_broadcaster
 
+# TODO: use a single global NameTag for all SpeakerDots
 class NameTag(Label):
     """A kind of tooltip that shows how biased a speaker is at the moment."""
 
@@ -301,6 +331,7 @@ class NameTag(Label):
         Window.bind(mouse_pos=self.on_mouse_pos)
 
     def on_mouse_pos(self, _window, pos):
+        """Follow hovering mouse cursor."""
         self.pos[0] = pos[0] - _root().ids.rel_layout.pos[0]
         self.pos[1] = pos[1] - _root().ids.rel_layout.pos[1]
 
