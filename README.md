@@ -3,6 +3,8 @@
 This is going to be a kind of simulator to account for the dispersion and
 vacillation of various inflected word forms in the Hungarian language.
 
+murmur is in *pre-alpha* stage. If anything works properly, thank your lucky stars.
+
 This project is MIT Licensed.
 
 ## Note on Kivy installation
