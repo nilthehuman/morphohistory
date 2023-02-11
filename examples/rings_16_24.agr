@@ -10,7 +10,7 @@
     "para": [
      [
       {
-       "weight_a": 0.0,
+       "bias_a": 0.0,
        "form_a": "havernak",
        "form_b": "havernek",
        "importance": 1.0,
@@ -34,7 +34,7 @@
     "para": [
      [
       {
-       "weight_a": 0.0,
+       "bias_a": 0.0,
        "form_a": "havernak",
        "form_b": "havernek",
        "importance": 1.0,
@@ -58,7 +58,7 @@
     "para": [
      [
       {
-       "weight_a": 0.0,
+       "bias_a": 0.0,
        "form_a": "havernak",
        "form_b": "havernek",
        "importance": 1.0,
@@ -82,7 +82,7 @@
     "para": [
      [
       {
-       "weight_a": 0.0,
+       "bias_a": 0.0,
        "form_a": "havernak",
        "form_b": "havernek",
        "importance": 1.0,
@@ -106,7 +106,7 @@
     "para": [
      [
       {
-       "weight_a": 0.0,
+       "bias_a": 0.0,
        "form_a": "havernak",
        "form_b": "havernek",
        "importance": 1.0,
@@ -130,7 +130,7 @@
     "para": [
      [
       {
-       "weight_a": 0.0,
+       "bias_a": 0.0,
        "form_a": "havernak",
        "form_b": "havernek",
        "importance": 1.0,
@@ -154,7 +154,7 @@
     "para": [
      [
       {
-       "weight_a": 0.0,
+       "bias_a": 0.0,
        "form_a": "havernak",
        "form_b": "havernek",
        "importance": 1.0,
@@ -178,7 +178,7 @@
     "para": [
      [
       {
-       "weight_a": 0.0,
+       "bias_a": 0.0,
        "form_a": "havernak",
        "form_b": "havernek",
        "importance": 1.0,
@@ -202,7 +202,7 @@
     "para": [
      [
       {
-       "weight_a": 0.0,
+       "bias_a": 0.0,
        "form_a": "havernak",
        "form_b": "havernek",
        "importance": 1.0,
@@ -226,7 +226,7 @@
     "para": [
      [
       {
-       "weight_a": 0.0,
+       "bias_a": 0.0,
        "form_a": "havernak",
        "form_b": "havernek",
        "importance": 1.0,
@@ -250,7 +250,7 @@
     "para": [
      [
       {
-       "weight_a": 0.0,
+       "bias_a": 0.0,
        "form_a": "havernak",
        "form_b": "havernek",
        "importance": 1.0,
@@ -274,7 +274,7 @@
     "para": [
      [
       {
-       "weight_a": 0.0,
+       "bias_a": 0.0,
        "form_a": "havernak",
        "form_b": "havernek",
        "importance": 1.0,
@@ -298,7 +298,7 @@
     "para": [
      [
       {
-       "weight_a": 0.0,
+       "bias_a": 0.0,
        "form_a": "havernak",
        "form_b": "havernek",
        "importance": 1.0,
@@ -322,7 +322,7 @@
     "para": [
      [
       {
-       "weight_a": 0.0,
+       "bias_a": 0.0,
        "form_a": "havernak",
        "form_b": "havernek",
        "importance": 1.0,
@@ -346,7 +346,7 @@
     "para": [
      [
       {
-       "weight_a": 0.0,
+       "bias_a": 0.0,
        "form_a": "havernak",
        "form_b": "havernek",
        "importance": 1.0,
@@ -370,7 +370,7 @@
     "para": [
      [
       {
-       "weight_a": 0.0,
+       "bias_a": 0.0,
        "form_a": "havernak",
        "form_b": "havernek",
        "importance": 1.0,
@@ -394,7 +394,7 @@
     "para": [
      [
       {
-       "weight_a": 1.0,
+       "bias_a": 1.0,
        "form_a": "havernak",
        "form_b": "havernek",
        "importance": 1.0,
@@ -418,7 +418,7 @@
     "para": [
      [
       {
-       "weight_a": 1.0,
+       "bias_a": 1.0,
        "form_a": "havernak",
        "form_b": "havernek",
        "importance": 1.0,
@@ -442,7 +442,7 @@
     "para": [
      [
       {
-       "weight_a": 1.0,
+       "bias_a": 1.0,
        "form_a": "havernak",
        "form_b": "havernek",
        "importance": 1.0,
@@ -466,7 +466,7 @@
     "para": [
      [
       {
-       "weight_a": 1.0,
+       "bias_a": 1.0,
        "form_a": "havernak",
        "form_b": "havernek",
        "importance": 1.0,
@@ -490,7 +490,7 @@
     "para": [
      [
       {
-       "weight_a": 1.0,
+       "bias_a": 1.0,
        "form_a": "havernak",
        "form_b": "havernek",
        "importance": 1.0,
@@ -514,7 +514,7 @@
     "para": [
      [
       {
-       "weight_a": 1.0,
+       "bias_a": 1.0,
        "form_a": "havernak",
        "form_b": "havernek",
        "importance": 1.0,
@@ -538,7 +538,7 @@
     "para": [
      [
       {
-       "weight_a": 1.0,
+       "bias_a": 1.0,
        "form_a": "havernak",
        "form_b": "havernek",
        "importance": 1.0,
@@ -562,7 +562,7 @@
     "para": [
      [
       {
-       "weight_a": 1.0,
+       "bias_a": 1.0,
        "form_a": "havernak",
        "form_b": "havernek",
        "importance": 1.0,
@@ -586,7 +586,7 @@
     "para": [
      [
       {
-       "weight_a": 1.0,
+       "bias_a": 1.0,
        "form_a": "havernak",
        "form_b": "havernek",
        "importance": 1.0,
@@ -610,7 +610,7 @@
     "para": [
      [
       {
-       "weight_a": 1.0,
+       "bias_a": 1.0,
        "form_a": "havernak",
        "form_b": "havernek",
        "importance": 1.0,
@@ -634,7 +634,7 @@
     "para": [
      [
       {
-       "weight_a": 1.0,
+       "bias_a": 1.0,
        "form_a": "havernak",
        "form_b": "havernek",
        "importance": 1.0,
@@ -658,7 +658,7 @@
     "para": [
      [
       {
-       "weight_a": 1.0,
+       "bias_a": 1.0,
        "form_a": "havernak",
        "form_b": "havernek",
        "importance": 1.0,
@@ -682,7 +682,7 @@
     "para": [
      [
       {
-       "weight_a": 1.0,
+       "bias_a": 1.0,
        "form_a": "havernak",
        "form_b": "havernek",
        "importance": 1.0,
@@ -706,7 +706,7 @@
     "para": [
      [
       {
-       "weight_a": 1.0,
+       "bias_a": 1.0,
        "form_a": "havernak",
        "form_b": "havernek",
        "importance": 1.0,
@@ -730,7 +730,7 @@
     "para": [
      [
       {
-       "weight_a": 1.0,
+       "bias_a": 1.0,
        "form_a": "havernak",
        "form_b": "havernek",
        "importance": 1.0,
@@ -754,7 +754,7 @@
     "para": [
      [
       {
-       "weight_a": 1.0,
+       "bias_a": 1.0,
        "form_a": "havernak",
        "form_b": "havernek",
        "importance": 1.0,
@@ -778,7 +778,7 @@
     "para": [
      [
       {
-       "weight_a": 1.0,
+       "bias_a": 1.0,
        "form_a": "havernak",
        "form_b": "havernek",
        "importance": 1.0,
@@ -802,7 +802,7 @@
     "para": [
      [
       {
-       "weight_a": 1.0,
+       "bias_a": 1.0,
        "form_a": "havernak",
        "form_b": "havernek",
        "importance": 1.0,
@@ -826,7 +826,7 @@
     "para": [
      [
       {
-       "weight_a": 1.0,
+       "bias_a": 1.0,
        "form_a": "havernak",
        "form_b": "havernek",
        "importance": 1.0,
@@ -850,7 +850,7 @@
     "para": [
      [
       {
-       "weight_a": 1.0,
+       "bias_a": 1.0,
        "form_a": "havernak",
        "form_b": "havernek",
        "importance": 1.0,
@@ -874,7 +874,7 @@
     "para": [
      [
       {
-       "weight_a": 1.0,
+       "bias_a": 1.0,
        "form_a": "havernak",
        "form_b": "havernek",
        "importance": 1.0,
@@ -898,7 +898,7 @@
     "para": [
      [
       {
-       "weight_a": 1.0,
+       "bias_a": 1.0,
        "form_a": "havernak",
        "form_b": "havernek",
        "importance": 1.0,
@@ -922,7 +922,7 @@
     "para": [
      [
       {
-       "weight_a": 1.0,
+       "bias_a": 1.0,
        "form_a": "havernak",
        "form_b": "havernek",
        "importance": 1.0,
@@ -946,7 +946,7 @@
     "para": [
      [
       {
-       "weight_a": 1.0,
+       "bias_a": 1.0,
        "form_a": "havernak",
        "form_b": "havernek",
        "importance": 1.0,
