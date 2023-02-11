@@ -6,10 +6,10 @@ from math import sin, cos, pi
 from .settings import SETTINGS
 from .speaker import Speaker
 
-WIDTH, HEIGHT = SETTINGS.agora_size
-DOT_WIDTH, DOT_HEIGHT = SETTINGS.speakerdot_size
+_WIDTH, _HEIGHT = SETTINGS.agora_size
+_DOT_WIDTH, _DOT_HEIGHT = SETTINGS.speakerdot_size
 
-class DemoFactory(ABC):
+class _DemoFactory(ABC):
     """Interface for demo generating factory classes."""
 
     @staticmethod
@@ -17,7 +17,7 @@ class DemoFactory(ABC):
     def get_speakers():
         """Return the starting state of the speaker population."""
 
-class Rainbow9x9(DemoFactory):
+class Rainbow9x9(_DemoFactory):
     """A 9x9 grid of speakers, pure A in the top left corner, pure B at bottom right and everything else in between."""
 
     @staticmethod
@@ -26,12 +26,12 @@ class Rainbow9x9(DemoFactory):
         for row in range(9):
             for col in range(9):
                 weight_a = 1 - 1 / 16 * (row + col)
-                pos = (WIDTH * 0.1 + WIDTH * 0.1 * col - DOT_WIDTH * 0.5,
-                       HEIGHT * 0.9 - HEIGHT * 0.1 * row - DOT_HEIGHT * 0.5)
+                pos = (_WIDTH * 0.1 + _WIDTH * 0.1 * col - _DOT_WIDTH * 0.5,
+                       _HEIGHT * 0.9 - _HEIGHT * 0.1 * row - _DOT_HEIGHT * 0.5)
                 speakers.append(Speaker.fromweight(row * 9 + col, pos, weight_a))
         return speakers
 
-class Rainbow10x10(DemoFactory):
+class Rainbow10x10(_DemoFactory):
     """A 10x10 grid of speakers, pure A in the top left corner, pure B at bottom right and everything else in between."""
 
     @staticmethod
@@ -41,12 +41,12 @@ class Rainbow10x10(DemoFactory):
         for row in range(10):
             for col in range(10):
                 weight_a = 1 - 1 / 18 * (row + col)
-                pos = (WIDTH * 0.05 + WIDTH * 0.1 * col - DOT_WIDTH * 0.5,
-                       HEIGHT * 0.95 - HEIGHT * 0.1 * row - DOT_HEIGHT * 0.5)
+                pos = (_WIDTH * 0.05 + _WIDTH * 0.1 * col - _DOT_WIDTH * 0.5,
+                       _HEIGHT * 0.95 - _HEIGHT * 0.1 * row - _DOT_HEIGHT * 0.5)
                 speakers.append(Speaker.fromweight(row * 10 + col, pos, weight_a))
         return speakers
 
-class Synonymy(DemoFactory):
+class Synonymy(_DemoFactory):
     """A 10x10 grid of speakers, all undecided: a case of perfect synonymy."""
 
     @staticmethod
@@ -55,28 +55,28 @@ class Synonymy(DemoFactory):
         pos = [None, None]
         for row in range(10):
             for col in range(10):
-                pos = (WIDTH * 0.05 + WIDTH * 0.1 * col - DOT_WIDTH * 0.5,
-                       HEIGHT * 0.95 - HEIGHT * 0.1 * row - DOT_HEIGHT * 0.5)
+                pos = (_WIDTH * 0.05 + _WIDTH * 0.1 * col - _DOT_WIDTH * 0.5,
+                       _HEIGHT * 0.95 - _HEIGHT * 0.1 * row - _DOT_HEIGHT * 0.5)
                 speakers.append(Speaker.fromweight(row * 10 + col, pos, 0.5))
         return speakers
 
-class SynonymyLarge(DemoFactory):
+class SynonymyLarge(_DemoFactory):
     """A 100x100 grid of speakers, all undecided: a case of perfect synonymy."""
 
     @staticmethod
     def get_speakers():
         SETTINGS.speakerdot_size = (12, 12) # TODO: integrate settings into Agora, I think
-        DOT_WIDTH, DOT_HEIGHT = SETTINGS.speakerdot_size
+        _DOT_WIDTH, _DOT_HEIGHT = SETTINGS.speakerdot_size
         speakers = []
         pos = [None, None]
         for row in range(30):
             for col in range(30):
-                pos = (WIDTH * 0.05 + WIDTH * 0.03103 * col - DOT_WIDTH * 0.5,
-                       HEIGHT * 0.95 - HEIGHT * 0.03103 * row - DOT_HEIGHT * 0.5)
+                pos = (_WIDTH * 0.05 + _WIDTH * 0.03103 * col - _DOT_WIDTH * 0.5,
+                       _HEIGHT * 0.95 - _HEIGHT * 0.03103 * row - _DOT_HEIGHT * 0.5)
                 speakers.append(Speaker.fromweight(row * 30 + col, pos, 0.5))
         return speakers
 
-class CoreVsPeriphery9x9(DemoFactory):
+class CoreVsPeriphery9x9(_DemoFactory):
     """A 9x9 grid of speakers, neutral majority on the outside, biased minority on the inside."""
 
     @staticmethod
@@ -85,15 +85,15 @@ class CoreVsPeriphery9x9(DemoFactory):
         pos = [None, None]
         for row in range(9):
             for col in range(9):
-                pos = (WIDTH * 0.1 + WIDTH * 0.1 * col - DOT_WIDTH * 0.5,
-                       HEIGHT * 0.9 - HEIGHT * 0.1 * row - DOT_HEIGHT * 0.5)
+                pos = (_WIDTH * 0.1 + _WIDTH * 0.1 * col - _DOT_WIDTH * 0.5,
+                       _HEIGHT * 0.9 - _HEIGHT * 0.1 * row - _DOT_HEIGHT * 0.5)
                 if (3 <= row <= 5 and 3 <= col <= 5):
                     speakers.append(Speaker.fromweight(row * 9 + col, pos, 0.0))
                 else:
                     speakers.append(Speaker.fromweight(row * 9 + col, pos, 0.5))
         return speakers
 
-class CoreVsPeriphery10x10(DemoFactory):
+class CoreVsPeriphery10x10(_DemoFactory):
     """A 10x10 grid of speakers, neutral majority on the outside, biased minority on the inside."""
 
     @staticmethod
@@ -102,15 +102,15 @@ class CoreVsPeriphery10x10(DemoFactory):
         pos = [None, None]
         for row in range(10):
             for col in range(10):
-                pos = (WIDTH * 0.05 + WIDTH * 0.1 * col - DOT_WIDTH * 0.5,
-                       HEIGHT * 0.95 - HEIGHT * 0.1 * row - DOT_HEIGHT * 0.5)
+                pos = (_WIDTH * 0.05 + _WIDTH * 0.1 * col - _DOT_WIDTH * 0.5,
+                       _HEIGHT * 0.95 - _HEIGHT * 0.1 * row - _DOT_HEIGHT * 0.5)
                 if (3 <= row <= 6 and 3 <= col <= 6):
                     speakers.append(Speaker.fromweight(row * 10 + col, pos, 0.0))
                 else:
                     speakers.append(Speaker.fromweight(row * 10 + col, pos, 0.5))
         return speakers
 
-class NewsAnchor(DemoFactory):
+class NewsAnchor(_DemoFactory):
     """A circle of neutral speakers around a biased broadcaster."""
 
     @staticmethod
@@ -118,33 +118,33 @@ class NewsAnchor(DemoFactory):
         speakers = []
         pos = [None, None]
         for n in range(16):
-            x = sin(2 * pi * float(n) / 16) * WIDTH * 0.3
-            y = cos(2 * pi * float(n) / 16) * HEIGHT * 0.3
-            pos = (WIDTH * 0.5 + x - DOT_WIDTH * 0.5,
-                   HEIGHT * 0.5 + y - DOT_HEIGHT * 0.5)
+            x = sin(2 * pi * float(n) / 16) * _WIDTH * 0.3
+            y = cos(2 * pi * float(n) / 16) * _HEIGHT * 0.3
+            pos = (_WIDTH * 0.5 + x - _DOT_WIDTH * 0.5,
+                   _HEIGHT * 0.5 + y - _DOT_HEIGHT * 0.5)
             speakers.append(Speaker.fromweight(n, pos, 0.5))
-        pos = (WIDTH * 0.5 - DOT_WIDTH * 0.5,
-               HEIGHT * 0.5 - DOT_HEIGHT * 0.5)
+        pos = (_WIDTH * 0.5 - _DOT_WIDTH * 0.5,
+               _HEIGHT * 0.5 - _DOT_HEIGHT * 0.5)
         speakers.append(Speaker.fromweight(16, pos, 1.0, is_broadcaster=True))
         return speakers
 
-class Rings16_24(DemoFactory):
+class Rings16_24(_DemoFactory):
     """A smaller ring of A speakers inside a wider ring of B speakers."""
 
     @staticmethod
     def get_speakers():
         speakers = []
         for n in range(16):
-            x = sin(2 * pi * float(n) / 16) * WIDTH * 0.2
-            y = cos(2 * pi * float(n) / 16) * HEIGHT * 0.2
-            pos = (WIDTH * 0.5 + x - DOT_WIDTH * 0.5,
-                   HEIGHT * 0.5 + y - DOT_HEIGHT * 0.5)
+            x = sin(2 * pi * float(n) / 16) * _WIDTH * 0.2
+            y = cos(2 * pi * float(n) / 16) * _HEIGHT * 0.2
+            pos = (_WIDTH * 0.5 + x - _DOT_WIDTH * 0.5,
+                   _HEIGHT * 0.5 + y - _DOT_HEIGHT * 0.5)
             speakers.append(Speaker.fromweight(n, pos, 0.0))
         for n in range(24):
-            x = sin(2 * pi * float(n) / 24) * WIDTH * 0.4
-            y = cos(2 * pi * float(n) / 24) * HEIGHT * 0.4
-            pos = (WIDTH * 0.5 + x - DOT_WIDTH * 0.5,
-                   HEIGHT * 0.5 + y - DOT_HEIGHT * 0.5)
+            x = sin(2 * pi * float(n) / 24) * _WIDTH * 0.4
+            y = cos(2 * pi * float(n) / 24) * _HEIGHT * 0.4
+            pos = (_WIDTH * 0.5 + x - _DOT_WIDTH * 0.5,
+                   _HEIGHT * 0.5 + y - _DOT_HEIGHT * 0.5)
             speakers.append(Speaker.fromweight(16 + n, pos, 1.0))
         return speakers
 

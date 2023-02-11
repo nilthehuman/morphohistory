@@ -3,7 +3,7 @@
 from copy import deepcopy
 from logging import debug
 
-from .paradigm import NounCell, Paradigm, NounParadigm
+from .paradigm import NounParadigm
 from .rng import RAND
 from .settings import SETTINGS
 
@@ -37,7 +37,7 @@ class Speaker:
 
     @staticmethod
     def from_dict(speaker_dict):
-        para = Paradigm.from_dict(speaker_dict['para'])
+        para = NounParadigm.from_dict(speaker_dict['para'])
         return Speaker(speaker_dict['n'],
                        speaker_dict['pos'],
                        para,
