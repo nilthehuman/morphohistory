@@ -49,6 +49,13 @@ class KeyeventHandler(Widget):
         if keycode[1] == 'g':
             _root().ids.agora.start_stop_sim()
             return True
+        if keycode[1] == 'f':
+            _root().ids.agora.start_stop_sim(fastforward=True)
+            return True
+        if keycode[1] == 'r':
+            _root().ids.agora.stop_sim()
+            _root().ids.agora.reset()
+            return True
         if keycode[1] == 'q':
             info("KeyeventHandler: Exiting app...")
             App.get_running_app().stop()
@@ -465,7 +472,8 @@ class AgoraWidget(Widget, Agora):
         if done:
             self.stop_sim()
             ff_button = _root().ids.button_layout.ids.fast_forward_button
-            ff_button.popup.dismiss()
+            if ff_button.popup:
+                ff_button.popup.dismiss()
             self.pick = None
             self.update_speakerdot_colors()
         else:
@@ -597,5 +605,6 @@ class AgoraWidget(Widget, Agora):
     def update_progressbar(self, sim_iteration):
         """Display number of simulation cycles performed in the progress bar popup."""
         ff_button = _root().ids.button_layout.ids.fast_forward_button
-        progressbar = ff_button.popup.ids.container.children[0].ids.progressbar
-        progressbar.value = sim_iteration
+        if ff_button.popup:
+            progressbar = ff_button.popup.ids.container.children[0].ids.progressbar
+            progressbar.value = sim_iteration
