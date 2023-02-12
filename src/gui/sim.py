@@ -3,7 +3,7 @@
 from copy import deepcopy
 from functools import partial
 from json import JSONDecodeError
-from logging import debug
+from logging import debug, info
 from math import sqrt
 from os.path import isfile, join
 
@@ -50,7 +50,7 @@ class KeyeventHandler(Widget):
             _root().ids.agora.start_stop_sim()
             return True
         if keycode[1] == 'q':
-            debug("Exiting app")
+            info("KeyeventHandler: Exiting app...")
             App.get_running_app().stop()
             return True
         return False
@@ -285,12 +285,12 @@ class SpeakerDot(Speaker, DragBehavior, Widget):
         pos = tuple(p - dp for (p, dp) in zip(pos, self.parent.parent.pos))
         if self.collide_point(*pos):
             if not self.nametag_on:
-                debug("Turning on nametag for", self.n)
+                debug("SpeakerDot: Turning on nametag for %d" % self.n)
                 self.nametag.text = str(self.n) + ': ' + self.name_tag()
                 self.parent.add_widget(self.nametag)
                 self.nametag_on = True
         elif self.nametag_on:
-            debug("Turning off nametag for", self.n)
+            debug("SpeakerDot: Turning off nametag for %d" % self.n)
             self.parent.remove_widget(self.nametag)
             self.nametag_on = False
 
@@ -419,14 +419,16 @@ class AgoraWidget(Widget, Agora):
     def start_stop_sim(self, fastforward=False):
         """Schedule or unschedule simulation based on current state."""
         if not self.sim:
-            debug("Starting simulation...")
             if fastforward:
+                debug("AgoraWidget: Scheduling fast forward simulation...")
                 batch_size = SETTINGS.sim_batch_size
                 sim_callback = partial(self.simulate_till_stable, batch_size=batch_size)
                 self.sim = Clock.schedule_interval(sim_callback, 0.0)
             else:
+                debug("AgoraWidget: Scheduling graphical simulation...")
                 self.start_sim()
         else:
+            debug("AgoraWidget: Unscheduling simulation...")
             self.stop_sim()
 
     def restart_sim(self):

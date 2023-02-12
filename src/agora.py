@@ -3,8 +3,7 @@
 from dataclasses import dataclass, field
 from itertools import product
 from json import dumps, load
-from logging import debug
-from time import time
+from logging import debug, info
 from typing import List
 
 from .rng import RAND
@@ -116,7 +115,7 @@ class Agora:
     def simulate(self, *_): # TODO: use threading to perform independent picks in parallel
         """Perform one iteration: pick two individuals to talk to each other
         and update the hearer's state based on the speaker's."""
-        debug("Iterating simulation")
+        debug("Agora: Iterating simulation...")
         if self.pick_queue:
             # a broadcaster is speaking
             self.pick = self.pick_queue.pop(0)
@@ -144,7 +143,7 @@ class Agora:
                 s = self.pick['speaker']
                 self.pick_queue = [ {'speaker': s, 'hearer': h} for h in self.state.speakers if h != s ]
                 self.pick = self.pick_queue.pop(0)
-        debug(self.pick['speaker'].n, "picked to talk to", self.pick['hearer'].n)
+        debug("Agora: %d picked to talk to %d" % (self.pick['speaker'].n, self.pick['hearer'].n))
         self.pick['speaker'].talk(self.pick)
         self.state.sim_iteration_total += 1
 
@@ -171,23 +170,25 @@ class Agora:
 
     def simulate_till_stable(self, batch_size=None, is_stable=all_biased_and_experienced):
         """Keep running the simulation until the stability condition is reached."""
-        debug("Simulation until stable started:", time())
         max_iteration = SETTINGS.sim_max_iteration
         if not self.sim_iteration:
             self.sim_iteration = 0
+            info("Agora: Simulation until stable started.")
         until = self.sim_iteration + batch_size + 1 if batch_size else max_iteration + 1
         for self.sim_iteration in range(self.sim_iteration + 1, until):
             if self.sim_cancelled:
                 self.sim_cancelled = False
                 self.sim_iteration = None
+                info("Agora: Simulation until stable cancelled.")
                 return True
             if is_stable and is_stable(self):
                 self.sim_iteration = None
+                info("Agora: Simulation until stable finished (stability reached).")
                 return True
             self.simulate()
             # Make sure we stop eventually no matter what
             if max_iteration <= self.sim_iteration:
                 self.sim_iteration = None
+                info("Agora: Simulation until stable finished (max iteration reached).")
                 return True
-        debug("Simulation until stable finished:", time())
         return False
