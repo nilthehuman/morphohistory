@@ -301,6 +301,8 @@ class SpeakerDot(Speaker, DragBehavior, Widget):
     def on_right_click(self, _instance, touch):
         """Remove this speaker when right clicked."""
         if touch.button == 'right' and self.collide_point(*touch.pos):
+            self.parent.remove_widget(self.nametag)
+            self.nametag_on = False
             _root().ids.agora.remove_speakerdot(self)
         else:
             pass # no need to propagate upwards to DragBehavior
