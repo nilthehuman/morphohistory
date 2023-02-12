@@ -16,13 +16,13 @@ from ..src.gui.app import MurmurApp
 # suppress warnings about internal Kivy warning
 pytestmark = mark.filterwarnings("ignore:The 'warn' method is deprecated")
 
-IMAGE_PATHS = {
+_IMAGE_PATHS = {
     'start_stop_button' : 'tests/images/start_stop_button.png',
     'speed_slider_knob' : 'tests/images/speed_slider_knob.png'
 }
 
 # test threads tell the main thread about failures in this variable
-_fail_msg = None
+_FAIL_MSG = None
 
 # Kivy will load the kv file as many times as the App is run, and that is bad
 def _clear_kv_from_builder():
@@ -57,12 +57,12 @@ def test_survive_simulation_by_keypress():
 
 def test_survive_simulation_by_mouse():
     def delayed_user_actions():
-        global _fail_msg
+        global _FAIL_MSG
         sleep(2)
         button_name = 'start_stop_button'
-        button_pos = locateCenterOnScreen(IMAGE_PATHS[button_name])
+        button_pos = locateCenterOnScreen(_IMAGE_PATHS[button_name])
         if button_pos is None:
-            _fail_msg = 'Unable to locate %s on screen' % button_name
+            _FAIL_MSG = 'Unable to locate %s on screen' % button_name
             App.get_running_app().stop()
             return
         click(*button_pos) # press start/stop btn to start simulation
@@ -75,26 +75,26 @@ def test_survive_simulation_by_mouse():
     MurmurApp().run()
     test_thread.join()
     # if an error happened on test_thread, we still need to fail on the main thread
-    if _fail_msg:
-        fail(_fail_msg)
+    if _FAIL_MSG:
+        fail(_FAIL_MSG)
     assert App.get_running_app() is None
 
 def test_survive_simulation_speed_adjustment():
     def delayed_user_actions():
-        global _fail_msg
+        global _FAIL_MSG
         sleep(2)
         button_name = 'start_stop_button'
-        button_pos = locateCenterOnScreen(IMAGE_PATHS[button_name])
+        button_pos = locateCenterOnScreen(_IMAGE_PATHS[button_name])
         if button_pos is None:
-            _fail_msg = 'Unable to locate %s on screen' % button_name
+            _FAIL_MSG = 'Unable to locate %s on screen' % button_name
             App.get_running_app().stop()
             return
         click(*button_pos) # press start/stop btn to start simulation
         sleep(1)
         knob_name = 'speed_slider_knob'
-        knob_pos = locateCenterOnScreen(IMAGE_PATHS[knob_name])
+        knob_pos = locateCenterOnScreen(_IMAGE_PATHS[knob_name])
         if knob_pos is None:
-            _fail_msg = 'Unable to locate %s on screen' % knob_name
+            _FAIL_MSG = 'Unable to locate %s on screen' % knob_name
             App.get_running_app().stop()
             return
         moveTo(knob_pos)
@@ -108,6 +108,6 @@ def test_survive_simulation_speed_adjustment():
     MurmurApp().run()
     test_thread.join()
     # if an error happened on test_thread, we still need to fail on the main thread
-    if _fail_msg:
-        fail(_fail_msg)
+    if _FAIL_MSG:
+        fail(_FAIL_MSG)
     assert App.get_running_app() is None
