@@ -233,7 +233,6 @@ class FastForwardButton(Button):
         self.popup = Popup(title="Folyamatban...", content=content,
                            size_hint=(None, None), size=SETTINGS.popup_size_progress)
         self.popup.open()
-        _root().ids.agora.clear_talk_arrow()
         _root().ids.agora.start_stop_sim(fastforward=True)
 
     def cancel_fast_forward(self, *_):
@@ -429,6 +428,8 @@ class AgoraWidget(Widget, Agora):
         """Schedule or unschedule simulation based on current state."""
         if not self.sim:
             if fastforward:
+                if self.graphics_on:
+                    self.clear_talk_arrow()
                 debug("AgoraWidget: Scheduling fast forward simulation...")
                 batch_size = SETTINGS.sim_batch_size
                 sim_callback = partial(self.simulate_till_stable, batch_size=batch_size)
