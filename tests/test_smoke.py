@@ -65,7 +65,7 @@ def test_survive_button_clicks(buttons):
         for button in buttons:
             button_pos = pyautogui.locateCenterOnScreen(_IMAGE_PATHS[button])
             if button_pos is None:
-                _FAIL_MSG = 'Unable to locate %s on screen' % button_name
+                _FAIL_MSG = 'Unable to locate %s on screen' % button
                 App.get_running_app().stop()
                 return
             pyautogui.click(*button_pos)
@@ -90,7 +90,7 @@ def test_survive_simulation_speed_adjustment():
         button = 'start_stop_button'
         button_pos = pyautogui.locateCenterOnScreen(_IMAGE_PATHS[button])
         if button_pos is None:
-            _FAIL_MSG = 'Unable to locate %s on screen' % button_name
+            _FAIL_MSG = 'Unable to locate %s on screen' % button
             App.get_running_app().stop()
             return
         pyautogui.click(*button_pos) # press start/stop btn to start simulation
