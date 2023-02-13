@@ -1,10 +1,13 @@
 PYTHON = python3
 
-.PHONY: setup lint test clean run
+.PHONY: init init_optional lint test clean run
 
-setup:
+init:
 	# maybe consider switching to Poetry later
 	$(PYTHON) -m pip install -r requirements.txt
+
+init_optional:
+	$(PYTHON) -m pip install -r optional-requirements.txt
 
 lint:
 	pylint src tests
