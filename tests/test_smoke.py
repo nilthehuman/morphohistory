@@ -1,6 +1,11 @@
 """Smoke tests to ensure the basic stability of the application."""
 
 import pyautogui
+try:
+    import pydirectinput
+    input_module = pydirectinput
+except ImportError:
+    input_module = pyautogui
 import pytest
 from sys import path as sys_path
 from threading import Thread
@@ -40,10 +45,11 @@ def _clear_kv_from_builder():
                          ])
 def test_survive_keypresses(keys):
     def delayed_user_actions():
+        sleep(2)
         for key in keys:
-            pyautogui.press(key)
+            input_module.press(key)
             sleep(2)
-        pyautogui.press('q') # quit application
+        input_module.press('q') # quit application
         sleep(1)
     _clear_kv_from_builder()
     test_thread = Thread(target=delayed_user_actions)
@@ -69,10 +75,10 @@ def test_survive_button_clicks(buttons):
                 _FAIL_MSG = 'Unable to locate %s on screen' % button
                 App.get_running_app().stop()
                 return
-            pyautogui.click(*button_pos)
+            input_module.click(*button_pos)
             sleep(2)
-            pyautogui.move(-300, 0) # move cursor off button
-        pyautogui.press('q') # quit application
+            input_module.move(-300, 0) # move cursor off button
+        input_module.press('q') # quit application
         sleep(2)
     _clear_kv_from_builder()
     test_thread = Thread(target=delayed_user_actions)
@@ -94,7 +100,7 @@ def test_survive_simulation_speed_adjustment():
             _FAIL_MSG = 'Unable to locate %s on screen' % button
             App.get_running_app().stop()
             return
-        pyautogui.click(*button_pos) # press start/stop btn to start simulation
+        input_module.click(*button_pos) # press start/stop btn to start simulation
         sleep(1)
         knob = 'speed_slider_knob'
         knob_pos = pyautogui.locateCenterOnScreen(_IMAGE_PATHS[knob])
@@ -102,10 +108,10 @@ def test_survive_simulation_speed_adjustment():
             _FAIL_MSG = 'Unable to locate %s on screen' % knob
             App.get_running_app().stop()
             return
-        pyautogui.moveTo(knob_pos)
-        pyautogui.drag(50, 0, 1, button='left')
+        input_module.moveTo(knob_pos)
+        input_module.drag(50, 0, 1, button='left')
         sleep(2)
-        pyautogui.press('q') # quit application
+        input_module.press('q') # quit application
         sleep(1)
     _clear_kv_from_builder()
     test_thread = Thread(target=delayed_user_actions)
