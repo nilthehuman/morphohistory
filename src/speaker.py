@@ -73,13 +73,14 @@ class Speaker:
         assert pick['speaker'] == self
         hearer = pick['hearer']
         assert not hearer.is_broadcaster # broadcasters are deaf
-        i, j = -1, -1
-        # pick a non-empty cell to share with the hearer
-        while True:
-            i = RAND.next() % 2
-            j = RAND.next() % 18
-            if self.para.para[i][j].form_a:
-                break
+        i, j = 0, 0
+        if not SETTINGS.sim_single_cell:
+            # pick a non-empty cell to share with the hearer
+            while True:
+                i = RAND.next() % 2
+                j = RAND.next() % 18
+                if self.para.para[i][j].form_a:
+                    break
         cum_weights = [self.para.para[i][j].bias_a, 1]
         is_form_a = RAND.choices([True, False], cum_weights=cum_weights)
         pick['is_form_a'] = is_form_a[0] # let the Agora know what we're saying

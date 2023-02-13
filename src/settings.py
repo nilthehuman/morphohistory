@@ -39,6 +39,7 @@ class _Settings:
         self.default_form_a = 'havernak'
         self.default_form_b = 'havernek'
 
+        self.sim_single_cell = True
         self.sim_distance_metric = self.DistanceMetric.CONSTANT
         #self.sim_learning_model = HARMONIC # TODO use this option
         self.sim_influence_self = False
