@@ -51,7 +51,7 @@ class Agora:
         self.pick_queue = None
 
     def save_starting_state(self):
-        """Stash a snapshot of the current list of speakers."""
+        """Stash a snapshot of the current state of the Agora."""
         self.starting_state = self.AgoraState()
         # N.B. paradigms are deep copied by Speaker.fromspeaker
         self.starting_state.speakers = [Speaker.fromspeaker(s) for s in self.state.speakers]

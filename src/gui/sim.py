@@ -126,7 +126,7 @@ class SaveToFileButton(Button):
     def show_overwrite_popup(self, *_):
         """Open another popup to ask for permission to overwrite existing file."""
         content = OverwritePopup(proceed=self.proceed, cancel=self.dismiss_overwrite_popup)
-        self.overwrite_popup = Popup(title="Meglévő fájl", content=content,
+        self.overwrite_popup = Popup(title="Meglévő fájl!", content=content,
                                      size_hint=(None, None), size=SETTINGS.popup_size_fail)
         self.overwrite_popup.open()
 

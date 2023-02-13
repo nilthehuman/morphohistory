@@ -89,7 +89,6 @@ class Speaker:
         """Accept a given form from another Speaker and adjust own bias based on it."""
         form = self.para.para[i][j].form_a if is_form_a else self.para.para[i][j].form_b
         debug("Speaker: I just heard '%s'" % form)
-        # we might want to use exponential decay instead
         delta = (1 if is_form_a else -1) / (self.experience + 1)
         self.para.nudge(delta, i, j)
         self.para.propagate(delta, i, j)
