@@ -48,7 +48,7 @@ class Agora:
         self.speaker_pairs = None
         self.cum_weights = None
         self.pick = None
-        self.pick_queue = None
+        self.pick_queue = []
 
     def save_starting_state(self):
         """Stash a snapshot of the current state of the Agora."""
@@ -68,7 +68,7 @@ class Agora:
         # variables for expensive calculations
         self.speaker_pairs = None
         self.cum_weights = None
-        self.pick_queue = None
+        self.pick_queue = []
 
     def clear_dist_cache(self):
         """Invalidate weights cache used for picking pairs."""
@@ -117,7 +117,7 @@ class Agora:
         and update the hearer's state based on the speaker's."""
         debug("Agora: Iterating simulation...")
         if self.pick_queue:
-            # a broadcaster is speaking
+            # either the second half of a mutual exchange, or a broadcaster's picks
             self.pick = self.pick_queue.pop(0)
         else:
             if not self.speaker_pairs:
@@ -143,6 +143,9 @@ class Agora:
                 s = self.pick['speaker']
                 self.pick_queue = [ {'speaker': s, 'hearer': h} for h in self.state.speakers if h != s ]
                 self.pick = self.pick_queue.pop(0)
+            elif SETTINGS.sim_influence_mutual:
+                reverse_pick = {'speaker': self.pick['hearer'], 'hearer': self.pick['speaker']}
+                self.pick_queue.append(reverse_pick)
         debug("Agora: %d picked to talk to %d" % (self.pick['speaker'].n, self.pick['hearer'].n))
         self.pick['speaker'].talk(self.pick)
         self.state.sim_iteration_total += 1
