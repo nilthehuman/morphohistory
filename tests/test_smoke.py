@@ -2,10 +2,9 @@
 
 import pyautogui
 try:
-    import pydirectinput
-    input_module = pydirectinput
+    import pydirectinput as input_module
 except ImportError:
-    input_module = pyautogui
+    import pyautogui as input_module
 import pytest
 from sys import path as sys_path
 from threading import Thread

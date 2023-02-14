@@ -17,12 +17,12 @@ try:
             # copied this trick from the original Lib/random.py
             return [population[bisect(cum_weights, random * scale, 0, len(population) - 1)]]
 except ImportError:
-    from random import choices, randrange, seed
+    from random import choices, randint, seed
     class _RNG:
         def __init__(self, random_seed):
             seed(random_seed)
         def next(self):
-            return randrange(0, 2**32)
+            return randint(2**32)
         def choices(self, population, cum_weights):
             return choices(population, cum_weights=cum_weights)
 
