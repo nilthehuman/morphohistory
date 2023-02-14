@@ -13,9 +13,9 @@ try:
         def choices(self, population, cum_weights):
             assert len(population) == len(cum_weights)
             scale = cum_weights[-1] + 0.0
-            r = next(self.mwc) / 2**32
+            random = next(self.mwc) / 2**32
             # copied this trick from the original Lib/random.py
-            return [population[bisect(cum_weights, r * scale, 0, len(population) - 1)]]
+            return [population[bisect(cum_weights, random * scale, 0, len(population) - 1)]]
 except ImportError:
     from random import choices, randrange, seed
     class _RNG:

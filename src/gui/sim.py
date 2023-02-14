@@ -275,7 +275,7 @@ class SpeakerDot(Speaker, DragBehavior, Widget):
         self.bind(on_touch_up=self.on_right_click)
 
     @classmethod
-    def fromspeaker(_cls, speaker):
+    def fromspeaker(cls, speaker):
         """Copy an existing Speaker."""
         if speaker.is_broadcaster:
             return BroadcasterSpeakerDot(speaker.n, speaker.pos, deepcopy(speaker.para), speaker.experience)
@@ -317,8 +317,8 @@ class SpeakerDot(Speaker, DragBehavior, Widget):
         """Refresh own color based on current paradigm bias."""
         color_a = SETTINGS.color_a
         color_b = SETTINGS.color_b
-        w = self.principal_bias()
-        self.color = [sum(x) for x in zip([w * c for c in color_a], [(1-w) * c for c in color_b])]
+        bias = self.principal_bias()
+        self.color = [sum(x) for x in zip([bias * c for c in color_a], [(1-bias) * c for c in color_b])]
 
     def talk(self, pick):
         """Interact with and influence another Speaker in the Agora."""
@@ -416,8 +416,8 @@ class AgoraWidget(Widget, Agora):
 
     def load_speakers(self, speakers):
         """Add an array of pre-built Speakers."""
-        for s in speakers:
-            self.add_speakerdot(SpeakerDot.fromspeaker(s))
+        for speaker in speakers:
+            self.add_speakerdot(SpeakerDot.fromspeaker(speaker))
 
     def start_sim(self):
         """Schedule regular simulation in Kivy event loop at intervals specified by the slider."""
@@ -500,8 +500,8 @@ class AgoraWidget(Widget, Agora):
             self.canvas.before.add(Line(points=[left, bottom, right, top], width=1))
             self.canvas.before.add(Line(points=[left, top, right, bottom], width=1))
             step = int(self.width / SETTINGS.grid_resolution)
-            for r in range(step, int(sqrt(2) * self.width/2), step):
-                self.canvas.before.add(Line(circle=(self.width/2, self.height/2, r), width=1))
+            for radius in range(step, int(sqrt(2) * self.width/2), step):
+                self.canvas.before.add(Line(circle=(self.width/2, self.height/2, radius), width=1))
 
     def toggle_manhattan_grid(self, force_show=False):
         """Show/hide a grey Cartesian grid behind the Agora to suggest the use of Manhattan distance."""
@@ -519,27 +519,27 @@ class AgoraWidget(Widget, Agora):
             step_x = int(self.width  / SETTINGS.grid_resolution)
             step_y = int(self.height / SETTINGS.grid_resolution)
             self.canvas.before.add(Color(*SETTINGS.grid_color))
-            for x in range(0, int(half_sqrt_2 * self.width), step_x):
-                self.canvas.before.add(Line(points=[self.width/2 + x,
+            for delta_x in range(0, int(half_sqrt_2 * self.width), step_x):
+                self.canvas.before.add(Line(points=[self.width/2 + delta_x,
                                                     bottom,
-                                                    self.width/2 + x,
+                                                    self.width/2 + delta_x,
                                                     top],
                                                     width=1))
-                self.canvas.before.add(Line(points=[self.width/2 - x,
+                self.canvas.before.add(Line(points=[self.width/2 - delta_x,
                                                     bottom,
-                                                    self.width/2 - x,
+                                                    self.width/2 - delta_x,
                                                     top],
                                                     width=1))
-            for y in range(0, int(half_sqrt_2 * self.height), step_y):
+            for delta_y in range(0, int(half_sqrt_2 * self.height), step_y):
                 self.canvas.before.add(Line(points=[left,
-                                                    self.height/2 + y,
+                                                    self.height/2 + delta_y,
                                                     right,
-                                                    self.height/2 + y],
+                                                    self.height/2 + delta_y],
                                                     width=1))
                 self.canvas.before.add(Line(points=[left,
-                                                    self.height/2 - y,
+                                                    self.height/2 - delta_y,
                                                     right,
-                                                    self.height/2 - y],
+                                                    self.height/2 - delta_y],
                                                     width=1))
 
     def update_grid(self, *_):
@@ -602,8 +602,8 @@ class AgoraWidget(Widget, Agora):
         """Set the colors of all speakers according to their current state."""
         if not self.graphics_on:
             return
-        for s in self.state.speakers:
-            s.update_color()
+        for speaker in self.state.speakers:
+            speaker.update_color()
 
     def update_progressbar(self, sim_iteration):
         """Display number of simulation cycles performed in the progress bar popup."""
