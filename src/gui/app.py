@@ -2,9 +2,14 @@
 
 from kivy.app import App
 from kivy.core.window import Window
+from kivy.lang import Builder
 
 from .gui import TopTabbedPanel
 from .sim import KeyeventHandler
+
+_KV_FILES = ["src/gui/sim.kv"]
+for file in _KV_FILES:
+    Builder.load_file(file)
 
 class MurmurApp(App):
     def build(self):
