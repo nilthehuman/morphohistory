@@ -325,6 +325,8 @@ class SpeakerDot(Speaker, DragBehavior, Widget):
         Speaker.talk(self, pick)
         if self.parent.graphics_on:
             pick['hearer'].update_color()
+            if SETTINGS.sim_influence_self:
+                pick['speaker'].update_color()
 
 class BroadcasterSpeakerDot(SpeakerDot):
     """The GUI representation of a broadcasting speaker who never listens to anyone."""

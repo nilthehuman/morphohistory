@@ -82,9 +82,11 @@ class Speaker:
                 if self.para.para[i][j].form_a:
                     break
         cum_weights = [self.para.para[i][j].bias_a, 1]
-        is_form_a = RAND.choices([True, False], cum_weights=cum_weights)
-        pick['is_form_a'] = is_form_a[0] # let the Agora know what we're saying
-        hearer.hear_noun(i, j, is_form_a[0])
+        is_form_a = RAND.choices([True, False], cum_weights=cum_weights)[0]
+        pick['is_form_a'] = is_form_a # let the Agora know what we're saying
+        hearer.hear_noun(i, j, is_form_a)
+        if SETTINGS.sim_influence_self:
+            self.hear_noun(i, j, is_form_a)
 
     def hear_noun(self, i, j, is_form_a):
         """Accept a given form from another Speaker and adjust own bias based on it."""
