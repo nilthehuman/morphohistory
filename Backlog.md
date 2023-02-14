@@ -12,5 +12,8 @@
 * If the app is about to be closed without saving, ask the user to save or discard changes
 * Keep SpeakerDots inside their AgoraWidget
 * Make smoke tests work on both Linux and Windows
+* Write smoke tests for saving/loading
 * Add GitHub Action to install and run tests after every push
 * Pimp up the README
+* Fix crash when one speaker alone is simulated
+* Extend simulation to verb paradigms
