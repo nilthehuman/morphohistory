@@ -15,8 +15,8 @@ class MurmurApp(App):
     def build(self):
         self.icon = "assets/logo.png"
         root = TopTabbedPanel()
-        Window.minimum_width = root.ids.rel_layout.width + root.ids.button_layout.width
-        Window.minimum_height = root.ids.rel_layout.height
+        Window.minimum_width = root.ids.agora_layout.width + root.ids.button_layout.width
+        Window.minimum_height = root.ids.agora_layout.height
         KeyeventHandler()
         return root
 

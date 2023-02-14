@@ -11,6 +11,7 @@ from kivy.app import App
 from kivy.clock import Clock
 from kivy.core.window import Window
 from kivy.graphics import Color, Line
+from kivy.graphics.transformation import Matrix
 from kivy.properties import ColorProperty, ObjectProperty
 from kivy.uix.anchorlayout import AnchorLayout
 from kivy.uix.behaviors import DragBehavior
@@ -20,6 +21,7 @@ from kivy.uix.floatlayout import FloatLayout
 from kivy.uix.gridlayout import GridLayout
 from kivy.uix.label import Label
 from kivy.uix.popup import Popup
+from kivy.uix.scatterlayout import ScatterLayout
 from kivy.uix.slider import Slider
 from kivy.uix.stencilview import StencilView
 from kivy.uix.widget import Widget
@@ -62,9 +64,21 @@ class KeyeventHandler(Widget):
             return True
         return False
 
-class AgoraLayout(AnchorLayout, StencilView):
-    """The main rectangular area on the simulation tab."""
+class CenterLayout(AnchorLayout, StencilView):
+    """The main rectangular area on the simulation tab, puts the AgoraLayout in the center."""
     pass
+
+class AgoraLayout(ScatterLayout):
+    """The scalable layout that holds the AgoraWidget."""
+    def on_touch_up(self, touch):
+        """Handle zooming in or out by mouse wheel."""
+        if touch.is_mouse_scrolling:
+            if touch.button == 'scrolldown':
+                factor = 1.02
+            if touch.button == 'scrollup':
+                factor = 1 / 1.02
+            self.apply_transform(Matrix().scale(factor, factor, 1), anchor=self.center)
+        super().on_touch_up(touch)
 
 class ButtonLayout(GridLayout):
     """The bar with control buttons at the right edge of the screen."""
@@ -288,8 +302,8 @@ class SpeakerDot(Speaker, DragBehavior, Widget):
             return
         if not self.parent.graphics_on:
             return
-        pos = tuple(p - dp for (p, dp) in zip(pos, self.parent.parent.pos))
-        if self.collide_point(*pos):
+        pos = _root().ids.agora_layout.transform_inv.transform_point(*pos, 0)
+        if self.collide_point(pos[0], pos[1]):
             if not self.nametag_on:
                 debug("SpeakerDot: Turning on nametag for %d" % self.n)
                 self.nametag.text = str(self.n) + ': ' + self.name_tag()
@@ -350,8 +364,8 @@ class NameTag(Label):
 
     def on_mouse_pos(self, _window, pos):
         """Follow hovering mouse cursor."""
-        self.pos[0] = pos[0] - _root().ids.rel_layout.pos[0]
-        self.pos[1] = pos[1] - _root().ids.rel_layout.pos[1]
+        transformed_pos = _root().ids.agora_layout.transform_inv.transform_point(*pos, 0)
+        self.pos = transformed_pos[0:2]
 
 class AgoraWidget(Widget, Agora):
     """An agora of speakers visualized on the screen."""

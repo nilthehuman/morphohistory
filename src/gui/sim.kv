@@ -11,9 +11,9 @@
             orientation: 'horizontal'
             size: root.width, root.height
             spacing: 0
-            AgoraLayout:
-                RelativeLayout:
-                    id: rel_layout
+            CenterLayout:
+                AgoraLayout:
+                    id: agora_layout
                     size_hint: None, None
                     size: 600, 600
                     AgoraWidget:
@@ -41,7 +41,7 @@
     TabbedPanelItem:
         text: "Multiszim"
 
-<AgoraLayout>
+<CenterLayout>
     anchor_x: 'center'
     anchor_y: 'center'
     size_hint: 1, 1
