@@ -9,6 +9,7 @@
 * Provide visual feedback when settings are changed
 * Show unusual settings on special warning label in the agora's bottom right corner
 * Undo/redo stack
+* Pressing return/enter in popups should be equivalent to clicking confirm button
 * Use a single global NameTag for all SpeakerDots
 * Multithreading for performance
 * If the app is about to be closed without saving, ask the user to save or discard changes
