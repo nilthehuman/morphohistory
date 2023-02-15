@@ -4,6 +4,8 @@
 
 from enum import Enum
 
+from kivy.graphics import Color
+
 class _Settings:
     """A plain struct holding all relevant constants and parameters."""
 
@@ -18,13 +20,13 @@ class _Settings:
 
     def __init__(self):
         self.agora_size = (600, 600)
-        self.color_a = (1.0, 1.0, 0.0)
-        self.color_b = (1.0, 0.0, 1.0)
-        self.color_broadcaster = (0.2, 0.9, 0.1)
-        self.color_arrow_tip = (0.2, 0.0, 0.8)
+        self.color_a = Color(1.0, 1.0, 0.0)
+        self.color_b = Color(1.0, 0.0, 1.0)
+        self.color_broadcaster = Color(0.2, 0.9, 0.1)
+        self.color_arrow_tip = Color(0.2, 0.0, 0.8)
         self.arrow_width = 2
         self.draw_arrow = True
-        self.grid_color = (0.15, 0.15, 0.15)
+        self.grid_color = Color(0.15, 0.15, 0.15)
         self.grid_resolution = 10
 
         self.speakerdot_size = (20, 20)

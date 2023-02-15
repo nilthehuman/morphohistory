@@ -343,7 +343,8 @@ class SpeakerDot(Speaker, DragBehavior, Widget):
         color_a = SETTINGS.color_a
         color_b = SETTINGS.color_b
         bias = self.principal_bias()
-        self.color = [sum(x) for x in zip([bias * c for c in color_a], [(1-bias) * c for c in color_b])]
+        self.color = [sum(x) for x in zip([bias * c for c in color_a.rgb],
+                                          [(1-bias) * c for c in color_b.rgb])]
 
     def talk(self, pick):
         """Interact with and influence another Speaker in the Agora."""
