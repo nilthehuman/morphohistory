@@ -4,6 +4,8 @@
 * Save and load (some?) settings from file
 * Allow user to apply or discard changes in Settings tab
 * Implement Rescorla-Wagner conditioning model as an option
+* Implement convolution-based learning model
+* Upon double click show the speaker's bias in all paradigm cells
 * Add a demo agora of two to three tight-knit communities apart from each other
 * Provide visual feedback when agora state is saved to file
 * Provide visual feedback when settings are changed
