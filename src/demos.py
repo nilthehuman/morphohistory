@@ -76,6 +76,20 @@ class SynonymyLarge(_DemoFactory):
                 speakers.append(Speaker.frombias(row * 30 + col, pos, 0.5))
         return speakers
 
+class Checkers(_DemoFactory):
+    """An 8x8 grid of biased speakers arranged in an alternating pattern."""
+
+    @staticmethod
+    def get_speakers():
+        speakers = []
+        pos = [None, None]
+        for row in range(8):
+            for col in range(8):
+                pos = (_WIDTH * 0.15 + _WIDTH * 0.1 * col - _DOT_WIDTH * 0.5,
+                       _HEIGHT * 0.85 - _HEIGHT * 0.1 * row - _DOT_HEIGHT * 0.5)
+                speakers.append(Speaker.frombias(row * 8 + col, pos, 1.0 if (row + col) % 2 else 0.0))
+        return speakers
+
 class CoreVsPeriphery9x9(_DemoFactory):
     """A 9x9 grid of speakers, neutral majority on the outside, biased minority on the inside."""
 
