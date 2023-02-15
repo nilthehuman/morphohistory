@@ -9,7 +9,7 @@ from .settings import SETTINGS
 
 class Speaker:
     """A simulated individual within the speaking community."""
-    def __init__(self, n, pos, para=None, is_broadcaster=False, experience=SETTINGS.experience_start):
+    def __init__(self, n, pos, para=None, is_broadcaster=False, experience=SETTINGS.starting_experience):
         self.n = n
         self.pos = pos
         self.para = para

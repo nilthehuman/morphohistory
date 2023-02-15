@@ -287,7 +287,7 @@ class SpeakerDot(Speaker, DragBehavior, Widget):
 
     color = ColorProperty()
 
-    def __init__(self, n, pos, para=None, experience=SETTINGS.experience_start, **kwargs):
+    def __init__(self, n, pos, para, experience, **kwargs):
         Speaker.__init__(self, n, pos, para, False, experience)
         DragBehavior.__init__(self, **kwargs)
         Widget.__init__(self, **kwargs)
@@ -356,7 +356,7 @@ class SpeakerDot(Speaker, DragBehavior, Widget):
 class BroadcasterSpeakerDot(SpeakerDot):
     """The GUI representation of a broadcasting speaker who never listens to anyone."""
 
-    def __init__(self, n, pos, para=None, experience=SETTINGS.experience_start, **kwargs):
+    def __init__(self, n, pos, para, experience, **kwargs):
         super().__init__(n, pos, para, experience, **kwargs)
         self.is_broadcaster = True
         self.update_color()

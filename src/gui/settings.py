@@ -82,7 +82,7 @@ _SETTINGS_JSON = '''
         "title": "Kezdeti tapasztalat",
         "desc": "Hány előzetes interakciót tételezzünk fel a beszélőkről",
         "section": "Simulation",
-        "key": "experience_start"
+        "key": "starting_experience"
     },
     {
         "type": "title",
@@ -134,7 +134,7 @@ class CustomSettings(Settings):
                                     'sim_influence_self': 0,
                                     'sim_influence_mutual': 0,
                                     'sim_prefer_opposite': 0,
-                                    'experience_start': 1
+                                    'starting_experience': 1
                                 })
         self.config.setdefaults('Termination',
                                 {
@@ -147,7 +147,7 @@ class CustomSettings(Settings):
     def on_config_change(self, config, section, key, value):
         # enforce upper and lower bounds on user-supplied values
         bounds = {
-            ('Simulation', 'experience_start') : (0, inf),
+            ('Simulation', 'starting_experience') : (0, inf),
             ('Termination', 'bias_threshold') : (0, 1),
             ('Termination', 'experience_threshold') : (0, inf),
             ('Termination', 'sim_max_iteration') : (100, inf)
