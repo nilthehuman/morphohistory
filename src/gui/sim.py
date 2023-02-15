@@ -364,7 +364,7 @@ class BroadcasterSpeakerDot(SpeakerDot):
 
     def update_color(self):
         """Set own color to special color to stand apart from the rest of the speakers."""
-        self.color = SETTINGS.color_broadcaster
+        self.color = SETTINGS.color_broadcaster.rgb
 
 # TODO: use a single global NameTag for all SpeakerDots
 class NameTag(Label):
@@ -613,15 +613,15 @@ class AgoraWidget(Widget, Agora):
                                                width=width)
             color_arrow_shaft = None
             if self.pick['is_form_a']:
-                color_arrow_shaft = SETTINGS.color_a
+                color_arrow_shaft = SETTINGS.color_a.rgb
             else:
-                color_arrow_shaft = SETTINGS.color_b
+                color_arrow_shaft = SETTINGS.color_b.rgb
             color_arrow_shaft = (0.85 * color_arrow_shaft[0],
                                  0.85 * color_arrow_shaft[1],
                                  0.85 * color_arrow_shaft[2])
             self.canvas.add(Color(*color_arrow_shaft))
             self.canvas.add(self.talk_arrow_shaft)
-            self.canvas.add(Color(*SETTINGS.color_arrow_tip))
+            self.canvas.add(SETTINGS.color_arrow_tip)
             self.canvas.add(self.talk_arrow_tip)
 
     def update_speakerdot_colors(self):

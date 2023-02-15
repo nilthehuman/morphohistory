@@ -1,17 +1,21 @@
 """The contents of the Settings tab: a list of user options to control the simulation parameters."""
 
+from json import dumps
 from math import inf
 
+from kivy.app import App
 from kivy.config import ConfigParser
+from kivy.graphics import Color
 from kivy.uix.boxlayout import BoxLayout
-from kivy.uix.settings import Settings, InterfaceWithNoMenu
+from kivy.uix.button import Button
+from kivy.uix.settings import InterfaceWithNoMenu, Settings, SettingItem
+from kivy.utils import get_color_from_hex, get_hex_from_color
 
 from ..settings import SETTINGS
 
 Settings.interface_cls = InterfaceWithNoMenu
 
-_SETTINGS_JSON = '''
-[
+_SETTINGS_UI = [
     {
         "type": "title",
         "title": "Megjelenés"
@@ -75,7 +79,7 @@ _SETTINGS_JSON = '''
         "title": "Fordított hatás",
         "desc": "A hallott alak ellenkezőjét preferáljuk-e",
         "section": "Simulation",
-        "key": "sim_influence_mutual"
+        "key": "sim_prefer_opposite"
     },
     {
         "type": "numeric",
@@ -110,7 +114,6 @@ _SETTINGS_JSON = '''
         "key": "sim_max_iteration"
     }
 ]
-'''
 
 class SettingsLayout(BoxLayout):
     """The vertical BoxLayout for the CustomSettingsPanel and the Buttons at the bottom."""
@@ -142,7 +145,7 @@ class CustomSettings(Settings):
                                     'experience_threshold': 10,
                                     'sim_max_iteration': 10000
                                 })
-        self.add_json_panel('Beállítások', self.config, data=_SETTINGS_JSON)
+        self.add_json_panel('Beállítások', self.config, data=dumps(_SETTINGS_UI))
 
     def on_config_change(self, config, section, key, value):
         # enforce upper and lower bounds on user-supplied values
@@ -159,3 +162,80 @@ class CustomSettings(Settings):
             self.config.set(section, key, clamped_value)
             # TODO: refresh the SettingsPanel as well
         super().on_config_change(config, section, key, value)
+
+    def reload_config_values(self):
+        """Refresh all values displayed in the SettingsPanel."""
+        settingspanel = self.interface.children[0].children[0]
+        subtree = settingspanel.children
+        for child in subtree:
+            if isinstance(child, SettingItem):
+                child.value = self.config.get(child.section, child.key)
+
+def _get_settings():
+    return App.get_running_app().root.ids.settings_layout.ids.settings
+
+def _get_config():
+    return _get_settings().config
+
+class ApplySettingsButton(Button):
+    """Button to destructively set the user's choices in the global settings object."""
+    def __init__(self, **kwargs):
+        super().__init__(**kwargs)
+        self.bind(on_release=self.apply_settings)
+
+    def apply_settings(self, *_):
+        """Overwrite current application settings with those in the SettingsPanel."""
+        update_colors = False
+        for section in _get_config().sections():
+            for (key, new_value) in _get_config().items(section):
+                # parse new_value from its raw string state
+                value_type = [item['type'] for item in _SETTINGS_UI if 'key' in item and key == item['key']][0]
+                if 'bool' == value_type:
+                    new_value = '0' != new_value
+                elif 'color' == value_type:
+                    new_value = Color(*get_color_from_hex(new_value))
+                    if new_value.rgb != getattr(SETTINGS, key).rgb:
+                        update_colors = True
+                elif 'numeric' == value_type:
+                    try:
+                        new_value = int(new_value)
+                    except ValueError:
+                        new_value = float(new_value)
+                elif 'options' == value_type:
+                    string_to_enum = {
+                        'konstans'   : SETTINGS.DistanceMetric.CONSTANT,
+                        'Manhattan'  : SETTINGS.DistanceMetric.MANHATTAN,
+                        'euklideszi' : SETTINGS.DistanceMetric.EUCLIDEAN
+                    }
+                    new_value = string_to_enum[new_value]
+                elif 'string' == value_type:
+                    pass
+                else:
+                    assert False
+                setattr(SETTINGS, key, new_value)
+                if update_colors:
+                    App.get_running_app().root.ids.sim_layout.ids.agora.update_speakerdot_colors()
+
+class DiscardSettingsButton(Button):
+    """Button to throw away all changes and restore previous settings."""
+    def __init__(self, **kwargs):
+        super().__init__(**kwargs)
+        self.bind(on_release=self.discard_settings)
+
+    def discard_settings(self, *_):
+        """Reset all items in SettingsPanel to the previous application settings."""
+        for section in _get_config().sections():
+            for (key, _) in _get_config().items(section):
+                old_value = getattr(SETTINGS, key)
+                if isinstance(old_value, Color):
+                    old_value = get_hex_from_color(old_value.rgb)
+                elif isinstance(old_value, SETTINGS.DistanceMetric):
+                    enum_to_string = {
+                        SETTINGS.DistanceMetric.CONSTANT  : 'konstans',
+                        SETTINGS.DistanceMetric.MANHATTAN : 'Manhattan',
+                        SETTINGS.DistanceMetric.EUCLIDEAN : 'euklideszi',
+                    }
+                    old_value = enum_to_string[old_value]
+                _get_config().set(section, key, old_value)
+        # force the update of displayed values on GUI as well
+        _get_settings().reload_config_values()
