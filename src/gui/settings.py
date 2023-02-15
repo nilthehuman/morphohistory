@@ -1,9 +1,8 @@
-"""The contents of the Settings tab: a list of user options."""
+"""The contents of the Settings tab: a list of user options to control the simulation parameters."""
 
 from math import inf
 
 from kivy.config import ConfigParser
-from kivy.properties import BoundedNumericProperty
 from kivy.uix.boxlayout import BoxLayout
 from kivy.uix.settings import Settings, InterfaceWithNoMenu
 
