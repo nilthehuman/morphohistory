@@ -83,6 +83,8 @@ class Speaker:
                     break
         cum_weights = [self.para.para[i][j].bias_a, 1]
         is_form_a = RAND.choices([True, False], cum_weights=cum_weights)[0]
+        if SETTINGS.sim_prefer_opposite:
+            is_form_a = not is_form_a
         pick['is_form_a'] = is_form_a # let the Agora know what we're saying
         hearer.hear_noun(i, j, is_form_a)
         if SETTINGS.sim_influence_self:

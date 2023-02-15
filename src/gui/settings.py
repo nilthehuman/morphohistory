@@ -72,6 +72,13 @@ _SETTINGS_JSON = '''
         "key": "sim_influence_mutual"
     },
     {
+        "type": "bool",
+        "title": "Fordított hatás",
+        "desc": "A hallott alak ellenkezőjét preferáljuk-e",
+        "section": "Simulation",
+        "key": "sim_influence_mutual"
+    },
+    {
         "type": "numeric",
         "title": "Kezdeti tapasztalat",
         "desc": "Hány előzetes interakciót tételezzünk fel a beszélőkről",
@@ -127,6 +134,7 @@ class CustomSettings(Settings):
                                     'sim_distance_metric': 'konstans',
                                     'sim_influence_self': 0,
                                     'sim_influence_mutual': 0,
+                                    'sim_prefer_opposite': 0,
                                     'experience_start': 1
                                 })
         self.config.setdefaults('Termination',
