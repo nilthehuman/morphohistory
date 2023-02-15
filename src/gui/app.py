@@ -7,7 +7,7 @@ from kivy.lang import Builder
 from .root import TopTabbedPanel
 from .sim import KeyeventHandler
 
-_KV_FILES = ["src/gui/root.kv", "src/gui/sim.kv"]
+_KV_FILES = ["src/gui/root.kv", "src/gui/sim.kv", "src/gui/settings.kv"]
 for file in _KV_FILES:
     Builder.load_file(file)
 

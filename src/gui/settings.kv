@@ -1,0 +1,21 @@
+#kivy 2.1
+<SettingsLayout>
+    orientation: 'vertical'
+    CustomSettings:
+        id: settings
+        size_hint: 1, 1
+    RelativeLayout:
+        size_hint_y: None
+        height: 60
+        Button:
+            id: apply_button
+            text: "Nosza!"
+            pos_hint: {'center_x': 0.32}
+            size_hint_x: None
+            width: 200
+        Button:
+            id: discard_button
+            text: "Mégse"
+            pos_hint: {'center_x': 0.68}
+            size_hint_x: None
+            width: 200
