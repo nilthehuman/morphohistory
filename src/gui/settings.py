@@ -171,6 +171,9 @@ class CustomSettings(Settings):
             if isinstance(child, SettingItem):
                 child.value = self.config.get(child.section, child.key)
 
+def _get_agora():
+    return App.get_running_app().root.ids.sim_layout.ids.agora
+
 def _get_settings():
     return App.get_running_app().root.ids.settings_layout.ids.settings
 
@@ -186,6 +189,7 @@ class ApplySettingsButton(Button):
     def apply_settings(self, *_):
         """Overwrite current application settings with those in the SettingsPanel."""
         update_colors = False
+        update_grid = False
         for section in _get_config().sections():
             for (key, new_value) in _get_config().items(section):
                 # parse new_value from its raw string state
@@ -208,13 +212,16 @@ class ApplySettingsButton(Button):
                         'euklideszi' : SETTINGS.DistanceMetric.EUCLIDEAN
                     }
                     new_value = string_to_enum[new_value]
+                    update_grid = True
                 elif 'string' == value_type:
                     pass
                 else:
                     assert False
                 setattr(SETTINGS, key, new_value)
-                if update_colors:
-                    App.get_running_app().root.ids.sim_layout.ids.agora.update_speakerdot_colors()
+        if update_colors:
+            _get_agora().update_speakerdot_colors()
+        if update_grid:
+            _get_agora().update_grid()
 
 class DiscardSettingsButton(Button):
     """Button to throw away all changes and restore previous settings."""

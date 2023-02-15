@@ -522,7 +522,7 @@ class AgoraWidget(Widget, Agora):
             top    = (0.5 + half_sqrt_2) * self.height
             left   = (0.5 - half_sqrt_2) * self.width
             right  = (0.5 + half_sqrt_2) * self.width
-            self.canvas.before.add(Color(*SETTINGS.grid_color))
+            self.canvas.before.add(SETTINGS.grid_color)
             self.canvas.before.add(Line(points=[left, bottom, right, top], width=1))
             self.canvas.before.add(Line(points=[left, top, right, bottom], width=1))
             step = int(self.width / SETTINGS.grid_resolution)
@@ -544,7 +544,7 @@ class AgoraWidget(Widget, Agora):
             right  = (0.5 + half_sqrt_2) * self.width
             step_x = int(self.width  / SETTINGS.grid_resolution)
             step_y = int(self.height / SETTINGS.grid_resolution)
-            self.canvas.before.add(Color(*SETTINGS.grid_color))
+            self.canvas.before.add(SETTINGS.grid_color)
             for delta_x in range(0, int(half_sqrt_2 * self.width), step_x):
                 self.canvas.before.add(Line(points=[self.width/2 + delta_x,
                                                     bottom,
