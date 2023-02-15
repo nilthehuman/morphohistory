@@ -1,0 +1,27 @@
+#kivy 2.1
+<TopTabbedPanel>
+    do_default_tab: False
+    tab_height: 30
+    tab_width: 120
+    background_color: 0.16, 0.2, 0.24
+    TabbedPanelItem:
+        text: "Szimulátor"
+        SimLayout:
+            id: sim_layout
+    TabbedPanelItem:
+        text: "Beállítások"
+    TabbedPanelItem:
+        text: "Paradigma"
+        #BoxLayout:
+        #    orientation: 'vertical'
+        #    CheckBox:
+        #        text: "Csak egy cellát szimulálj, jó? köszi"
+        #        color: (0.2, 0.9, 0.2, 1.0)
+        #    TextInput:
+        #        text: "semmi"
+        #        disabled: False
+        #    TextInput:
+        #        text: "még annyi se"
+        #        disabled: True
+    TabbedPanelItem:
+        text: "Multiszim"

@@ -7,7 +7,7 @@ from kivy.lang import Builder
 from .gui import TopTabbedPanel
 from .sim import KeyeventHandler
 
-_KV_FILES = ["src/gui/sim.kv"]
+_KV_FILES = ["src/gui/gui.kv", "src/gui/sim.kv"]
 for file in _KV_FILES:
     Builder.load_file(file)
 
@@ -15,8 +15,9 @@ class MurmurApp(App):
     def build(self):
         self.icon = "assets/logo.png"
         root = TopTabbedPanel()
-        Window.minimum_width = root.ids.agora_layout.width + root.ids.button_layout.width
-        Window.minimum_height = root.ids.agora_layout.height
+        Window.minimum_width = (root.ids.sim_layout.ids.agora_layout.width +
+                                root.ids.sim_layout.ids.button_layout.width)
+        Window.minimum_height = root.ids.sim_layout.ids.agora_layout.height
         KeyeventHandler()
         return root
 

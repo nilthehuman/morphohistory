@@ -31,8 +31,15 @@ from ..agora import Agora
 from ..demos import DEFAULT_DEMO
 from ..speaker import Speaker
 
-def _root():
-    return App.get_running_app().root
+# aliases for tediously long Widget and Layout lookups
+def _get_agora():
+    return App.get_running_app().root.ids.sim_layout.ids.agora
+
+def _get_agora_layout():
+    return App.get_running_app().root.ids.sim_layout.ids.agora_layout
+
+def _get_button_layout():
+    return App.get_running_app().root.ids.sim_layout.ids.button_layout
 
 # Adapted from kivy.org/doc/stable/api-kivy.core.window.html
 class KeyeventHandler(Widget):
@@ -49,20 +56,24 @@ class KeyeventHandler(Widget):
 
     def on_keypressed(self, _keyboard, keycode, *_):
         if keycode[1] == 'g':
-            _root().ids.agora.start_stop_sim()
+            _get_agora().start_stop_sim()
             return True
         if keycode[1] == 'f':
-            _root().ids.agora.start_stop_sim(fastforward=True)
+            _get_agora().start_stop_sim(fastforward=True)
             return True
         if keycode[1] == 'r':
-            _root().ids.agora.stop_sim()
-            _root().ids.agora.reset()
+            _get_agora().stop_sim()
+            _get_agora().reset()
             return True
         if keycode[1] == 'q':
             info("KeyeventHandler: Exiting app...")
             App.get_running_app().stop()
             return True
         return False
+
+class SimLayout(BoxLayout):
+    """The horizontal BoxLayout holding all the contents of the Simulation tab."""
+    pass
 
 class CenterLayout(AnchorLayout, StencilView):
     """The main rectangular area on the simulation tab, puts the AgoraLayout in the center."""
@@ -118,7 +129,7 @@ class SaveToFileButton(Button):
 
     def show_save_popup(self, *_):
         """Open the main file saving dialogue popup."""
-        _root().ids.agora.stop_sim()
+        _get_agora().stop_sim()
         content = SaveToFilePopup(save=self.save, cancel=self.dismiss_popup)
         self.popup = Popup(title="Agora mentése", content=content,
                            size_hint=(None, None), size=SETTINGS.popup_size_load)
@@ -134,7 +145,7 @@ class SaveToFileButton(Button):
         if isfile(fullpath):
             self.show_overwrite_popup()
         else:
-            _root().ids.agora.save_to_file(fullpath)
+            _get_agora().save_to_file(fullpath)
             self.dismiss_popup()
 
     def show_overwrite_popup(self, *_):
@@ -149,7 +160,7 @@ class SaveToFileButton(Button):
         filechooser = self.popup.ids.container.children[0].ids.filechooser
         text_input = self.popup.ids.container.children[0].ids.text_input
         fullpath = join(filechooser.path, text_input.text)
-        _root().ids.agora.save_to_file(fullpath)
+        _get_agora().save_to_file(fullpath)
         self.dismiss_overwrite_popup()
         self.dismiss_popup()
 
@@ -167,7 +178,7 @@ class LoadFromFileButton(Button):
 
     def show_load_popup(self, *_):
         """Open the main file loading dialogue popup."""
-        _root().ids.agora.stop_sim()
+        _get_agora().stop_sim()
         content = LoadFromFilePopup(load=self.load, cancel=self.dismiss_popup)
         self.popup = Popup(title="Agora betöltése", content=content,
                            size_hint=(None, None), size=SETTINGS.popup_size_load)
@@ -179,7 +190,7 @@ class LoadFromFileButton(Button):
             return
         fullpath = fileselection[0]
         try:
-            _root().ids.agora.load_from_file(fullpath)
+            _get_agora().load_from_file(fullpath)
             self.dismiss_popup()
         except (JSONDecodeError, TypeError):
             self.show_fail_popup()
@@ -213,12 +224,12 @@ class StartStopSimButton(Button):
 
     def start_stop(self, *_):
         """Start or resume the simulation if not running, stop if already running."""
-        _root().ids.agora.start_stop_sim()
+        _get_agora().start_stop_sim()
         self.update_text()
 
     def update_text(self):
         """Toggle button text to show what the button will do next."""
-        self.text = self.stop_text if _root().ids.agora.sim else self.start_text
+        self.text = self.stop_text if _get_agora().sim else self.start_text
 
 class RewindButton(Button):
     """Restores the initial state of the Agora when loaded."""
@@ -229,8 +240,8 @@ class RewindButton(Button):
 
     def rewind(self, *_):
         """Reset the state of the simulation to the the original state."""
-        _root().ids.agora.stop_sim()
-        _root().ids.agora.reset()
+        _get_agora().stop_sim()
+        _get_agora().reset()
 
 class FastForwardButton(Button):
     """Keeps running the simulation until a stable state is reached."""
@@ -242,17 +253,17 @@ class FastForwardButton(Button):
 
     def fastforward(self, *_):
         """Perform many iterations of the simulation at once ignoring graphics."""
-        _root().ids.agora.stop_sim()
+        _get_agora().stop_sim()
         content = FastForwardPopup(cancel=self.cancel_fast_forward)
         self.popup = Popup(title="Folyamatban...", content=content,
                            size_hint=(None, None), size=SETTINGS.popup_size_progress)
         self.popup.open()
-        _root().ids.agora.start_stop_sim(fastforward=True)
+        _get_agora().start_stop_sim(fastforward=True)
 
     def cancel_fast_forward(self, *_):
         """Stop the running simulation early."""
-        if _root().ids.agora.sim:
-            _root().ids.agora.sim_cancelled = True
+        if _get_agora().sim:
+            _get_agora().sim_cancelled = True
 
 class SpeedSlider(Slider):
     """Used to set the idle time between simulation steps."""
@@ -264,8 +275,8 @@ class SpeedSlider(Slider):
 
     def adjust_sim_speed(self, *_):
         """Speed up or slow down the running graphical (non-fast-forward) simulation."""
-        if _root().ids.agora.sim:
-            _root().ids.agora.restart_sim()
+        if _get_agora().sim:
+            _get_agora().restart_sim()
 
 class IterationCounter(Label):
     """Displays the number of iterations simulated so far."""
@@ -302,7 +313,7 @@ class SpeakerDot(Speaker, DragBehavior, Widget):
             return
         if not self.parent.graphics_on:
             return
-        pos = _root().ids.agora_layout.transform_inv.transform_point(*pos, 0)
+        pos = _get_agora_layout().transform_inv.transform_point(*pos, 0)
         if self.collide_point(pos[0], pos[1]):
             if not self.nametag_on:
                 debug("SpeakerDot: Turning on nametag for %d" % self.n)
@@ -316,14 +327,14 @@ class SpeakerDot(Speaker, DragBehavior, Widget):
 
     def on_pos_changed(self, *_):
         """Invalidate the whole distance calculation cache when any speaker is moved."""
-        _root().ids.agora.clear_dist_cache()
+        _get_agora().clear_dist_cache()
 
     def on_right_click(self, _instance, touch):
         """Remove this speaker when right clicked."""
         if touch.button == 'right' and self.collide_point(*touch.pos):
             self.parent.remove_widget(self.nametag)
             self.nametag_on = False
-            _root().ids.agora.remove_speakerdot(self)
+            _get_agora().remove_speakerdot(self)
         else:
             pass # no need to propagate upwards to DragBehavior
 
@@ -364,7 +375,7 @@ class NameTag(Label):
 
     def on_mouse_pos(self, _window, pos):
         """Follow hovering mouse cursor."""
-        transformed_pos = _root().ids.agora_layout.transform_inv.transform_point(*pos, 0)
+        transformed_pos = _get_agora_layout().transform_inv.transform_point(*pos, 0)
         self.pos = transformed_pos[0:2]
 
 class AgoraWidget(Widget, Agora):
@@ -436,7 +447,7 @@ class AgoraWidget(Widget, Agora):
     def start_sim(self):
         """Schedule regular simulation in Kivy event loop at intervals specified by the slider."""
         assert not self.sim
-        slowdown = _root().ids.button_layout.ids.speed_slider.value
+        slowdown = _get_button_layout().ids.speed_slider.value
         self.sim = Clock.schedule_interval(self.simulate, 1.0 - 0.01 * slowdown)
         self.slowdown_prev = slowdown
 
@@ -460,7 +471,7 @@ class AgoraWidget(Widget, Agora):
     def restart_sim(self):
         """Reschedule simulation with different sleep timing."""
         if self.sim:
-            slowdown = _root().ids.button_layout.ids.speed_slider.value
+            slowdown = _get_button_layout().ids.speed_slider.value
             if self.slowdown_prev != slowdown:
                 self.sim.cancel()
                 self.sim = None
@@ -471,7 +482,7 @@ class AgoraWidget(Widget, Agora):
         if self.sim:
             self.sim.cancel()
             self.sim = None
-            start_stop_button = _root().ids.button_layout.ids.start_stop_button
+            start_stop_button = _get_button_layout().ids.start_stop_button
             start_stop_button.update_text()
 
     def simulate(self, *_):
@@ -488,7 +499,7 @@ class AgoraWidget(Widget, Agora):
         self.graphics_on = graphics_on_before
         if done:
             self.stop_sim()
-            ff_button = _root().ids.button_layout.ids.fast_forward_button
+            ff_button = _get_button_layout().ids.fast_forward_button
             if ff_button.popup:
                 ff_button.popup.dismiss()
             self.pick = None
@@ -572,7 +583,7 @@ class AgoraWidget(Widget, Agora):
 
     def update_iteration_counter(self):
         """Set the text on the button panel that shows how deep into the simulation we are."""
-        iter_counter = _root().ids.button_layout.ids.iteration_counter
+        iter_counter = _get_button_layout().ids.iteration_counter
         iter_counter.text = '%d iteráció' % self.state.sim_iteration_total
 
     def update_talk_arrow(self):
@@ -621,7 +632,7 @@ class AgoraWidget(Widget, Agora):
 
     def update_progressbar(self, sim_iteration):
         """Display number of simulation cycles performed in the progress bar popup."""
-        ff_button = _root().ids.button_layout.ids.fast_forward_button
+        ff_button = _get_button_layout().ids.fast_forward_button
         if ff_button.popup:
             progressbar = ff_button.popup.ids.container.children[0].ids.progressbar
             progressbar.value = sim_iteration
