@@ -4,10 +4,13 @@ from kivy.app import App
 from kivy.core.window import Window
 from kivy.lang import Builder
 
-from .root import TopTabbedPanel
-from .sim import KeyeventHandler
+from .root import *
+from .sim import *
+from .settings import *
 
-_KV_FILES = ["src/gui/root.kv", "src/gui/sim.kv", "src/gui/settings.kv"]
+_KV_FILES = ["src/gui/root.kv",
+             "src/gui/sim.kv",
+             "src/gui/settings.kv"]
 for file in _KV_FILES:
     Builder.load_file(file)
 

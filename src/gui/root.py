@@ -6,9 +6,6 @@ from kivy import require as kivy_require
 from kivy.config import Config
 from kivy.uix.tabbedpanel import TabbedPanel
 
-from .sim import *
-from .settings import *
-
 kivy_require('2.1.0')
 Config.set('input', 'mouse', 'mouse,multitouch_on_demand')
 
