@@ -390,8 +390,9 @@ class AgoraWidget(Widget, Agora):
         Agora.__init__(self)
         self.state.speakers = speakers if speakers else []
         self.sim = None
-        self.slowdown_prev = None
         self.pick = []
+        self.slowdown_prev = None
+        self.distance_metric_prev = SETTINGS.sim_distance_metric
         self.talk_arrow_shaft = None
         self.talk_arrow_tip = None
         self.graphics_on = True
@@ -399,7 +400,7 @@ class AgoraWidget(Widget, Agora):
 
     def on_size(self, *_):
         """Finish initializing: draw the grid and load the default speaker population."""
-        self.update_grid() # TODO: update when setting is changed
+        self.update_grid()
         self.update_iteration_counter()
         speakers = DEFAULT_DEMO.get_speakers()
         self.load_speakers(speakers)
@@ -511,79 +512,76 @@ class AgoraWidget(Widget, Agora):
         else:
             self.update_progressbar(self.sim_iteration)
 
-    def toggle_euclidean_grid(self, force_show=False):
-        """Show/hide a grid with circles behind the Agora to suggest the use of Euclidean distance."""
+    def show_euclidean_grid(self):
+        """Draw a grid with circles behind the Agora to suggest the use of Euclidean distance."""
         if not self.graphics_on:
             return
-        if self.canvas.has_before and self.canvas.before.length():
-            if not force_show:
-                self.canvas.before.clear()
-        else:
-            self.toggle_manhattan_grid(force_show=True)
-            half_sqrt_2 = 1 / sqrt(2)
-            bottom = (0.5 - half_sqrt_2) * self.height
-            top    = (0.5 + half_sqrt_2) * self.height
-            left   = (0.5 - half_sqrt_2) * self.width
-            right  = (0.5 + half_sqrt_2) * self.width
-            self.canvas.before.add(SETTINGS.grid_color)
-            self.canvas.before.add(Line(points=[left, bottom, right, top], width=1))
-            self.canvas.before.add(Line(points=[left, top, right, bottom], width=1))
-            step = int(self.width / SETTINGS.grid_resolution)
-            for radius in range(step, int(sqrt(2) * self.width/2), step):
-                self.canvas.before.add(Line(circle=(self.width/2, self.height/2, radius), width=1))
+        self.show_manhattan_grid()
+        half_sqrt_2 = 1 / sqrt(2)
+        bottom = (0.5 - half_sqrt_2) * self.height
+        top    = (0.5 + half_sqrt_2) * self.height
+        left   = (0.5 - half_sqrt_2) * self.width
+        right  = (0.5 + half_sqrt_2) * self.width
+        self.canvas.before.add(Line(points=[left, bottom, right, top], width=1))
+        self.canvas.before.add(Line(points=[left, top, right, bottom], width=1))
+        step = int(self.width / SETTINGS.grid_resolution)
+        for radius in range(step, int(sqrt(2) * self.width/2), step):
+            self.canvas.before.add(Line(circle=(self.width/2, self.height/2, radius), width=1))
 
-    def toggle_manhattan_grid(self, force_show=False):
-        """Show/hide a grey Cartesian grid behind the Agora to suggest the use of Manhattan distance."""
+    def show_manhattan_grid(self):
+        """Draw a grey Cartesian grid behind the Agora to suggest the use of Manhattan distance."""
         if not self.graphics_on:
             return
-        if self.canvas.has_before and self.canvas.before.length():
-            if not force_show:
-                self.canvas.before.clear()
-        else:
-            half_sqrt_2 = 1 / sqrt(2)
-            bottom = (0.5 - half_sqrt_2) * self.height
-            top    = (0.5 + half_sqrt_2) * self.height
-            left   = (0.5 - half_sqrt_2) * self.width
-            right  = (0.5 + half_sqrt_2) * self.width
-            step_x = int(self.width  / SETTINGS.grid_resolution)
-            step_y = int(self.height / SETTINGS.grid_resolution)
-            self.canvas.before.add(SETTINGS.grid_color)
-            for delta_x in range(0, int(half_sqrt_2 * self.width), step_x):
-                self.canvas.before.add(Line(points=[self.width/2 + delta_x,
-                                                    bottom,
-                                                    self.width/2 + delta_x,
-                                                    top],
-                                                    width=1))
-                self.canvas.before.add(Line(points=[self.width/2 - delta_x,
-                                                    bottom,
-                                                    self.width/2 - delta_x,
-                                                    top],
-                                                    width=1))
-            for delta_y in range(0, int(half_sqrt_2 * self.height), step_y):
-                self.canvas.before.add(Line(points=[left,
-                                                    self.height/2 + delta_y,
-                                                    right,
-                                                    self.height/2 + delta_y],
-                                                    width=1))
-                self.canvas.before.add(Line(points=[left,
-                                                    self.height/2 - delta_y,
-                                                    right,
-                                                    self.height/2 - delta_y],
-                                                    width=1))
+        half_sqrt_2 = 1 / sqrt(2)
+        bottom = (0.5 - half_sqrt_2) * self.height
+        top    = (0.5 + half_sqrt_2) * self.height
+        left   = (0.5 - half_sqrt_2) * self.width
+        right  = (0.5 + half_sqrt_2) * self.width
+        step_x = int(self.width  / SETTINGS.grid_resolution)
+        step_y = int(self.height / SETTINGS.grid_resolution)
+        self.canvas.before.add(SETTINGS.grid_color)
+        for delta_x in range(0, int(half_sqrt_2 * self.width), step_x):
+            self.canvas.before.add(Line(points=[self.width/2 + delta_x,
+                                                bottom,
+                                                self.width/2 + delta_x,
+                                                top],
+                                                width=1))
+            self.canvas.before.add(Line(points=[self.width/2 - delta_x,
+                                                bottom,
+                                                self.width/2 - delta_x,
+                                                top],
+                                                width=1))
+        for delta_y in range(0, int(half_sqrt_2 * self.height), step_y):
+            self.canvas.before.add(Line(points=[left,
+                                                self.height/2 + delta_y,
+                                                right,
+                                                self.height/2 + delta_y],
+                                                width=1))
+            self.canvas.before.add(Line(points=[left,
+                                                self.height/2 - delta_y,
+                                                right,
+                                                self.height/2 - delta_y],
+                                                width=1))
 
     def update_grid(self, *_):
         """Show/hide the grid behind the Agora."""
         if not self.graphics_on:
             return
-        if SETTINGS.sim_distance_metric == SETTINGS.DistanceMetric.CONSTANT:
+        if self.canvas.has_before and self.distance_metric_prev == SETTINGS.sim_distance_metric:
+            # leave grid as it is
+            pass
+        else:
             if self.canvas.has_before and self.canvas.before.length():
                 self.canvas.before.clear()
-        elif SETTINGS.sim_distance_metric == SETTINGS.DistanceMetric.MANHATTAN:
-            self.toggle_manhattan_grid(force_show=True)
-        elif SETTINGS.sim_distance_metric == SETTINGS.DistanceMetric.EUCLIDEAN:
-            self.toggle_euclidean_grid(force_show=True)
-        else:
-            assert False
+            if SETTINGS.sim_distance_metric == SETTINGS.DistanceMetric.CONSTANT:
+                pass
+            elif SETTINGS.sim_distance_metric == SETTINGS.DistanceMetric.MANHATTAN:
+                self.show_manhattan_grid()
+            elif SETTINGS.sim_distance_metric == SETTINGS.DistanceMetric.EUCLIDEAN:
+                self.show_euclidean_grid()
+            else:
+                assert False
+        self.distance_metric_prev = SETTINGS.sim_distance_metric
 
     def update_iteration_counter(self):
         """Set the text on the button panel that shows how deep into the simulation we are."""
