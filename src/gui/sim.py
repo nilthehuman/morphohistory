@@ -313,6 +313,9 @@ class SpeakerDot(Speaker, DragBehavior, Widget):
             return
         if not self.parent.graphics_on:
             return
+        if App.get_running_app().root.current_tab != App.get_running_app().root.tab_list[-1]:
+            # user's looking at a different tab right now
+            return
         pos = _get_agora_layout().transform_inv.transform_point(*pos, 0)
         if self.collide_point(pos[0], pos[1]):
             if not self.nametag_on:
