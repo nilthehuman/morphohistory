@@ -151,7 +151,7 @@ class CustomSettings(Settings):
         # enforce upper and lower bounds on user-supplied values
         bounds = {
             ('Simulation', 'starting_experience') : (0, inf),
-            ('Termination', 'bias_threshold') : (0, 1),
+            ('Termination', 'bias_threshold') : (50, 100),
             ('Termination', 'experience_threshold') : (0, inf),
             ('Termination', 'sim_max_iteration') : (100, inf)
         }
