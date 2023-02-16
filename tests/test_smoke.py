@@ -25,7 +25,9 @@ _IMAGE_PATHS = {
     'start_stop_button'   : 'tests/images/start_stop_button.png',
     'speed_slider_knob'   : 'tests/images/speed_slider_knob.png',
     'fast_forward_button' : 'tests/images/fast_forward_button.png',
-    'rewind_button'       : 'tests/images/rewind_button.png'
+    'rewind_button'       : 'tests/images/rewind_button.png',
+    'first_tab_header'    : 'tests/images/first_tab_header.png',
+    'second_tab_header'   : 'tests/images/second_tab_header.png'
 }
 
 # test threads will tell the main thread about failures in this variable
@@ -63,7 +65,8 @@ def test_survive_keypresses(keys):
                              # FIXME: button text changes when clicked...
                              #['start_stop_button', 'start_stop_button'],
                              ['fast_forward_button'],
-                             ['fast_forward_button', 'rewind_button']
+                             ['fast_forward_button', 'rewind_button'],
+                             ['second_tab_header', 'first_tab_header']
                          ])
 def test_survive_button_clicks(buttons):
     def delayed_user_actions():

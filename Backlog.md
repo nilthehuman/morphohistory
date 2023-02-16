@@ -1,4 +1,3 @@
-* Implement Settings tab contents
 * Implement Paradigm tab contents
 * Implement Multisim tab contents
 * Save and load (some?) settings from file
