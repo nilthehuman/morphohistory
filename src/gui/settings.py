@@ -93,7 +93,7 @@ _SETTINGS_UI = [
         "title": "Holtpont"
     },
     {
-        "type": "numeric",
+        "type": "string",
         "title": "Elfogultsági küszöb",
         "desc": "Mekkora biast várunk el minden beszélőtől, mielőtt leáll a szimuláció",
         "section": "Termination",
@@ -114,6 +114,12 @@ _SETTINGS_UI = [
         "key": "sim_max_iteration"
     }
 ]
+
+def _get_agora():
+    return App.get_running_app().root.ids.sim_layout.ids.agora
+
+def _get_settings():
+    return App.get_running_app().root.ids.settings_layout.ids.settings
 
 class SettingsLayout(BoxLayout):
     """The vertical BoxLayout for the CustomSettingsPanel and the Buttons at the bottom."""
@@ -141,13 +147,15 @@ class CustomSettings(Settings):
                                 })
         self.config.setdefaults('Termination',
                                 {
-                                    'bias_threshold': 0.8,
+                                    'bias_threshold': '80%',
                                     'experience_threshold': 10,
                                     'sim_max_iteration': 10000
                                 })
         self.add_json_panel('Beállítások', self.config, data=dumps(_SETTINGS_UI))
+        self.load_settings_values()
 
     def on_config_change(self, config, section, key, value):
+        """Keep sensible value constraints and formatting in order when a new value is entered."""
         # enforce upper and lower bounds on user-supplied values
         bounds = {
             ('Simulation', 'starting_experience') : (0, inf),
@@ -156,42 +164,28 @@ class CustomSettings(Settings):
             ('Termination', 'sim_max_iteration') : (100, inf)
         }
         if (section, key) in bounds:
-            clamped_value = float(value)
+            clamped_value = value
+            if key == 'bias_threshold':
+                clamped_value = clamped_value[:-1]
+            clamped_value = float(clamped_value)
             clamped_value = max(clamped_value, bounds[(section, key)][0])
             clamped_value = min(clamped_value, bounds[(section, key)][1])
+            if key != 'bias_threshold':
+                # keep numeric values in integer format
+                clamped_value = int(clamped_value)
+            clamped_value = str(clamped_value)
+            if key == 'bias_threshold':
+                clamped_value += '%'
             self.config.set(section, key, clamped_value)
-            # TODO: refresh the SettingsPanel as well
+            self.reload_config_values(section, key)
         super().on_config_change(config, section, key, value)
 
-    def reload_config_values(self):
-        """Refresh all values displayed in the SettingsPanel."""
-        settingspanel = self.interface.children[0].children[0]
-        subtree = settingspanel.children
-        for child in subtree:
-            if isinstance(child, SettingItem):
-                child.value = self.config.get(child.section, child.key)
-
-def _get_agora():
-    return App.get_running_app().root.ids.sim_layout.ids.agora
-
-def _get_settings():
-    return App.get_running_app().root.ids.settings_layout.ids.settings
-
-def _get_config():
-    return _get_settings().config
-
-class ApplySettingsButton(Button):
-    """Button to destructively set the user's choices in the global settings object."""
-    def __init__(self, **kwargs):
-        super().__init__(**kwargs)
-        self.bind(on_release=self.apply_settings)
-
-    def apply_settings(self, *_):
-        """Overwrite current application settings with those in the SettingsPanel."""
+    def commit_settings(self):
+        """Destructively set all values in the global SETTINGS to the current values in our ConfigParser instance."""
         update_colors = False
         update_grid = False
-        for section in _get_config().sections():
-            for (key, new_value) in _get_config().items(section):
+        for section in self.config.sections():
+            for (key, new_value) in self.config.items(section):
                 # parse new_value from its raw string state
                 value_type = [item['type'] for item in _SETTINGS_UI if 'key' in item and key == item['key']][0]
                 if 'bool' == value_type:
@@ -201,10 +195,7 @@ class ApplySettingsButton(Button):
                     if new_value.rgb != getattr(SETTINGS, key).rgb:
                         update_colors = True
                 elif 'numeric' == value_type:
-                    try:
-                        new_value = int(new_value)
-                    except ValueError:
-                        new_value = float(new_value)
+                    new_value = int(new_value)
                 elif 'options' == value_type:
                     string_to_enum = {
                         'konstans'   : SETTINGS.DistanceMetric.CONSTANT,
@@ -214,7 +205,9 @@ class ApplySettingsButton(Button):
                     new_value = string_to_enum[new_value]
                     update_grid = True
                 elif 'string' == value_type:
-                    pass
+                    if '%' == new_value[-1]:
+                        # percentage to plain float
+                        new_value = float(new_value[:-1]) / 100
                 else:
                     assert False
                 setattr(SETTINGS, key, new_value)
@@ -222,6 +215,50 @@ class ApplySettingsButton(Button):
             _get_agora().update_speakerdot_colors()
         if update_grid:
             _get_agora().update_grid()
+
+    def load_settings_values(self):
+        """Destructively (re)set all values in our ConfigParser instance to the current global SETTINGS."""
+        for section in self.config.sections():
+            for (key, _) in self.config.items(section):
+                old_value = getattr(SETTINGS, key)
+                if isinstance(old_value, bool):
+                    old_value = '1' if old_value else '0'
+                elif isinstance(old_value, Color):
+                    old_value = get_hex_from_color(old_value.rgb)
+                elif isinstance(old_value, SETTINGS.DistanceMetric):
+                    enum_to_string = {
+                        SETTINGS.DistanceMetric.CONSTANT  : 'konstans',
+                        SETTINGS.DistanceMetric.MANHATTAN : 'Manhattan',
+                        SETTINGS.DistanceMetric.EUCLIDEAN : 'euklideszi',
+                    }
+                    old_value = enum_to_string[old_value]
+                elif isinstance(old_value, float):
+                    # plain float to percentage
+                    old_value = str(100 * old_value) + '%'
+                #print("Setting", section, key, str(old_value))
+                self.config.set(section, key, str(old_value))
+        # force the update of displayed values on GUI as well
+        self.reload_config_values()
+
+    def reload_config_values(self, section=None, key=None):
+        """Refresh all values displayed in the SettingsPanel."""
+        assert bool(section) == bool(key)
+        settingspanel = self.interface.children[0].children[0]
+        subtree = settingspanel.children
+        for child in subtree:
+            if isinstance(child, SettingItem):
+                if not key or section == child.section and key == child.key:
+                    child.value = self.config.get(child.section, child.key)
+
+class ApplySettingsButton(Button):
+    """Button to destructively set the user's choices in the global settings object."""
+    def __init__(self, **kwargs):
+        super().__init__(**kwargs)
+        self.bind(on_release=self.apply_settings)
+
+    def apply_settings(self, *_):
+        """Overwrite current application settings with those in the SettingsPanel."""
+        _get_settings().commit_settings()
 
 class DiscardSettingsButton(Button):
     """Button to throw away all changes and restore previous settings."""
@@ -231,18 +268,4 @@ class DiscardSettingsButton(Button):
 
     def discard_settings(self, *_):
         """Reset all items in SettingsPanel to the previous application settings."""
-        for section in _get_config().sections():
-            for (key, _) in _get_config().items(section):
-                old_value = getattr(SETTINGS, key)
-                if isinstance(old_value, Color):
-                    old_value = get_hex_from_color(old_value.rgb)
-                elif isinstance(old_value, SETTINGS.DistanceMetric):
-                    enum_to_string = {
-                        SETTINGS.DistanceMetric.CONSTANT  : 'konstans',
-                        SETTINGS.DistanceMetric.MANHATTAN : 'Manhattan',
-                        SETTINGS.DistanceMetric.EUCLIDEAN : 'euklideszi',
-                    }
-                    old_value = enum_to_string[old_value]
-                _get_config().set(section, key, old_value)
-        # force the update of displayed values on GUI as well
-        _get_settings().reload_config_values()
+        _get_settings().load_settings_values()
