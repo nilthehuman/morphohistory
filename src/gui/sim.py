@@ -32,6 +32,9 @@ from ..demos import DEFAULT_DEMO
 from ..speaker import Speaker
 
 # aliases for tediously long Widget and Layout lookups
+def _get_root():
+    return App.get_running_app().root
+
 def _get_agora():
     return App.get_running_app().root.ids.sim_layout.ids.agora
 
@@ -313,7 +316,7 @@ class SpeakerDot(Speaker, DragBehavior, Widget):
             return
         if not self.parent.graphics_on:
             return
-        if App.get_running_app().root.current_tab != App.get_running_app().root.tab_list[-1]:
+        if _get_root().current_tab != _get_root().tab_list[-1]:
             # user's looking at a different tab right now
             return
         pos = _get_agora_layout().transform_inv.transform_point(*pos, 0)
@@ -397,6 +400,7 @@ class AgoraWidget(Widget, Agora):
         self.talk_arrow_tip = None
         self.graphics_on = True
         self.bind(size=self.on_size)
+        self.bind(on_touch_up=self.pass_touch_to_tabbedpanel)
 
     def on_size(self, *_):
         """Finish initializing: draw the grid and load the default speaker population."""
@@ -406,6 +410,15 @@ class AgoraWidget(Widget, Agora):
         self.load_speakers(speakers)
         self.save_starting_state()
         self.unbind(size=self.on_size)
+
+    def pass_touch_to_tabbedpanel(self, instance, touch):
+        """Workaround to enable tab switching if AgoraWidget overlaps with tab strip.
+        (The Scatter widget above the AgoraWidget stops and claims the touch)"""
+        for tab in _get_root().tab_list:
+            if tab.collide_point(*tab.to_widget(*touch.pos)):
+                _get_root().switch_to(tab)
+                return True
+        return False
 
     def reset(self):
         """Reset state to earlier speaker snapshot."""
