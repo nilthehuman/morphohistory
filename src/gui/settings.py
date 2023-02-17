@@ -186,6 +186,7 @@ class CustomSettings(Settings):
     def commit_settings(self):
         """Destructively set all values in the global SETTINGS to the current values in our ConfigParser instance."""
         update_colors = False
+        update_arrow = False
         update_grid = False
         for section in self.config.sections():
             for (key, new_value) in self.config.items(section):
@@ -193,6 +194,8 @@ class CustomSettings(Settings):
                 value_type = [item['type'] for item in _SETTINGS_UI if 'key' in item and key == item['key']][0]
                 if 'bool' == value_type:
                     new_value = '0' != new_value
+                    if 'draw_arrow' == key:
+                        update_arrow = True
                 elif 'color' == value_type:
                     new_value = Color(*get_color_from_hex(new_value))
                     if new_value.rgb != getattr(SETTINGS, key).rgb:
@@ -216,6 +219,8 @@ class CustomSettings(Settings):
                 setattr(SETTINGS, key, new_value)
         if update_colors:
             _get_agora().update_speakerdot_colors()
+        if update_arrow:
+            _get_agora().update_talk_arrow()
         if update_grid:
             _get_agora().update_grid()
 
