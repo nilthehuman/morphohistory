@@ -266,7 +266,7 @@ class ConfirmedLabel(Label):
             self.parent.remove_widget(self)
 
 class ApplyConfirmedLabel(ConfirmedLabel):
-    """A small green note in the center of the screen to confirm saving the user's settings."""
+    """A small green note in the center of the screen to confirm applying the user's settings."""
     pass
 
 class DiscardConfirmedLabel(ConfirmedLabel):

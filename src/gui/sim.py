@@ -400,7 +400,7 @@ class AgoraWidget(Widget, Agora):
         self.talk_arrow_tip = None
         self.graphics_on = True
         self.bind(size=self.on_size)
-        self.bind(on_touch_up=self.pass_touch_to_tabbedpanel)
+        self.bind(on_touch_up=self.change_tab_manually)
 
     def on_size(self, *_):
         """Finish initializing: draw the grid and load the default speaker population."""
@@ -411,7 +411,7 @@ class AgoraWidget(Widget, Agora):
         self.save_starting_state()
         self.unbind(size=self.on_size)
 
-    def pass_touch_to_tabbedpanel(self, instance, touch):
+    def change_tab_manually(self, instance, touch):
         """Workaround to enable tab switching if AgoraWidget overlaps with tab strip.
         (The Scatter widget above the AgoraWidget stops and claims the touch)"""
         for tab in _get_root().tab_list:
