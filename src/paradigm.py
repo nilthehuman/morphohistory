@@ -85,7 +85,7 @@ class _Paradigm(ABC):
         dense_para = []
         assert len(self.para) <= 2
         for num in self.para:
-            assert len(num) <= 18
+            assert len(num) <= 13
             dense_para.append([])
             for cell in num:
                 if cell:
@@ -101,7 +101,7 @@ class _Paradigm(ABC):
         assert len(para_list) <= 2
         while para_list:
             list_below = para_list.pop(0)
-            assert len(list_below) <= 18
+            assert len(list_below) <= 13
             while list_below:
                 cell = _Cell.from_dict(list_below.pop(0))
                 new_para.para[cell.number][cell.case] = cell
@@ -136,7 +136,7 @@ class NounParadigm(_Paradigm):
     """A 2D matrix representing the competing forms of a single noun.
        Hungarian nouns inflect for number and case."""
     def __init__(self, bias_a=0.5, form_a='', form_b=''):
-        self.para = [[_NounCell(i, j, bias_a) for j in range(18)] for i in range(2)]
+        self.para = [[_NounCell(i, j, bias_a) for j in range(13)] for i in range(2)]
         self.para[0][0].form_a = form_a
         self.para[0][0].form_b = form_b
         self.para[0][0].importance = 1.0
@@ -145,37 +145,32 @@ class NounParadigm(_Paradigm):
     def morphosyntactic_properties(i, j):
         """Get the set of features describing a cell's context.
         (Gregory Stump's exact term if I'm not mistaken.)"""
-        assert i < 2 and j < 18
+        assert i < 2 and j < 13
         numbers = {
             0 : 'sg',
             1 : 'pl'
         }
         cases = {
-            0 : 'nom',
-            1 : 'acc',
-            2 : 'dat',
-            3 : 'ins',
-            4 : 'caus',
-            5 : 'transl',
-            6 : 'term',
-            7 : 'ess-formal',
-            8 : 'ess-modal',
-            9 : 'ine',
-           10 : 'supe',
-           11 : 'ade',
-           12 : 'ill',
-           13 : 'subl',
-           14 : 'all',
-           15 : 'ela',
-           16 : 'del',
-           17 : 'abl'
+            0 : 'acc',
+            1 : 'dat',
+            2 : 'ins',
+            3 : 'transl',
+            4 : 'ine',
+            5 : 'supe',
+            6 : 'ade',
+            7 : 'ill',
+            8 : 'subl',
+            9 : 'all',
+           10 : 'ela',
+           11 : 'del',
+           12 : 'abl'
         }
         return "{%s, %s}" % (numbers[i], cases[j])
 
     def nudge(self, amount, i, j):
         """Adjust the weights in a single cell."""
         assert -1 <= amount <= 1
-        assert i < 2 and j < 18
+        assert i < 2 and j < 13
         self.para[i][j].bias_a = _clamp(self.para[i][j].bias_a + amount)
 
     def propagate(self, amount, i, j):
@@ -184,7 +179,7 @@ class NounParadigm(_Paradigm):
         for self_i in range(2):
             if self_i != i:
                 self.nudge(delta, self_i, j)
-        for self_j in range(18):
+        for self_j in range(13):
             if self_j != j:
                 self.nudge(delta, i, self_j)
 
