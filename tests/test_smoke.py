@@ -33,14 +33,6 @@ _IMAGE_PATHS = {
 # test threads will tell the main thread about failures in this variable
 _FAIL_MSG = None
 
-# Kivy will load the kv file as many times as the App is run, and that is bad
-def _clear_kv_from_builder():
-    morphohistory_kv_files = ['src/gui/root.kv',
-                              'src/gui/sim.kv',
-                              'src/gui/settings.kv']
-    for kv_file in morphohistory_kv_files:
-        Builder.unload_file(kv_file)
-
 @pytest.mark.parametrize("keys",
                          [
                              [],
@@ -55,7 +47,6 @@ def test_survive_keypresses(keys):
             sleep(2)
         input_module.press('q') # quit application
         sleep(1)
-    _clear_kv_from_builder()
     test_thread = Thread(target=delayed_user_actions)
     test_thread.start()
     MorphoHistoryApp().run()
@@ -85,7 +76,6 @@ def test_survive_button_clicks(buttons):
             input_module.move(-300, 0) # move cursor off button
         input_module.press('q') # quit application
         sleep(2)
-    _clear_kv_from_builder()
     test_thread = Thread(target=delayed_user_actions)
     test_thread.start()
     MorphoHistoryApp().run()
@@ -118,7 +108,6 @@ def test_survive_simulation_speed_adjustment():
         sleep(2)
         input_module.press('q') # quit application
         sleep(1)
-    _clear_kv_from_builder()
     test_thread = Thread(target=delayed_user_actions)
     test_thread.start()
     MorphoHistoryApp().run()
