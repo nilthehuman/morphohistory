@@ -1,0 +1,1541 @@
+{
+ "speakers": [
+  {
+   "n": 0,
+   "pos": [
+    80.0,
+    500.0
+   ],
+   "para": {
+    "para": [
+     [
+      {
+       "bias_a": 0.0,
+       "form_a": "havernak",
+       "form_b": "havernek",
+       "importance": 1.0,
+       "number": 0,
+       "case": 0
+      }
+     ],
+     []
+    ]
+   },
+   "experience": 1,
+   "is_broadcaster": false
+  },
+  {
+   "n": 1,
+   "pos": [
+    140.0,
+    500.0
+   ],
+   "para": {
+    "para": [
+     [
+      {
+       "bias_a": 1.0,
+       "form_a": "havernak",
+       "form_b": "havernek",
+       "importance": 1.0,
+       "number": 0,
+       "case": 0
+      }
+     ],
+     []
+    ]
+   },
+   "experience": 1,
+   "is_broadcaster": false
+  },
+  {
+   "n": 2,
+   "pos": [
+    200.0,
+    500.0
+   ],
+   "para": {
+    "para": [
+     [
+      {
+       "bias_a": 0.0,
+       "form_a": "havernak",
+       "form_b": "havernek",
+       "importance": 1.0,
+       "number": 0,
+       "case": 0
+      }
+     ],
+     []
+    ]
+   },
+   "experience": 1,
+   "is_broadcaster": false
+  },
+  {
+   "n": 3,
+   "pos": [
+    260.0,
+    500.0
+   ],
+   "para": {
+    "para": [
+     [
+      {
+       "bias_a": 1.0,
+       "form_a": "havernak",
+       "form_b": "havernek",
+       "importance": 1.0,
+       "number": 0,
+       "case": 0
+      }
+     ],
+     []
+    ]
+   },
+   "experience": 1,
+   "is_broadcaster": false
+  },
+  {
+   "n": 4,
+   "pos": [
+    320.0,
+    500.0
+   ],
+   "para": {
+    "para": [
+     [
+      {
+       "bias_a": 0.0,
+       "form_a": "havernak",
+       "form_b": "havernek",
+       "importance": 1.0,
+       "number": 0,
+       "case": 0
+      }
+     ],
+     []
+    ]
+   },
+   "experience": 1,
+   "is_broadcaster": false
+  },
+  {
+   "n": 5,
+   "pos": [
+    380.0,
+    500.0
+   ],
+   "para": {
+    "para": [
+     [
+      {
+       "bias_a": 1.0,
+       "form_a": "havernak",
+       "form_b": "havernek",
+       "importance": 1.0,
+       "number": 0,
+       "case": 0
+      }
+     ],
+     []
+    ]
+   },
+   "experience": 1,
+   "is_broadcaster": false
+  },
+  {
+   "n": 6,
+   "pos": [
+    440.0,
+    500.0
+   ],
+   "para": {
+    "para": [
+     [
+      {
+       "bias_a": 0.0,
+       "form_a": "havernak",
+       "form_b": "havernek",
+       "importance": 1.0,
+       "number": 0,
+       "case": 0
+      }
+     ],
+     []
+    ]
+   },
+   "experience": 1,
+   "is_broadcaster": false
+  },
+  {
+   "n": 7,
+   "pos": [
+    500.0,
+    500.0
+   ],
+   "para": {
+    "para": [
+     [
+      {
+       "bias_a": 1.0,
+       "form_a": "havernak",
+       "form_b": "havernek",
+       "importance": 1.0,
+       "number": 0,
+       "case": 0
+      }
+     ],
+     []
+    ]
+   },
+   "experience": 1,
+   "is_broadcaster": false
+  },
+  {
+   "n": 8,
+   "pos": [
+    80.0,
+    440.0
+   ],
+   "para": {
+    "para": [
+     [
+      {
+       "bias_a": 1.0,
+       "form_a": "havernak",
+       "form_b": "havernek",
+       "importance": 1.0,
+       "number": 0,
+       "case": 0
+      }
+     ],
+     []
+    ]
+   },
+   "experience": 1,
+   "is_broadcaster": false
+  },
+  {
+   "n": 9,
+   "pos": [
+    140.0,
+    440.0
+   ],
+   "para": {
+    "para": [
+     [
+      {
+       "bias_a": 0.0,
+       "form_a": "havernak",
+       "form_b": "havernek",
+       "importance": 1.0,
+       "number": 0,
+       "case": 0
+      }
+     ],
+     []
+    ]
+   },
+   "experience": 1,
+   "is_broadcaster": false
+  },
+  {
+   "n": 10,
+   "pos": [
+    200.0,
+    440.0
+   ],
+   "para": {
+    "para": [
+     [
+      {
+       "bias_a": 1.0,
+       "form_a": "havernak",
+       "form_b": "havernek",
+       "importance": 1.0,
+       "number": 0,
+       "case": 0
+      }
+     ],
+     []
+    ]
+   },
+   "experience": 1,
+   "is_broadcaster": false
+  },
+  {
+   "n": 11,
+   "pos": [
+    260.0,
+    440.0
+   ],
+   "para": {
+    "para": [
+     [
+      {
+       "bias_a": 0.0,
+       "form_a": "havernak",
+       "form_b": "havernek",
+       "importance": 1.0,
+       "number": 0,
+       "case": 0
+      }
+     ],
+     []
+    ]
+   },
+   "experience": 1,
+   "is_broadcaster": false
+  },
+  {
+   "n": 12,
+   "pos": [
+    320.0,
+    440.0
+   ],
+   "para": {
+    "para": [
+     [
+      {
+       "bias_a": 1.0,
+       "form_a": "havernak",
+       "form_b": "havernek",
+       "importance": 1.0,
+       "number": 0,
+       "case": 0
+      }
+     ],
+     []
+    ]
+   },
+   "experience": 1,
+   "is_broadcaster": false
+  },
+  {
+   "n": 13,
+   "pos": [
+    380.0,
+    440.0
+   ],
+   "para": {
+    "para": [
+     [
+      {
+       "bias_a": 0.0,
+       "form_a": "havernak",
+       "form_b": "havernek",
+       "importance": 1.0,
+       "number": 0,
+       "case": 0
+      }
+     ],
+     []
+    ]
+   },
+   "experience": 1,
+   "is_broadcaster": false
+  },
+  {
+   "n": 14,
+   "pos": [
+    440.0,
+    440.0
+   ],
+   "para": {
+    "para": [
+     [
+      {
+       "bias_a": 1.0,
+       "form_a": "havernak",
+       "form_b": "havernek",
+       "importance": 1.0,
+       "number": 0,
+       "case": 0
+      }
+     ],
+     []
+    ]
+   },
+   "experience": 1,
+   "is_broadcaster": false
+  },
+  {
+   "n": 15,
+   "pos": [
+    500.0,
+    440.0
+   ],
+   "para": {
+    "para": [
+     [
+      {
+       "bias_a": 0.0,
+       "form_a": "havernak",
+       "form_b": "havernek",
+       "importance": 1.0,
+       "number": 0,
+       "case": 0
+      }
+     ],
+     []
+    ]
+   },
+   "experience": 1,
+   "is_broadcaster": false
+  },
+  {
+   "n": 16,
+   "pos": [
+    80.0,
+    380.0
+   ],
+   "para": {
+    "para": [
+     [
+      {
+       "bias_a": 0.0,
+       "form_a": "havernak",
+       "form_b": "havernek",
+       "importance": 1.0,
+       "number": 0,
+       "case": 0
+      }
+     ],
+     []
+    ]
+   },
+   "experience": 1,
+   "is_broadcaster": false
+  },
+  {
+   "n": 17,
+   "pos": [
+    140.0,
+    380.0
+   ],
+   "para": {
+    "para": [
+     [
+      {
+       "bias_a": 1.0,
+       "form_a": "havernak",
+       "form_b": "havernek",
+       "importance": 1.0,
+       "number": 0,
+       "case": 0
+      }
+     ],
+     []
+    ]
+   },
+   "experience": 1,
+   "is_broadcaster": false
+  },
+  {
+   "n": 18,
+   "pos": [
+    200.0,
+    380.0
+   ],
+   "para": {
+    "para": [
+     [
+      {
+       "bias_a": 0.0,
+       "form_a": "havernak",
+       "form_b": "havernek",
+       "importance": 1.0,
+       "number": 0,
+       "case": 0
+      }
+     ],
+     []
+    ]
+   },
+   "experience": 1,
+   "is_broadcaster": false
+  },
+  {
+   "n": 19,
+   "pos": [
+    260.0,
+    380.0
+   ],
+   "para": {
+    "para": [
+     [
+      {
+       "bias_a": 1.0,
+       "form_a": "havernak",
+       "form_b": "havernek",
+       "importance": 1.0,
+       "number": 0,
+       "case": 0
+      }
+     ],
+     []
+    ]
+   },
+   "experience": 1,
+   "is_broadcaster": false
+  },
+  {
+   "n": 20,
+   "pos": [
+    320.0,
+    380.0
+   ],
+   "para": {
+    "para": [
+     [
+      {
+       "bias_a": 0.0,
+       "form_a": "havernak",
+       "form_b": "havernek",
+       "importance": 1.0,
+       "number": 0,
+       "case": 0
+      }
+     ],
+     []
+    ]
+   },
+   "experience": 1,
+   "is_broadcaster": false
+  },
+  {
+   "n": 21,
+   "pos": [
+    380.0,
+    380.0
+   ],
+   "para": {
+    "para": [
+     [
+      {
+       "bias_a": 1.0,
+       "form_a": "havernak",
+       "form_b": "havernek",
+       "importance": 1.0,
+       "number": 0,
+       "case": 0
+      }
+     ],
+     []
+    ]
+   },
+   "experience": 1,
+   "is_broadcaster": false
+  },
+  {
+   "n": 22,
+   "pos": [
+    440.0,
+    380.0
+   ],
+   "para": {
+    "para": [
+     [
+      {
+       "bias_a": 0.0,
+       "form_a": "havernak",
+       "form_b": "havernek",
+       "importance": 1.0,
+       "number": 0,
+       "case": 0
+      }
+     ],
+     []
+    ]
+   },
+   "experience": 1,
+   "is_broadcaster": false
+  },
+  {
+   "n": 23,
+   "pos": [
+    500.0,
+    380.0
+   ],
+   "para": {
+    "para": [
+     [
+      {
+       "bias_a": 1.0,
+       "form_a": "havernak",
+       "form_b": "havernek",
+       "importance": 1.0,
+       "number": 0,
+       "case": 0
+      }
+     ],
+     []
+    ]
+   },
+   "experience": 1,
+   "is_broadcaster": false
+  },
+  {
+   "n": 24,
+   "pos": [
+    80.0,
+    320.0
+   ],
+   "para": {
+    "para": [
+     [
+      {
+       "bias_a": 1.0,
+       "form_a": "havernak",
+       "form_b": "havernek",
+       "importance": 1.0,
+       "number": 0,
+       "case": 0
+      }
+     ],
+     []
+    ]
+   },
+   "experience": 1,
+   "is_broadcaster": false
+  },
+  {
+   "n": 25,
+   "pos": [
+    140.0,
+    320.0
+   ],
+   "para": {
+    "para": [
+     [
+      {
+       "bias_a": 0.0,
+       "form_a": "havernak",
+       "form_b": "havernek",
+       "importance": 1.0,
+       "number": 0,
+       "case": 0
+      }
+     ],
+     []
+    ]
+   },
+   "experience": 1,
+   "is_broadcaster": false
+  },
+  {
+   "n": 26,
+   "pos": [
+    200.0,
+    320.0
+   ],
+   "para": {
+    "para": [
+     [
+      {
+       "bias_a": 1.0,
+       "form_a": "havernak",
+       "form_b": "havernek",
+       "importance": 1.0,
+       "number": 0,
+       "case": 0
+      }
+     ],
+     []
+    ]
+   },
+   "experience": 1,
+   "is_broadcaster": false
+  },
+  {
+   "n": 27,
+   "pos": [
+    260.0,
+    320.0
+   ],
+   "para": {
+    "para": [
+     [
+      {
+       "bias_a": 0.0,
+       "form_a": "havernak",
+       "form_b": "havernek",
+       "importance": 1.0,
+       "number": 0,
+       "case": 0
+      }
+     ],
+     []
+    ]
+   },
+   "experience": 1,
+   "is_broadcaster": false
+  },
+  {
+   "n": 28,
+   "pos": [
+    320.0,
+    320.0
+   ],
+   "para": {
+    "para": [
+     [
+      {
+       "bias_a": 1.0,
+       "form_a": "havernak",
+       "form_b": "havernek",
+       "importance": 1.0,
+       "number": 0,
+       "case": 0
+      }
+     ],
+     []
+    ]
+   },
+   "experience": 1,
+   "is_broadcaster": false
+  },
+  {
+   "n": 29,
+   "pos": [
+    380.0,
+    320.0
+   ],
+   "para": {
+    "para": [
+     [
+      {
+       "bias_a": 0.0,
+       "form_a": "havernak",
+       "form_b": "havernek",
+       "importance": 1.0,
+       "number": 0,
+       "case": 0
+      }
+     ],
+     []
+    ]
+   },
+   "experience": 1,
+   "is_broadcaster": false
+  },
+  {
+   "n": 30,
+   "pos": [
+    440.0,
+    320.0
+   ],
+   "para": {
+    "para": [
+     [
+      {
+       "bias_a": 1.0,
+       "form_a": "havernak",
+       "form_b": "havernek",
+       "importance": 1.0,
+       "number": 0,
+       "case": 0
+      }
+     ],
+     []
+    ]
+   },
+   "experience": 1,
+   "is_broadcaster": false
+  },
+  {
+   "n": 31,
+   "pos": [
+    500.0,
+    320.0
+   ],
+   "para": {
+    "para": [
+     [
+      {
+       "bias_a": 0.0,
+       "form_a": "havernak",
+       "form_b": "havernek",
+       "importance": 1.0,
+       "number": 0,
+       "case": 0
+      }
+     ],
+     []
+    ]
+   },
+   "experience": 1,
+   "is_broadcaster": false
+  },
+  {
+   "n": 32,
+   "pos": [
+    80.0,
+    260.0
+   ],
+   "para": {
+    "para": [
+     [
+      {
+       "bias_a": 0.0,
+       "form_a": "havernak",
+       "form_b": "havernek",
+       "importance": 1.0,
+       "number": 0,
+       "case": 0
+      }
+     ],
+     []
+    ]
+   },
+   "experience": 1,
+   "is_broadcaster": false
+  },
+  {
+   "n": 33,
+   "pos": [
+    140.0,
+    260.0
+   ],
+   "para": {
+    "para": [
+     [
+      {
+       "bias_a": 1.0,
+       "form_a": "havernak",
+       "form_b": "havernek",
+       "importance": 1.0,
+       "number": 0,
+       "case": 0
+      }
+     ],
+     []
+    ]
+   },
+   "experience": 1,
+   "is_broadcaster": false
+  },
+  {
+   "n": 34,
+   "pos": [
+    200.0,
+    260.0
+   ],
+   "para": {
+    "para": [
+     [
+      {
+       "bias_a": 0.0,
+       "form_a": "havernak",
+       "form_b": "havernek",
+       "importance": 1.0,
+       "number": 0,
+       "case": 0
+      }
+     ],
+     []
+    ]
+   },
+   "experience": 1,
+   "is_broadcaster": false
+  },
+  {
+   "n": 35,
+   "pos": [
+    260.0,
+    260.0
+   ],
+   "para": {
+    "para": [
+     [
+      {
+       "bias_a": 1.0,
+       "form_a": "havernak",
+       "form_b": "havernek",
+       "importance": 1.0,
+       "number": 0,
+       "case": 0
+      }
+     ],
+     []
+    ]
+   },
+   "experience": 1,
+   "is_broadcaster": false
+  },
+  {
+   "n": 36,
+   "pos": [
+    320.0,
+    260.0
+   ],
+   "para": {
+    "para": [
+     [
+      {
+       "bias_a": 0.0,
+       "form_a": "havernak",
+       "form_b": "havernek",
+       "importance": 1.0,
+       "number": 0,
+       "case": 0
+      }
+     ],
+     []
+    ]
+   },
+   "experience": 1,
+   "is_broadcaster": false
+  },
+  {
+   "n": 37,
+   "pos": [
+    380.0,
+    260.0
+   ],
+   "para": {
+    "para": [
+     [
+      {
+       "bias_a": 1.0,
+       "form_a": "havernak",
+       "form_b": "havernek",
+       "importance": 1.0,
+       "number": 0,
+       "case": 0
+      }
+     ],
+     []
+    ]
+   },
+   "experience": 1,
+   "is_broadcaster": false
+  },
+  {
+   "n": 38,
+   "pos": [
+    440.0,
+    260.0
+   ],
+   "para": {
+    "para": [
+     [
+      {
+       "bias_a": 0.0,
+       "form_a": "havernak",
+       "form_b": "havernek",
+       "importance": 1.0,
+       "number": 0,
+       "case": 0
+      }
+     ],
+     []
+    ]
+   },
+   "experience": 1,
+   "is_broadcaster": false
+  },
+  {
+   "n": 39,
+   "pos": [
+    500.0,
+    260.0
+   ],
+   "para": {
+    "para": [
+     [
+      {
+       "bias_a": 1.0,
+       "form_a": "havernak",
+       "form_b": "havernek",
+       "importance": 1.0,
+       "number": 0,
+       "case": 0
+      }
+     ],
+     []
+    ]
+   },
+   "experience": 1,
+   "is_broadcaster": false
+  },
+  {
+   "n": 40,
+   "pos": [
+    80.0,
+    200.0
+   ],
+   "para": {
+    "para": [
+     [
+      {
+       "bias_a": 1.0,
+       "form_a": "havernak",
+       "form_b": "havernek",
+       "importance": 1.0,
+       "number": 0,
+       "case": 0
+      }
+     ],
+     []
+    ]
+   },
+   "experience": 1,
+   "is_broadcaster": false
+  },
+  {
+   "n": 41,
+   "pos": [
+    140.0,
+    200.0
+   ],
+   "para": {
+    "para": [
+     [
+      {
+       "bias_a": 0.0,
+       "form_a": "havernak",
+       "form_b": "havernek",
+       "importance": 1.0,
+       "number": 0,
+       "case": 0
+      }
+     ],
+     []
+    ]
+   },
+   "experience": 1,
+   "is_broadcaster": false
+  },
+  {
+   "n": 42,
+   "pos": [
+    200.0,
+    200.0
+   ],
+   "para": {
+    "para": [
+     [
+      {
+       "bias_a": 1.0,
+       "form_a": "havernak",
+       "form_b": "havernek",
+       "importance": 1.0,
+       "number": 0,
+       "case": 0
+      }
+     ],
+     []
+    ]
+   },
+   "experience": 1,
+   "is_broadcaster": false
+  },
+  {
+   "n": 43,
+   "pos": [
+    260.0,
+    200.0
+   ],
+   "para": {
+    "para": [
+     [
+      {
+       "bias_a": 0.0,
+       "form_a": "havernak",
+       "form_b": "havernek",
+       "importance": 1.0,
+       "number": 0,
+       "case": 0
+      }
+     ],
+     []
+    ]
+   },
+   "experience": 1,
+   "is_broadcaster": false
+  },
+  {
+   "n": 44,
+   "pos": [
+    320.0,
+    200.0
+   ],
+   "para": {
+    "para": [
+     [
+      {
+       "bias_a": 1.0,
+       "form_a": "havernak",
+       "form_b": "havernek",
+       "importance": 1.0,
+       "number": 0,
+       "case": 0
+      }
+     ],
+     []
+    ]
+   },
+   "experience": 1,
+   "is_broadcaster": false
+  },
+  {
+   "n": 45,
+   "pos": [
+    380.0,
+    200.0
+   ],
+   "para": {
+    "para": [
+     [
+      {
+       "bias_a": 0.0,
+       "form_a": "havernak",
+       "form_b": "havernek",
+       "importance": 1.0,
+       "number": 0,
+       "case": 0
+      }
+     ],
+     []
+    ]
+   },
+   "experience": 1,
+   "is_broadcaster": false
+  },
+  {
+   "n": 46,
+   "pos": [
+    440.0,
+    200.0
+   ],
+   "para": {
+    "para": [
+     [
+      {
+       "bias_a": 1.0,
+       "form_a": "havernak",
+       "form_b": "havernek",
+       "importance": 1.0,
+       "number": 0,
+       "case": 0
+      }
+     ],
+     []
+    ]
+   },
+   "experience": 1,
+   "is_broadcaster": false
+  },
+  {
+   "n": 47,
+   "pos": [
+    500.0,
+    200.0
+   ],
+   "para": {
+    "para": [
+     [
+      {
+       "bias_a": 0.0,
+       "form_a": "havernak",
+       "form_b": "havernek",
+       "importance": 1.0,
+       "number": 0,
+       "case": 0
+      }
+     ],
+     []
+    ]
+   },
+   "experience": 1,
+   "is_broadcaster": false
+  },
+  {
+   "n": 48,
+   "pos": [
+    80.0,
+    140.0
+   ],
+   "para": {
+    "para": [
+     [
+      {
+       "bias_a": 0.0,
+       "form_a": "havernak",
+       "form_b": "havernek",
+       "importance": 1.0,
+       "number": 0,
+       "case": 0
+      }
+     ],
+     []
+    ]
+   },
+   "experience": 1,
+   "is_broadcaster": false
+  },
+  {
+   "n": 49,
+   "pos": [
+    140.0,
+    140.0
+   ],
+   "para": {
+    "para": [
+     [
+      {
+       "bias_a": 1.0,
+       "form_a": "havernak",
+       "form_b": "havernek",
+       "importance": 1.0,
+       "number": 0,
+       "case": 0
+      }
+     ],
+     []
+    ]
+   },
+   "experience": 1,
+   "is_broadcaster": false
+  },
+  {
+   "n": 50,
+   "pos": [
+    200.0,
+    140.0
+   ],
+   "para": {
+    "para": [
+     [
+      {
+       "bias_a": 0.0,
+       "form_a": "havernak",
+       "form_b": "havernek",
+       "importance": 1.0,
+       "number": 0,
+       "case": 0
+      }
+     ],
+     []
+    ]
+   },
+   "experience": 1,
+   "is_broadcaster": false
+  },
+  {
+   "n": 51,
+   "pos": [
+    260.0,
+    140.0
+   ],
+   "para": {
+    "para": [
+     [
+      {
+       "bias_a": 1.0,
+       "form_a": "havernak",
+       "form_b": "havernek",
+       "importance": 1.0,
+       "number": 0,
+       "case": 0
+      }
+     ],
+     []
+    ]
+   },
+   "experience": 1,
+   "is_broadcaster": false
+  },
+  {
+   "n": 52,
+   "pos": [
+    320.0,
+    140.0
+   ],
+   "para": {
+    "para": [
+     [
+      {
+       "bias_a": 0.0,
+       "form_a": "havernak",
+       "form_b": "havernek",
+       "importance": 1.0,
+       "number": 0,
+       "case": 0
+      }
+     ],
+     []
+    ]
+   },
+   "experience": 1,
+   "is_broadcaster": false
+  },
+  {
+   "n": 53,
+   "pos": [
+    380.0,
+    140.0
+   ],
+   "para": {
+    "para": [
+     [
+      {
+       "bias_a": 1.0,
+       "form_a": "havernak",
+       "form_b": "havernek",
+       "importance": 1.0,
+       "number": 0,
+       "case": 0
+      }
+     ],
+     []
+    ]
+   },
+   "experience": 1,
+   "is_broadcaster": false
+  },
+  {
+   "n": 54,
+   "pos": [
+    440.0,
+    140.0
+   ],
+   "para": {
+    "para": [
+     [
+      {
+       "bias_a": 0.0,
+       "form_a": "havernak",
+       "form_b": "havernek",
+       "importance": 1.0,
+       "number": 0,
+       "case": 0
+      }
+     ],
+     []
+    ]
+   },
+   "experience": 1,
+   "is_broadcaster": false
+  },
+  {
+   "n": 55,
+   "pos": [
+    500.0,
+    140.0
+   ],
+   "para": {
+    "para": [
+     [
+      {
+       "bias_a": 1.0,
+       "form_a": "havernak",
+       "form_b": "havernek",
+       "importance": 1.0,
+       "number": 0,
+       "case": 0
+      }
+     ],
+     []
+    ]
+   },
+   "experience": 1,
+   "is_broadcaster": false
+  },
+  {
+   "n": 56,
+   "pos": [
+    80.0,
+    80.0
+   ],
+   "para": {
+    "para": [
+     [
+      {
+       "bias_a": 1.0,
+       "form_a": "havernak",
+       "form_b": "havernek",
+       "importance": 1.0,
+       "number": 0,
+       "case": 0
+      }
+     ],
+     []
+    ]
+   },
+   "experience": 1,
+   "is_broadcaster": false
+  },
+  {
+   "n": 57,
+   "pos": [
+    140.0,
+    80.0
+   ],
+   "para": {
+    "para": [
+     [
+      {
+       "bias_a": 0.0,
+       "form_a": "havernak",
+       "form_b": "havernek",
+       "importance": 1.0,
+       "number": 0,
+       "case": 0
+      }
+     ],
+     []
+    ]
+   },
+   "experience": 1,
+   "is_broadcaster": false
+  },
+  {
+   "n": 58,
+   "pos": [
+    200.0,
+    80.0
+   ],
+   "para": {
+    "para": [
+     [
+      {
+       "bias_a": 1.0,
+       "form_a": "havernak",
+       "form_b": "havernek",
+       "importance": 1.0,
+       "number": 0,
+       "case": 0
+      }
+     ],
+     []
+    ]
+   },
+   "experience": 1,
+   "is_broadcaster": false
+  },
+  {
+   "n": 59,
+   "pos": [
+    260.0,
+    80.0
+   ],
+   "para": {
+    "para": [
+     [
+      {
+       "bias_a": 0.0,
+       "form_a": "havernak",
+       "form_b": "havernek",
+       "importance": 1.0,
+       "number": 0,
+       "case": 0
+      }
+     ],
+     []
+    ]
+   },
+   "experience": 1,
+   "is_broadcaster": false
+  },
+  {
+   "n": 60,
+   "pos": [
+    320.0,
+    80.0
+   ],
+   "para": {
+    "para": [
+     [
+      {
+       "bias_a": 1.0,
+       "form_a": "havernak",
+       "form_b": "havernek",
+       "importance": 1.0,
+       "number": 0,
+       "case": 0
+      }
+     ],
+     []
+    ]
+   },
+   "experience": 1,
+   "is_broadcaster": false
+  },
+  {
+   "n": 61,
+   "pos": [
+    380.0,
+    80.0
+   ],
+   "para": {
+    "para": [
+     [
+      {
+       "bias_a": 0.0,
+       "form_a": "havernak",
+       "form_b": "havernek",
+       "importance": 1.0,
+       "number": 0,
+       "case": 0
+      }
+     ],
+     []
+    ]
+   },
+   "experience": 1,
+   "is_broadcaster": false
+  },
+  {
+   "n": 62,
+   "pos": [
+    440.0,
+    80.0
+   ],
+   "para": {
+    "para": [
+     [
+      {
+       "bias_a": 1.0,
+       "form_a": "havernak",
+       "form_b": "havernek",
+       "importance": 1.0,
+       "number": 0,
+       "case": 0
+      }
+     ],
+     []
+    ]
+   },
+   "experience": 1,
+   "is_broadcaster": false
+  },
+  {
+   "n": 63,
+   "pos": [
+    500.0,
+    80.0
+   ],
+   "para": {
+    "para": [
+     [
+      {
+       "bias_a": 0.0,
+       "form_a": "havernak",
+       "form_b": "havernek",
+       "importance": 1.0,
+       "number": 0,
+       "case": 0
+      }
+     ],
+     []
+    ]
+   },
+   "experience": 1,
+   "is_broadcaster": false
+  }
+ ],
+ "sim_iteration_total": 0
+}
