@@ -14,8 +14,9 @@ _KV_FILES = ["src/gui/root.kv",
 for file in _KV_FILES:
     Builder.load_file(file)
 
-class MurmurApp(App):
+class MorphoHistoryApp(App):
     def build(self):
+        self.title = "morphohistory"
         self.icon = "assets/logo.png"
         root = TopTabbedPanel()
         Window.minimum_width = (root.ids.sim_layout.ids.agora_layout.width +
@@ -25,4 +26,4 @@ class MurmurApp(App):
         return root
 
 if __name__ == '__main__':
-    MurmurApp().run()
+    MorphoHistoryApp().run()

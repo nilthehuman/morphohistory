@@ -15,7 +15,7 @@ from kivy.lang import Builder
 
 # kludge relative import for Python REPL
 sys_path.append('..')
-from ..src.gui.app import MurmurApp
+from ..src.gui.app import MorphoHistoryApp
 
 # suppress warnings about internal Kivy warning
 pytestmark = pytest.mark.filterwarnings("ignore:The 'warn' method is deprecated")
@@ -35,8 +35,11 @@ _FAIL_MSG = None
 
 # Kivy will load the kv file as many times as the App is run, and that is bad
 def _clear_kv_from_builder():
-    murmur_kv_file = './src/gui/murmur.kv'
-    Builder.unload_file(murmur_kv_file)
+    morphohistory_kv_files = ['src/gui/root.kv',
+                              'src/gui/sim.kv',
+                              'src/gui/settings.kv']
+    for kv_file in morphohistory_kv_files:
+        Builder.unload_file(kv_file)
 
 @pytest.mark.parametrize("keys",
                          [
@@ -55,7 +58,7 @@ def test_survive_keypresses(keys):
     _clear_kv_from_builder()
     test_thread = Thread(target=delayed_user_actions)
     test_thread.start()
-    MurmurApp().run()
+    MorphoHistoryApp().run()
     test_thread.join()
     assert App.get_running_app() is None
 
@@ -85,7 +88,7 @@ def test_survive_button_clicks(buttons):
     _clear_kv_from_builder()
     test_thread = Thread(target=delayed_user_actions)
     test_thread.start()
-    MurmurApp().run()
+    MorphoHistoryApp().run()
     test_thread.join()
     # if an error happened on test_thread, we still need to fail on the main thread
     if _FAIL_MSG:
@@ -118,7 +121,7 @@ def test_survive_simulation_speed_adjustment():
     _clear_kv_from_builder()
     test_thread = Thread(target=delayed_user_actions)
     test_thread.start()
-    MurmurApp().run()
+    MorphoHistoryApp().run()
     test_thread.join()
     # if an error happened on test_thread, we still need to fail on the main thread
     if _FAIL_MSG:
