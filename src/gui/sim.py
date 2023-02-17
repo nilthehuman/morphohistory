@@ -195,7 +195,7 @@ class LoadFromFileButton(Button):
         try:
             _get_agora().load_from_file(fullpath)
             self.dismiss_popup()
-        except (JSONDecodeError, TypeError):
+        except (JSONDecodeError, UnicodeDecodeError, TypeError):
             self.show_fail_popup()
 
     def dismiss_popup(self):
