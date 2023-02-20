@@ -44,7 +44,7 @@ class _Settings:
         self.sim_single_cell = True
         self.sim_distance_metric = self.DistanceMetric.CONSTANT
         #self.sim_learning_model = HARMONIC # TODO use this option
-        self.sim_influence_self = False
+        self.sim_influence_self = True
         self.sim_influence_mutual = False
         self.sim_prefer_opposite = False
         #self.sim_reverse_preference = False # TODO use this option

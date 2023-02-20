@@ -143,7 +143,7 @@ class CustomSettings(Settings):
         self.config.setdefaults('Simulation',
                                 {
                                     'sim_distance_metric': 'konstans',
-                                    'sim_influence_self': 0,
+                                    'sim_influence_self': 1,
                                     'sim_influence_mutual': 0,
                                     'sim_prefer_opposite': 0,
                                     'starting_experience': 1
