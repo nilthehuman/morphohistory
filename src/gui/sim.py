@@ -74,7 +74,7 @@ class KeyeventHandler(Widget):
             return True
         return False
 
-class SimLayout(BoxLayout):
+class SimTabLayout(BoxLayout):
     """The horizontal BoxLayout holding all the contents of the Simulation tab."""
     pass
 

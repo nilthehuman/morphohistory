@@ -1,14 +1,14 @@
 #kivy 2.1
 #:import Window kivy.core.window.Window
 
-<SettingsLayout>
+<SettingsTabLayout>
     orientation: 'vertical'
     CustomSettings:
         id: settings
         size_hint: 1, 1
     RelativeLayout:
         size_hint_y: None
-        height: 60
+        height: 50
         ApplySettingsButton:
             id: apply_button
             text: "Nosza!"

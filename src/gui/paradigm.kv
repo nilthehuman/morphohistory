@@ -1,0 +1,53 @@
+#kivy 2.1
+<ParadigmTabLayout>
+    id: para_tab_layout
+    orientation: 'vertical'
+    spacing: 10
+    BoxLayout:
+        orientation: 'horizontal'
+        size_hint: 1, None
+        height: 50
+        canvas.before:
+            Color:
+                rgba: 0.3, 0.8, 1.0, 1
+            Line:
+                width: 1
+                points: self.x, self.y, self.x + self.width, self.y
+        Widget:
+            size_hint_x: 0.08
+        CheckBox:
+            id: single_cell_checkbox
+            active: True
+            text_color: 1, 1, 1, 1
+            color: 0.2, 0.9, 0.2, 1
+            size_hint_x: None
+            width: 30
+        Label:
+            text: "Csak egy cellát szimulálj, jó? Köszi"
+            text_size: self.size
+            font_size: 14
+            size_hint_x: 0.35
+            valign: "center"
+        Widget:
+            size_hint_x: 0.52
+    ParadigmTable:
+        cols: 7
+        rows: 14
+        orientation: 'tb-lr'
+        padding: 5, 0, 5, 0
+        spacing: 4, 4
+    RelativeLayout:
+        size_hint_y: None
+        height: 50
+        ApplyParadigmButton:
+            id: apply_button
+            text: "Nosza!"
+            pos_hint: {'center_x': 0.32}
+            size_hint_x: None
+            width: 200
+        DiscardParadigmButton:
+            id: discard_button
+            text: "Mégse"
+            pos_hint: {'center_x': 0.68}
+            size_hint_x: None
+            width: 200

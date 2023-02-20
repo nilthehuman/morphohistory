@@ -1,7 +1,5 @@
 """The top level root widget (main window) of the application's GUI."""
 
-# pylint: disable=wildcard-import, unused-wildcard-import
-
 from kivy import require as kivy_require
 from kivy.config import Config
 from kivy.uix.tabbedpanel import TabbedPanel

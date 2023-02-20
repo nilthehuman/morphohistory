@@ -6,24 +6,15 @@
     background_color: 0.16, 0.2, 0.24
     TabbedPanelItem:
         text: "Szimulátor"
-        SimLayout:
+        SimTabLayout:
             id: sim_layout
     TabbedPanelItem:
         text: "Beállítások"
-        SettingsLayout:
+        SettingsTabLayout:
             id: settings_layout
     TabbedPanelItem:
         text: "Paradigma"
-        #BoxLayout:
-        #    orientation: 'vertical'
-        #    CheckBox:
-        #        text: "Csak egy cellát szimulálj, jó? köszi"
-        #        color: (0.2, 0.9, 0.2, 1.0)
-        #    TextInput:
-        #        text: "semmi"
-        #        disabled: False
-        #    TextInput:
-        #        text: "még annyi se"
-        #        disabled: True
+        ParadigmTabLayout:
+            id: para_layout
     TabbedPanelItem:
         text: "Multiszim"

@@ -124,7 +124,7 @@ def _get_agora():
 def _get_settings():
     return App.get_running_app().root.ids.settings_layout.ids.settings
 
-class SettingsLayout(BoxLayout):
+class SettingsTabLayout(BoxLayout):
     """The vertical BoxLayout for the CustomSettingsPanel and the Buttons at the bottom."""
     pass
 

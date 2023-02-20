@@ -1,5 +1,7 @@
 """Main entry point of the application."""
 
+# pylint: disable=wildcard-import, unused-wildcard-import
+
 from kivy.app import App
 from kivy.core.window import Window
 from kivy.lang import Builder
@@ -7,10 +9,12 @@ from kivy.lang import Builder
 from .root import *
 from .sim import *
 from .settings import *
+from .paradigm import *
 
 _KV_FILES = ["src/gui/root.kv",
              "src/gui/sim.kv",
-             "src/gui/settings.kv"]
+             "src/gui/settings.kv",
+             "src/gui/paradigm.kv"]
 for file in _KV_FILES:
     Builder.load_file(file)
 
