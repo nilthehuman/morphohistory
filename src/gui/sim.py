@@ -414,8 +414,9 @@ class AgoraWidget(Widget, Agora):
     def change_tab_manually(self, instance, touch):
         """Workaround to enable tab switching if AgoraWidget overlaps with tab strip.
         (The Scatter widget above the AgoraWidget stops and claims the touch)"""
+        abs_touch_pos = self.to_window(*touch.pos)
         for tab in _get_root().tab_list:
-            if tab.collide_point(*tab.to_widget(*touch.pos)):
+            if tab.collide_point(*tab.to_widget(*abs_touch_pos)):
                 _get_root().switch_to(tab)
                 return True
         return False
