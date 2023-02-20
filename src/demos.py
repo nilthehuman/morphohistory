@@ -90,6 +90,23 @@ class Checkers(_DemoFactory):
                 speakers.append(Speaker.frombias(row * 8 + col, pos, 1.0 if (row + col) % 2 else 0.0))
         return speakers
 
+class AloneAgainstTheWorld(_DemoFactory):
+    """A 9x9 grid of speakers, all but one speaker biased towards A, the loner is biased towards B."""
+
+    @staticmethod
+    def get_speakers():
+        speakers = []
+        pos = [None, None]
+        for row in range(9):
+            for col in range(9):
+                pos = (_WIDTH * 0.1 + _WIDTH * 0.1 * col - _DOT_WIDTH * 0.5,
+                       _HEIGHT * 0.9 - _HEIGHT * 0.1 * row - _DOT_HEIGHT * 0.5)
+                if row == col == 4:
+                    speakers.append(Speaker.frombias(row * 9 + col, pos, 1.0))
+                else:
+                    speakers.append(Speaker.frombias(row * 9 + col, pos, 0.0))
+        return speakers
+
 class CoreVsPeriphery9x9(_DemoFactory):
     """A 9x9 grid of speakers, neutral majority on the outside, biased minority on the inside."""
 
@@ -101,7 +118,7 @@ class CoreVsPeriphery9x9(_DemoFactory):
             for col in range(9):
                 pos = (_WIDTH * 0.1 + _WIDTH * 0.1 * col - _DOT_WIDTH * 0.5,
                        _HEIGHT * 0.9 - _HEIGHT * 0.1 * row - _DOT_HEIGHT * 0.5)
-                if (3 <= row <= 5 and 3 <= col <= 5):
+                if 3 <= row <= 5 and 3 <= col <= 5:
                     speakers.append(Speaker.frombias(row * 9 + col, pos, 0.0))
                 else:
                     speakers.append(Speaker.frombias(row * 9 + col, pos, 0.5))
@@ -118,7 +135,7 @@ class CoreVsPeriphery10x10(_DemoFactory):
             for col in range(10):
                 pos = (_WIDTH * 0.05 + _WIDTH * 0.1 * col - _DOT_WIDTH * 0.5,
                        _HEIGHT * 0.95 - _HEIGHT * 0.1 * row - _DOT_HEIGHT * 0.5)
-                if (3 <= row <= 6 and 3 <= col <= 6):
+                if 3 <= row <= 6 and 3 <= col <= 6:
                     speakers.append(Speaker.frombias(row * 10 + col, pos, 0.0))
                 else:
                     speakers.append(Speaker.frombias(row * 10 + col, pos, 0.5))
