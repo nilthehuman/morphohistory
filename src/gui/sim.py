@@ -463,6 +463,16 @@ class AgoraWidget(Widget, Agora):
         for speaker in speakers:
             self.add_speakerdot(SpeakerDot.fromspeaker(speaker))
 
+    def set_paradigm(self, para):
+        """Update the exact forms and prominence values in all cells of all
+        speakers' (redundantly stored) paradigms based on the values in para."""
+        for speaker in self.state.speakers:
+            for num in range(0, 2):
+                for case in range(0, 13):
+                    speaker.para.para[num][case].form_a = para.para[num][case].form_a
+                    speaker.para.para[num][case].form_b = para.para[num][case].form_b
+                    speaker.para.para[num][case].prominence = para.para[num][case].prominence
+
     def start_sim(self):
         """Schedule regular simulation in Kivy event loop at intervals specified by the slider."""
         assert not self.sim

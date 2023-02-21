@@ -8,8 +8,16 @@ from kivy.uix.label import Label
 from kivy.uix.gridlayout import GridLayout
 from kivy.uix.textinput import TextInput
 
+from ..settings import SETTINGS
+
+def _get_agora():
+    return App.get_running_app().root.ids.sim_layout.ids.agora
+
 def _get_single_cell_checkbox():
     return App.get_running_app().root.ids.para_layout.ids.single_cell_checkbox
+
+def _get_paradigm_table():
+    return App.get_running_app().root.ids.para_layout.ids.para_table
 
 class ParadigmTabLayout(BoxLayout):
     """The vertical BoxLayout holding the "single cell" CheckBox, the paradigm table
@@ -108,6 +116,45 @@ class ParadigmTable(GridLayout):
             text_input = CellTextInput(size_hint_x=0.1, text='1')
             self.add_widget(text_input)
 
+    def on_size(self, *_):
+        """Finish initializing once the root widget is ready."""
+        self.save_or_load_cells()
+        self.unbind(size=self.on_size)
+
+    def save_or_load_cells(self, save=False):
+        """Write the contents of all cells to speaker's paradigms, or reload cells from them."""
+        def _process_subcell(num, case, subcell):
+            # N.B. children are stored in reverse order
+            child_number = 14 * 7 - ((1 + 3*num + subcell) * 14 + 2 + case) # why do I need to add 2 here instead of 1??
+            text_input = self.children[child_number]
+            if 0 == subcell:
+                if save:
+                    SETTINGS.paradigm.para[num][case].form_a = text_input.text
+                else:
+                    text_input.text = SETTINGS.paradigm.para[num][case].form_a
+            elif 1 == subcell:
+                if save:
+                    SETTINGS.paradigm.para[num][case].form_b = text_input.text
+                else:
+                    text_input.text = SETTINGS.paradigm.para[num][case].form_b
+            elif 2 == subcell:
+                try:
+                    if save:
+                        SETTINGS.paradigm.para[num][case].prominence = float(text_input.text)
+                    else:
+                        text_input.text = str(SETTINGS.paradigm.para[num][case].prominence)
+                except ValueError:
+                    pass
+        if _get_single_cell_checkbox().active:
+            for subcell in range(0, 3):
+                _process_subcell(0, 0, subcell)
+        else:
+            for num in range(0, 2):
+                for case in range(0, 13):
+                    for subcell in range(0, 3):
+                        _process_subcell(num, case, subcell)
+        _get_agora().set_paradigm(SETTINGS.paradigm)
+
 class ApplyParadigmButton(Button):
     """Button to replace all word forms in the current simulation with the ones set on this tab."""
 
@@ -117,7 +164,7 @@ class ApplyParadigmButton(Button):
 
     def apply_paradigm(self, *_):
         """Update all word forms in the simulated paradigm to the user's new inputs."""
-        pass # TODO implement
+        _get_paradigm_table().save_or_load_cells(save=True)
 
 class DiscardParadigmButton(Button):
     """Button to reset all word forms in this tab to the ones in the current simulation."""
@@ -128,4 +175,4 @@ class DiscardParadigmButton(Button):
 
     def discard_paradigm(self, *_):
         """Reset all word forms in the paradigm table to their previous values."""
-        pass # TODO implement
+        _get_paradigm_table().save_or_load_cells(save=False)

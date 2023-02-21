@@ -6,6 +6,8 @@ from enum import Enum
 
 from kivy.graphics import Color
 
+from .paradigm import NounParadigm
+
 class _Settings:
     """A plain struct holding all relevant constants and parameters."""
 
@@ -38,8 +40,7 @@ class _Settings:
         self.starting_experience = 1
         self.experience_threshold = 10
 
-        self.default_form_a = 'havernak'
-        self.default_form_b = 'havernek'
+        self.paradigm = NounParadigm(bias_a=0.5, form_a='rozéból', form_b='rozéből')
 
         self.sim_single_cell = True
         self.sim_distance_metric = self.DistanceMetric.CONSTANT
