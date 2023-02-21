@@ -1,5 +1,4 @@
 * Implement Multisim tab contents
-* Save and load (some?) settings from file
 * Allow user to apply or discard changes in Settings tab
 * Implement Rescorla-Wagner conditioning model as an option
 * Implement convolution-based learning model

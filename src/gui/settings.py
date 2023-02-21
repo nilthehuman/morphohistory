@@ -18,6 +18,8 @@ from ..settings import SETTINGS
 
 Settings.interface_cls = InterfaceWithNoMenu
 
+_SETTINGS_FILE_PATH = './user_settings.ini'
+
 _SETTINGS_UI = [
     {
         "type": "title",
@@ -155,7 +157,8 @@ class CustomSettings(Settings):
                                     'sim_max_iteration': 10000
                                 })
         self.add_json_panel('Beállítások', self.config, data=dumps(_SETTINGS_UI))
-        self.load_settings_values()
+        self.config.read(_SETTINGS_FILE_PATH)
+        self.reload_config_values()
 
     def on_config_change(self, config, section, key, value):
         """Keep sensible value constraints and formatting in order when a new value is entered."""
@@ -184,7 +187,8 @@ class CustomSettings(Settings):
         super().on_config_change(config, section, key, value)
 
     def commit_settings(self):
-        """Destructively set all values in the global SETTINGS to the current values in our ConfigParser instance."""
+        """Destructively set all values in the global SETTINGS to the current values
+        in our ConfigParser instance, and also save them to file."""
         update_colors = False
         update_arrow = False
         update_grid = False
@@ -217,6 +221,9 @@ class CustomSettings(Settings):
                 else:
                     assert False
                 setattr(SETTINGS, key, new_value)
+        # save all settings to disk
+        self.config.write()
+        # update graphics on main tab
         if update_colors:
             _get_agora().update_speakerdot_colors()
         if update_arrow:
@@ -249,7 +256,7 @@ class CustomSettings(Settings):
         self.reload_config_values()
 
     def reload_config_values(self, section=None, key=None):
-        """Refresh all values displayed in the SettingsPanel."""
+        """Refresh all values displayed in the SettingsPanel from our ConfigParser instance."""
         assert bool(section) == bool(key)
         settingspanel = self.interface.children[0].children[0]
         subtree = settingspanel.children
