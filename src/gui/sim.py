@@ -26,6 +26,8 @@ from kivy.uix.slider import Slider
 from kivy.uix.stencilview import StencilView
 from kivy.uix.widget import Widget
 
+from .confirm import ApplyConfirmedLabel
+
 from ..settings import SETTINGS
 from ..agora import Agora
 from ..demos import DEFAULT_DEMO
@@ -150,6 +152,8 @@ class SaveToFileButton(Button):
         else:
             _get_agora().save_to_file(fullpath)
             self.dismiss_popup()
+            label = ApplyConfirmedLabel()
+            _get_agora_layout().add_widget(label)
 
     def show_overwrite_popup(self, *_):
         """Open another popup to ask for permission to overwrite existing file."""
@@ -166,6 +170,8 @@ class SaveToFileButton(Button):
         _get_agora().save_to_file(fullpath)
         self.dismiss_overwrite_popup()
         self.dismiss_popup()
+        label = ApplyConfirmedLabel()
+        _get_agora_layout().add_widget(label)
 
     def dismiss_overwrite_popup(self):
         """Close nested dialogue popup about overwriting existing file."""

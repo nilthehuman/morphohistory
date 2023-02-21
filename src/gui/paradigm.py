@@ -8,6 +8,8 @@ from kivy.uix.label import Label
 from kivy.uix.gridlayout import GridLayout
 from kivy.uix.textinput import TextInput
 
+from .confirm import ApplyConfirmedLabel, DiscardConfirmedLabel
+
 from ..settings import SETTINGS
 
 def _get_agora():
@@ -167,6 +169,8 @@ class ApplyParadigmButton(Button):
     def apply_paradigm(self, *_):
         """Update all word forms in the simulated paradigm to the user's new inputs."""
         _get_paradigm_table().save_or_load_cells(save=True)
+        label = ApplyConfirmedLabel()
+        self.parent.add_widget(label)
 
 class DiscardParadigmButton(Button):
     """Button to reset all word forms in this tab to the ones in the current simulation."""
@@ -178,3 +182,5 @@ class DiscardParadigmButton(Button):
     def discard_paradigm(self, *_):
         """Reset all word forms in the paradigm table to their previous values."""
         _get_paradigm_table().save_or_load_cells(save=False)
+        label = DiscardConfirmedLabel()
+        self.parent.add_widget(label)

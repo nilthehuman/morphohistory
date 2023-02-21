@@ -3,16 +3,15 @@
 from copy import copy
 from math import inf
 
-from kivy.animation import Animation
 from kivy.app import App
 from kivy.config import ConfigParser
 from kivy.graphics import Color
-from kivy.properties import NumericProperty
 from kivy.uix.boxlayout import BoxLayout
 from kivy.uix.button import Button
-from kivy.uix.label import Label
 from kivy.uix.settings import InterfaceWithNoMenu, Settings, SettingItem, SettingsPanel
 from kivy.utils import get_color_from_hex, get_hex_from_color
+
+from .confirm import ApplyConfirmedLabel, DiscardConfirmedLabel
 
 from ..settings import SETTINGS
 
@@ -303,26 +302,6 @@ class CustomSettings(Settings):
                 if not key or section == child.section and key == child.key:
                     child.value = self.config.get(child.section, child.key)
 
-class ConfirmedLabel(Label):
-    """Common base class to ApplyConfirmedLabel and DiscardConfirmedLabel for convenience."""
-    alpha = NumericProperty(1)
-
-    def __init__(self, **kwargs):
-        super().__init__(**kwargs)
-        self.bind(alpha=self.on_fade)
-
-    def on_fade(self, _instance, value):
-        if 0 == value:
-            self.parent.remove_widget(self)
-
-class ApplyConfirmedLabel(ConfirmedLabel):
-    """A small green note in the center of the screen to confirm applying the user's settings."""
-    pass
-
-class DiscardConfirmedLabel(ConfirmedLabel):
-    """A small red note in the center of the screen to confirm discarding the user's settings."""
-    pass
-
 class ApplySettingsButton(Button):
     """Button to destructively set the user's choices in the global settings object."""
     def __init__(self, **kwargs):
@@ -334,7 +313,6 @@ class ApplySettingsButton(Button):
         _get_settings().commit_settings()
         label = ApplyConfirmedLabel()
         self.parent.add_widget(label)
-        Animation(alpha=0, d=1.5, t='in_quad').start(label)
 
 class DiscardSettingsButton(Button):
     """Button to throw away all changes and restore previous settings."""
@@ -347,4 +325,3 @@ class DiscardSettingsButton(Button):
         _get_settings().load_settings_values()
         label = DiscardConfirmedLabel()
         self.parent.add_widget(label)
-        Animation(alpha=0, d=1.5, t='in_quad').start(label)
