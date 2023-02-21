@@ -162,7 +162,7 @@ class CustomSettings(Settings):
 
     # Initiasize anti-pattern
     def on_size(self, *_):
-        self.commit_settings()
+        self.commit_settings(write_to_file=False)
         self.unbind(size=self.on_size)
 
     def on_config_change(self, config, section, key, value):
@@ -191,7 +191,7 @@ class CustomSettings(Settings):
             self.reload_config_values(section, key)
         super().on_config_change(config, section, key, value)
 
-    def commit_settings(self):
+    def commit_settings(self, write_to_file=True):
         """Destructively set all values in the global SETTINGS to the current values
         in our ConfigParser instance, and also save them to file."""
         update_colors = False
@@ -226,8 +226,9 @@ class CustomSettings(Settings):
                 else:
                     assert False
                 setattr(SETTINGS, key, new_value)
-        # save all settings to disk
-        self.config.write()
+        if write_to_file:
+            # save all settings to disk
+            self.config.write()
         # update graphics on main tab
         if update_colors:
             _get_agora().update_speakerdot_colors()
