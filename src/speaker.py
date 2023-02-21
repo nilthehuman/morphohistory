@@ -27,7 +27,8 @@ class Speaker:
     @classmethod
     def frombias(cls, n, pos, bias_a, is_broadcaster=False):
         """Construct a Speaker from a single bias value."""
-        para = NounParadigm(bias_a=bias_a, form_a=SETTINGS.paradigm.para[0][0].form_a, form_b=SETTINGS.paradigm.para[0][0].form_b)
+        para = NounParadigm(bias_a=bias_a, form_a=SETTINGS.paradigm.para[0][0].form_a,
+                                           form_b=SETTINGS.paradigm.para[0][0].form_b)
         new_speaker = cls(n, pos, para, is_broadcaster)
         return new_speaker
 

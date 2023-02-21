@@ -121,7 +121,7 @@ class Agora:
             self.pick = self.pick_queue.pop(0)
         else:
             if not self.speaker_pairs:
-                self.speaker_pairs = list([{'speaker': s, 'hearer': h} for (s, h) in product(self.state.speakers, self.state.speakers) if s != h])
+                self.speaker_pairs = list({'speaker': s, 'hearer': h} for (s, h) in product(self.state.speakers, self.state.speakers) if s != h)
             if not self.cum_weights:
                 if SETTINGS.sim_distance_metric == SETTINGS.DistanceMetric.CONSTANT:
                     inv_dist_sq = _inv_dist_sq_constant

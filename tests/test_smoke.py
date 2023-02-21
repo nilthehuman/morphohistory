@@ -11,7 +11,6 @@ from threading import Thread
 from time import sleep
 
 from kivy.app import App
-from kivy.lang import Builder
 
 # kludge relative import for Python REPL
 sys_path.append('..')
