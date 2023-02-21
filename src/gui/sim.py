@@ -399,9 +399,9 @@ class AgoraWidget(Widget, Agora):
         self.talk_arrow_shaft = None
         self.talk_arrow_tip = None
         self.graphics_on = True
-        self.bind(size=self.on_size)
         self.bind(on_touch_up=self.change_tab_manually)
 
+    # Initiasize anti-pattern
     def on_size(self, *_):
         """Finish initializing: draw the grid and load the default speaker population."""
         self.update_grid()

@@ -30,8 +30,8 @@ class CaseLabel(Label):
     def __init__(self, text, **kwargs):
         super().__init__(**kwargs)
         self._text = text
-        self.bind(size=self.on_size)
 
+    # Initiasize anti-pattern
     def on_size(self, *_):
         """Finish initializing once the root widget is ready."""
         self.toggle_text()
@@ -49,8 +49,8 @@ class CellTextInput(TextInput):
         super().__init__(**kwargs)
         self.text = text
         self.cursor_color = (0, 0, 0, 1)
-        self.bind(size=self.on_size)
 
+    # Initiasize anti-pattern
     def on_size(self, *_):
         """Finish initializing once the root widget is ready."""
         self.toggle_disabled()
@@ -116,6 +116,7 @@ class ParadigmTable(GridLayout):
             text_input = CellTextInput(size_hint_x=0.1, text='1')
             self.add_widget(text_input)
 
+    # Initiasize anti-pattern
     def on_size(self, *_):
         """Finish initializing once the root widget is ready."""
         self.save_or_load_cells()
