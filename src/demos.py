@@ -179,4 +179,20 @@ class Rings16_24(_DemoFactory):
             speakers.append(Speaker.frombias(16 + n, pos, 1.0))
         return speakers
 
+class Villages(_DemoFactory):
+    """Four different compact communities a bit further apart from each other."""
+
+    @staticmethod
+    def get_speakers():
+        speakers = []
+        pos = [None, None]
+        for row in range(9):
+            for col in range(9):
+                if (row < 3 or 5 < row) and (col < 3 or 5 < col):
+                    pos = (_WIDTH * 0.1 + _WIDTH * 0.1 * col - _DOT_WIDTH * 0.5,
+                           _HEIGHT * 0.9 - _HEIGHT * 0.1 * row - _DOT_HEIGHT * 0.5)
+                    bias_a = 0.0 if (row < 3) == (col < 3) else 1.0
+                    speakers.append(Speaker.frombias(row * 9 + col, pos, bias_a))
+        return speakers
+
 DEFAULT_DEMO = Rainbow9x9
