@@ -59,8 +59,8 @@ class Speaker:
         for cases in self.para.para:
             for cell in cases:
                 if cell.form_a:
-                    sum_w += cell.bias_a * cell.importance
-                    sum_imp += cell.importance
+                    sum_w += cell.bias_a * cell.prominence
+                    sum_imp += cell.prominence
         self.principal_bias_cached = sum_w / sum_imp
         return self.principal_bias_cached
 

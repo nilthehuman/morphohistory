@@ -7,14 +7,14 @@ def _clamp(value):
 
 class _Cell(ABC):
     """A weighted superposition of two word forms for the same morphosyntactic context."""
-    def __init__(self, bias_a=0.5, form_a='', form_b='', importance=1.0):
+    def __init__(self, bias_a=0.5, form_a='', form_b='', prominence=1.0):
         self.bias_a = bias_a
         self.form_a = form_a
         self.form_b = form_b
         if not form_a and not form_b:
-            self.importance = 0
+            self.prominence = 0
         else:
-            self.importance = importance
+            self.prominence = prominence
 
     def __bool__(self):
         return 0 != len(self.form_a)
@@ -41,7 +41,7 @@ class _Cell(ABC):
                          cell_dict['bias_a'],
                          cell_dict['form_a'],
                          cell_dict['form_b'],
-                         cell_dict['importance'])
+                         cell_dict['prominence'])
 
     def to_str_short(self):
         if 0 == len(self.form_a):
@@ -109,8 +109,8 @@ class _Paradigm(ABC):
 
 class _NounCell(_Cell):
     """A single cell in a noun paradigm for a given morphosyntactic context."""
-    def __init__(self, number=0, case=0, bias_a=0.5, form_a='', form_b='', importance=1.0):
-        super().__init__(bias_a, form_a, form_b, importance)
+    def __init__(self, number=0, case=0, bias_a=0.5, form_a='', form_b='', prominence=1.0):
+        super().__init__(bias_a, form_a, form_b, prominence)
         self.number = number
         self.case = case
 
@@ -120,8 +120,8 @@ class _NounCell(_Cell):
 
 class _VerbCell(_Cell):
     """A single cell in a verb paradigm for a given morphosyntactic context."""
-    def __init__(self, person=0, number=0, defness=0, tense=0, mood=0, bias_a=0.5, form_a='', form_b='', importance=1.0):
-        super().__init__(bias_a, form_a, form_b, importance)
+    def __init__(self, person=0, number=0, defness=0, tense=0, mood=0, bias_a=0.5, form_a='', form_b='', prominence=1.0):
+        super().__init__(bias_a, form_a, form_b, prominence)
         self.person = person
         self.number = number
         self.defness = defness
@@ -139,7 +139,7 @@ class NounParadigm(_Paradigm):
         self.para = [[_NounCell(i, j, bias_a) for j in range(13)] for i in range(2)]
         self.para[0][0].form_a = form_a
         self.para[0][0].form_b = form_b
-        self.para[0][0].importance = 1.0
+        self.para[0][0].prominence = 1.0
 
     @staticmethod
     def morphosyntactic_properties(i, j):
@@ -175,7 +175,7 @@ class NounParadigm(_Paradigm):
 
     def propagate(self, amount, i, j):
         """Spread a weight change down each dimension in the paradigm."""
-        delta = _clamp(self.para[i][j].importance * amount)
+        delta = _clamp(self.para[i][j].prominence * amount)
         for self_i in range(2):
             if self_i != i:
                 self.nudge(delta, self_i, j)
@@ -226,7 +226,7 @@ class VerbParadigm(_Paradigm):
 
     def propagate(self, amount, i, j, k, l, m):
         """Spread a weight change down each dimension in the paradigm."""
-        delta = _clamp(self.para[i][j][k][l][m].importance * amount)
+        delta = _clamp(self.para[i][j][k][l][m].prominence * amount)
         for self_i in range(3):
             if self_i != i:
                 self.nudge(delta, self_i, j, k, l, m)

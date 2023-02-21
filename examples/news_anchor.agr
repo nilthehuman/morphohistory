@@ -13,7 +13,7 @@
        "bias_a": 0.5,
        "form_a": "havernak",
        "form_b": "havernek",
-       "importance": 1.0,
+       "prominence": 1.0,
        "number": 0,
        "case": 0
       }
@@ -37,7 +37,7 @@
        "bias_a": 0.5,
        "form_a": "havernak",
        "form_b": "havernek",
-       "importance": 1.0,
+       "prominence": 1.0,
        "number": 0,
        "case": 0
       }
@@ -61,7 +61,7 @@
        "bias_a": 0.5,
        "form_a": "havernak",
        "form_b": "havernek",
-       "importance": 1.0,
+       "prominence": 1.0,
        "number": 0,
        "case": 0
       }
@@ -85,7 +85,7 @@
        "bias_a": 0.5,
        "form_a": "havernak",
        "form_b": "havernek",
-       "importance": 1.0,
+       "prominence": 1.0,
        "number": 0,
        "case": 0
       }
@@ -109,7 +109,7 @@
        "bias_a": 0.5,
        "form_a": "havernak",
        "form_b": "havernek",
-       "importance": 1.0,
+       "prominence": 1.0,
        "number": 0,
        "case": 0
       }
@@ -133,7 +133,7 @@
        "bias_a": 0.5,
        "form_a": "havernak",
        "form_b": "havernek",
-       "importance": 1.0,
+       "prominence": 1.0,
        "number": 0,
        "case": 0
       }
@@ -157,7 +157,7 @@
        "bias_a": 0.5,
        "form_a": "havernak",
        "form_b": "havernek",
-       "importance": 1.0,
+       "prominence": 1.0,
        "number": 0,
        "case": 0
       }
@@ -181,7 +181,7 @@
        "bias_a": 0.5,
        "form_a": "havernak",
        "form_b": "havernek",
-       "importance": 1.0,
+       "prominence": 1.0,
        "number": 0,
        "case": 0
       }
@@ -205,7 +205,7 @@
        "bias_a": 0.5,
        "form_a": "havernak",
        "form_b": "havernek",
-       "importance": 1.0,
+       "prominence": 1.0,
        "number": 0,
        "case": 0
       }
@@ -229,7 +229,7 @@
        "bias_a": 0.5,
        "form_a": "havernak",
        "form_b": "havernek",
-       "importance": 1.0,
+       "prominence": 1.0,
        "number": 0,
        "case": 0
       }
@@ -253,7 +253,7 @@
        "bias_a": 0.5,
        "form_a": "havernak",
        "form_b": "havernek",
-       "importance": 1.0,
+       "prominence": 1.0,
        "number": 0,
        "case": 0
       }
@@ -277,7 +277,7 @@
        "bias_a": 0.5,
        "form_a": "havernak",
        "form_b": "havernek",
-       "importance": 1.0,
+       "prominence": 1.0,
        "number": 0,
        "case": 0
       }
@@ -301,7 +301,7 @@
        "bias_a": 0.5,
        "form_a": "havernak",
        "form_b": "havernek",
-       "importance": 1.0,
+       "prominence": 1.0,
        "number": 0,
        "case": 0
       }
@@ -325,7 +325,7 @@
        "bias_a": 0.5,
        "form_a": "havernak",
        "form_b": "havernek",
-       "importance": 1.0,
+       "prominence": 1.0,
        "number": 0,
        "case": 0
       }
@@ -349,7 +349,7 @@
        "bias_a": 0.5,
        "form_a": "havernak",
        "form_b": "havernek",
-       "importance": 1.0,
+       "prominence": 1.0,
        "number": 0,
        "case": 0
       }
@@ -373,7 +373,7 @@
        "bias_a": 0.5,
        "form_a": "havernak",
        "form_b": "havernek",
-       "importance": 1.0,
+       "prominence": 1.0,
        "number": 0,
        "case": 0
       }
@@ -397,7 +397,7 @@
        "bias_a": 1.0,
        "form_a": "havernak",
        "form_b": "havernek",
-       "importance": 1.0,
+       "prominence": 1.0,
        "number": 0,
        "case": 0
       }

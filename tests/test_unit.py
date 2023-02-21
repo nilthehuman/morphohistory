@@ -10,7 +10,7 @@ def test_default_NounParadigm():
     assert noun_para[0][0].bias_a == 0.5
     assert noun_para[0][0].form_a == ''
     assert noun_para[0][0].form_b == ''
-    assert noun_para[0][0].importance == 1.0
+    assert noun_para[0][0].prominence == 1.0
 
 def test_NounParadigm_assignment():
     noun_para = NounParadigm()
