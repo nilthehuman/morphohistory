@@ -14,5 +14,5 @@ def test_default_NounParadigm():
 
 def test_NounParadigm_assignment():
     noun_para = NounParadigm()
-    noun_para[0][0].weight_a = 0.12345
-    assert noun_para[0][0].weight_a == 0.12345
+    noun_para[0][0].bias_a = 0.12345
+    assert noun_para[0][0].bias_a == 0.12345
