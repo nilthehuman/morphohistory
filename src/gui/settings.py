@@ -1,6 +1,6 @@
 """The contents of the Settings tab: a list of user options to control the simulation parameters."""
 
-from json import dumps
+from copy import copy
 from math import inf
 
 from kivy.animation import Animation
@@ -11,7 +11,7 @@ from kivy.properties import NumericProperty
 from kivy.uix.boxlayout import BoxLayout
 from kivy.uix.button import Button
 from kivy.uix.label import Label
-from kivy.uix.settings import InterfaceWithNoMenu, Settings, SettingItem
+from kivy.uix.settings import InterfaceWithNoMenu, Settings, SettingItem, SettingsPanel
 from kivy.utils import get_color_from_hex, get_hex_from_color
 
 from ..settings import SETTINGS
@@ -130,6 +130,17 @@ class SettingsTabLayout(BoxLayout):
     """The vertical BoxLayout for the CustomSettingsPanel and the Buttons at the bottom."""
     pass
 
+class CustomSettingsPanel(SettingsPanel):
+    """Base class overridden to keep it from saving to file every time a setting is changed."""
+    def set_value(self, section, key, value):
+        """Override base class method to keep it from saving to file
+        every time a setting is changed."""
+        current = self.get_value(section, key)
+        if current == value:
+            return
+        self.config.set(section, key, value)
+        #self.config.write() # don't write to file just yet
+
 class CustomSettings(Settings):
     """A list of user preferences to control the appearance and operation of the application."""
     def __init__(self, **kwargs):
@@ -156,7 +167,7 @@ class CustomSettings(Settings):
                                     'experience_threshold': 10,
                                     'sim_max_iteration': 10000
                                 })
-        self.add_json_panel('Beállítások', self.config, data=dumps(_SETTINGS_UI))
+        self.add_json_panel('Beállítások', self.config, data=_SETTINGS_UI)
         self.config.read(_SETTINGS_FILE_PATH)
         self.reload_config_values()
 
@@ -260,6 +271,27 @@ class CustomSettings(Settings):
                 self.config.set(section, key, str(old_value))
         # force the update of displayed values on GUI as well
         self.reload_config_values()
+
+    def create_json_panel(self, title, config, filename=None, data=None):
+        """Override base class method to keep it from saving to file
+        every time a setting is changed."""
+        assert not filename and data
+        assert isinstance(data, list)
+        panel = CustomSettingsPanel(title=title, settings=self, config=config)
+        for setting in data:
+            # determine the type and the class to use
+            if 'type' not in setting:
+                raise ValueError('A setting is missing the "type" element')
+            ttype = setting['type']
+            cls = self._types.get(ttype)
+            if cls is None:
+                raise ValueError('No class registered to handle the <%s> type' % setting['type'])
+            str_settings = copy(setting)
+            del str_settings['type']
+            instance = cls(panel=panel, **str_settings)
+            # instance created, add to the panel
+            panel.add_widget(instance)
+        return panel
 
     def reload_config_values(self, section=None, key=None):
         """Refresh all values displayed in the SettingsPanel from our ConfigParser instance."""
