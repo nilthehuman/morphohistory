@@ -395,10 +395,11 @@ class AgoraWidget(Widget, Agora):
         self.sim = None
         self.pick = []
         self.slowdown_prev = None
-        self.distance_metric_prev = SETTINGS.sim_distance_metric
         self.talk_arrow_shaft = None
         self.talk_arrow_tip = None
         self.graphics_on = True
+        self.bind(on_touch_down=partial(self.update_grid, highlight=True))
+        self.bind(on_touch_up=partial(self.update_grid, highlight=False))
         self.bind(on_touch_up=self.change_tab_manually)
 
     # Initiasize anti-pattern
@@ -536,11 +537,11 @@ class AgoraWidget(Widget, Agora):
         else:
             self.update_progressbar(self.sim_iteration)
 
-    def show_euclidean_grid(self):
+    def show_euclidean_grid(self, highlight=False):
         """Draw a grid with circles behind the Agora to suggest the use of Euclidean distance."""
         if not self.graphics_on:
             return
-        self.show_manhattan_grid()
+        self.show_manhattan_grid(highlight=highlight)
         half_sqrt_2 = 1 / sqrt(2)
         bottom = (0.5 - half_sqrt_2) * self.height
         top    = (0.5 + half_sqrt_2) * self.height
@@ -552,7 +553,7 @@ class AgoraWidget(Widget, Agora):
         for radius in range(step, int(sqrt(2) * self.width/2), step):
             self.canvas.before.add(Line(circle=(self.width/2, self.height/2, radius), width=1))
 
-    def show_manhattan_grid(self):
+    def show_manhattan_grid(self, highlight=False):
         """Draw a grey Cartesian grid behind the Agora to suggest the use of Manhattan distance."""
         if not self.graphics_on:
             return
@@ -563,7 +564,14 @@ class AgoraWidget(Widget, Agora):
         right  = (0.5 + half_sqrt_2) * self.width
         step_x = int(self.width  / SETTINGS.grid_resolution)
         step_y = int(self.height / SETTINGS.grid_resolution)
-        self.canvas.before.add(SETTINGS.grid_color)
+        if highlight:
+            # highlight grid while dragged (looks cool)
+            grid_color_doubled = (2 * SETTINGS.grid_color.rgb[0],
+                                  2 * SETTINGS.grid_color.rgb[1],
+                                  2 * SETTINGS.grid_color.rgb[2])
+            self.canvas.before.add(Color(*grid_color_doubled))
+        else:
+            self.canvas.before.add(SETTINGS.grid_color)
         for delta_x in range(0, int(half_sqrt_2 * self.width), step_x):
             self.canvas.before.add(Line(points=[self.width/2 + delta_x,
                                                 bottom,
@@ -587,25 +595,20 @@ class AgoraWidget(Widget, Agora):
                                                 self.height/2 - delta_y],
                                                 width=1))
 
-    def update_grid(self, *_):
+    def update_grid(self, *_, highlight=False):
         """Show/hide the grid behind the Agora."""
         if not self.graphics_on:
             return
-        if self.canvas.has_before and self.distance_metric_prev == SETTINGS.sim_distance_metric:
-            # leave grid as it is
+        if self.canvas.has_before and self.canvas.before.length():
+            self.canvas.before.clear()
+        if SETTINGS.sim_distance_metric == SETTINGS.DistanceMetric.CONSTANT:
             pass
+        elif SETTINGS.sim_distance_metric == SETTINGS.DistanceMetric.MANHATTAN:
+            self.show_manhattan_grid(highlight=highlight)
+        elif SETTINGS.sim_distance_metric == SETTINGS.DistanceMetric.EUCLIDEAN:
+            self.show_euclidean_grid(highlight=highlight)
         else:
-            if self.canvas.has_before and self.canvas.before.length():
-                self.canvas.before.clear()
-            if SETTINGS.sim_distance_metric == SETTINGS.DistanceMetric.CONSTANT:
-                pass
-            elif SETTINGS.sim_distance_metric == SETTINGS.DistanceMetric.MANHATTAN:
-                self.show_manhattan_grid()
-            elif SETTINGS.sim_distance_metric == SETTINGS.DistanceMetric.EUCLIDEAN:
-                self.show_euclidean_grid()
-            else:
-                assert False
-        self.distance_metric_prev = SETTINGS.sim_distance_metric
+            assert False
 
     def update_iteration_counter(self):
         """Set the text on the button panel that shows how deep into the simulation we are."""
