@@ -48,6 +48,7 @@ class CellTextInput(TextInput):
     def __init__(self, text='', **kwargs):
         super().__init__(**kwargs)
         self.text = text
+        self.multiline = False # FIXME: this does not work :/
         self.cursor_color = (0, 0, 0, 1)
 
     # Initiasize anti-pattern
