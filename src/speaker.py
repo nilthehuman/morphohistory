@@ -66,7 +66,7 @@ class Speaker:
 
     def name_tag(self):
         """Text to display next to SpeakerDot label on mouse hover."""
-        return self.para[0][0].to_str_short() + "; exp=%d" % self.experience
+        return self.para[0][0].to_str_short() + "; xp:%d" % self.experience
 
     def talk(self, pick):
         """Interact with and influence another Speaker in the Agora."""
