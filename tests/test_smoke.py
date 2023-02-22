@@ -1,4 +1,5 @@
 """Smoke tests to ensure the basic stability of the application."""
+from os.path import dirname, join
 
 import pyautogui
 try:
@@ -10,23 +11,29 @@ from sys import path as sys_path
 from threading import Thread
 from time import sleep
 
+from platform import system
+if system() == "Windows":
+    from kivy.config import Config
+    Config.set('kivy', 'keyboard_mode', 'systemandmulti')
+
 from kivy.app import App
 
 # kludge relative import for Python REPL
 sys_path.append('..')
-from ..src.gui.app import MorphoHistoryApp
+from src.gui.app import MorphoHistoryApp
 
 # suppress warnings about internal Kivy warning
 pytestmark = pytest.mark.filterwarnings("ignore:The 'warn' method is deprecated")
 
 # PyAutoGUI will look for these GUI elements on the screen
+image_directory = join(dirname(__file__), "images")
 _IMAGE_PATHS = {
-    'start_stop_button'   : 'tests/images/start_stop_button.png',
-    'speed_slider_knob'   : 'tests/images/speed_slider_knob.png',
-    'fast_forward_button' : 'tests/images/fast_forward_button.png',
-    'rewind_button'       : 'tests/images/rewind_button.png',
-    'first_tab_header'    : 'tests/images/first_tab_header.png',
-    'second_tab_header'   : 'tests/images/second_tab_header.png'
+    'start_stop_button'   : join(image_directory, "start_stop_button.png"),
+    'speed_slider_knob'   : join(image_directory, "speed_slider_knob.png"),
+    'fast_forward_button' : join(image_directory, "fast_forward_button.png"),
+    'rewind_button'       : join(image_directory, "rewind_button.png"),
+    'first_tab_header'    : join(image_directory, "first_tab_header.png"),
+    'second_tab_header'   : join(image_directory, "second_tab_header.pn")
 }
 
 # test threads will tell the main thread about failures in this variable

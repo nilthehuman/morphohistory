@@ -7,6 +7,12 @@ from logging import debug, info
 from math import sqrt
 from os.path import isfile, join
 
+
+from platform import system
+if system() == "Windows":
+    from kivy.config import Config
+    Config.set('kivy', 'keyboard_mode', 'systemandmulti')
+
 from kivy.app import App
 from kivy.clock import Clock
 from kivy.core.window import Window

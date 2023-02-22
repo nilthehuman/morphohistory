@@ -3,6 +3,11 @@
 from copy import copy
 from math import inf
 
+from platform import system
+if system() == "Windows":
+    from kivy.config import Config
+    Config.set('kivy', 'keyboard_mode', 'systemandmulti')
+
 from kivy.app import App
 from kivy.config import ConfigParser
 from kivy.graphics import Color

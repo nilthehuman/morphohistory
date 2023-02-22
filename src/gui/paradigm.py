@@ -1,6 +1,11 @@
 """The contents of the Paradigm tab: a complete noun paradigm with two different forms in each cell."""
 
-from kivy.animation import Animation
+
+from platform import system
+if system() == "Windows":
+    from kivy.config import Config
+    Config.set('kivy', 'keyboard_mode', 'systemandmulti')
+
 from kivy.app import App
 from kivy.uix.boxlayout import BoxLayout
 from kivy.uix.button import Button
