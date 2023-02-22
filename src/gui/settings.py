@@ -245,6 +245,7 @@ class CustomSettings(Settings):
         if update_arrow:
             _get_agora().update_talk_arrow()
         if update_grid:
+            _get_agora().clear_dist_cache()
             _get_agora().update_grid()
 
     def load_settings_values(self):
