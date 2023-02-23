@@ -18,7 +18,7 @@ class KeyboardHandler(Widget):
         self.keyboard = Window.request_keyboard(lambda: True, self)
         self.keyboard.bind(on_key_down=self.on_keypressed)
 
-    def on_keypressed(self, _keyboard, keycode, *_):
+    def on_keypressed(self, _keyboard, keycode, _text, modifiers):
         if keycode[1] == 'g':
             get_agora().start_stop_sim()
             return True
@@ -32,5 +32,11 @@ class KeyboardHandler(Widget):
         if keycode[1] == 'q':
             info("KeyboardHandler: Exiting app...")
             App.get_running_app().stop()
+            return True
+        if keycode[1] == 'tab' and 'ctrl' in modifiers:
+            if 'shift' in modifiers:
+                get_root().switch_to_prev()
+            else:
+                get_root().switch_to_next()
             return True
         return False
