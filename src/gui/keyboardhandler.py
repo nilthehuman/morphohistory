@@ -15,12 +15,8 @@ class KeyboardHandler(Widget):
 
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
-        self.keyboard = Window.request_keyboard(self.on_keyboard_closed, self)
+        self.keyboard = Window.request_keyboard(lambda: True, self)
         self.keyboard.bind(on_key_down=self.on_keypressed)
-
-    def on_keyboard_closed(self):
-        self.keyboard.unbind(on_key_down=self.on_keypressed)
-        self.keyboard = None
 
     def on_keypressed(self, _keyboard, keycode, *_):
         if keycode[1] == 'g':
