@@ -46,8 +46,8 @@ class Rainbow10x10(_DemoFactory):
                 speakers.append(Speaker.frombias(row * 10 + col, pos, bias_a, starting_experience))
         return speakers
 
-class Synonymy(_DemoFactory):
-    """A 10x10 grid of speakers, all undecided: a case of perfect synonymy."""
+class Balance(_DemoFactory):
+    """A 10x10 grid of speakers, all undecided: a case of balanced alternatives."""
 
     @staticmethod
     def get_speakers(our_bias=None, their_bias=None, starting_experience=1):
@@ -60,8 +60,8 @@ class Synonymy(_DemoFactory):
                 speakers.append(Speaker.frombias(row * 10 + col, pos, 0.5, starting_experience))
         return speakers
 
-class SynonymyLarge(_DemoFactory):
-    """A 30x30 grid of speakers, all undecided: a case of perfect synonymy."""
+class BalanceLarge(_DemoFactory):
+    """A 30x30 grid of speakers, all undecided: a case of balanced alternatives."""
 
     @staticmethod
     def get_speakers(our_bias=None, their_bias=None, starting_experience=1):
