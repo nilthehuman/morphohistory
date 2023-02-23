@@ -80,6 +80,13 @@ class Agora:
         self.state.sim_iteration_total = 0
         self.clear_caches()
 
+    def load_demo_agora(self, demo_factory):
+        """Replace current speaker community with a demo preset."""
+        speakers = demo_factory.get_speakers()
+        self.clear_speakers()
+        self.load_speakers(speakers)
+        self.save_starting_state()
+
     def save_to_file(self, filepath):
         """Write current state to disk."""
         with open(filepath, 'w', encoding='utf-8') as stream:

@@ -1,0 +1,32 @@
+#kivy 2.1
+<TuningTabLayout>
+    orientation: 'vertical'
+    padding: 100, 60, 100, 100
+    spacing: 10
+    BoxLayout:
+        orientation: 'horizontal'
+        size_hint: 1, None
+        height: 50
+        canvas.before:
+            Color:
+                rgba: 0.3, 0.8, 1.0, 1
+            Line:
+                width: 1
+                points: self.x, self.y, self.x + self.width, self.y
+        Widget:
+            size_hint_x: 0.2
+        Label:
+            text: "Kiinduló agora:"
+            text_size: self.size
+            size_hint_x: 0.3
+            valign: "center"
+        Widget:
+            size_hint_x: 0.2
+        DemoSpinner:
+            #size_hint: None, None
+            #size: 100, 44
+            pos_hint: {'center': (.5, .5)}
+            text_autoupdate: True
+    BoxLayout:
+        Label:
+            text: "továbbiak"

@@ -371,9 +371,6 @@ class AgoraWidget(Widget, Agora):
         """Finish initializing: draw the grid and load the default speaker population."""
         self.update_grid()
         self.update_iteration_counter()
-        speakers = DEMO_FACTORIES[SETTINGS.current_demo].get_speakers()
-        self.load_speakers(speakers)
-        self.save_starting_state()
         self.unbind(size=self.on_size)
 
     def change_tab_manually(self, _instance, touch):

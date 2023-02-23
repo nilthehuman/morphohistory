@@ -20,6 +20,7 @@ from .root import *
 from .sim import *
 from .settings import *
 from .paradigm import *
+from .tuning import *
 
 
 _DIRECTORY = join(dirname(__file__))
@@ -27,6 +28,7 @@ _KV_FILES = (join(_DIRECTORY, "root.kv"),
              join(_DIRECTORY, "sim.kv"),
              join(_DIRECTORY, "settings.kv"),
              join(_DIRECTORY, "paradigm.kv"),
+             join(_DIRECTORY, "tuning.kv"),
              join(_DIRECTORY, "confirm.kv"))
 for file in _KV_FILES:
     Builder.load_file(file)
