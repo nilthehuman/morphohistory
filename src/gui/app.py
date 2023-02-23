@@ -15,6 +15,7 @@ from kivy.app import App
 from kivy.core.window import Window
 from kivy.lang import Builder
 
+from .keyboardhandler import KeyboardHandler
 from .root import *
 from .sim import *
 from .settings import *
@@ -38,7 +39,7 @@ class MorphoHistoryApp(App):
         Window.minimum_width = (root.ids.sim_layout.ids.agora_layout.width +
                                 root.ids.sim_layout.ids.button_layout.width)
         Window.minimum_height = root.ids.sim_layout.ids.agora_layout.height
-        KeyeventHandler()
+        KeyboardHandler()
         return root
 
 if __name__ == '__main__':

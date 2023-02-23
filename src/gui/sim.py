@@ -46,36 +46,6 @@ def _get_agora_layout():
 def _get_button_layout():
     return App.get_running_app().root.ids.sim_layout.ids.button_layout
 
-# Adapted from kivy.org/doc/stable/api-kivy.core.window.html
-class KeyeventHandler(Widget):
-    """Handles hotkeys to the application's basic features."""
-
-    def __init__(self, **kwargs):
-        super().__init__(**kwargs)
-        self.keyboard = Window.request_keyboard(self.on_keyboard_closed, self)
-        self.keyboard.bind(on_key_down=self.on_keypressed)
-
-    def on_keyboard_closed(self):
-        self.keyboard.unbind(on_key_down=self.on_keypressed)
-        self.keyboard = None
-
-    def on_keypressed(self, _keyboard, keycode, *_):
-        if keycode[1] == 'g':
-            _get_agora().start_stop_sim()
-            return True
-        if keycode[1] == 'f':
-            _get_agora().start_stop_sim(fastforward=True)
-            return True
-        if keycode[1] == 'r':
-            _get_agora().stop_sim()
-            _get_agora().reset()
-            return True
-        if keycode[1] == 'q':
-            info("KeyeventHandler: Exiting app...")
-            App.get_running_app().stop()
-            return True
-        return False
-
 class SimTabLayout(BoxLayout):
     """The horizontal BoxLayout holding all the contents of the Simulation tab."""
     pass
