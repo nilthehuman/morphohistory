@@ -1,8 +1,16 @@
 """Main entry point of the application."""
 
 # pylint: disable=wildcard-import, unused-wildcard-import
-from os.path import dirname
+from os.path import dirname, join
+from platform import system
 
+from kivy.config import Config
+Config.set('input', 'mouse', 'mouse,multitouch_on_demand')
+if system() == "Windows":
+    Config.set('kivy', 'keyboard_mode', 'systemandmulti')
+
+from kivy import require as kivy_require
+kivy_require('2.1.0')
 from kivy.app import App
 from kivy.core.window import Window
 from kivy.lang import Builder
@@ -13,12 +21,12 @@ from .settings import *
 from .paradigm import *
 
 
-root = join(dirname(__file__))
-_KV_FILES = (join(root, "root.kv"),
-             join(root, "sim.kv"),
-             join(root, "settings.kv"),
-             join(root, "paradigm.kv"),
-             join(root, "confirm.kv"))
+_DIRECTORY = join(dirname(__file__))
+_KV_FILES = (join(_DIRECTORY, "root.kv"),
+             join(_DIRECTORY, "sim.kv"),
+             join(_DIRECTORY, "settings.kv"),
+             join(_DIRECTORY, "paradigm.kv"),
+             join(_DIRECTORY, "confirm.kv"))
 for file in _KV_FILES:
     Builder.load_file(file)
 

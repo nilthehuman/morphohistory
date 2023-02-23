@@ -3,11 +3,6 @@
 from copy import copy
 from math import inf
 
-from platform import system
-if system() == "Windows":
-    from kivy.config import Config
-    Config.set('kivy', 'keyboard_mode', 'systemandmulti')
-
 from kivy.app import App
 from kivy.config import ConfigParser
 from kivy.graphics import Color
@@ -22,7 +17,7 @@ from ..settings import SETTINGS
 
 Settings.interface_cls = InterfaceWithNoMenu
 
-_SETTINGS_FILE_PATH = './user_settings.ini'
+_SETTINGS_FILE_PATH = 'user_settings.ini'
 
 _SETTINGS_UI = [
     {
@@ -265,7 +260,7 @@ class CustomSettings(Settings):
                     enum_to_string = {
                         SETTINGS.DistanceMetric.CONSTANT  : 'konstans',
                         SETTINGS.DistanceMetric.MANHATTAN : 'Manhattan',
-                        SETTINGS.DistanceMetric.EUCLIDEAN : 'euklideszi',
+                        SETTINGS.DistanceMetric.EUCLIDEAN : 'euklideszi'
                     }
                     old_value = enum_to_string[old_value]
                 elif isinstance(old_value, float):

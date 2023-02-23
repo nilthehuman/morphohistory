@@ -1,4 +1,5 @@
 """Smoke tests to ensure the basic stability of the application."""
+
 from os.path import dirname, join
 
 import pyautogui
@@ -26,14 +27,14 @@ from src.gui.app import MorphoHistoryApp
 pytestmark = pytest.mark.filterwarnings("ignore:The 'warn' method is deprecated")
 
 # PyAutoGUI will look for these GUI elements on the screen
-image_directory = join(dirname(__file__), "images")
+_IMAGE_DIRECTORY = join(dirname(__file__), "images")
 _IMAGE_PATHS = {
-    'start_stop_button'   : join(image_directory, "start_stop_button.png"),
-    'speed_slider_knob'   : join(image_directory, "speed_slider_knob.png"),
-    'fast_forward_button' : join(image_directory, "fast_forward_button.png"),
-    'rewind_button'       : join(image_directory, "rewind_button.png"),
-    'first_tab_header'    : join(image_directory, "first_tab_header.png"),
-    'second_tab_header'   : join(image_directory, "second_tab_header.pn")
+    'start_stop_button'   : join(_IMAGE_DIRECTORY, "start_stop_button.png"),
+    'speed_slider_knob'   : join(_IMAGE_DIRECTORY, "speed_slider_knob.png"),
+    'fast_forward_button' : join(_IMAGE_DIRECTORY, "fast_forward_button.png"),
+    'rewind_button'       : join(_IMAGE_DIRECTORY, "rewind_button.png"),
+    'first_tab_header'    : join(_IMAGE_DIRECTORY, "first_tab_header.png"),
+    'second_tab_header'   : join(_IMAGE_DIRECTORY, "second_tab_header.pn")
 }
 
 # test threads will tell the main thread about failures in this variable
