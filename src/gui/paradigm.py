@@ -24,12 +24,10 @@ class CaseLabel(Label):
         super().__init__(**kwargs)
         self._text = text
 
-    # Initiasize anti-pattern
-    def on_size(self, *_):
+    def on_gui_ready(self):
         """Finish initializing once the root widget is ready."""
         self.toggle_text()
         get_single_cell_checkbox().bind(active=self.toggle_text)
-        self.unbind(size=self.on_size)
 
     def toggle_text(self, *_):
         """Show or hide our own text depending on the state of the CheckBox above."""
@@ -44,12 +42,10 @@ class CellTextInput(TextInput):
         self.multiline = False # FIXME: this does not work :/
         self.cursor_color = (0, 0, 0, 1)
 
-    # Initiasize anti-pattern
-    def on_size(self, *_):
+    def on_gui_ready(self):
         """Finish initializing once the root widget is ready."""
         self.toggle_disabled()
         get_single_cell_checkbox().bind(active=self.toggle_disabled)
-        self.unbind(size=self.on_size)
 
     def toggle_disabled(self, *_):
         """Show or hide our own text depending on the state of the CheckBox above."""
@@ -110,11 +106,9 @@ class ParadigmTable(GridLayout):
             text_input = CellTextInput(size_hint_x=0.1, text='1')
             self.add_widget(text_input)
 
-    # Initiasize anti-pattern
-    def on_size(self, *_):
+    def on_gui_ready(self):
         """Finish initializing once the root widget is ready."""
         self.save_or_load_cells()
-        self.unbind(size=self.on_size)
 
     def save_or_load_cells(self, save=False):
         """Write the contents of all cells to speaker's paradigms, or reload cells from them."""

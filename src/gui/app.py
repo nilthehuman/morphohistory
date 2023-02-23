@@ -44,5 +44,18 @@ class MorphoHistoryApp(App):
         KeyboardHandler()
         return root
 
+    def on_start(self):
+        """Prepare GUI elements that need to know about the Widget tree to complete their setup."""
+        def descend_tree(widget):
+            if not hasattr(widget, 'ids'):
+                return
+            for child in widget.ids.values():
+                try:
+                    child.on_gui_ready()
+                except AttributeError:
+                    pass  # it's fine
+                descend_tree(child)
+        descend_tree(self.root)
+
 if __name__ == '__main__':
     MorphoHistoryApp().run()

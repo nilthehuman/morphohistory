@@ -25,11 +25,9 @@ class DemoSpinner(Spinner):
         self.values = [str(factory_name) for factory_name in DEMO_FACTORIES.keys()]
         self.values = [factory_name[factory_name.index('.')+1:] for factory_name in self.values]
 
-    # Initiasize anti-pattern
-    def on_size(self, *_):
+    def on_gui_ready(self):
         """Finish initializing: tell the Agora to load the first demo in the dropdown."""
         self.on_text()
-        self.unbind(size=self.on_size)
 
     def on_text(self, *_):
         """Tell the Agora on the main tab to load the selected demo."""

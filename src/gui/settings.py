@@ -165,10 +165,8 @@ class CustomSettings(Settings):
         self.config.read(_SETTINGS_FILE_PATH)
         self.reload_config_values()
 
-    # Initiasize anti-pattern
-    def on_size(self, *_):
+    def on_gui_ready(self):
         self.commit_settings(write_to_file=False)
-        self.unbind(size=self.on_size)
 
     def on_config_change(self, config, section, key, value):
         """Keep sensible value constraints and formatting in order when a new value is entered."""
