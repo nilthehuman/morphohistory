@@ -11,6 +11,7 @@ from kivy.uix.button import Button
 from kivy.uix.settings import InterfaceWithNoMenu, Settings, SettingItem, SettingsPanel
 from kivy.utils import get_color_from_hex, get_hex_from_color
 
+from .access_widgets import *
 from .confirm import ApplyConfirmedLabel, DiscardConfirmedLabel
 
 from ..settings import SETTINGS
@@ -118,12 +119,6 @@ _SETTINGS_UI = [
         "key": "sim_max_iteration"
     }
 ]
-
-def _get_agora():
-    return App.get_running_app().root.ids.sim_layout.ids.agora
-
-def _get_settings():
-    return App.get_running_app().root.ids.settings_layout.ids.settings
 
 class SettingsTabLayout(BoxLayout):
     """The vertical BoxLayout for the CustomSettingsPanel and the Buttons at the bottom."""
@@ -241,12 +236,12 @@ class CustomSettings(Settings):
             self.config.write()
         # update graphics on main tab
         if update_colors:
-            _get_agora().update_speakerdot_colors()
+            get_agora().update_speakerdot_colors()
         if update_arrow:
-            _get_agora().update_talk_arrow()
+            get_agora().update_talk_arrow()
         if update_grid:
-            _get_agora().clear_dist_cache()
-            _get_agora().update_grid()
+            get_agora().clear_dist_cache()
+            get_agora().update_grid()
 
     def load_settings_values(self):
         """Destructively (re)set all values in our ConfigParser instance to the current global SETTINGS."""
@@ -311,7 +306,7 @@ class ApplySettingsButton(Button):
 
     def apply_settings(self, *_):
         """Overwrite current application settings with those in the SettingsPanel."""
-        _get_settings().commit_settings()
+        get_settings().commit_settings()
         label = ApplyConfirmedLabel()
         self.parent.add_widget(label)
 
@@ -323,6 +318,6 @@ class DiscardSettingsButton(Button):
 
     def discard_settings(self, *_):
         """Reset all items in SettingsPanel to the previous application settings."""
-        _get_settings().load_settings_values()
+        get_settings().load_settings_values()
         label = DiscardConfirmedLabel()
         self.parent.add_widget(label)

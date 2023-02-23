@@ -7,18 +7,10 @@ from kivy.uix.label import Label
 from kivy.uix.gridlayout import GridLayout
 from kivy.uix.textinput import TextInput
 
+from .access_widgets import *
 from .confirm import ApplyConfirmedLabel, DiscardConfirmedLabel
 
 from ..settings import SETTINGS
-
-def _get_agora():
-    return App.get_running_app().root.ids.sim_layout.ids.agora
-
-def _get_single_cell_checkbox():
-    return App.get_running_app().root.ids.para_layout.ids.single_cell_checkbox
-
-def _get_paradigm_table():
-    return App.get_running_app().root.ids.para_layout.ids.para_table
 
 class ParadigmTabLayout(BoxLayout):
     """The vertical BoxLayout holding the "single cell" CheckBox, the paradigm table
@@ -36,12 +28,12 @@ class CaseLabel(Label):
     def on_size(self, *_):
         """Finish initializing once the root widget is ready."""
         self.toggle_text()
-        _get_single_cell_checkbox().bind(active=self.toggle_text)
+        get_single_cell_checkbox().bind(active=self.toggle_text)
         self.unbind(size=self.on_size)
 
     def toggle_text(self, *_):
         """Show or hide our own text depending on the state of the CheckBox above."""
-        self.text = '' if _get_single_cell_checkbox().active else self._text
+        self.text = '' if get_single_cell_checkbox().active else self._text
 
 class CellTextInput(TextInput):
     """A text input box for one form of a cell in the paradigm table."""
@@ -56,12 +48,12 @@ class CellTextInput(TextInput):
     def on_size(self, *_):
         """Finish initializing once the root widget is ready."""
         self.toggle_disabled()
-        _get_single_cell_checkbox().bind(active=self.toggle_disabled)
+        get_single_cell_checkbox().bind(active=self.toggle_disabled)
         self.unbind(size=self.on_size)
 
     def toggle_disabled(self, *_):
         """Show or hide our own text depending on the state of the CheckBox above."""
-        self.disabled = _get_single_cell_checkbox().active
+        self.disabled = get_single_cell_checkbox().active
 
 class ParadigmTable(GridLayout):
     """A 14 row (header + 13 cases) by 7 column (label col + 2 x (form A, form B, prominence)) table
@@ -148,7 +140,7 @@ class ParadigmTable(GridLayout):
                         text_input.text = str(SETTINGS.paradigm.para[num][case].prominence)
                 except ValueError:
                     pass
-        if _get_single_cell_checkbox().active:
+        if get_single_cell_checkbox().active:
             for subcell in range(0, 3):
                 _process_subcell(0, 0, subcell)
         else:
@@ -156,7 +148,7 @@ class ParadigmTable(GridLayout):
                 for case in range(0, 13):
                     for subcell in range(0, 3):
                         _process_subcell(num, case, subcell)
-        _get_agora().set_paradigm(SETTINGS.paradigm)
+        get_agora().set_paradigm(SETTINGS.paradigm)
 
 class ApplyParadigmButton(Button):
     """Button to replace all word forms in the current simulation with the ones set on this tab."""
@@ -167,7 +159,7 @@ class ApplyParadigmButton(Button):
 
     def apply_paradigm(self, *_):
         """Update all word forms in the simulated paradigm to the user's new inputs."""
-        _get_paradigm_table().save_or_load_cells(save=True)
+        get_paradigm_table().save_or_load_cells(save=True)
         label = ApplyConfirmedLabel()
         self.parent.add_widget(label)
 
@@ -180,6 +172,6 @@ class DiscardParadigmButton(Button):
 
     def discard_paradigm(self, *_):
         """Reset all word forms in the paradigm table to their previous values."""
-        _get_paradigm_table().save_or_load_cells(save=False)
+        get_paradigm_table().save_or_load_cells(save=False)
         label = DiscardConfirmedLabel()
         self.parent.add_widget(label)
