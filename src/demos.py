@@ -154,15 +154,35 @@ class NewsAnchor(_DemoFactory):
         speakers.append(Speaker.frombias(16, pos, our_bias, starting_experience, is_broadcaster=True))
         return speakers
 
+class Rings16_16(_DemoFactory):
+    """A smaller ring of A speakers inside a wider ring of B speakers."""
+
+    @staticmethod
+    def get_speakers(our_bias=1, their_bias=0, starting_experience=1, inner_radius=0.5):
+        speakers = []
+        for n in range(16):
+            x = sin(2 * pi * float(n) / 16) * _WIDTH * 0.4 * inner_radius
+            y = cos(2 * pi * float(n) / 16) * _HEIGHT * 0.4 * inner_radius
+            pos = (_WIDTH * 0.5 + x - _DOT_WIDTH * 0.5,
+                   _HEIGHT * 0.5 + y - _DOT_HEIGHT * 0.5)
+            speakers.append(Speaker.frombias(n, pos, their_bias))
+        for n in range(16):
+            x = sin(2 * pi * float(n) / 16) * _WIDTH * 0.4
+            y = cos(2 * pi * float(n) / 16) * _HEIGHT * 0.4
+            pos = (_WIDTH * 0.5 + x - _DOT_WIDTH * 0.5,
+                   _HEIGHT * 0.5 + y - _DOT_HEIGHT * 0.5)
+            speakers.append(Speaker.frombias(16 + n, pos, our_bias))
+        return speakers
+
 class Rings16_24(_DemoFactory):
     """A smaller ring of A speakers inside a wider ring of B speakers."""
 
     @staticmethod
-    def get_speakers(our_bias=1, their_bias=0, starting_experience=1):
+    def get_speakers(our_bias=1, their_bias=0, starting_experience=1, inner_radius=0.5):
         speakers = []
         for n in range(16):
-            x = sin(2 * pi * float(n) / 16) * _WIDTH * 0.2
-            y = cos(2 * pi * float(n) / 16) * _HEIGHT * 0.2
+            x = sin(2 * pi * float(n) / 16) * _WIDTH * 0.4 * inner_radius
+            y = cos(2 * pi * float(n) / 16) * _HEIGHT * 0.4 * inner_radius
             pos = (_WIDTH * 0.5 + x - _DOT_WIDTH * 0.5,
                    _HEIGHT * 0.5 + y - _DOT_HEIGHT * 0.5)
             speakers.append(Speaker.frombias(n, pos, their_bias))
