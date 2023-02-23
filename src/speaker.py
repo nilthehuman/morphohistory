@@ -55,14 +55,14 @@ class Speaker:
         # TODO: figure out why this function is slow
         if self.principal_bias_cached:
             return self.principal_bias_cached
-        sum_w = 0
-        sum_imp = 0
+        sum_bias = 0
+        sum_prominence = 0
         for cases in self.para.para:
             for cell in cases:
                 if cell.form_a:
-                    sum_w += cell.bias_a * cell.prominence
-                    sum_imp += cell.prominence
-        self.principal_bias_cached = sum_w / sum_imp
+                    sum_bias += cell.bias_a * cell.prominence
+                    sum_prominence += cell.prominence
+        self.principal_bias_cached = sum_bias / sum_prominence
         return self.principal_bias_cached
 
     def name_tag(self):
