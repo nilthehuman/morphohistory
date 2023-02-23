@@ -61,7 +61,7 @@ class Synonymy(_DemoFactory):
         return speakers
 
 class SynonymyLarge(_DemoFactory):
-    """A 100x100 grid of speakers, all undecided: a case of perfect synonymy."""
+    """A 30x30 grid of speakers, all undecided: a case of perfect synonymy."""
 
     @staticmethod
     def get_speakers():
