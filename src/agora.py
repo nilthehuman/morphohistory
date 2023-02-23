@@ -98,6 +98,7 @@ class Agora:
     def load_speakers(self, speakers):
         """Replace current speaker community with a copy of the argument."""
         self.state.speakers = [Speaker.fromspeaker(s) for s in speakers]
+        assert not all(s.is_broadcaster for s in self.state.speakers)
         self.clear_caches()
 
     def add_speaker(self, speaker):

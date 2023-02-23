@@ -467,8 +467,10 @@ class AgoraWidget(Widget, Agora):
 
     def load_speakers(self, speakers):
         """Add an array of pre-built Speakers."""
+        # Attention: base class method is *not* called here
         for speaker in speakers:
             self.add_speakerdot(SpeakerDot.fromspeaker(speaker))
+        assert not all(s.is_broadcaster for s in self.state.speakers)
 
     def set_paradigm(self, para):
         """Update the exact forms and prominence values in all cells of all
