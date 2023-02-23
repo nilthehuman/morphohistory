@@ -297,7 +297,7 @@ class SpeakerDot(Speaker, DragBehavior, Widget):
     color = ColorProperty()
 
     def __init__(self, n, pos, para, experience, **kwargs):
-        Speaker.__init__(self, n, pos, para, False, experience)
+        Speaker.__init__(self, n, pos, para, experience, False)
         DragBehavior.__init__(self, **kwargs)
         Widget.__init__(self, **kwargs)
         self.size = SETTINGS.speakerdot_size
