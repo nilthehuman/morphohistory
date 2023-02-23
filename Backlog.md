@@ -14,6 +14,7 @@
 * Make smoke tests work on both Linux and Windows
 * Write smoke tests for saving/loading
 * Add GitHub Action to install and run tests after every push
+* Bugfix: looks like the progress bar graphic starts out in the negative range or something
 * Pimp up the README
 * Fix crash when one speaker alone is simulated
 * Extend simulation to verb paradigms
