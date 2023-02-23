@@ -47,9 +47,8 @@ class MorphoHistoryApp(App):
     def on_start(self):
         """Prepare GUI elements that need to know about the Widget tree to complete their setup."""
         def descend_tree(widget):
-            if not hasattr(widget, 'ids'):
-                return
-            for child in widget.ids.values():
+            children = list(widget.ids.values()) + widget.children
+            for child in children:
                 try:
                     child.on_gui_ready()
                 except AttributeError:

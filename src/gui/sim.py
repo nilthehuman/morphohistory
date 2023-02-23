@@ -367,9 +367,12 @@ class AgoraWidget(Widget, Agora):
         self.bind(on_touch_up=self.change_tab_manually)
 
     def on_gui_ready(self):
-        """Finish initializing: draw the grid and load the default speaker population."""
-        self.update_grid()
+        """Finish initializing: set iteration counter Label to zero."""
         self.update_iteration_counter()
+
+    def on_size(self, *_):
+        """Draw the grid on resize."""
+        self.update_grid()
 
     def change_tab_manually(self, _instance, touch):
         """Workaround to enable tab switching if AgoraWidget overlaps with tab strip.
