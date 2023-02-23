@@ -11,14 +11,28 @@ from .paradigm import NounParadigm
 class _Settings:
     """A plain struct holding all relevant constants and parameters."""
 
+    class DemoAgora(Enum):
+        RAINBOW_9X9   =  1
+        RAINBOW_10X10 =  2
+        BALANCE       =  3
+        BALANCE_LARGE =  4
+        CHECKERS      =  5
+        ALONE         =  6
+        CORE_9x9      =  7
+        CORE_10x10    =  8
+        NEWS_ANCHOR   =  9
+        RINGS_16_16   = 10
+        RINGS_16_24   = 11
+        VILLAGES      = 12
+
     class DistanceMetric(Enum):
-        CONSTANT = 1
+        CONSTANT  = 1
         MANHATTAN = 2
         EUCLIDEAN = 3
 
     class LearningModel(Enum):
         HARMONIC = 1
-        RW = 2
+        RW       = 2
 
     def __init__(self):
         self.agora_size = (600, 600)
@@ -35,6 +49,8 @@ class _Settings:
         self.popup_size_load = (400, 430)
         self.popup_size_fail = (250, 200)
         self.popup_size_progress = (500, 250)
+
+        self.current_demo = self.DemoAgora.RAINBOW_9X9
 
         self.bias_threshold = 0.8
         self.starting_experience = 1

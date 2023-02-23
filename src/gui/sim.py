@@ -30,7 +30,7 @@ from .confirm import ApplyConfirmedLabel
 
 from ..settings import SETTINGS
 from ..agora import Agora
-from ..demos import DEFAULT_DEMO
+from ..demos import DEMO_FACTORIES
 from ..speaker import Speaker
 
 # aliases for tediously long Widget and Layout lookups
@@ -413,7 +413,7 @@ class AgoraWidget(Widget, Agora):
         """Finish initializing: draw the grid and load the default speaker population."""
         self.update_grid()
         self.update_iteration_counter()
-        speakers = DEFAULT_DEMO.get_speakers()
+        speakers = DEMO_FACTORIES[SETTINGS.current_demo].get_speakers()
         self.load_speakers(speakers)
         self.save_starting_state()
         self.unbind(size=self.on_size)

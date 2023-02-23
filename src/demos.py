@@ -210,4 +210,17 @@ class Villages(_DemoFactory):
                     speakers.append(Speaker.frombias(row * 9 + col, pos, bias_a))
         return speakers
 
-DEFAULT_DEMO = Rainbow9x9
+DEMO_FACTORIES = {
+    SETTINGS.DemoAgora.RAINBOW_9X9   : Rainbow9x9,
+    SETTINGS.DemoAgora.RAINBOW_10X10 : Rainbow10x10,
+    SETTINGS.DemoAgora.BALANCE       : Balance,
+    SETTINGS.DemoAgora.BALANCE_LARGE : BalanceLarge,
+    SETTINGS.DemoAgora.CHECKERS      : Checkers,
+    SETTINGS.DemoAgora.ALONE         : AloneAgainstTheWorld,
+    SETTINGS.DemoAgora.CORE_9x9      : CoreVsPeriphery9x9,
+    SETTINGS.DemoAgora.CORE_10x10    : CoreVsPeriphery10x10,
+    SETTINGS.DemoAgora.NEWS_ANCHOR   : NewsAnchor,
+    SETTINGS.DemoAgora.RINGS_16_16   : Rings16_16,
+    SETTINGS.DemoAgora.RINGS_16_24   : Rings16_24,
+    SETTINGS.DemoAgora.VILLAGES      : Villages
+}
