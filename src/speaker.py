@@ -9,7 +9,7 @@ from .settings import SETTINGS
 
 class Speaker:
     """A simulated individual within the speaking community."""
-    def __init__(self, n, pos, para=None, is_broadcaster=False, experience=SETTINGS.starting_experience):
+    def __init__(self, n, pos, para=None, experience=SETTINGS.starting_experience, is_broadcaster=False):
         self.n = n
         self.pos = pos
         self.para = para
@@ -20,16 +20,16 @@ class Speaker:
     @classmethod
     def fromspeaker(cls, speaker):
         """Copy an existing Speaker."""
-        new_speaker = cls(speaker.n, speaker.pos, deepcopy(speaker.para), speaker.is_broadcaster)
-        new_speaker.experience = speaker.experience
+        new_speaker = cls(speaker.n, speaker.pos, deepcopy(speaker.para),
+                          speaker.experience, speaker.is_broadcaster)
         return new_speaker
 
     @classmethod
-    def frombias(cls, n, pos, bias_a, is_broadcaster=False):
+    def frombias(cls, n, pos, bias_a, experience=SETTINGS.starting_experience, is_broadcaster=False):
         """Construct a Speaker from a single bias value."""
         para = NounParadigm(bias_a=bias_a, form_a=SETTINGS.paradigm.para[0][0].form_a,
                                            form_b=SETTINGS.paradigm.para[0][0].form_b)
-        new_speaker = cls(n, pos, para, is_broadcaster)
+        new_speaker = cls(n, pos, para, experience, is_broadcaster)
         return new_speaker
 
     def to_json(self):
@@ -46,8 +46,8 @@ class Speaker:
         return Speaker(speaker_dict['n'],
                        speaker_dict['pos'],
                        para,
-                       speaker_dict['is_broadcaster'],
-                       speaker_dict['experience'])
+                       speaker_dict['experience'],
+                       speaker_dict['is_broadcaster'])
 
     def principal_bias(self):
         """Which way the speaker is leaning, summed up in a single float."""
