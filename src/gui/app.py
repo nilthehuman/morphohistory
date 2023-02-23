@@ -7,7 +7,7 @@ from platform import system
 from kivy.config import Config
 Config.set('input', 'mouse', 'mouse,multitouch_on_demand')
 if system() == "Windows":
-    Config.set('kivy', 'keyboard_mode', 'systemandmulti')
+    Config.set('kivy', 'keyboard_mode', 'system')
 
 from kivy import require as kivy_require
 kivy_require('2.1.0')
