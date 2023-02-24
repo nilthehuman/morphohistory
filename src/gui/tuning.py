@@ -24,6 +24,19 @@ class DemoSpinner(Spinner):
         super().__init__(**kwargs)
         self.values = [str(factory_name) for factory_name in DEMO_FACTORIES.keys()]
         self.values = [factory_name[factory_name.index('.')+1:] for factory_name in self.values]
+        # FIXME: revert or clean this up after NYTUD talk
+        self.values = ['Szivárvány 9x9',
+                       'Szivárvány 10x10',
+                       'Egyensúly',
+                       'Egyensúly (óriás)',
+                       'Sakktábla',
+                       'Egyedül',
+                       'Kisebbség vs nagyobbság 9x9',
+                       'Kisebbség vs nagyobbság 10x10',
+                       'Mizantróp filmcsillag',
+                       'Gyűrűk 16+16',
+                       'Gyűrűk 16+24',
+                       'Falvak']
 
     def on_gui_ready(self):
         """Finish initializing: tell the Agora to load the first demo in the dropdown."""
