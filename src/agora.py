@@ -207,8 +207,8 @@ class Agora:
                 info("Agora: Simulation until stable cancelled.")
                 return True
             if is_stable and is_stable(self):
+                info("Agora: Simulation until stable finished (stability reached after %d iterations)." % self.sim_iteration)
                 self.sim_iteration = None
-                info("Agora: Simulation until stable finished (stability reached).")
                 return True
             self.simulate()
             # Make sure we stop eventually no matter what

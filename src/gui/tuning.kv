@@ -188,6 +188,7 @@
             text: "100"
     AnchorLayout:
         LaunchTuningButton:
+            id: launch_tuning_button
 
 
 <ParamInput@TextInput>
@@ -204,3 +205,33 @@
     size_hint_x: None
     size_hint_y: 0.75
     width: 200
+
+<TuningProgressPopup>
+    canvas.before:
+        Color:
+            rgb: 0.03, 0.1, 0.2
+        Rectangle:
+            pos: self.pos
+            size: self.size
+    size: root.size
+    pos: root.pos
+    orientation: "vertical"
+    ProgressBar:
+        canvas:
+            BorderImage:
+                pos: self.x, self.center_y - 8
+                size: self.width * (self.value / self.max) if self.max else 0, 16
+                source: 'assets/progressbar.png'
+        id: progressbar
+        pos_hint: {'center_x': 0.5}
+        size_hint: 0.8, 0.8
+    Label:
+        id: progress_label
+        orientation: "horizontal"
+    Button:
+        id: cancel_button
+        text: "Mindegy, hagyjad!"
+        pos_hint: {'center_x': 0.5}
+        size_hint: None, None
+        size: 150, 50
+        on_release: root.cancel()
