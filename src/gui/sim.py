@@ -280,6 +280,9 @@ class SpeakerDot(Speaker, DragBehavior, Widget):
             return
         if not self.parent.graphics_on:
             return
+        if not App.get_running_app():
+            # the App has been stopped, we're just about to exit for good
+            return
         if get_root().current_tab != get_root().tab_list[-1]:
             # user's looking at a different tab right now
             return
@@ -346,6 +349,9 @@ class NameTag(Label):
 
     def on_mouse_pos(self, _window, pos):
         """Follow hovering mouse cursor."""
+        if not App.get_running_app():
+            # the App has been stopped, we're just about to exit for good
+            return
         transformed_pos = get_agora_layout().transform_inv.transform_point(*pos, 0)
         self.pos = transformed_pos[0:2]
 
