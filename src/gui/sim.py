@@ -31,7 +31,6 @@ from .confirm import ApplyConfirmedLabel
 
 from ..settings import SETTINGS
 from ..agora import Agora
-from ..demos import DEMO_FACTORIES
 from ..speaker import Speaker
 
 class SimTabLayout(BoxLayout):

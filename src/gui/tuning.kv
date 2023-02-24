@@ -12,8 +12,8 @@
     orientation: 'vertical'
     size_hint: None, None
     width: 600
-    height: 400
-    padding: 30, 15, 30, 15
+    height: 450
+    padding: 30, 10, 30, 10
     spacing: 10
     canvas.before:
         Color:
@@ -172,6 +172,20 @@
             id: inner_radius_step_input
         Widget:
             size_hint_x: 1
+    BoxLayout:
+        orientation: 'horizontal'
+        size_hint_y: None
+        height: 50
+        Label:
+            text: "Ismétlés beállításonként:"
+            text_size: self.size
+            size_hint_x: None
+            width: 300
+            halign: "center"
+            valign: "center"
+        ParamInput:
+            id: repetition_input
+            text: "100"
     AnchorLayout:
         LaunchTuningButton:
 
@@ -183,6 +197,7 @@
     halign: "center"
     valign: "center"
     cursor_color: 0, 0, 0, 1
+    do_wrap: False
 
 <LaunchTuningButton>
     text: "Menjen!"

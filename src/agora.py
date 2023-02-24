@@ -80,9 +80,13 @@ class Agora:
         self.state.sim_iteration_total = 0
         self.clear_caches()
 
-    def load_demo_agora(self, demo_factory):
+    def load_demo_agora(self, demo_factory, our_bias=None, their_bias=None, starting_experience=None, inner_radius=None):
         """Replace current speaker community with a demo preset."""
-        speakers = demo_factory.get_speakers()
+        if our_bias is None and their_bias is None:
+            # fall back on the default arguments
+            speakers = demo_factory.get_speakers()
+        else:
+            speakers = demo_factory.get_speakers(our_bias, their_bias, starting_experience, inner_radius)
         self.clear_speakers()
         self.load_speakers(speakers)
         self.save_starting_state()

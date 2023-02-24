@@ -38,14 +38,14 @@ class _DemoFactory(ABC):
 
     @staticmethod
     @abstractmethod
-    def get_speakers(our_bias, their_bias, starting_experience):
+    def get_speakers(our_bias, their_bias, starting_experience, inner_radius):
         """Return the starting state of the speaker population."""
 
 class Rainbow9x9(_DemoFactory):
     """A 9x9 grid of speakers, pure A in the top left corner, pure B at bottom right and everything else in between."""
 
     @staticmethod
-    def get_speakers(our_bias=1, their_bias=0, starting_experience=1):
+    def get_speakers(our_bias=1, their_bias=0, starting_experience=1, _inner_radius=None):
         speakers = []
         for row in range(9):
             for col in range(9):
@@ -59,7 +59,7 @@ class Rainbow10x10(_DemoFactory):
     """A 10x10 grid of speakers, pure A in the top left corner, pure B at bottom right and everything else in between."""
 
     @staticmethod
-    def get_speakers(our_bias=1, their_bias=0, starting_experience=1):
+    def get_speakers(our_bias=1, their_bias=0, starting_experience=1, _inner_radius=None):
         speakers = []
         pos = [None, None]
         for row in range(10):
@@ -74,7 +74,7 @@ class Balance(_DemoFactory):
     """A 10x10 grid of speakers, all undecided: a case of balanced alternatives."""
 
     @staticmethod
-    def get_speakers(our_bias=None, their_bias=None, starting_experience=1):
+    def get_speakers(our_bias=None, their_bias=None, starting_experience=1, _inner_radius=None):
         speakers = []
         pos = [None, None]
         for row in range(10):
@@ -88,7 +88,7 @@ class BalanceLarge(_DemoFactory):
     """A 30x30 grid of speakers, all undecided: a case of balanced alternatives."""
 
     @staticmethod
-    def get_speakers(our_bias=None, their_bias=None, starting_experience=1):
+    def get_speakers(our_bias=None, their_bias=None, starting_experience=1, _inner_radius=None):
         SETTINGS.speakerdot_size = (12, 12) # TODO: integrate settings into Agora, I think
         _DOT_WIDTH, _DOT_HEIGHT = SETTINGS.speakerdot_size
         speakers = []
@@ -104,7 +104,7 @@ class Checkers(_DemoFactory):
     """An 8x8 grid of biased speakers arranged in an alternating pattern."""
 
     @staticmethod
-    def get_speakers(our_bias=1, their_bias=0, starting_experience=1):
+    def get_speakers(our_bias=1, their_bias=0, starting_experience=1, _inner_radius=None):
         speakers = []
         pos = [None, None]
         for row in range(8):
@@ -119,7 +119,7 @@ class AloneAgainstTheWorld(_DemoFactory):
     """A 9x9 grid of speakers, all but one speaker biased towards A, the loner is biased towards B."""
 
     @staticmethod
-    def get_speakers(our_bias=1, their_bias=0, starting_experience=1):
+    def get_speakers(our_bias=1, their_bias=0, starting_experience=1, _inner_radius=None):
         speakers = []
         pos = [None, None]
         for row in range(9):
@@ -134,7 +134,7 @@ class CoreVsPeriphery9x9(_DemoFactory):
     """A 9x9 grid of speakers, neutral majority on the outside, biased minority on the inside."""
 
     @staticmethod
-    def get_speakers(our_bias=0.5, their_bias=0, starting_experience=1):
+    def get_speakers(our_bias=0.5, their_bias=0, starting_experience=1, _inner_radius=None):
         speakers = []
         pos = [None, None]
         for row in range(9):
@@ -149,7 +149,7 @@ class CoreVsPeriphery10x10(_DemoFactory):
     """A 10x10 grid of speakers, neutral majority on the outside, biased minority on the inside."""
 
     @staticmethod
-    def get_speakers(our_bias=0.5, their_bias=0, starting_experience=1):
+    def get_speakers(our_bias=0.5, their_bias=0, starting_experience=1, _inner_radius=None):
         speakers = []
         pos = [None, None]
         for row in range(10):
@@ -164,7 +164,7 @@ class NewsAnchor(_DemoFactory):
     """A circle of neutral speakers around a biased broadcaster."""
 
     @staticmethod
-    def get_speakers(our_bias=1, their_bias=0.5, starting_experience=1):
+    def get_speakers(our_bias=1, their_bias=0.5, starting_experience=1, _inner_radius=None):
         speakers = []
         pos = [None, None]
         for n in range(16):
@@ -222,7 +222,7 @@ class Villages(_DemoFactory):
     """Four different compact communities a bit further apart from each other."""
 
     @staticmethod
-    def get_speakers(our_bias=1, their_bias=0, starting_experience=1):
+    def get_speakers(our_bias=1, their_bias=0, starting_experience=1, _inner_radius=None):
         speakers = []
         pos = [None, None]
         for row in range(9):
