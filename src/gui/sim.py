@@ -381,7 +381,7 @@ class AgoraWidget(Widget, Agora):
         for tab in get_root().tab_list:
             if tab.collide_point(*tab.to_widget(*abs_touch_pos)):
                 get_root().switch_to(tab)
-                return True
+                break
         return False
 
     def reset(self):
