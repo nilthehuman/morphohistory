@@ -30,3 +30,7 @@ def get_single_cell_checkbox():
 def get_paradigm_table():
     """Returns the GridLayout that takes up most of the Paradigm tab."""
     return App.get_running_app().root.ids.para_layout.ids.para_table
+
+def get_tuning_menu():
+    """Returns the BoxLayout that takes up most of the Tuning tab."""
+    return App.get_running_app().root.ids.tuning_layout.ids.tuning_menu

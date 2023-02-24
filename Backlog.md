@@ -7,6 +7,7 @@
 * Pressing return/enter in popups should be equivalent to clicking confirm button
 * Increase dot size logarithmically to reflect experience (make this optional)
 * Use a single global NameTag for all SpeakerDots
+* Figure out why startup has become slower (white window lingers a bit longer)
 * Multithreading for performance
 * If the app is about to be closed without saving, ask the user to save or discard changes
 * Keep SpeakerDots inside their AgoraWidget

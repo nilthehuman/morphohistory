@@ -2,185 +2,189 @@
 <TuningTabLayout>
     orientation: 'vertical'
     AnchorLayout:
-        BoxLayout:
-            orientation: 'vertical'
-            size_hint: None, None
-            width: 600
-            height: 400
-            padding: 30, 15, 30, 15
-            spacing: 10
-            canvas.before:
-                Color:
-                    rgba: 0.3, 0.8, 1.0, 1
-                Line:
-                    width: 1
-                    points: self.x, self.y, self.x + self.width, self.y, self.x + self.width, self.y + self.height, self.x, self.y + self.height, self.x, self.y
-            BoxLayout:
-                orientation: 'horizontal'
-                size_hint_y: None
-                height: 50
-                canvas.before:
-                    Color:
-                        rgba: 0.3, 0.8, 1.0, 1
-                    Line:
-                        width: 1
-                        points: self.x, self.y, self.x + self.width, self.y
-                Widget:
-                    size_hint_x: 1
-                Label:
-                    text: "Kiinduló agora:"
-                    text_size: self.size
-                    size_hint_x: None
-                    width: 300
-                    halign: "center"
-                    valign: "center"
-                Widget:
-                    size_hint_x: 0.5
-                DemoSpinner:
-                    id: demo_spinner
-                    size_hint_x: None
-                    width: 250
-                    text_autoupdate: True
-                Widget:
-                    size_hint_x: 1
-            # TODO: refactor the following BoxLayouts to avoid repetition, and to avoid repetition
-            BoxLayout:
-                orientation: 'horizontal'
-                size_hint_y: None
-                height: 50
-                Widget:
-                    size_hint_x: 1
-                Label:
-                    text: "[b]Egyik bias[/b] eleje, vége, lépésköz:"
-                    markup: True
-                    text_size: self.size
-                    size_hint_x: None
-                    width: 300
-                    halign: "center"
-                    valign: "center"
-                Widget:
-                    size_hint_x: 0.5
-                ParamInput:
-                    id: our_bias_start_input
-                Widget:
-                    size_hint_x: None
-                    width: 35
-                ParamInput:
-                    id: our_bias_stop_input
-                Widget:
-                    size_hint_x: None
-                    width: 35
-                ParamInput:
-                    id: our_bias_step_input
-                Widget:
-                    size_hint_x: 1
-            BoxLayout:
-                orientation: 'horizontal'
-                size_hint_y: None
-                height: 50
-                disabled: demo_spinner.text[:9] == "Egyensúly"
-                Widget:
-                    size_hint_x: 1
-                Label:
-                    text: "[b]Másik bias[/b] eleje, vége, lépésköz:"
-                    markup: True
-                    text_size: self.size
-                    size_hint_x: None
-                    width: 300
-                    halign: "center"
-                    valign: "center"
-                Widget:
-                    size_hint_x: 0.5
-                ParamInput:
-                    id: their_bias_start_input
-                Widget:
-                    size_hint_x: None
-                    width: 35
-                ParamInput:
-                    id: their_bias_stop_input
-                Widget:
-                    size_hint_x: None
-                    width: 35
-                ParamInput:
-                    id: their_bias_step_input
-                Widget:
-                    size_hint_x: 1
-            BoxLayout:
-                orientation: 'horizontal'
-                size_hint_y: None
-                height: 50
-                Widget:
-                    size_hint_x: 1
-                Label:
-                    text: "[b]Kezdeti tapasztalat[/b] eleje, vége, lépésköz:"
-                    markup: True
-                    text_size: self.size
-                    size_hint_x: None
-                    width: 300
-                    halign: "center"
-                    valign: "center"
-                Widget:
-                    size_hint_x: 0.5
-                ParamInput:
-                    id: starting_experience_start_input
-                Widget:
-                    size_hint_x: None
-                    width: 35
-                ParamInput:
-                    id: starting_experience_stop_input
-                Widget:
-                    size_hint_x: None
-                    width: 35
-                ParamInput:
-                    id: starting_experience_step_input
-                Widget:
-                    size_hint_x: 1
-            BoxLayout:
-                orientation: 'horizontal'
-                size_hint_y: None
-                height: 50
-                disabled: demo_spinner.text[:6] != "Gyűrűk"
-                Widget:
-                    size_hint_x: 1
-                Label:
-                    text: "[b]Belső gyűrű sugara[/b] eleje, vége, lépésköz:"
-                    markup: True
-                    text_size: self.size
-                    size_hint_x: None
-                    width: 300
-                    halign: "center"
-                    valign: "center"
-                Widget:
-                    size_hint_x: 0.5
-                ParamInput:
-                    id: inner_radius_start_input
-                Widget:
-                    size_hint_x: None
-                    width: 35
-                ParamInput:
-                    id: inner_radius_stop_input
-                Widget:
-                    size_hint_x: None
-                    width: 35
-                ParamInput:
-                    id: inner_radius_step_input
-                Widget:
-                    size_hint_x: 1
-            AnchorLayout:
-                LaunchTuningButton:
+        TuningMenu:
+            id: tuning_menu
     RelativeLayout:
         size_hint_y: None
         height: 50
 
+<TuningMenu@BoxLayout>
+    orientation: 'vertical'
+    size_hint: None, None
+    width: 600
+    height: 400
+    padding: 30, 15, 30, 15
+    spacing: 10
+    canvas.before:
+        Color:
+            rgba: 0.3, 0.8, 1.0, 1
+        Line:
+            width: 1
+            points: self.x, self.y, self.x + self.width, self.y, self.x + self.width, self.y + self.height, self.x, self.y + self.height, self.x, self.y
+    BoxLayout:
+        orientation: 'horizontal'
+        size_hint_y: None
+        height: 50
+        canvas.before:
+            Color:
+                rgba: 0.3, 0.8, 1.0, 1
+            Line:
+                width: 1
+                points: self.x, self.y, self.x + self.width, self.y
+        Widget:
+            size_hint_x: 1
+        Label:
+            text: "Kiinduló agora:"
+            text_size: self.size
+            size_hint_x: None
+            width: 300
+            halign: "center"
+            valign: "center"
+        Widget:
+            size_hint_x: 0.5
+        DemoSpinner:
+            id: demo_spinner
+            size_hint_x: None
+            width: 250
+            text_autoupdate: True
+        Widget:
+            size_hint_x: 1
+    # TODO: refactor the following BoxLayouts to avoid repetition, and to avoid repetition
+    BoxLayout:
+        orientation: 'horizontal'
+        size_hint_y: None
+        height: 50
+        Widget:
+            size_hint_x: 1
+        Label:
+            text: "[b]Egyik bias[/b] eleje, vége, lépésköz:"
+            markup: True
+            text_size: self.size
+            size_hint_x: None
+            width: 300
+            halign: "center"
+            valign: "center"
+        Widget:
+            size_hint_x: 0.5
+        ParamInput:
+            id: our_bias_start_input
+        Widget:
+            size_hint_x: None
+            width: 35
+        ParamInput:
+            id: our_bias_stop_input
+        Widget:
+            size_hint_x: None
+            width: 35
+        ParamInput:
+            id: our_bias_step_input
+        Widget:
+            size_hint_x: 1
+    BoxLayout:
+        orientation: 'horizontal'
+        size_hint_y: None
+        height: 50
+        disabled: demo_spinner.text[:9] == "Egyensúly"
+        Widget:
+            size_hint_x: 1
+        Label:
+            text: "[b]Másik bias[/b] eleje, vége, lépésköz:"
+            markup: True
+            text_size: self.size
+            size_hint_x: None
+            width: 300
+            halign: "center"
+            valign: "center"
+        Widget:
+            size_hint_x: 0.5
+        ParamInput:
+            id: their_bias_start_input
+        Widget:
+            size_hint_x: None
+            width: 35
+        ParamInput:
+            id: their_bias_stop_input
+        Widget:
+            size_hint_x: None
+            width: 35
+        ParamInput:
+            id: their_bias_step_input
+        Widget:
+            size_hint_x: 1
+    BoxLayout:
+        orientation: 'horizontal'
+        size_hint_y: None
+        height: 50
+        Widget:
+            size_hint_x: 1
+        Label:
+            text: "[b]Kezdeti tapasztalat[/b] eleje, vége, lépésköz:"
+            markup: True
+            text_size: self.size
+            size_hint_x: None
+            width: 300
+            halign: "center"
+            valign: "center"
+        Widget:
+            size_hint_x: 0.5
+        ParamInput:
+            id: starting_experience_start_input
+        Widget:
+            size_hint_x: None
+            width: 35
+        ParamInput:
+            id: starting_experience_stop_input
+        Widget:
+            size_hint_x: None
+            width: 35
+        ParamInput:
+            id: starting_experience_step_input
+        Widget:
+            size_hint_x: 1
+    BoxLayout:
+        orientation: 'horizontal'
+        size_hint_y: None
+        height: 50
+        disabled: demo_spinner.text[:6] != "Gyűrűk"
+        Widget:
+            size_hint_x: 1
+        Label:
+            text: "[b]Belső gyűrű sugara[/b] eleje, vége, lépésköz:"
+            markup: True
+            text_size: self.size
+            size_hint_x: None
+            width: 300
+            halign: "center"
+            valign: "center"
+        Widget:
+            size_hint_x: 0.5
+        ParamInput:
+            id: inner_radius_start_input
+        Widget:
+            size_hint_x: None
+            width: 35
+        ParamInput:
+            id: inner_radius_stop_input
+        Widget:
+            size_hint_x: None
+            width: 35
+        ParamInput:
+            id: inner_radius_step_input
+        Widget:
+            size_hint_x: 1
+    AnchorLayout:
+        LaunchTuningButton:
+
+
 <ParamInput@TextInput>
     size_hint: None, None
     width: 60
-    height: 40
+    height: 35
     halign: "center"
     valign: "center"
     cursor_color: 0, 0, 0, 1
 
-<LaunchTuningButton@Button>
+<LaunchTuningButton>
     text: "Menjen!"
     size_hint_x: None
     size_hint_y: 0.75

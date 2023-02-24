@@ -1,6 +1,7 @@
 """An assortment of sample agoras for experimentation and demonstration purposes."""
 
 from abc import ABC, abstractmethod
+from dataclasses import dataclass
 from math import sin, cos, pi
 
 from .settings import SETTINGS
@@ -8,6 +9,29 @@ from .speaker import Speaker
 
 _WIDTH, _HEIGHT = SETTINGS.agora_size
 _DOT_WIDTH, _DOT_HEIGHT = SETTINGS.speakerdot_size
+
+@dataclass
+class _DefaultArguments:
+    our_bias: float = 1
+    their_bias: float = 0
+    starting_experience: int = 1
+    inner_radius: float = None
+
+# TODO: use these in the class method definitions below as well
+DEFAULT_DEMO_ARGUMENTS = {
+    SETTINGS.DemoAgora.RAINBOW_9X9   : _DefaultArguments(),
+    SETTINGS.DemoAgora.RAINBOW_10X10 : _DefaultArguments(),
+    SETTINGS.DemoAgora.BALANCE       : _DefaultArguments(our_bias=None, their_bias=None),
+    SETTINGS.DemoAgora.BALANCE_LARGE : _DefaultArguments(our_bias=None, their_bias=None),
+    SETTINGS.DemoAgora.CHECKERS      : _DefaultArguments(),
+    SETTINGS.DemoAgora.ALONE         : _DefaultArguments(),
+    SETTINGS.DemoAgora.CORE_9x9      : _DefaultArguments(our_bias=0.5),
+    SETTINGS.DemoAgora.CORE_10x10    : _DefaultArguments(our_bias=0.5),
+    SETTINGS.DemoAgora.NEWS_ANCHOR   : _DefaultArguments(our_bias=1, their_bias=0.5, inner_radius=1),
+    SETTINGS.DemoAgora.RINGS_16_16   : _DefaultArguments(our_bias=1, their_bias=0, inner_radius=0.25),
+    SETTINGS.DemoAgora.RINGS_16_24   : _DefaultArguments(our_bias=1, their_bias=0, inner_radius=0.25),
+    SETTINGS.DemoAgora.VILLAGES      : _DefaultArguments()
+}
 
 class _DemoFactory(ABC):
     """Interface for demo generating factory classes."""
