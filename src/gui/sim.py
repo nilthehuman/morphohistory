@@ -618,4 +618,6 @@ class AgoraWidget(Widget, Agora):
         ff_button = get_button_layout().ids.fast_forward_button
         if ff_button.popup:
             progressbar = ff_button.popup.ids.container.children[0].ids.progressbar
+            if progressbar.max != SETTINGS.sim_max_iteration:
+                progressbar.max = SETTINGS.sim_max_iteration
             progressbar.value = sim_iteration
