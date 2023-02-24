@@ -14,7 +14,7 @@ class TopTabbedPanel(TabbedPanel):
 
     def switch_to_prev(self):
         """Switch to the tab immediately to the left of the currently active tab,
-        cycling back to the rightmost tab on overflow."""
+        cycling back to the rightmost tab on underflow."""
         tab_index = self.tab_list.index(self.current_tab)
         tab_index = (tab_index + 1) % len(self.tab_list)
         self.switch_to(self.tab_list[tab_index])
