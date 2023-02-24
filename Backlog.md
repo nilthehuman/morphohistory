@@ -1,4 +1,3 @@
-* Implement Multisim tab contents
 * Implement Rescorla-Wagner conditioning model as an option
 * Implement convolution-based learning model
 * Duplicate same Confirm/Discard user logic on Tuning tab as on the other tabs?
