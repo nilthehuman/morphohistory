@@ -3,7 +3,8 @@ on a variety of model parameters."""
 
 from copy import copy
 from logging import info
-from time import gmtime, strftime
+from os.path import isfile
+from time import gmtime, strftime, perf_counter
 
 from kivy.clock import Clock
 from kivy.properties import ObjectProperty
@@ -155,7 +156,6 @@ class LaunchTuningButton(Button):
         self.popup = Popup(title="Kis türelmet, ez eltarthat ám egy darabig...", content=content,
                            size_hint=(None, None), size=SETTINGS.popup_size_progress)
         self.popup.open()
-        info("Tuning: Exhaustive simulation started at %s" % strftime("%H:%M:%S", gmtime()))
         self.tuner = Tuner()
         self.tuner.run()
 
@@ -169,8 +169,6 @@ class LaunchTuningButton(Button):
 class Tuner:
     """The class that's actually responsible for performing the parametrized simulations
     and writing the results to file."""
-
-    output_filename = 'results.csv'
 
     result_item = {
         'egyik_bias' : None,
@@ -246,6 +244,7 @@ class Tuner:
         popup = get_tuning_menu().ids.launch_tuning_button.popup
         popup.ids.container.children[0].ids.progressbar.max = self.num_total_setups * self.repetitions
 
+        # state to keep track of simulation parameters and results
         self.agora = Agora()
         self.results = []
         self.current_setup = 0
@@ -262,8 +261,14 @@ class Tuner:
         self.inner_radius = next(self.inner_radius_range)
         self.prepare_next_setup()
 
+        # create the CSV file, write the header line, and we're good to go
+        self.output_filename = 'results.csv'
+        self.initialize_csv_file()
+
     def run(self):
         """Schedule our own method driving the tuning in the Kivy event loop."""
+        info("Tuning: Exhaustive simulation started at %s" % strftime("%H:%M:%S", gmtime()))
+        self.start_time = perf_counter()
         self.tuning_event = Clock.schedule_interval(self.iterate_tuning, 0.0)
 
     def iterate_tuning(self, *_):
@@ -279,7 +284,8 @@ class Tuner:
         # this is pretty horrifying actually, maybe we could try continuation-passing style?
         if self.current_rep == self.repetitions:
             self.current_rep = 0
-            self.results.append(self.new_result)
+            # export results to file incrementally
+            self.write_new_row_to_csv_file()
             try:
                 self.inner_radius = next(self.inner_radius_range)
             except StopIteration:
@@ -298,11 +304,13 @@ class Tuner:
                         try:
                             self.our_bias = next(self.our_bias_range)
                         except StopIteration:
-                            # we're done, stop iterating and write the aggregated results to file
+                            # we're done, stop iterating
                             self.tuning_event.cancel()
-                            self.write_results_to_csv(self.output_filename)
                             get_tuning_menu().ids.launch_tuning_button.popup.dismiss()
-                            info("Tuning: Exhaustive simulation completed at %s" % strftime("%H:%M:%S", gmtime()))
+                            end_time = perf_counter()
+                            info("Tuning: Exhaustive simulation finished at %s, took %s" % \
+                                (strftime("%H:%M:%S", gmtime()),
+                                 strftime("%H:%M:%S", gmtime(end_time - self.start_time))))
                             return
             self.prepare_next_setup()
         self.perform_next_rep()
@@ -340,14 +348,25 @@ class Tuner:
         self.current_rep += 1
         self.num_total_reps += 1
 
-    def write_results_to_csv(self, filename):
-        """Output complete simulation results to a CSV file."""
-        with open(filename, 'w', encoding='utf-8') as stream:
+    def initialize_csv_file(self):
+        """Create output CSV file and write the first row with the column names."""
+        append_num = 0
+        try:
+            filename_until_dot = self.output_filename[:self.output_filename.index('.csv')]
+        except ValueError:
+            filename_until_dot = self.output_filename
+        while isfile(self.output_filename):
+            self.output_filename = filename_until_dot + str(append_num) + '.csv'
+            append_num += 1
+        with open(self.output_filename, 'w', encoding='utf-8') as filehandle:
             keys_normalized = [_normalize_hungarian(key) for key in self.result_item.keys()]
             csv_header = ','.join(keys_normalized)
-            stream.write(csv_header)
-            for result in self.results:
-                # create CSV manually for now
-                stream.write("\n")
-                csv_row = ','.join([str(value) for value in result.values()])
-                stream.write(csv_row)
+            filehandle.write(csv_header)
+
+    def write_new_row_to_csv_file(self):
+        """Output next row of simulation results to target CSV file."""
+        with open(self.output_filename, 'a', encoding='utf-8') as stream:
+            # create CSV manually for now
+            stream.write("\n")
+            csv_row = ','.join([str(value) for value in self.new_result.values()])
+            stream.write(csv_row)
