@@ -279,6 +279,7 @@ class Tuner:
         # this is pretty horrifying actually, maybe we could try continuation-passing style?
         if self.current_rep == self.repetitions:
             self.current_rep = 0
+            self.results.append(self.new_result)
             try:
                 self.inner_radius = next(self.inner_radius_range)
             except StopIteration:
@@ -336,7 +337,6 @@ class Tuner:
         else:
             self.new_result[dominant_form] += 1
         self.agora.reset()
-        self.results.append(self.new_result)
         self.current_rep += 1
         self.num_total_reps += 1
 
