@@ -1,8 +1,8 @@
 from sys import version_info
-from kivy.logger import Logger
+from logging import warning
 
 if version_info < (3, 7):
-    Logger.warning("You're using an old version of Python. Please consider upgrading to Python 3.7 or newer.")
+    warning("You're using an old version of Python. Please consider upgrading to Python 3.7 or newer.")
 
 try:
     from .src.gui.app import MorphoHistoryApp
