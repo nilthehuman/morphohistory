@@ -207,7 +207,7 @@ class RewindButton(Button):
     def rewind(self, *_):
         """Reset the state of the simulation to the the original state."""
         get_agora().stop_sim()
-        get_agora().reset()
+        get_agora().quick_reset()
 
 class FastForwardButton(Button):
     """Keeps running the simulation until a stable state is reached."""
@@ -392,6 +392,12 @@ class AgoraWidget(Widget, Agora):
     def reset(self):
         """Reset state to earlier speaker snapshot."""
         super().reset()
+        self.update_iteration_counter()
+
+    def quick_reset(self):
+        """Keep speakers but reset their biases and experience."""
+        super().quick_reset()
+        self.update_speakerdot_colors()
         self.update_iteration_counter()
 
     def load_from_file(self, filepath):

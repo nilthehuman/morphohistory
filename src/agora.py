@@ -1,5 +1,6 @@
 """An evolving virtual community of speakers influencing each other stochastically."""
 
+from copy import deepcopy
 from dataclasses import dataclass, field
 from itertools import product
 from json import dumps, load
@@ -62,6 +63,15 @@ class Agora:
         self.clear_speakers()
         self.load_speakers(self.starting_state.speakers)
         self.state.sim_iteration_total = self.starting_state.sim_iteration_total
+
+    def quick_reset(self):
+        """Keep speakers but reset their biases and experience."""
+        # FIXME: pair speakers based on their identifier 'n', not their raw index
+        for i in range(len(self.state.speakers)):
+            self.state.speakers[i].para = deepcopy(self.starting_state.speakers[i].para)
+            self.state.speakers[i].experience = self.starting_state.speakers[i].experience
+        # keep valuable caches (pick_queue still needs to be cleared though)
+        self.pick_queue = []
 
     def clear_caches(self):
         """Invalidate cache variables."""

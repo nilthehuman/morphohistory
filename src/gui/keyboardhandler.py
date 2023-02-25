@@ -27,7 +27,7 @@ class KeyboardHandler(Widget):
             return True
         if keycode[1] == 'r':
             get_agora().stop_sim()
-            get_agora().reset()
+            get_agora().quick_reset()
             return True
         if keycode[1] == 'q':
             info("KeyboardHandler: Exiting app...")

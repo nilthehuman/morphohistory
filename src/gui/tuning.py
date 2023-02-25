@@ -344,7 +344,7 @@ class Tuner:
             self.new_result['egyik_sem'] += 1
         else:
             self.new_result[dominant_form] += 1
-        self.agora.reset()
+        self.agora.quick_reset()
         self.current_rep += 1
         self.num_total_reps += 1
 
