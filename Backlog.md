@@ -1,5 +1,6 @@
 * Implement Rescorla-Wagner conditioning model as an option
 * Implement convolution-based learning model
+* Figure out pylint license compatibility issue (GPL vs MIT)
 * Duplicate same Confirm/Discard user logic on Tuning tab as on the other tabs?
 * Upon double click show the speaker's bias in all paradigm cells
 * Show unusual settings on special warning label in the agora's bottom right corner
@@ -10,6 +11,7 @@
 * Figure out why startup has become slower (white window lingers a bit longer)
 * Multithreading for performance
 * If the app is about to be closed without saving, ask the user to save or discard changes
+* Use type hints throughout the codebase?
 * Keep SpeakerDots inside their AgoraWidget
 * Gently snap SpeakerDots to grid when dragging
 * Make smoke tests work on both Linux and Windows
