@@ -72,6 +72,7 @@ class Agora:
             self.state.speakers[i].experience = self.starting_state.speakers[i].experience
         # keep valuable caches (pick_queue still needs to be cleared though)
         self.pick_queue = []
+        self.state.sim_iteration_total = self.starting_state.sim_iteration_total
 
     def clear_caches(self):
         """Invalidate cache variables."""
