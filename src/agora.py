@@ -116,6 +116,7 @@ class Agora:
         self.load_speakers(speakers)
         self.state.sim_iteration_total = loaded_state['sim_iteration_total']
         self.save_starting_state()
+        SETTINGS.paradigm = deepcopy(self.state.speakers[0].para)
 
     def load_speakers(self, speakers):
         """Replace current speaker community with a copy of the argument."""
