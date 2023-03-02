@@ -397,6 +397,7 @@ class AgoraWidget(Widget, Agora):
     def quick_reset(self):
         """Keep speakers but reset their biases and experience."""
         super().quick_reset()
+        self.clear_talk_arrow()
         self.update_speakerdot_colors()
         self.update_iteration_counter()
 
