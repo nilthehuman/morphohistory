@@ -81,6 +81,13 @@ _SETTINGS_UI = [
     },
     {
         "type": "bool",
+        "title": "Passzív enyészet   (ÚJ!)",
+        "desc": "Elsorvadjon-e idővel a szerényebb súlyú alak",
+        "section": "Simulation",
+        "key": "sim_passive_decay"
+    },
+    {
+        "type": "bool",
         "title": "Fordított hatás",
         "desc": "A hallott alak ellenkezőjét preferáljuk-e",
         "section": "Simulation",
@@ -152,6 +159,7 @@ class CustomSettings(Settings):
                                     'sim_distance_metric': 'konstans',
                                     'sim_influence_self': 1,
                                     'sim_influence_mutual': 0,
+                                    'sim_passive_decay': 0,
                                     'sim_prefer_opposite': 0,
                                     'starting_experience': 1
                                 })

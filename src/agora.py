@@ -152,6 +152,19 @@ class Agora:
             for speaker in self.state.speakers:
                 speaker.experience = experience
 
+    def passive_decay(self):
+        for speaker in self.state.speakers:
+            current_picks = []
+            if self.pick:
+                current_picks += [self.pick['speaker'].n, self.pick['hearer'].n]
+            for pick in self.pick_queue:
+                current_picks += [pick['speaker'].n, pick['hearer'].n]
+            if speaker.n not in current_picks:
+                speaker.passive_decay()
+        # TODO move to sim.py
+        if self.graphics_on:
+            self.update_speakerdot_colors()
+
     def dominant_form(self):
         if all(s.principal_bias() > 0.5 for s in self.state.speakers):
             return self.state.speakers[0].para[0][0].form_a
@@ -195,6 +208,8 @@ class Agora:
                 self.pick_queue.append(reverse_pick)
         debug("Agora: %d picked to talk to %d" % (self.pick['speaker'].n, self.pick['hearer'].n))
         self.pick['speaker'].talk(self.pick)
+        if SETTINGS.sim_passive_decay:
+            self.passive_decay()
         self.state.sim_iteration_total += 1
 
     def all_biased(self):

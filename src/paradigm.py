@@ -107,6 +107,21 @@ class _Paradigm(ABC):
                 new_para.para[cell.number][cell.case] = cell
         return new_para
 
+    def passive_decay(self):
+        def descend(cells):
+            if isinstance(cells, list):
+                for below in cells:
+                    descend(below)
+            else:
+                cell = cells
+                if cell.bias_a > 0.5:
+                    cell.bias_a *= 1.02
+                elif cell.bias_a < 0.5:
+                    cell.bias_a /= 1.02
+                cell.bias_a = _clamp(cell.bias_a)
+                return
+        descend(self.para)
+
 class _NounCell(_Cell):
     """A single cell in a noun paradigm for a given morphosyntactic context."""
     def __init__(self, number=0, case=0, bias_a=0.5, form_a='', form_b='', prominence=1.0):
