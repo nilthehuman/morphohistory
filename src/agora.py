@@ -91,11 +91,12 @@ class Agora:
         self.state.sim_iteration_total = 0
         self.clear_caches()
 
-    def load_demo_agora(self, demo_factory, our_bias=None, their_bias=None, starting_experience=None, inner_radius=None):
+    def load_demo_agora(self, demo_factory, our_bias=None, their_bias=None,
+        starting_experience=SETTINGS.starting_experience, inner_radius=None):
         """Replace current speaker community with a demo preset."""
         if our_bias is None and their_bias is None:
             # fall back on the default arguments
-            speakers = demo_factory.get_speakers()
+            speakers = demo_factory.get_speakers(starting_experience=starting_experience)
         else:
             speakers = demo_factory.get_speakers(our_bias, their_bias, starting_experience, inner_radius)
         self.clear_speakers()
@@ -138,6 +139,18 @@ class Agora:
                     speaker.para.para[num][case].form_a = para.para[num][case].form_a
                     speaker.para.para[num][case].form_b = para.para[num][case].form_b
                     speaker.para.para[num][case].prominence = para.para[num][case].prominence
+
+    def set_starting_experience(self, experience=None):
+        """Set the experience value of each speaker in the saved snapshot,
+        and also in the current state if it's identical to the snapshot."""
+        # FIXME: defining a default argument value for experience failed for some reason
+        if experience is None:
+            experience = SETTINGS.starting_experience
+        for speaker in self.starting_state.speakers:
+            speaker.experience = experience
+        if 0 == self.state.sim_iteration_total:
+            for speaker in self.state.speakers:
+                speaker.experience = experience
 
     def dominant_form(self):
         if all(s.principal_bias() > 0.5 for s in self.state.speakers):

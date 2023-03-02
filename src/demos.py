@@ -1,4 +1,4 @@
-"""An assortment of sample agoras for experimentation and demonstration purposes."""
+"""An assortment of parametrized sample agoras for experimentation and demonstration purposes."""
 
 from abc import ABC, abstractmethod
 from dataclasses import dataclass
@@ -52,7 +52,7 @@ class Rainbow9x9(_DemoFactory):
                 pos = (_WIDTH * 0.1 + _WIDTH * 0.1 * col - _DOT_WIDTH * 0.5,
                        _HEIGHT * 0.9 - _HEIGHT * 0.1 * row - _DOT_HEIGHT * 0.5)
                 bias_a = our_bias + (their_bias - our_bias) * 1 / 16 * (row + col)
-                speakers.append(Speaker.frombias(row * 9 + col, pos, bias_a))
+                speakers.append(Speaker.frombias(row * 9 + col, pos, bias_a, starting_experience))
         return speakers
 
 class Rainbow10x10(_DemoFactory):
@@ -164,7 +164,7 @@ class NewsAnchor(_DemoFactory):
     """A circle of neutral speakers around a biased broadcaster."""
 
     @staticmethod
-    def get_speakers(our_bias=1, their_bias=0.5, starting_experience=1, _inner_radius=None):
+    def get_speakers(our_bias=1, their_bias=0.0, starting_experience=1, _inner_radius=None):
         speakers = []
         pos = [None, None]
         for n in range(16):
@@ -189,13 +189,13 @@ class Rings16_16(_DemoFactory):
             y = cos(2 * pi * float(n) / 16) * _HEIGHT * 0.4 * inner_radius
             pos = (_WIDTH * 0.5 + x - _DOT_WIDTH * 0.5,
                    _HEIGHT * 0.5 + y - _DOT_HEIGHT * 0.5)
-            speakers.append(Speaker.frombias(n, pos, their_bias))
+            speakers.append(Speaker.frombias(n, pos, their_bias, starting_experience))
         for n in range(16):
             x = sin(2 * pi * float(n) / 16) * _WIDTH * 0.4
             y = cos(2 * pi * float(n) / 16) * _HEIGHT * 0.4
             pos = (_WIDTH * 0.5 + x - _DOT_WIDTH * 0.5,
                    _HEIGHT * 0.5 + y - _DOT_HEIGHT * 0.5)
-            speakers.append(Speaker.frombias(16 + n, pos, our_bias))
+            speakers.append(Speaker.frombias(16 + n, pos, our_bias, starting_experience))
         return speakers
 
 class Rings16_24(_DemoFactory):
@@ -209,13 +209,13 @@ class Rings16_24(_DemoFactory):
             y = cos(2 * pi * float(n) / 16) * _HEIGHT * 0.4 * inner_radius
             pos = (_WIDTH * 0.5 + x - _DOT_WIDTH * 0.5,
                    _HEIGHT * 0.5 + y - _DOT_HEIGHT * 0.5)
-            speakers.append(Speaker.frombias(n, pos, their_bias))
+            speakers.append(Speaker.frombias(n, pos, their_bias, starting_experience))
         for n in range(24):
             x = sin(2 * pi * float(n) / 24) * _WIDTH * 0.4
             y = cos(2 * pi * float(n) / 24) * _HEIGHT * 0.4
             pos = (_WIDTH * 0.5 + x - _DOT_WIDTH * 0.5,
                    _HEIGHT * 0.5 + y - _DOT_HEIGHT * 0.5)
-            speakers.append(Speaker.frombias(16 + n, pos, our_bias))
+            speakers.append(Speaker.frombias(16 + n, pos, our_bias, starting_experience))
         return speakers
 
 class Villages(_DemoFactory):
@@ -231,7 +231,7 @@ class Villages(_DemoFactory):
                     pos = (_WIDTH * 0.1 + _WIDTH * 0.1 * col - _DOT_WIDTH * 0.5,
                            _HEIGHT * 0.9 - _HEIGHT * 0.1 * row - _DOT_HEIGHT * 0.5)
                     bias_a = their_bias if (row < 3) == (col < 3) else our_bias
-                    speakers.append(Speaker.frombias(row * 9 + col, pos, bias_a))
+                    speakers.append(Speaker.frombias(row * 9 + col, pos, bias_a, starting_experience))
         return speakers
 
 DEMO_FACTORIES = {
