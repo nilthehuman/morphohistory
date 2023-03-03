@@ -108,6 +108,8 @@ class _Paradigm(ABC):
         return new_para
 
     def passive_decay(self):
+        """Gradually forget underdog variants in each cell."""
+        # TODO: optimize this if possible
         def descend(cells):
             if isinstance(cells, list):
                 for below in cells:
