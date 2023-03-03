@@ -98,7 +98,7 @@ class DemoSpinner(Spinner):
         selected = self.values.index(self.text) + 1
         SETTINGS.current_demo = selected
         demo_factory = DEMO_FACTORIES[selected]
-        get_agora().load_demo_agora(demo_factory)
+        get_agora().load_demo_agora(demo_factory, starting_experience=SETTINGS.starting_experience)
         # update suggested default parametrization values
         tuning_menu = get_tuning_menu()
         if DEFAULT_DEMO_ARGUMENTS[selected].our_bias is not None:

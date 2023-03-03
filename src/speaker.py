@@ -100,3 +100,6 @@ class Speaker:
         self.para.propagate(delta, i, j)
         self.experience = self.experience + 1
         self.principal_bias_cached = None
+
+    def passive_decay(self):
+        self.para.passive_decay()

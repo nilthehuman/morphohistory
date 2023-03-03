@@ -81,6 +81,13 @@ _SETTINGS_UI = [
     },
     {
         "type": "bool",
+        "title": "Passzív enyészet   (ÚJ!)",
+        "desc": "Elsorvadjon-e idővel a szerényebb súlyú alak",
+        "section": "Simulation",
+        "key": "sim_passive_decay"
+    },
+    {
+        "type": "bool",
         "title": "Fordított hatás",
         "desc": "A hallott alak ellenkezőjét preferáljuk-e",
         "section": "Simulation",
@@ -152,6 +159,7 @@ class CustomSettings(Settings):
                                     'sim_distance_metric': 'konstans',
                                     'sim_influence_self': 1,
                                     'sim_influence_mutual': 0,
+                                    'sim_passive_decay': 0,
                                     'sim_prefer_opposite': 0,
                                     'starting_experience': 1
                                 })
@@ -200,6 +208,7 @@ class CustomSettings(Settings):
         update_colors = False
         update_arrow = False
         update_grid = False
+        update_starting_experience = False
         for section in self.config.sections():
             for (key, new_value) in self.config.items(section):
                 # parse new_value from its raw string state
@@ -214,6 +223,8 @@ class CustomSettings(Settings):
                         update_colors = True
                 elif 'numeric' == value_type:
                     new_value = int(new_value)
+                    if 'starting_experience' == key:
+                        update_starting_experience = True
                 elif 'options' == value_type:
                     string_to_enum = {
                         'konstans'   : SETTINGS.DistanceMetric.CONSTANT,
@@ -240,6 +251,8 @@ class CustomSettings(Settings):
         if update_grid:
             get_agora().clear_dist_cache()
             get_agora().update_grid()
+        if update_starting_experience:
+            get_agora().set_starting_experience()
 
     def load_settings_values(self):
         """Destructively (re)set all values in our ConfigParser instance to the current global SETTINGS."""

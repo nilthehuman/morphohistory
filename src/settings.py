@@ -63,6 +63,7 @@ class _Settings:
         #self.sim_learning_model = HARMONIC # TODO use this option
         self.sim_influence_self = True
         self.sim_influence_mutual = False
+        self.sim_passive_decay = False
         self.sim_prefer_opposite = False
         self.sim_batch_size = 100
         self.sim_max_iteration = 10000
