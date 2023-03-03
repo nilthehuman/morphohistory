@@ -1,3 +1,4 @@
+* Store iteration history in Agora, allow saving history to file
 * Implement Rescorla-Wagner conditioning model as an option
 * Implement convolution-based learning model
 * Figure out pylint license compatibility issue (GPL vs MIT)
