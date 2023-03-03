@@ -146,6 +146,11 @@ class Agora:
             return self.state.speakers[0].para[0][0].form_b
         return None
 
+    def uniform_balance(self):
+        """Detect a situation where no speaker is strongly biased either way."""
+        return all(1 - SETTINGS.bias_threshold < s.principal_bias() < SETTINGS.bias_threshold
+                   for s in self.state.speakers)
+
     def simulate(self, *_): # TODO: use threading to perform independent picks in parallel
         """Perform one iteration: pick two individuals to talk to each other
         and update the hearer's state based on the speaker's."""

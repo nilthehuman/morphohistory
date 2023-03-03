@@ -177,7 +177,8 @@ class Tuner:
         'belso_gyuru_sugara' : None,
         SETTINGS.paradigm.para[0][0].form_a : 0,
         SETTINGS.paradigm.para[0][0].form_b : 0,
-        'egyik_sem' : 0
+        'egyik_sem' : 0,
+        'uniform_egyensuly' : 0
     }
 
     # why doesn't Python have macros?
@@ -344,6 +345,8 @@ class Tuner:
             self.new_result['egyik_sem'] += 1
         else:
             self.new_result[dominant_form] += 1
+        if self.agora.uniform_balance():
+            self.new_result['uniform_egyensuly'] += 1
         self.agora.quick_reset()
         self.current_rep += 1
         self.num_total_reps += 1
