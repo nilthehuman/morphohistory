@@ -161,7 +161,7 @@ class CoreVsPeriphery10x10(_DemoFactory):
         return speakers
 
 class NewsAnchor(_DemoFactory):
-    """A circle of neutral speakers around a biased broadcaster."""
+    """A circle of biased speakers around a broadcaster with the opposite bias."""
 
     @staticmethod
     def get_speakers(our_bias=1, their_bias=0.0, starting_experience=1, _inner_radius=None):
