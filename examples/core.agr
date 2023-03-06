@@ -1,4 +1,5 @@
 {
+ "_description": "A 10x10 grid of speakers, neutral majority on the outside, biased minority on the inside",
  "speakers": [
   {
    "n": 0,

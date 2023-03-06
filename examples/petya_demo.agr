@@ -1,19 +1,19 @@
 {
- "_description": "A smaller ring of 16 'A' speakers inside a wider ring of 16 'B' speakers",
+ "_description": "A custom arrangement of 32 biased speakers, courtesy of Petya",
  "speakers": [
   {
    "n": 0,
    "pos": [
-    290.0,
-    410.0
+    556.026655784832,
+    560.6162419264001
    ],
    "para": {
     "para": [
      [
       {
-       "bias_a": 0.0,
-       "form_a": "havernak",
-       "form_b": "havernek",
+       "bias_a": 0,
+       "form_a": "roz\u00e9b\u00f3l",
+       "form_b": "roz\u00e9b\u0151l",
        "prominence": 1.0,
        "number": 0,
        "case": 0
@@ -28,16 +28,16 @@
   {
    "n": 1,
    "pos": [
-    335.9220118838108,
-    400.8655439013544
+    152.96975093187473,
+    189.36213650180224
    ],
    "para": {
     "para": [
      [
       {
-       "bias_a": 0.0,
-       "form_a": "havernak",
-       "form_b": "havernek",
+       "bias_a": 0,
+       "form_a": "roz\u00e9b\u00f3l",
+       "form_b": "roz\u00e9b\u0151l",
        "prominence": 1.0,
        "number": 0,
        "case": 0
@@ -52,16 +52,16 @@
   {
    "n": 2,
    "pos": [
-    374.8528137423857,
-    374.8528137423857
+    504.36149195774567,
+    540.3986893741937
    ],
    "para": {
     "para": [
      [
       {
-       "bias_a": 0.0,
-       "form_a": "havernak",
-       "form_b": "havernek",
+       "bias_a": 0,
+       "form_a": "roz\u00e9b\u00f3l",
+       "form_b": "roz\u00e9b\u0151l",
        "prominence": 1.0,
        "number": 0,
        "case": 0
@@ -76,16 +76,16 @@
   {
    "n": 3,
    "pos": [
-    400.8655439013544,
-    335.9220118838108
+    552.8974705019943,
+    499.2155626770908
    ],
    "para": {
     "para": [
      [
       {
-       "bias_a": 0.0,
-       "form_a": "havernak",
-       "form_b": "havernek",
+       "bias_a": 0,
+       "form_a": "roz\u00e9b\u00f3l",
+       "form_b": "roz\u00e9b\u0151l",
        "prominence": 1.0,
        "number": 0,
        "case": 0
@@ -100,16 +100,16 @@
   {
    "n": 4,
    "pos": [
-    410.0,
-    290.0
+    346.93490452121597,
+    229.18722935974398
    ],
    "para": {
     "para": [
      [
       {
-       "bias_a": 0.0,
-       "form_a": "havernak",
-       "form_b": "havernek",
+       "bias_a": 0,
+       "form_a": "roz\u00e9b\u00f3l",
+       "form_b": "roz\u00e9b\u0151l",
        "prominence": 1.0,
        "number": 0,
        "case": 0
@@ -124,16 +124,16 @@
   {
    "n": 5,
    "pos": [
-    400.8655439013544,
-    244.07798811618923
+    465.64111712516234,
+    593.0714750228772
    ],
    "para": {
     "para": [
      [
       {
-       "bias_a": 0.0,
-       "form_a": "havernak",
-       "form_b": "havernek",
+       "bias_a": 0,
+       "form_a": "roz\u00e9b\u00f3l",
+       "form_b": "roz\u00e9b\u0151l",
        "prominence": 1.0,
        "number": 0,
        "case": 0
@@ -148,16 +148,16 @@
   {
    "n": 6,
    "pos": [
-    374.8528137423857,
-    205.1471862576143
+    335.8528137423857,
+    147.14718625761432
    ],
    "para": {
     "para": [
      [
       {
-       "bias_a": 0.0,
-       "form_a": "havernak",
-       "form_b": "havernek",
+       "bias_a": 0,
+       "form_a": "roz\u00e9b\u00f3l",
+       "form_b": "roz\u00e9b\u0151l",
        "prominence": 1.0,
        "number": 0,
        "case": 0
@@ -172,16 +172,16 @@
   {
    "n": 7,
    "pos": [
-    335.9220118838108,
-    179.1344560986456
+    352.9220118838108,
+    107.1344560986456
    ],
    "para": {
     "para": [
      [
       {
-       "bias_a": 0.0,
-       "form_a": "havernak",
-       "form_b": "havernek",
+       "bias_a": 0,
+       "form_a": "roz\u00e9b\u00f3l",
+       "form_b": "roz\u00e9b\u0151l",
        "prominence": 1.0,
        "number": 0,
        "case": 0
@@ -196,16 +196,16 @@
   {
    "n": 8,
    "pos": [
-    290.0,
-    170.0
+    292.0,
+    110.99999999999997
    ],
    "para": {
     "para": [
      [
       {
-       "bias_a": 0.0,
-       "form_a": "havernak",
-       "form_b": "havernek",
+       "bias_a": 0,
+       "form_a": "roz\u00e9b\u00f3l",
+       "form_b": "roz\u00e9b\u0151l",
        "prominence": 1.0,
        "number": 0,
        "case": 0
@@ -220,16 +220,16 @@
   {
    "n": 9,
    "pos": [
-    244.07798811618923,
-    179.13445609864556
+    195.65300408783716,
+    172.37748158306152
    ],
    "para": {
     "para": [
      [
       {
-       "bias_a": 0.0,
-       "form_a": "havernak",
-       "form_b": "havernek",
+       "bias_a": 0,
+       "form_a": "roz\u00e9b\u00f3l",
+       "form_b": "roz\u00e9b\u0151l",
        "prominence": 1.0,
        "number": 0,
        "case": 0
@@ -244,16 +244,16 @@
   {
    "n": 10,
    "pos": [
-    205.1471862576143,
-    205.1471862576143
+    225.41810980436625,
+    241.18438367406233
    ],
    "para": {
     "para": [
      [
       {
-       "bias_a": 0.0,
-       "form_a": "havernak",
-       "form_b": "havernek",
+       "bias_a": 0,
+       "form_a": "roz\u00e9b\u00f3l",
+       "form_b": "roz\u00e9b\u0151l",
        "prominence": 1.0,
        "number": 0,
        "case": 0
@@ -275,9 +275,9 @@
     "para": [
      [
       {
-       "bias_a": 0.0,
-       "form_a": "havernak",
-       "form_b": "havernek",
+       "bias_a": 0,
+       "form_a": "roz\u00e9b\u00f3l",
+       "form_b": "roz\u00e9b\u0151l",
        "prominence": 1.0,
        "number": 0,
        "case": 0
@@ -299,9 +299,9 @@
     "para": [
      [
       {
-       "bias_a": 0.0,
-       "form_a": "havernak",
-       "form_b": "havernek",
+       "bias_a": 0,
+       "form_a": "roz\u00e9b\u00f3l",
+       "form_b": "roz\u00e9b\u0151l",
        "prominence": 1.0,
        "number": 0,
        "case": 0
@@ -316,16 +316,16 @@
   {
    "n": 13,
    "pos": [
-    179.13445609864561,
-    335.9220118838108
+    333.3722107672537,
+    341.47315833142693
    ],
    "para": {
     "para": [
      [
       {
-       "bias_a": 0.0,
-       "form_a": "havernak",
-       "form_b": "havernek",
+       "bias_a": 0,
+       "form_a": "roz\u00e9b\u00f3l",
+       "form_b": "roz\u00e9b\u0151l",
        "prominence": 1.0,
        "number": 0,
        "case": 0
@@ -340,16 +340,16 @@
   {
    "n": 14,
    "pos": [
-    205.1471862576143,
-    374.8528137423857
+    234.1471862576143,
+    340.8528137423857
    ],
    "para": {
     "para": [
      [
       {
-       "bias_a": 0.0,
-       "form_a": "havernak",
-       "form_b": "havernek",
+       "bias_a": 0,
+       "form_a": "roz\u00e9b\u00f3l",
+       "form_b": "roz\u00e9b\u0151l",
        "prominence": 1.0,
        "number": 0,
        "case": 0
@@ -364,16 +364,16 @@
   {
    "n": 15,
    "pos": [
-    244.07798811618915,
-    400.8655439013544
+    219.07798811618918,
+    424.8655439013544
    ],
    "para": {
     "para": [
      [
       {
-       "bias_a": 0.0,
-       "form_a": "havernak",
-       "form_b": "havernek",
+       "bias_a": 0,
+       "form_a": "roz\u00e9b\u00f3l",
+       "form_b": "roz\u00e9b\u0151l",
        "prominence": 1.0,
        "number": 0,
        "case": 0
@@ -388,16 +388,16 @@
   {
    "n": 16,
    "pos": [
-    290.0,
-    530.0
+    438.6534393428481,
+    459.05176758636804
    ],
    "para": {
     "para": [
      [
       {
-       "bias_a": 1.0,
-       "form_a": "havernak",
-       "form_b": "havernek",
+       "bias_a": 1,
+       "form_a": "roz\u00e9b\u00f3l",
+       "form_b": "roz\u00e9b\u0151l",
        "prominence": 1.0,
        "number": 0,
        "case": 0
@@ -412,16 +412,16 @@
   {
    "n": 17,
    "pos": [
-    381.84402376762154,
-    511.73108780270877
+    421.25970844186156,
+    561.2822342503249
    ],
    "para": {
     "para": [
      [
       {
-       "bias_a": 1.0,
-       "form_a": "havernak",
-       "form_b": "havernek",
+       "bias_a": 1,
+       "form_a": "roz\u00e9b\u00f3l",
+       "form_b": "roz\u00e9b\u0151l",
        "prominence": 1.0,
        "number": 0,
        "case": 0
@@ -436,16 +436,16 @@
   {
    "n": 18,
    "pos": [
-    459.7056274847714,
-    459.7056274847714
+    443.9393536150754,
+    507.0044490938594
    ],
    "para": {
     "para": [
      [
       {
-       "bias_a": 1.0,
-       "form_a": "havernak",
-       "form_b": "havernek",
+       "bias_a": 1,
+       "form_a": "roz\u00e9b\u00f3l",
+       "form_b": "roz\u00e9b\u0151l",
        "prominence": 1.0,
        "number": 0,
        "case": 0
@@ -460,16 +460,16 @@
   {
    "n": 19,
    "pos": [
-    511.73108780270877,
-    381.8440237676216
+    494.83865151374874,
+    435.8998198922936
    ],
    "para": {
     "para": [
      [
       {
-       "bias_a": 1.0,
-       "form_a": "havernak",
-       "form_b": "havernek",
+       "bias_a": 1,
+       "form_a": "roz\u00e9b\u00f3l",
+       "form_b": "roz\u00e9b\u0151l",
        "prominence": 1.0,
        "number": 0,
        "case": 0
@@ -484,16 +484,16 @@
   {
    "n": 20,
    "pos": [
-    530.0,
-    290.0
+    581.803471286144,
+    442.0319266006402
    ],
    "para": {
     "para": [
      [
       {
-       "bias_a": 1.0,
-       "form_a": "havernak",
-       "form_b": "havernek",
+       "bias_a": 1,
+       "form_a": "roz\u00e9b\u00f3l",
+       "form_b": "roz\u00e9b\u0151l",
        "prominence": 1.0,
        "number": 0,
        "case": 0
@@ -508,16 +508,16 @@
   {
    "n": 21,
    "pos": [
-    511.73108780270877,
-    198.15597623237846
+    444.1613426468687,
+    84.41357188671442
    ],
    "para": {
     "para": [
      [
       {
-       "bias_a": 1.0,
-       "form_a": "havernak",
-       "form_b": "havernek",
+       "bias_a": 1,
+       "form_a": "roz\u00e9b\u00f3l",
+       "form_b": "roz\u00e9b\u0151l",
        "prominence": 1.0,
        "number": 0,
        "case": 0
@@ -532,16 +532,16 @@
   {
    "n": 22,
    "pos": [
-    459.7056274847714,
-    120.29437251522859
+    394.3882071674594,
+    123.6728597730206
    ],
    "para": {
     "para": [
      [
       {
-       "bias_a": 1.0,
-       "form_a": "havernak",
-       "form_b": "havernek",
+       "bias_a": 1,
+       "form_a": "roz\u00e9b\u00f3l",
+       "form_b": "roz\u00e9b\u0151l",
        "prominence": 1.0,
        "number": 0,
        "case": 0
@@ -563,9 +563,9 @@
     "para": [
      [
       {
-       "bias_a": 1.0,
-       "form_a": "havernak",
-       "form_b": "havernek",
+       "bias_a": 1,
+       "form_a": "roz\u00e9b\u00f3l",
+       "form_b": "roz\u00e9b\u0151l",
        "prominence": 1.0,
        "number": 0,
        "case": 0
@@ -580,16 +580,16 @@
   {
    "n": 24,
    "pos": [
-    290.00000000000006,
-    50.0
+    392.4807801530241,
+    516.2312415752962
    ],
    "para": {
     "para": [
      [
       {
-       "bias_a": 1.0,
-       "form_a": "havernak",
-       "form_b": "havernek",
+       "bias_a": 1,
+       "form_a": "roz\u00e9b\u00f3l",
+       "form_b": "roz\u00e9b\u0151l",
        "prominence": 1.0,
        "number": 0,
        "case": 0
@@ -604,16 +604,16 @@
   {
    "n": 25,
    "pos": [
-    198.15597623237846,
-    68.26891219729112
+    61.89032350143441,
+    299.1322081464112
    ],
    "para": {
     "para": [
      [
       {
-       "bias_a": 1.0,
-       "form_a": "havernak",
-       "form_b": "havernek",
+       "bias_a": 1,
+       "form_a": "roz\u00e9b\u00f3l",
+       "form_b": "roz\u00e9b\u0151l",
        "prominence": 1.0,
        "number": 0,
        "case": 0
@@ -628,16 +628,16 @@
   {
    "n": 26,
    "pos": [
-    120.29437251522859,
-    120.29437251522856
+    110.29437251522859,
+    236.29437251522856
    ],
    "para": {
     "para": [
      [
       {
-       "bias_a": 1.0,
-       "form_a": "havernak",
-       "form_b": "havernek",
+       "bias_a": 1,
+       "form_a": "roz\u00e9b\u00f3l",
+       "form_b": "roz\u00e9b\u0151l",
        "prominence": 1.0,
        "number": 0,
        "case": 0
@@ -652,16 +652,16 @@
   {
    "n": 27,
    "pos": [
-    68.26891219729123,
-    198.1559762323783
+    67.26891219729123,
+    249.15597623237826
    ],
    "para": {
     "para": [
      [
       {
-       "bias_a": 1.0,
-       "form_a": "havernak",
-       "form_b": "havernek",
+       "bias_a": 1,
+       "form_a": "roz\u00e9b\u00f3l",
+       "form_b": "roz\u00e9b\u0151l",
        "prominence": 1.0,
        "number": 0,
        "case": 0
@@ -676,16 +676,16 @@
   {
    "n": 28,
    "pos": [
-    50.0,
+    105.0,
     289.99999999999994
    ],
    "para": {
     "para": [
      [
       {
-       "bias_a": 1.0,
-       "form_a": "havernak",
-       "form_b": "havernek",
+       "bias_a": 1,
+       "form_a": "roz\u00e9b\u00f3l",
+       "form_b": "roz\u00e9b\u0151l",
        "prominence": 1.0,
        "number": 0,
        "case": 0
@@ -700,16 +700,16 @@
   {
    "n": 29,
    "pos": [
-    68.26891219729123,
-    381.8440237676216
+    86.28751090551525,
+    346.93298877043765
    ],
    "para": {
     "para": [
      [
       {
-       "bias_a": 1.0,
-       "form_a": "havernak",
-       "form_b": "havernek",
+       "bias_a": 1,
+       "form_a": "roz\u00e9b\u00f3l",
+       "form_b": "roz\u00e9b\u0151l",
        "prominence": 1.0,
        "number": 0,
        "case": 0
@@ -724,16 +724,16 @@
   {
    "n": 30,
    "pos": [
-    120.29437251522856,
-    459.7056274847714
+    137.18680880418856,
+    335.82776136573136
    ],
    "para": {
     "para": [
      [
       {
-       "bias_a": 1.0,
-       "form_a": "havernak",
-       "form_b": "havernek",
+       "bias_a": 1,
+       "form_a": "roz\u00e9b\u00f3l",
+       "form_b": "roz\u00e9b\u0151l",
        "prominence": 1.0,
        "number": 0,
        "case": 0
@@ -748,16 +748,16 @@
   {
    "n": 31,
    "pos": [
-    198.1559762323783,
-    511.73108780270877
+    162.11877881593028,
+    384.4747344258767
    ],
    "para": {
     "para": [
      [
       {
-       "bias_a": 1.0,
-       "form_a": "havernak",
-       "form_b": "havernek",
+       "bias_a": 1,
+       "form_a": "roz\u00e9b\u00f3l",
+       "form_b": "roz\u00e9b\u0151l",
        "prominence": 1.0,
        "number": 0,
        "case": 0

@@ -1,4 +1,5 @@
 {
+ "_description": "An 8x8 grid of biased speakers arranged in an alternating pattern",
  "speakers": [
   {
    "n": 0,

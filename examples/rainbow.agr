@@ -1,4 +1,5 @@
 {
+ "_description": "A 10x10 grid of speakers, pure A in the top left corner, pure B at bottom right and everything else in between",
  "speakers": [
   {
    "n": 0,

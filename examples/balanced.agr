@@ -1,4 +1,5 @@
 {
+ "_description": "A 10x10 grid of speakers, all of them unbiased",
  "speakers": [
   {
    "n": 0,
@@ -11,8 +12,8 @@
      [
       {
        "bias_a": 0.5,
-       "form_a": "P\u00e1loson",
-       "form_b": "P\u00e1losan",
+       "form_a": "szovelok",
+       "form_b": "szovelek",
        "prominence": 1.0,
        "number": 0,
        "case": 0
@@ -35,8 +36,8 @@
      [
       {
        "bias_a": 0.5,
-       "form_a": "P\u00e1loson",
-       "form_b": "P\u00e1losan",
+       "form_a": "szovelok",
+       "form_b": "szovelek",
        "prominence": 1.0,
        "number": 0,
        "case": 0
@@ -59,8 +60,8 @@
      [
       {
        "bias_a": 0.5,
-       "form_a": "P\u00e1loson",
-       "form_b": "P\u00e1losan",
+       "form_a": "szovelok",
+       "form_b": "szovelek",
        "prominence": 1.0,
        "number": 0,
        "case": 0
@@ -83,8 +84,8 @@
      [
       {
        "bias_a": 0.5,
-       "form_a": "P\u00e1loson",
-       "form_b": "P\u00e1losan",
+       "form_a": "szovelok",
+       "form_b": "szovelek",
        "prominence": 1.0,
        "number": 0,
        "case": 0
@@ -107,8 +108,8 @@
      [
       {
        "bias_a": 0.5,
-       "form_a": "P\u00e1loson",
-       "form_b": "P\u00e1losan",
+       "form_a": "szovelok",
+       "form_b": "szovelek",
        "prominence": 1.0,
        "number": 0,
        "case": 0
@@ -131,8 +132,8 @@
      [
       {
        "bias_a": 0.5,
-       "form_a": "P\u00e1loson",
-       "form_b": "P\u00e1losan",
+       "form_a": "szovelok",
+       "form_b": "szovelek",
        "prominence": 1.0,
        "number": 0,
        "case": 0
@@ -155,8 +156,8 @@
      [
       {
        "bias_a": 0.5,
-       "form_a": "P\u00e1loson",
-       "form_b": "P\u00e1losan",
+       "form_a": "szovelok",
+       "form_b": "szovelek",
        "prominence": 1.0,
        "number": 0,
        "case": 0
@@ -179,8 +180,8 @@
      [
       {
        "bias_a": 0.5,
-       "form_a": "P\u00e1loson",
-       "form_b": "P\u00e1losan",
+       "form_a": "szovelok",
+       "form_b": "szovelek",
        "prominence": 1.0,
        "number": 0,
        "case": 0
@@ -203,8 +204,8 @@
      [
       {
        "bias_a": 0.5,
-       "form_a": "P\u00e1loson",
-       "form_b": "P\u00e1losan",
+       "form_a": "szovelok",
+       "form_b": "szovelek",
        "prominence": 1.0,
        "number": 0,
        "case": 0
@@ -227,8 +228,8 @@
      [
       {
        "bias_a": 0.5,
-       "form_a": "P\u00e1loson",
-       "form_b": "P\u00e1losan",
+       "form_a": "szovelok",
+       "form_b": "szovelek",
        "prominence": 1.0,
        "number": 0,
        "case": 0
@@ -251,8 +252,8 @@
      [
       {
        "bias_a": 0.5,
-       "form_a": "P\u00e1loson",
-       "form_b": "P\u00e1losan",
+       "form_a": "szovelok",
+       "form_b": "szovelek",
        "prominence": 1.0,
        "number": 0,
        "case": 0
@@ -275,8 +276,8 @@
      [
       {
        "bias_a": 0.5,
-       "form_a": "P\u00e1loson",
-       "form_b": "P\u00e1losan",
+       "form_a": "szovelok",
+       "form_b": "szovelek",
        "prominence": 1.0,
        "number": 0,
        "case": 0
@@ -299,8 +300,8 @@
      [
       {
        "bias_a": 0.5,
-       "form_a": "P\u00e1loson",
-       "form_b": "P\u00e1losan",
+       "form_a": "szovelok",
+       "form_b": "szovelek",
        "prominence": 1.0,
        "number": 0,
        "case": 0
@@ -323,8 +324,8 @@
      [
       {
        "bias_a": 0.5,
-       "form_a": "P\u00e1loson",
-       "form_b": "P\u00e1losan",
+       "form_a": "szovelok",
+       "form_b": "szovelek",
        "prominence": 1.0,
        "number": 0,
        "case": 0
@@ -347,8 +348,8 @@
      [
       {
        "bias_a": 0.5,
-       "form_a": "P\u00e1loson",
-       "form_b": "P\u00e1losan",
+       "form_a": "szovelok",
+       "form_b": "szovelek",
        "prominence": 1.0,
        "number": 0,
        "case": 0
@@ -371,8 +372,8 @@
      [
       {
        "bias_a": 0.5,
-       "form_a": "P\u00e1loson",
-       "form_b": "P\u00e1losan",
+       "form_a": "szovelok",
+       "form_b": "szovelek",
        "prominence": 1.0,
        "number": 0,
        "case": 0
@@ -395,8 +396,8 @@
      [
       {
        "bias_a": 0.5,
-       "form_a": "P\u00e1loson",
-       "form_b": "P\u00e1losan",
+       "form_a": "szovelok",
+       "form_b": "szovelek",
        "prominence": 1.0,
        "number": 0,
        "case": 0
@@ -419,8 +420,8 @@
      [
       {
        "bias_a": 0.5,
-       "form_a": "P\u00e1loson",
-       "form_b": "P\u00e1losan",
+       "form_a": "szovelok",
+       "form_b": "szovelek",
        "prominence": 1.0,
        "number": 0,
        "case": 0
@@ -443,8 +444,8 @@
      [
       {
        "bias_a": 0.5,
-       "form_a": "P\u00e1loson",
-       "form_b": "P\u00e1losan",
+       "form_a": "szovelok",
+       "form_b": "szovelek",
        "prominence": 1.0,
        "number": 0,
        "case": 0
@@ -467,8 +468,8 @@
      [
       {
        "bias_a": 0.5,
-       "form_a": "P\u00e1loson",
-       "form_b": "P\u00e1losan",
+       "form_a": "szovelok",
+       "form_b": "szovelek",
        "prominence": 1.0,
        "number": 0,
        "case": 0
@@ -491,8 +492,8 @@
      [
       {
        "bias_a": 0.5,
-       "form_a": "P\u00e1loson",
-       "form_b": "P\u00e1losan",
+       "form_a": "szovelok",
+       "form_b": "szovelek",
        "prominence": 1.0,
        "number": 0,
        "case": 0
@@ -515,8 +516,8 @@
      [
       {
        "bias_a": 0.5,
-       "form_a": "P\u00e1loson",
-       "form_b": "P\u00e1losan",
+       "form_a": "szovelok",
+       "form_b": "szovelek",
        "prominence": 1.0,
        "number": 0,
        "case": 0
@@ -539,8 +540,8 @@
      [
       {
        "bias_a": 0.5,
-       "form_a": "P\u00e1loson",
-       "form_b": "P\u00e1losan",
+       "form_a": "szovelok",
+       "form_b": "szovelek",
        "prominence": 1.0,
        "number": 0,
        "case": 0
@@ -563,8 +564,8 @@
      [
       {
        "bias_a": 0.5,
-       "form_a": "P\u00e1loson",
-       "form_b": "P\u00e1losan",
+       "form_a": "szovelok",
+       "form_b": "szovelek",
        "prominence": 1.0,
        "number": 0,
        "case": 0
@@ -587,8 +588,8 @@
      [
       {
        "bias_a": 0.5,
-       "form_a": "P\u00e1loson",
-       "form_b": "P\u00e1losan",
+       "form_a": "szovelok",
+       "form_b": "szovelek",
        "prominence": 1.0,
        "number": 0,
        "case": 0
@@ -611,8 +612,8 @@
      [
       {
        "bias_a": 0.5,
-       "form_a": "P\u00e1loson",
-       "form_b": "P\u00e1losan",
+       "form_a": "szovelok",
+       "form_b": "szovelek",
        "prominence": 1.0,
        "number": 0,
        "case": 0
@@ -635,8 +636,8 @@
      [
       {
        "bias_a": 0.5,
-       "form_a": "P\u00e1loson",
-       "form_b": "P\u00e1losan",
+       "form_a": "szovelok",
+       "form_b": "szovelek",
        "prominence": 1.0,
        "number": 0,
        "case": 0
@@ -659,8 +660,8 @@
      [
       {
        "bias_a": 0.5,
-       "form_a": "P\u00e1loson",
-       "form_b": "P\u00e1losan",
+       "form_a": "szovelok",
+       "form_b": "szovelek",
        "prominence": 1.0,
        "number": 0,
        "case": 0
@@ -683,8 +684,8 @@
      [
       {
        "bias_a": 0.5,
-       "form_a": "P\u00e1loson",
-       "form_b": "P\u00e1losan",
+       "form_a": "szovelok",
+       "form_b": "szovelek",
        "prominence": 1.0,
        "number": 0,
        "case": 0
@@ -707,8 +708,8 @@
      [
       {
        "bias_a": 0.5,
-       "form_a": "P\u00e1loson",
-       "form_b": "P\u00e1losan",
+       "form_a": "szovelok",
+       "form_b": "szovelek",
        "prominence": 1.0,
        "number": 0,
        "case": 0
@@ -731,8 +732,8 @@
      [
       {
        "bias_a": 0.5,
-       "form_a": "P\u00e1loson",
-       "form_b": "P\u00e1losan",
+       "form_a": "szovelok",
+       "form_b": "szovelek",
        "prominence": 1.0,
        "number": 0,
        "case": 0
@@ -755,8 +756,8 @@
      [
       {
        "bias_a": 0.5,
-       "form_a": "P\u00e1loson",
-       "form_b": "P\u00e1losan",
+       "form_a": "szovelok",
+       "form_b": "szovelek",
        "prominence": 1.0,
        "number": 0,
        "case": 0
@@ -779,8 +780,8 @@
      [
       {
        "bias_a": 0.5,
-       "form_a": "P\u00e1loson",
-       "form_b": "P\u00e1losan",
+       "form_a": "szovelok",
+       "form_b": "szovelek",
        "prominence": 1.0,
        "number": 0,
        "case": 0
@@ -803,8 +804,8 @@
      [
       {
        "bias_a": 0.5,
-       "form_a": "P\u00e1loson",
-       "form_b": "P\u00e1losan",
+       "form_a": "szovelok",
+       "form_b": "szovelek",
        "prominence": 1.0,
        "number": 0,
        "case": 0
@@ -827,8 +828,8 @@
      [
       {
        "bias_a": 0.5,
-       "form_a": "P\u00e1loson",
-       "form_b": "P\u00e1losan",
+       "form_a": "szovelok",
+       "form_b": "szovelek",
        "prominence": 1.0,
        "number": 0,
        "case": 0
@@ -851,8 +852,8 @@
      [
       {
        "bias_a": 0.5,
-       "form_a": "P\u00e1loson",
-       "form_b": "P\u00e1losan",
+       "form_a": "szovelok",
+       "form_b": "szovelek",
        "prominence": 1.0,
        "number": 0,
        "case": 0
@@ -875,8 +876,8 @@
      [
       {
        "bias_a": 0.5,
-       "form_a": "P\u00e1loson",
-       "form_b": "P\u00e1losan",
+       "form_a": "szovelok",
+       "form_b": "szovelek",
        "prominence": 1.0,
        "number": 0,
        "case": 0
@@ -899,8 +900,8 @@
      [
       {
        "bias_a": 0.5,
-       "form_a": "P\u00e1loson",
-       "form_b": "P\u00e1losan",
+       "form_a": "szovelok",
+       "form_b": "szovelek",
        "prominence": 1.0,
        "number": 0,
        "case": 0
@@ -923,8 +924,8 @@
      [
       {
        "bias_a": 0.5,
-       "form_a": "P\u00e1loson",
-       "form_b": "P\u00e1losan",
+       "form_a": "szovelok",
+       "form_b": "szovelek",
        "prominence": 1.0,
        "number": 0,
        "case": 0
@@ -947,8 +948,8 @@
      [
       {
        "bias_a": 0.5,
-       "form_a": "P\u00e1loson",
-       "form_b": "P\u00e1losan",
+       "form_a": "szovelok",
+       "form_b": "szovelek",
        "prominence": 1.0,
        "number": 0,
        "case": 0
@@ -971,8 +972,8 @@
      [
       {
        "bias_a": 0.5,
-       "form_a": "P\u00e1loson",
-       "form_b": "P\u00e1losan",
+       "form_a": "szovelok",
+       "form_b": "szovelek",
        "prominence": 1.0,
        "number": 0,
        "case": 0
@@ -995,8 +996,8 @@
      [
       {
        "bias_a": 0.5,
-       "form_a": "P\u00e1loson",
-       "form_b": "P\u00e1losan",
+       "form_a": "szovelok",
+       "form_b": "szovelek",
        "prominence": 1.0,
        "number": 0,
        "case": 0
@@ -1019,8 +1020,8 @@
      [
       {
        "bias_a": 0.5,
-       "form_a": "P\u00e1loson",
-       "form_b": "P\u00e1losan",
+       "form_a": "szovelok",
+       "form_b": "szovelek",
        "prominence": 1.0,
        "number": 0,
        "case": 0
@@ -1043,8 +1044,8 @@
      [
       {
        "bias_a": 0.5,
-       "form_a": "P\u00e1loson",
-       "form_b": "P\u00e1losan",
+       "form_a": "szovelok",
+       "form_b": "szovelek",
        "prominence": 1.0,
        "number": 0,
        "case": 0
@@ -1067,8 +1068,8 @@
      [
       {
        "bias_a": 0.5,
-       "form_a": "P\u00e1loson",
-       "form_b": "P\u00e1losan",
+       "form_a": "szovelok",
+       "form_b": "szovelek",
        "prominence": 1.0,
        "number": 0,
        "case": 0
@@ -1091,8 +1092,8 @@
      [
       {
        "bias_a": 0.5,
-       "form_a": "P\u00e1loson",
-       "form_b": "P\u00e1losan",
+       "form_a": "szovelok",
+       "form_b": "szovelek",
        "prominence": 1.0,
        "number": 0,
        "case": 0
@@ -1115,8 +1116,8 @@
      [
       {
        "bias_a": 0.5,
-       "form_a": "P\u00e1loson",
-       "form_b": "P\u00e1losan",
+       "form_a": "szovelok",
+       "form_b": "szovelek",
        "prominence": 1.0,
        "number": 0,
        "case": 0
@@ -1139,8 +1140,8 @@
      [
       {
        "bias_a": 0.5,
-       "form_a": "P\u00e1loson",
-       "form_b": "P\u00e1losan",
+       "form_a": "szovelok",
+       "form_b": "szovelek",
        "prominence": 1.0,
        "number": 0,
        "case": 0
@@ -1163,8 +1164,8 @@
      [
       {
        "bias_a": 0.5,
-       "form_a": "P\u00e1loson",
-       "form_b": "P\u00e1losan",
+       "form_a": "szovelok",
+       "form_b": "szovelek",
        "prominence": 1.0,
        "number": 0,
        "case": 0
@@ -1187,8 +1188,8 @@
      [
       {
        "bias_a": 0.5,
-       "form_a": "P\u00e1loson",
-       "form_b": "P\u00e1losan",
+       "form_a": "szovelok",
+       "form_b": "szovelek",
        "prominence": 1.0,
        "number": 0,
        "case": 0
@@ -1211,8 +1212,8 @@
      [
       {
        "bias_a": 0.5,
-       "form_a": "P\u00e1loson",
-       "form_b": "P\u00e1losan",
+       "form_a": "szovelok",
+       "form_b": "szovelek",
        "prominence": 1.0,
        "number": 0,
        "case": 0
@@ -1235,8 +1236,8 @@
      [
       {
        "bias_a": 0.5,
-       "form_a": "P\u00e1loson",
-       "form_b": "P\u00e1losan",
+       "form_a": "szovelok",
+       "form_b": "szovelek",
        "prominence": 1.0,
        "number": 0,
        "case": 0
@@ -1259,8 +1260,8 @@
      [
       {
        "bias_a": 0.5,
-       "form_a": "P\u00e1loson",
-       "form_b": "P\u00e1losan",
+       "form_a": "szovelok",
+       "form_b": "szovelek",
        "prominence": 1.0,
        "number": 0,
        "case": 0
@@ -1283,8 +1284,8 @@
      [
       {
        "bias_a": 0.5,
-       "form_a": "P\u00e1loson",
-       "form_b": "P\u00e1losan",
+       "form_a": "szovelok",
+       "form_b": "szovelek",
        "prominence": 1.0,
        "number": 0,
        "case": 0
@@ -1307,8 +1308,8 @@
      [
       {
        "bias_a": 0.5,
-       "form_a": "P\u00e1loson",
-       "form_b": "P\u00e1losan",
+       "form_a": "szovelok",
+       "form_b": "szovelek",
        "prominence": 1.0,
        "number": 0,
        "case": 0
@@ -1331,8 +1332,8 @@
      [
       {
        "bias_a": 0.5,
-       "form_a": "P\u00e1loson",
-       "form_b": "P\u00e1losan",
+       "form_a": "szovelok",
+       "form_b": "szovelek",
        "prominence": 1.0,
        "number": 0,
        "case": 0
@@ -1355,8 +1356,8 @@
      [
       {
        "bias_a": 0.5,
-       "form_a": "P\u00e1loson",
-       "form_b": "P\u00e1losan",
+       "form_a": "szovelok",
+       "form_b": "szovelek",
        "prominence": 1.0,
        "number": 0,
        "case": 0
@@ -1379,8 +1380,8 @@
      [
       {
        "bias_a": 0.5,
-       "form_a": "P\u00e1loson",
-       "form_b": "P\u00e1losan",
+       "form_a": "szovelok",
+       "form_b": "szovelek",
        "prominence": 1.0,
        "number": 0,
        "case": 0
@@ -1403,8 +1404,8 @@
      [
       {
        "bias_a": 0.5,
-       "form_a": "P\u00e1loson",
-       "form_b": "P\u00e1losan",
+       "form_a": "szovelok",
+       "form_b": "szovelek",
        "prominence": 1.0,
        "number": 0,
        "case": 0
@@ -1427,8 +1428,8 @@
      [
       {
        "bias_a": 0.5,
-       "form_a": "P\u00e1loson",
-       "form_b": "P\u00e1losan",
+       "form_a": "szovelok",
+       "form_b": "szovelek",
        "prominence": 1.0,
        "number": 0,
        "case": 0
@@ -1451,8 +1452,8 @@
      [
       {
        "bias_a": 0.5,
-       "form_a": "P\u00e1loson",
-       "form_b": "P\u00e1losan",
+       "form_a": "szovelok",
+       "form_b": "szovelek",
        "prominence": 1.0,
        "number": 0,
        "case": 0
@@ -1475,8 +1476,8 @@
      [
       {
        "bias_a": 0.5,
-       "form_a": "P\u00e1loson",
-       "form_b": "P\u00e1losan",
+       "form_a": "szovelok",
+       "form_b": "szovelek",
        "prominence": 1.0,
        "number": 0,
        "case": 0
@@ -1499,8 +1500,8 @@
      [
       {
        "bias_a": 0.5,
-       "form_a": "P\u00e1loson",
-       "form_b": "P\u00e1losan",
+       "form_a": "szovelok",
+       "form_b": "szovelek",
        "prominence": 1.0,
        "number": 0,
        "case": 0
@@ -1523,8 +1524,8 @@
      [
       {
        "bias_a": 0.5,
-       "form_a": "P\u00e1loson",
-       "form_b": "P\u00e1losan",
+       "form_a": "szovelok",
+       "form_b": "szovelek",
        "prominence": 1.0,
        "number": 0,
        "case": 0
@@ -1547,8 +1548,8 @@
      [
       {
        "bias_a": 0.5,
-       "form_a": "P\u00e1loson",
-       "form_b": "P\u00e1losan",
+       "form_a": "szovelok",
+       "form_b": "szovelek",
        "prominence": 1.0,
        "number": 0,
        "case": 0
@@ -1571,8 +1572,8 @@
      [
       {
        "bias_a": 0.5,
-       "form_a": "P\u00e1loson",
-       "form_b": "P\u00e1losan",
+       "form_a": "szovelok",
+       "form_b": "szovelek",
        "prominence": 1.0,
        "number": 0,
        "case": 0
@@ -1595,8 +1596,8 @@
      [
       {
        "bias_a": 0.5,
-       "form_a": "P\u00e1loson",
-       "form_b": "P\u00e1losan",
+       "form_a": "szovelok",
+       "form_b": "szovelek",
        "prominence": 1.0,
        "number": 0,
        "case": 0
@@ -1619,8 +1620,8 @@
      [
       {
        "bias_a": 0.5,
-       "form_a": "P\u00e1loson",
-       "form_b": "P\u00e1losan",
+       "form_a": "szovelok",
+       "form_b": "szovelek",
        "prominence": 1.0,
        "number": 0,
        "case": 0
@@ -1643,8 +1644,8 @@
      [
       {
        "bias_a": 0.5,
-       "form_a": "P\u00e1loson",
-       "form_b": "P\u00e1losan",
+       "form_a": "szovelok",
+       "form_b": "szovelek",
        "prominence": 1.0,
        "number": 0,
        "case": 0
@@ -1667,8 +1668,8 @@
      [
       {
        "bias_a": 0.5,
-       "form_a": "P\u00e1loson",
-       "form_b": "P\u00e1losan",
+       "form_a": "szovelok",
+       "form_b": "szovelek",
        "prominence": 1.0,
        "number": 0,
        "case": 0
@@ -1691,8 +1692,8 @@
      [
       {
        "bias_a": 0.5,
-       "form_a": "P\u00e1loson",
-       "form_b": "P\u00e1losan",
+       "form_a": "szovelok",
+       "form_b": "szovelek",
        "prominence": 1.0,
        "number": 0,
        "case": 0
@@ -1715,8 +1716,8 @@
      [
       {
        "bias_a": 0.5,
-       "form_a": "P\u00e1loson",
-       "form_b": "P\u00e1losan",
+       "form_a": "szovelok",
+       "form_b": "szovelek",
        "prominence": 1.0,
        "number": 0,
        "case": 0
@@ -1739,8 +1740,8 @@
      [
       {
        "bias_a": 0.5,
-       "form_a": "P\u00e1loson",
-       "form_b": "P\u00e1losan",
+       "form_a": "szovelok",
+       "form_b": "szovelek",
        "prominence": 1.0,
        "number": 0,
        "case": 0
@@ -1763,8 +1764,8 @@
      [
       {
        "bias_a": 0.5,
-       "form_a": "P\u00e1loson",
-       "form_b": "P\u00e1losan",
+       "form_a": "szovelok",
+       "form_b": "szovelek",
        "prominence": 1.0,
        "number": 0,
        "case": 0
@@ -1787,8 +1788,8 @@
      [
       {
        "bias_a": 0.5,
-       "form_a": "P\u00e1loson",
-       "form_b": "P\u00e1losan",
+       "form_a": "szovelok",
+       "form_b": "szovelek",
        "prominence": 1.0,
        "number": 0,
        "case": 0
@@ -1811,8 +1812,8 @@
      [
       {
        "bias_a": 0.5,
-       "form_a": "P\u00e1loson",
-       "form_b": "P\u00e1losan",
+       "form_a": "szovelok",
+       "form_b": "szovelek",
        "prominence": 1.0,
        "number": 0,
        "case": 0
@@ -1835,8 +1836,8 @@
      [
       {
        "bias_a": 0.5,
-       "form_a": "P\u00e1loson",
-       "form_b": "P\u00e1losan",
+       "form_a": "szovelok",
+       "form_b": "szovelek",
        "prominence": 1.0,
        "number": 0,
        "case": 0
@@ -1859,8 +1860,8 @@
      [
       {
        "bias_a": 0.5,
-       "form_a": "P\u00e1loson",
-       "form_b": "P\u00e1losan",
+       "form_a": "szovelok",
+       "form_b": "szovelek",
        "prominence": 1.0,
        "number": 0,
        "case": 0
@@ -1883,8 +1884,8 @@
      [
       {
        "bias_a": 0.5,
-       "form_a": "P\u00e1loson",
-       "form_b": "P\u00e1losan",
+       "form_a": "szovelok",
+       "form_b": "szovelek",
        "prominence": 1.0,
        "number": 0,
        "case": 0
@@ -1907,8 +1908,8 @@
      [
       {
        "bias_a": 0.5,
-       "form_a": "P\u00e1loson",
-       "form_b": "P\u00e1losan",
+       "form_a": "szovelok",
+       "form_b": "szovelek",
        "prominence": 1.0,
        "number": 0,
        "case": 0
@@ -1931,8 +1932,8 @@
      [
       {
        "bias_a": 0.5,
-       "form_a": "P\u00e1loson",
-       "form_b": "P\u00e1losan",
+       "form_a": "szovelok",
+       "form_b": "szovelek",
        "prominence": 1.0,
        "number": 0,
        "case": 0
@@ -1955,8 +1956,8 @@
      [
       {
        "bias_a": 0.5,
-       "form_a": "P\u00e1loson",
-       "form_b": "P\u00e1losan",
+       "form_a": "szovelok",
+       "form_b": "szovelek",
        "prominence": 1.0,
        "number": 0,
        "case": 0
@@ -1979,8 +1980,8 @@
      [
       {
        "bias_a": 0.5,
-       "form_a": "P\u00e1loson",
-       "form_b": "P\u00e1losan",
+       "form_a": "szovelok",
+       "form_b": "szovelek",
        "prominence": 1.0,
        "number": 0,
        "case": 0
@@ -2003,8 +2004,8 @@
      [
       {
        "bias_a": 0.5,
-       "form_a": "P\u00e1loson",
-       "form_b": "P\u00e1losan",
+       "form_a": "szovelok",
+       "form_b": "szovelek",
        "prominence": 1.0,
        "number": 0,
        "case": 0
@@ -2027,8 +2028,8 @@
      [
       {
        "bias_a": 0.5,
-       "form_a": "P\u00e1loson",
-       "form_b": "P\u00e1losan",
+       "form_a": "szovelok",
+       "form_b": "szovelek",
        "prominence": 1.0,
        "number": 0,
        "case": 0
@@ -2051,8 +2052,8 @@
      [
       {
        "bias_a": 0.5,
-       "form_a": "P\u00e1loson",
-       "form_b": "P\u00e1losan",
+       "form_a": "szovelok",
+       "form_b": "szovelek",
        "prominence": 1.0,
        "number": 0,
        "case": 0
@@ -2075,8 +2076,8 @@
      [
       {
        "bias_a": 0.5,
-       "form_a": "P\u00e1loson",
-       "form_b": "P\u00e1losan",
+       "form_a": "szovelok",
+       "form_b": "szovelek",
        "prominence": 1.0,
        "number": 0,
        "case": 0
@@ -2099,8 +2100,8 @@
      [
       {
        "bias_a": 0.5,
-       "form_a": "P\u00e1loson",
-       "form_b": "P\u00e1losan",
+       "form_a": "szovelok",
+       "form_b": "szovelek",
        "prominence": 1.0,
        "number": 0,
        "case": 0
@@ -2123,8 +2124,8 @@
      [
       {
        "bias_a": 0.5,
-       "form_a": "P\u00e1loson",
-       "form_b": "P\u00e1losan",
+       "form_a": "szovelok",
+       "form_b": "szovelek",
        "prominence": 1.0,
        "number": 0,
        "case": 0
@@ -2147,8 +2148,8 @@
      [
       {
        "bias_a": 0.5,
-       "form_a": "P\u00e1loson",
-       "form_b": "P\u00e1losan",
+       "form_a": "szovelok",
+       "form_b": "szovelek",
        "prominence": 1.0,
        "number": 0,
        "case": 0
@@ -2171,8 +2172,8 @@
      [
       {
        "bias_a": 0.5,
-       "form_a": "P\u00e1loson",
-       "form_b": "P\u00e1losan",
+       "form_a": "szovelok",
+       "form_b": "szovelek",
        "prominence": 1.0,
        "number": 0,
        "case": 0
@@ -2195,8 +2196,8 @@
      [
       {
        "bias_a": 0.5,
-       "form_a": "P\u00e1loson",
-       "form_b": "P\u00e1losan",
+       "form_a": "szovelok",
+       "form_b": "szovelek",
        "prominence": 1.0,
        "number": 0,
        "case": 0
@@ -2219,8 +2220,8 @@
      [
       {
        "bias_a": 0.5,
-       "form_a": "P\u00e1loson",
-       "form_b": "P\u00e1losan",
+       "form_a": "szovelok",
+       "form_b": "szovelek",
        "prominence": 1.0,
        "number": 0,
        "case": 0
@@ -2243,8 +2244,8 @@
      [
       {
        "bias_a": 0.5,
-       "form_a": "P\u00e1loson",
-       "form_b": "P\u00e1losan",
+       "form_a": "szovelok",
+       "form_b": "szovelek",
        "prominence": 1.0,
        "number": 0,
        "case": 0
@@ -2267,8 +2268,8 @@
      [
       {
        "bias_a": 0.5,
-       "form_a": "P\u00e1loson",
-       "form_b": "P\u00e1losan",
+       "form_a": "szovelok",
+       "form_b": "szovelek",
        "prominence": 1.0,
        "number": 0,
        "case": 0
@@ -2291,8 +2292,8 @@
      [
       {
        "bias_a": 0.5,
-       "form_a": "P\u00e1loson",
-       "form_b": "P\u00e1losan",
+       "form_a": "szovelok",
+       "form_b": "szovelek",
        "prominence": 1.0,
        "number": 0,
        "case": 0
@@ -2315,8 +2316,8 @@
      [
       {
        "bias_a": 0.5,
-       "form_a": "P\u00e1loson",
-       "form_b": "P\u00e1losan",
+       "form_a": "szovelok",
+       "form_b": "szovelek",
        "prominence": 1.0,
        "number": 0,
        "case": 0
@@ -2339,8 +2340,8 @@
      [
       {
        "bias_a": 0.5,
-       "form_a": "P\u00e1loson",
-       "form_b": "P\u00e1losan",
+       "form_a": "szovelok",
+       "form_b": "szovelek",
        "prominence": 1.0,
        "number": 0,
        "case": 0
@@ -2363,8 +2364,8 @@
      [
       {
        "bias_a": 0.5,
-       "form_a": "P\u00e1loson",
-       "form_b": "P\u00e1losan",
+       "form_a": "szovelok",
+       "form_b": "szovelek",
        "prominence": 1.0,
        "number": 0,
        "case": 0
@@ -2387,8 +2388,8 @@
      [
       {
        "bias_a": 0.5,
-       "form_a": "P\u00e1loson",
-       "form_b": "P\u00e1losan",
+       "form_a": "szovelok",
+       "form_b": "szovelek",
        "prominence": 1.0,
        "number": 0,
        "case": 0

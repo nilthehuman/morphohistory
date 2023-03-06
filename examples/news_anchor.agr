@@ -1,4 +1,5 @@
 {
+ "_description": "A circle of biased speakers around a broadcaster with the opposite bias",
  "speakers": [
   {
    "n": 0,

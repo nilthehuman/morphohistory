@@ -1,4 +1,5 @@
 {
+ "_description": "A smaller ring of 16 'A' speakers inside a wider ring of 24 'B' speakers",
  "speakers": [
   {
    "n": 0,
