@@ -320,11 +320,12 @@ class SpeakerDot(Speaker, DragBehavior, Widget):
 
     def talk(self, pick):
         """Interact with and influence another Speaker in the Agora."""
-        Speaker.talk(self, pick)
+        retval = Speaker.talk(self, pick)
         if self.parent.graphics_on:
             pick['hearer'].update_color()
             if SETTINGS.sim_influence_self:
                 pick['speaker'].update_color()
+        return retval
 
 class BroadcasterSpeakerDot(SpeakerDot):
     """The GUI representation of a broadcasting speaker who never listens to anyone."""
@@ -606,7 +607,7 @@ class AgoraWidget(Widget, Agora):
                                                hearer_y - 12.0 * sin_a - 8.0 * cos_a],
                                                width=width)
             color_arrow_shaft = None
-            if self.pick['is_form_a']:
+            if self.history[-1].form_a:
                 color_arrow_shaft = SETTINGS.color_a.rgb
             else:
                 color_arrow_shaft = SETTINGS.color_b.rgb

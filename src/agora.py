@@ -30,7 +30,20 @@ class Agora:
     """A collection of simulated speakers influencing each other."""
 
     @dataclass
-    class AgoraState:
+    class HistoryItem:
+        """A single entry in the list of interactions that constitute the Agora's past history.
+        Basically stores a pick and which cell and form was used in the interaction."""
+        speaker: int
+        hearer: int
+        cell: (int, int)
+        form_a: bool
+
+        def to_dict(self):
+            """Returns own state for JSON serialization."""
+            return self.__dict__
+
+    @dataclass
+    class State:
         """The essential variables that define the current state of an Agora."""
         speakers: List[Speaker] = field(default_factory=lambda: [])
         sim_iteration_total: int = 0
@@ -40,8 +53,9 @@ class Agora:
             return self.__dict__
 
     def __init__(self):
-        self.state = self.AgoraState()
+        self.state = self.State()
         self.starting_state = None
+        self.history = []
         self.clear_caches()
         self.sim_iteration = None
         self.sim_cancelled = False
@@ -51,9 +65,15 @@ class Agora:
         self.pick = None
         self.pick_queue = []
 
+    def to_dict(self):
+        """Returns own state for JSON serialization."""
+        my_dict = { 'state' : self.state,
+                    'history' : self.history }
+        return my_dict
+
     def save_starting_state(self):
         """Stash a snapshot of the current state of the Agora."""
-        self.starting_state = self.AgoraState()
+        self.starting_state = self.State()
         # N.B. paradigms are deep copied by Speaker.fromspeaker
         self.starting_state.speakers = [Speaker.fromspeaker(s) for s in self.state.speakers]
         self.starting_state.sim_iteration_total = self.state.sim_iteration_total
@@ -106,17 +126,18 @@ class Agora:
     def save_to_file(self, filepath):
         """Write current state to disk."""
         with open(filepath, 'w', encoding='utf-8') as stream:
-            stream.write(dumps(self.state, indent=1, default=lambda x: x.to_dict()))
+            stream.write(dumps(self, indent=1, default=lambda x: x.to_dict()))
 
     def load_from_file(self, filepath):
         """Restore an Agora state previously written to file."""
         with open(filepath, 'r', encoding='utf-8') as stream:
-            loaded_state = load(stream)
-        speakers = [Speaker.from_dict(s) for s in loaded_state['speakers']]
+            loaded_dict = load(stream)
+        speakers = [Speaker.from_dict(s) for s in loaded_dict['state']['speakers']]
         self.clear_speakers()
         self.load_speakers(speakers)
-        self.state.sim_iteration_total = loaded_state['sim_iteration_total']
+        self.state.sim_iteration_total = loaded_dict['state']['sim_iteration_total']
         self.save_starting_state()
+        self.history = loaded_dict['history']
         SETTINGS.paradigm = deepcopy(self.state.speakers[0].para)
 
     def load_speakers(self, speakers):
@@ -212,7 +233,11 @@ class Agora:
                 reverse_pick = {'speaker': self.pick['hearer'], 'hearer': self.pick['speaker']}
                 self.pick_queue.append(reverse_pick)
         debug("Agora: %d picked to talk to %d" % (self.pick['speaker'].n, self.pick['hearer'].n))
-        self.pick['speaker'].talk(self.pick)
+        cell, form_a_used = self.pick['speaker'].talk(self.pick)
+        self.history.append(self.HistoryItem(self.pick['speaker'].n,
+                                             self.pick['hearer'].n,
+                                             cell,
+                                             form_a_used))
         if SETTINGS.sim_passive_decay:
             self.passive_decay()
         self.state.sim_iteration_total += 1
