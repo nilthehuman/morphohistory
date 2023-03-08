@@ -32,7 +32,7 @@ class Speaker:
         new_speaker = cls(n, pos, para, experience, is_broadcaster)
         return new_speaker
 
-    def to_json(self):
+    def to_dict(self):
         """Export object contents for JSON serialization."""
         speaker_only = Speaker.fromspeaker(self)
         speaker_dict = speaker_only.__dict__

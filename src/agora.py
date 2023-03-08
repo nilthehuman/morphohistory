@@ -35,7 +35,7 @@ class Agora:
         speakers: List[Speaker] = field(default_factory=lambda: [])
         sim_iteration_total: int = 0
 
-        def to_json(self):
+        def to_dict(self):
             """Returns own state for JSON serialization."""
             return self.__dict__
 
@@ -106,7 +106,7 @@ class Agora:
     def save_to_file(self, filepath):
         """Write current state to disk."""
         with open(filepath, 'w', encoding='utf-8') as stream:
-            stream.write(dumps(self.state, indent=1, default=lambda x: x.to_json()))
+            stream.write(dumps(self.state, indent=1, default=lambda x: x.to_dict()))
 
     def load_from_file(self, filepath):
         """Restore an Agora state previously written to file."""

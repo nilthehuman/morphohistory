@@ -29,7 +29,7 @@ class _Cell(ABC):
     def get_morphosyntactic_properties(self):
         """Returns a string listing the cell's features."""
 
-    def to_json(self):
+    def to_dict(self):
         """Returns own state for JSON serialization."""
         return self.__dict__
 
@@ -80,7 +80,8 @@ class _Paradigm(ABC):
     def propagate(self, amount, i, j):
         """Spread a weight change down each dimension in the paradigm."""
 
-    def to_json(self):
+    def to_dict(self):
+        """Returns own state for JSON serialization."""
         # output non-empty cells only to save space
         dense_para = []
         assert len(self.para) <= 2
@@ -95,9 +96,10 @@ class _Paradigm(ABC):
 
     @staticmethod
     def from_dict(para_dict):
+        """Reconstruct paradigm object from an imported JSON dictionary."""
         assert list(para_dict.keys()) == ['para']
         para_list = para_dict['para']
-        new_para = NounParadigm()
+        new_para = NounParadigm()  # TODO: generalize to *Paradigm
         assert len(para_list) <= 2
         while para_list:
             list_below = para_list.pop(0)
