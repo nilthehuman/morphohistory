@@ -132,12 +132,18 @@ class Agora:
         """Restore an Agora state previously written to file."""
         with open(filepath, 'r', encoding='utf-8') as stream:
             loaded_dict = load(stream)
-        speakers = [Speaker.from_dict(s) for s in loaded_dict['state']['speakers']]
+        try:
+            speakers = [Speaker.from_dict(s) for s in loaded_dict['state']['speakers']]
+            sim_iteration_total = loaded_dict['state']['sim_iteration_total']
+            self.history = loaded_dict['history']
+        except KeyError:
+            # old file format had no history in it
+            speakers = [Speaker.from_dict(s) for s in loaded_dict['speakers']]
+            sim_iteration_total = loaded_dict['sim_iteration_total']
         self.clear_speakers()
         self.load_speakers(speakers)
-        self.state.sim_iteration_total = loaded_dict['state']['sim_iteration_total']
+        self.state.sim_iteration_total = sim_iteration_total
         self.save_starting_state()
-        self.history = loaded_dict['history']
         SETTINGS.paradigm = deepcopy(self.state.speakers[0].para)
 
     def load_speakers(self, speakers):
