@@ -46,15 +46,20 @@ class MorphoHistoryApp(App):
 
     def on_start(self):
         """Prepare GUI elements that need to know about the Widget tree to complete their setup."""
+        all_children = set()
         def descend_tree(widget):
-            children = list(widget.ids.values()) + widget.children
+            children = set(list(widget.ids.values()) + widget.children)
+            all_children.update(children)
             for child in children:
-                try:
-                    child.on_gui_ready()
-                except AttributeError:
-                    pass  # it's fine
                 descend_tree(child)
+        # collect all widgets in the entire tree
         descend_tree(self.root)
+        # call on_child_ready setup function on all children
+        for child in all_children:
+            try:
+                child.on_gui_ready()
+            except AttributeError:
+                pass  # that's fine
 
 if __name__ == '__main__':
     MorphoHistoryApp().run()
