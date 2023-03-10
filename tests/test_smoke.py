@@ -34,7 +34,7 @@ _IMAGE_PATHS = {
     'fast_forward_button' : join(_IMAGE_DIRECTORY, "fast_forward_button.png"),
     'rewind_button'       : join(_IMAGE_DIRECTORY, "rewind_button.png"),
     'first_tab_header'    : join(_IMAGE_DIRECTORY, "first_tab_header.png"),
-    'second_tab_header'   : join(_IMAGE_DIRECTORY, "second_tab_header.pn")
+    'second_tab_header'   : join(_IMAGE_DIRECTORY, "second_tab_header.png")
 }
 
 # test threads will tell the main thread about failures in this variable
