@@ -197,23 +197,6 @@ class Tuner:
     def __init__(self):
         """Fetch the parameter ranges defined by user in the Tuning menu
         and prepare for actually performing the simulations."""
-        # state to keep track of simulation parameters and results
-        self.agora = Agora()
-        self.results = []
-        self.current_setup = 0
-        self.current_rep = 0
-        self.num_total_reps = 0
-        self.tuning_cancelled = False
-        self.our_bias_range = self.loop_our_bias()
-        self.their_bias_range = self.loop_their_bias()
-        self.starting_experience_range = self.loop_starting_experience()
-        self.inner_radius_range = self.loop_inner_radius()
-        self.our_bias = next(self.our_bias_range)
-        self.their_bias = next(self.their_bias_range)
-        self.starting_experience = next(self.starting_experience_range)
-        self.inner_radius = next(self.inner_radius_range)
-        self.prepare_next_setup()
-
         tuning_menu = get_tuning_menu()
         # macros?... :(
         try:
@@ -261,6 +244,23 @@ class Tuner:
                                 len(list(self.loop_inner_radius()))
         popup = get_tuning_menu().ids.launch_tuning_button.popup
         popup.ids.container.children[0].ids.progressbar.max = self.num_total_setups * self.repetitions
+
+        # state to keep track of simulation parameters and results
+        self.agora = Agora()
+        self.results = []
+        self.current_setup = 0
+        self.current_rep = 0
+        self.num_total_reps = 0
+        self.tuning_cancelled = False
+        self.our_bias_range = self.loop_our_bias()
+        self.their_bias_range = self.loop_their_bias()
+        self.starting_experience_range = self.loop_starting_experience()
+        self.inner_radius_range = self.loop_inner_radius()
+        self.our_bias = next(self.our_bias_range)
+        self.their_bias = next(self.their_bias_range)
+        self.starting_experience = next(self.starting_experience_range)
+        self.inner_radius = next(self.inner_radius_range)
+        self.prepare_next_setup()
 
         # create the CSV file, write the header line, and we're good to go
         self.output_filename = 'results.csv'
