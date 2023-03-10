@@ -23,6 +23,8 @@
 * Bugfix: looks like the progress bar graphic starts out in the negative range or something
 * Pimp up the README
 * Fix crash when one speaker alone is simulated
+* Regression tests to ensure that base class objects and derived GUI objects are Liskov substitutable
+* Basic performance tests
 * Extend simulation to verb paradigms
 * Speakers should be mortal and new ones should be born
 * Creative on-line form production: sum of biases in a cell may be less than one, rely on surface analogy with other lexemes to produce "missing" form
