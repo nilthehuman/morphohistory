@@ -8,11 +8,12 @@ from kivy.config import ConfigParser
 from kivy.graphics import Color
 from kivy.uix.boxlayout import BoxLayout
 from kivy.uix.button import Button
-from kivy.uix.settings import InterfaceWithNoMenu, Settings, SettingItem, SettingsPanel
+from kivy.uix.settings import InterfaceWithNoMenu, Settings, SettingItem, SettingOptions, SettingsPanel
 from kivy.utils import get_color_from_hex, get_hex_from_color
 
 from .access_widgets import *
 from .confirm import ApplyConfirmedLabel, DiscardConfirmedLabel
+from .l10n import localize, localize_all_texts
 
 from ..settings import SETTINGS
 
@@ -132,7 +133,7 @@ class SettingsTabLayout(BoxLayout):
     pass
 
 class CustomSettingsPanel(SettingsPanel):
-    """Base class overridden to keep it from saving to file every time a setting is changed."""
+    """Override base class to keep it from saving to file every time a setting is changed."""
     def set_value(self, section, key, value):
         """Override base class method to keep it from saving to file
         every time a setting is changed."""
@@ -142,10 +143,17 @@ class CustomSettingsPanel(SettingsPanel):
         self.config.set(section, key, value)
         #self.config.write() # don't write to file just yet
 
+class CustomSettingOptions(SettingOptions):
+    """Override base class to allow localization inside dynamically created options Popup."""
+    def _create_popup(self, instance):
+        super()._create_popup(instance)
+        localize_all_texts(self.popup)
+
 class CustomSettings(Settings):
     """A list of user preferences to control the appearance and operation of the application."""
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
+        self.register_type('options', CustomSettingOptions)
         self.config = ConfigParser()
         self.config.setdefaults('Appearance',
                                 {
@@ -227,9 +235,9 @@ class CustomSettings(Settings):
                         update_starting_experience = True
                 elif 'options' == value_type:
                     string_to_enum = {
-                        'constant'  : SETTINGS.DistanceMetric.CONSTANT,
-                        'Manhattan' : SETTINGS.DistanceMetric.MANHATTAN,
-                        'Euclidean' : SETTINGS.DistanceMetric.EUCLIDEAN
+                        localize('constant')  : SETTINGS.DistanceMetric.CONSTANT,
+                        localize('Manhattan') : SETTINGS.DistanceMetric.MANHATTAN,
+                        localize('Euclidean') : SETTINGS.DistanceMetric.EUCLIDEAN
                     }
                     new_value = string_to_enum[new_value]
                     update_grid = True
@@ -265,9 +273,9 @@ class CustomSettings(Settings):
                     old_value = get_hex_from_color(old_value.rgb)
                 elif isinstance(old_value, SETTINGS.DistanceMetric):
                     enum_to_string = {
-                        SETTINGS.DistanceMetric.CONSTANT  : 'constant',
-                        SETTINGS.DistanceMetric.MANHATTAN : 'Manhattan',
-                        SETTINGS.DistanceMetric.EUCLIDEAN : 'Euclidean'
+                        SETTINGS.DistanceMetric.CONSTANT  : localize('constant'),
+                        SETTINGS.DistanceMetric.MANHATTAN : localize('Manhattan'),
+                        SETTINGS.DistanceMetric.EUCLIDEAN : localize('Euclidean')
                     }
                     old_value = enum_to_string[old_value]
                 elif isinstance(old_value, float):

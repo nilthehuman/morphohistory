@@ -114,7 +114,7 @@ _LOCALIZE_TEXTS_HUN = L10nDict({
     "What kind of geometry to use" : "Hogyan számítson a geometria",
     "constant" : "konstans",
     "Manhattan" : "Manhattan",
-    "Euclidean" : "Euclidean",
+    "Euclidean" : "euklideszi",
     "Self influence" : "Önbefolyásolás",
     "Should a speaker affect itself" : "Hasson-e magára a beszélő",
     "Mutual influence" : "Kölcsönös befolyásolás",
