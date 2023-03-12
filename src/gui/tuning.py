@@ -95,38 +95,37 @@ class DemoSpinner(Spinner):
         if not get_root():
             # Widget tree has not been built yet, leave job to on_gui_ready
             return
-        selected = self.values.index(self.text) + 1
-        SETTINGS.current_demo = selected
-        demo_factory = DEMO_FACTORIES[selected]
+        SETTINGS.current_demo = self.text
+        demo_factory = DEMO_FACTORIES[self.text]
         get_agora().load_demo_agora(demo_factory, starting_experience=SETTINGS.starting_experience)
         # update suggested default parametrization values
         tuning_menu = get_tuning_menu()
-        if DEFAULT_DEMO_ARGUMENTS[selected].our_bias is not None:
-            tuning_menu.ids.our_bias_start_input.text = str(DEFAULT_DEMO_ARGUMENTS[selected].our_bias)
-            tuning_menu.ids.our_bias_stop_input.text = str(abs(1 - DEFAULT_DEMO_ARGUMENTS[selected].our_bias))
+        if DEFAULT_DEMO_ARGUMENTS[self.text].our_bias is not None:
+            tuning_menu.ids.our_bias_start_input.text = str(DEFAULT_DEMO_ARGUMENTS[self.text].our_bias)
+            tuning_menu.ids.our_bias_stop_input.text = str(abs(1 - DEFAULT_DEMO_ARGUMENTS[self.text].our_bias))
             tuning_menu.ids.our_bias_step_input.text = '0.1'
         else:
             tuning_menu.ids.our_bias_start_input.text = 'N/A'
             tuning_menu.ids.our_bias_stop_input.text = 'N/A'
             tuning_menu.ids.our_bias_step_input.text = 'N/A'
-        if DEFAULT_DEMO_ARGUMENTS[selected].their_bias is not None:
-            tuning_menu.ids.their_bias_start_input.text = str(DEFAULT_DEMO_ARGUMENTS[selected].their_bias)
-            tuning_menu.ids.their_bias_stop_input.text = str(DEFAULT_DEMO_ARGUMENTS[selected].their_bias)
+        if DEFAULT_DEMO_ARGUMENTS[self.text].their_bias is not None:
+            tuning_menu.ids.their_bias_start_input.text = str(DEFAULT_DEMO_ARGUMENTS[self.text].their_bias)
+            tuning_menu.ids.their_bias_stop_input.text = str(DEFAULT_DEMO_ARGUMENTS[self.text].their_bias)
             tuning_menu.ids.their_bias_step_input.text = '0.1'
         else:
             tuning_menu.ids.their_bias_start_input.text = 'N/A'
             tuning_menu.ids.their_bias_stop_input.text = 'N/A'
             tuning_menu.ids.their_bias_step_input.text = 'N/A'
-        if DEFAULT_DEMO_ARGUMENTS[selected].starting_experience is not None:
-            tuning_menu.ids.starting_experience_start_input.text = str(DEFAULT_DEMO_ARGUMENTS[selected].starting_experience)
-            tuning_menu.ids.starting_experience_stop_input.text = str(DEFAULT_DEMO_ARGUMENTS[selected].starting_experience)
+        if DEFAULT_DEMO_ARGUMENTS[self.text].starting_experience is not None:
+            tuning_menu.ids.starting_experience_start_input.text = str(DEFAULT_DEMO_ARGUMENTS[self.text].starting_experience)
+            tuning_menu.ids.starting_experience_stop_input.text = str(DEFAULT_DEMO_ARGUMENTS[self.text].starting_experience)
             tuning_menu.ids.starting_experience_step_input.text = '10'
         else:
             tuning_menu.ids.starting_experience_start_input.text = 'N/A'
             tuning_menu.ids.starting_experience_stop_input.text = 'N/A'
             tuning_menu.ids.starting_experience_step_input.text = 'N/A'
-        if DEFAULT_DEMO_ARGUMENTS[selected].inner_radius is not None:
-            tuning_menu.ids.inner_radius_start_input.text = str(DEFAULT_DEMO_ARGUMENTS[selected].inner_radius)
+        if DEFAULT_DEMO_ARGUMENTS[self.text].inner_radius is not None:
+            tuning_menu.ids.inner_radius_start_input.text = str(DEFAULT_DEMO_ARGUMENTS[self.text].inner_radius)
             tuning_menu.ids.inner_radius_stop_input.text = '0.9'
             tuning_menu.ids.inner_radius_step_input.text = '0.125'
         else:

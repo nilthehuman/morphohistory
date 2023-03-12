@@ -2,7 +2,7 @@
 
 #TODO: use observer pattern to spread changes
 
-from enum import Enum, IntEnum
+from enum import Enum, StrEnum
 
 from kivy.graphics import Color
 
@@ -11,19 +11,19 @@ from .paradigm import NounParadigm
 class _Settings:
     """A plain struct holding all relevant constants and parameters."""
 
-    class DemoAgora(IntEnum):
-        RAINBOW_9X9   =  1
-        RAINBOW_10X10 =  2
-        BALANCE       =  3
-        BALANCE_LARGE =  4
-        CHECKERS      =  5
-        ALONE         =  6
-        CORE_9x9      =  7
-        CORE_10x10    =  8
-        NEWS_ANCHOR   =  9
-        RINGS_16_16   = 10
-        RINGS_16_24   = 11
-        VILLAGES      = 12
+    class DemoAgora(StrEnum):
+        RAINBOW_9X9   = "Rainbow 9x9"
+        RAINBOW_10X10 = "Rainbow 10x10"
+        BALANCE       = "Balance"
+        BALANCE_LARGE = "Balance Large"
+        CHECKERS      = "Checkers"
+        ALONE         = "Alone"
+        CORE_9x9      = "Core 9x9"
+        CORE_10x10    = "Core 10x10"
+        NEWS_ANCHOR   = "News Anchor"
+        RINGS_16_16   = "Rings 16+16"
+        RINGS_16_24   = "Rings 16+24"
+        VILLAGES      = "Villages"
 
     class DistanceMetric(Enum):
         CONSTANT  = 1
