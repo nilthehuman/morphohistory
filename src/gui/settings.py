@@ -23,33 +23,33 @@ _SETTINGS_FILE_PATH = 'user_settings.ini'
 _SETTINGS_UI = [
     {
         "type": "title",
-        "title": "Megjelenés"
+        "title": "Appearance"
     },
     {
         "type": "color",
-        "title": "A szín",
-        "desc": "Az első alternánst jelölő szín",
+        "title": "Color A",
+        "desc": "The color designating the first alternant",
         "section": "Appearance",
         "key": "color_a"
     },
     {
         "type": "color",
-        "title": "B szín",
-        "desc": "A második alternánst jelölő szín",
+        "title": "Color B",
+        "desc": "The color designating the second alternant",
         "section": "Appearance",
         "key": "color_b"
     },
     {
         "type": "color",
-        "title": "Broadcaster színe",
-        "desc": "A mindenkihez szóló beszélők színe",
+        "title": "Broadcaster color",
+        "desc": "The color of a speaker talking to everyone",
         "section": "Appearance",
         "key": "color_broadcaster"
     },
     {
         "type": "bool",
-        "title": "Közlés mutatása",
-        "desc": "Jelezze-e nyíl az egyes interakciókat",
+        "title": "Show interaction",
+        "desc": "Draw an arrow to make the current interaction visible",
         "section": "Appearance",
         "key": "draw_arrow"
     },
@@ -59,69 +59,69 @@ _SETTINGS_UI = [
     },
     {
         "type": "options",
-        "title": "Távolságmérték",
-        "desc": "Hogyan számítson a geometria",
+        "title": "Distance metric",
+        "desc": "What kind of geometry to use",
         "section": "Simulation",
         "key": "sim_distance_metric",
-        "options": ["konstans", "Manhattan", "euklideszi"]
+        "options": ["constant", "Manhattan", "Euclidean"]
     },
     {
         "type": "bool",
-        "title": "Önbefolyásolás",
-        "desc": "Hasson-e magára a beszélő",
+        "title": "Self influence",
+        "desc": "Should a speaker affect itself",
         "section": "Simulation",
         "key": "sim_influence_self"
     },
     {
         "type": "bool",
-        "title": "Kölcsönös befolyásolás",
-        "desc": "Hasson-e egymásra mindkét fél",
+        "title": "Mutual influence",
+        "desc": "Should both parties affect each other",
         "section": "Simulation",
         "key": "sim_influence_mutual"
     },
     {
         "type": "bool",
-        "title": "Passzív enyészet   (ÚJ!)",
-        "desc": "Elsorvadjon-e idővel a szerényebb súlyú alak",
+        "title": "Passive decay",
+        "desc": "Should underrepresented forms be forgotten with time",
         "section": "Simulation",
         "key": "sim_passive_decay"
     },
     {
         "type": "bool",
-        "title": "Fordított hatás",
-        "desc": "A hallott alak ellenkezőjét preferáljuk-e",
+        "title": "Reverse preference",
+        "desc": "Should speakers prefer the opposite of the forms we encounter",
         "section": "Simulation",
         "key": "sim_prefer_opposite"
     },
     {
         "type": "numeric",
-        "title": "Kezdeti tapasztalat",
-        "desc": "Hány előzetes interakciót tételezzünk fel a beszélőkről",
+        "title": "Starting experience",
+        "desc": "Number of interactions speakers are assumed to have initially",
         "section": "Simulation",
         "key": "starting_experience"
     },
     {
         "type": "title",
-        "title": "Holtpont"
+        "title": "Termination"
     },
     {
         "type": "string",
-        "title": "Elfogultsági küszöb",
-        "desc": "Mekkora biast várunk el minden beszélőtől, mielőtt leáll a szimuláció",
+        "title": "Bias threshold",
+        "desc": "Degree of bias expected of every speaker before the simulation halts",
         "section": "Termination",
         "key": "bias_threshold"
     },
     {
         "type": "numeric",
-        "title": "Tapasztalati küszöb",
-        "desc": "Hány hallott alakot várunk el minden beszélőtől, mielőtt leáll a szimuláció",
+        "title": "Experience threshold",
+        "desc": "Number of forms encountered expected of every speaker before the simulation halts",
         "section": "Termination",
         "key": "experience_threshold"
     },
     {
         "type": "numeric",
-        "title": "Iterációs limit",
-        "desc": "Hány interakciót engedünk meg legfeljebb",
+        "title": "Max iterations",
+        "desc": "Maximum number of iterations allowed in fast forward",
         "section": "Termination",
         "key": "sim_max_iteration"
     }
@@ -156,7 +156,7 @@ class CustomSettings(Settings):
                                 })
         self.config.setdefaults('Simulation',
                                 {
-                                    'sim_distance_metric': 'konstans',
+                                    'sim_distance_metric': 'constant',
                                     'sim_influence_self': 1,
                                     'sim_influence_mutual': 0,
                                     'sim_passive_decay': 0,
@@ -169,7 +169,7 @@ class CustomSettings(Settings):
                                     'experience_threshold': 10,
                                     'sim_max_iteration': 10000
                                 })
-        self.add_json_panel('Beállítások', self.config, data=_SETTINGS_UI)
+        self.add_json_panel('Settings', self.config, data=_SETTINGS_UI)
         self.config.read(_SETTINGS_FILE_PATH)
         self.reload_config_values()
 
@@ -180,10 +180,10 @@ class CustomSettings(Settings):
         """Keep sensible value constraints and formatting in order when a new value is entered."""
         # enforce upper and lower bounds on user-supplied values
         bounds = {
-            ('Simulation', 'starting_experience') : (0, inf),
-            ('Termination', 'bias_threshold') : (50, 100),
-            ('Termination', 'experience_threshold') : (0, inf),
-            ('Termination', 'sim_max_iteration') : (100, inf)
+            ('Simulation' , 'starting_experience')  : (  0, inf),
+            ('Termination', 'bias_threshold')       : ( 50, 100),
+            ('Termination', 'experience_threshold') : (  0, inf),
+            ('Termination', 'sim_max_iteration')    : (100, inf)
         }
         if (section, key) in bounds:
             clamped_value = value
@@ -227,9 +227,9 @@ class CustomSettings(Settings):
                         update_starting_experience = True
                 elif 'options' == value_type:
                     string_to_enum = {
-                        'konstans'   : SETTINGS.DistanceMetric.CONSTANT,
-                        'Manhattan'  : SETTINGS.DistanceMetric.MANHATTAN,
-                        'euklideszi' : SETTINGS.DistanceMetric.EUCLIDEAN
+                        'constant'  : SETTINGS.DistanceMetric.CONSTANT,
+                        'Manhattan' : SETTINGS.DistanceMetric.MANHATTAN,
+                        'Euclidean' : SETTINGS.DistanceMetric.EUCLIDEAN
                     }
                     new_value = string_to_enum[new_value]
                     update_grid = True
@@ -265,9 +265,9 @@ class CustomSettings(Settings):
                     old_value = get_hex_from_color(old_value.rgb)
                 elif isinstance(old_value, SETTINGS.DistanceMetric):
                     enum_to_string = {
-                        SETTINGS.DistanceMetric.CONSTANT  : 'konstans',
+                        SETTINGS.DistanceMetric.CONSTANT  : 'constant',
                         SETTINGS.DistanceMetric.MANHATTAN : 'Manhattan',
-                        SETTINGS.DistanceMetric.EUCLIDEAN : 'euklideszi'
+                        SETTINGS.DistanceMetric.EUCLIDEAN : 'Euclidean'
                     }
                     old_value = enum_to_string[old_value]
                 elif isinstance(old_value, float):

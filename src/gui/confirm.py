@@ -4,6 +4,8 @@ from kivy.animation import Animation
 from kivy.properties import NumericProperty
 from kivy.uix.label import Label
 
+from .l10n import localize
+
 class ConfirmedLabel(Label):
     """Common base class to ApplyConfirmedLabel and DiscardConfirmedLabel for convenience."""
     alpha = NumericProperty(1)
@@ -12,6 +14,7 @@ class ConfirmedLabel(Label):
         super().__init__(**kwargs)
         Animation(alpha=0, d=1.5, t='in_quad').start(self)
         self.bind(alpha=self.on_fade)
+        self.text = localize(self.text)  # need to do this by hand which is a bit unfortunate
 
     def on_fade(self, _instance, value):
         if 0 == value:

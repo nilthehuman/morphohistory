@@ -64,7 +64,7 @@ class ParadigmTable(GridLayout):
             case_label = CaseLabel(text=case_names[row], size_hint_x=0.1)
             self.add_widget(case_label)
 
-        header_label = Label(text="SING (A alak)", size_hint_x=0.175)
+        header_label = Label(text="SING (form A)", size_hint_x=0.175)
         self.add_widget(header_label)
         first_textinput = TextInput(size_hint_x=0.175, cursor_color=(0, 0, 0, 1))
         self.add_widget(first_textinput)
@@ -72,7 +72,7 @@ class ParadigmTable(GridLayout):
             text_input = CellTextInput(size_hint_x=0.175)
             self.add_widget(text_input)
 
-        header_label = Label(text="SING (B alak)", size_hint_x=0.175)
+        header_label = Label(text="SING (form B)", size_hint_x=0.175)
         self.add_widget(header_label)
         first_textinput = TextInput(size_hint_x=0.175, cursor_color=(0, 0, 0, 1))
         self.add_widget(first_textinput)
@@ -80,7 +80,7 @@ class ParadigmTable(GridLayout):
             text_input = CellTextInput(size_hint_x=0.175)
             self.add_widget(text_input)
 
-        header_label = Label(text="prominencia", size_hint_x=0.1)
+        header_label = Label(text="prominence", size_hint_x=0.1)
         self.add_widget(header_label)
         first_textinput = TextInput(size_hint_x=0.1, text='1', cursor_color=(0, 0, 0, 1))
         self.add_widget(first_textinput)
@@ -88,19 +88,19 @@ class ParadigmTable(GridLayout):
             text_input = CellTextInput(size_hint_x=0.1, text='1')
             self.add_widget(text_input)
 
-        header_label = Label(text="PLUR (A alak)", size_hint_x=0.175)
+        header_label = Label(text="PLUR (form A)", size_hint_x=0.175)
         self.add_widget(header_label)
         for row in range(1, 14):
             text_input = CellTextInput(size_hint_x=0.175)
             self.add_widget(text_input)
 
-        header_label = Label(text="PLUR (B alak)", size_hint_x=0.175)
+        header_label = Label(text="PLUR (form B)", size_hint_x=0.175)
         self.add_widget(header_label)
         for row in range(1, 14):
             text_input = CellTextInput(size_hint_x=0.175)
             self.add_widget(text_input)
 
-        header_label = Label(text="prominencia", size_hint_x=0.1)
+        header_label = Label(text="prominence", size_hint_x=0.1)
         self.add_widget(header_label)
         for row in range(1, 14):
             text_input = CellTextInput(size_hint_x=0.1, text='1')

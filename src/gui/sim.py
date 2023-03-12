@@ -28,10 +28,12 @@ from kivy.uix.widget import Widget
 
 from .access_widgets import *
 from .confirm import ApplyConfirmedLabel
+from .l10n import localize, localize_all_texts
 
 from ..settings import SETTINGS
 from ..agora import Agora
 from ..speaker import Speaker
+
 
 class SimTabLayout(BoxLayout):
     """The horizontal BoxLayout holding all the contents of the Simulation tab."""
@@ -56,6 +58,13 @@ class AgoraLayout(ScatterLayout):
 class ButtonLayout(GridLayout):
     """The bar with control buttons at the right edge of the screen."""
     pass
+
+class LocalizedPopup(Popup):
+    """Normal Kivy Popup windows but they automatically translate themselves."""
+    def open(self):
+        """Localize all user-visible strings inside our window before popping up."""
+        localize_all_texts(self)
+        super().open()
 
 class SaveToFilePopup(FloatLayout):
     """A popup window for picking a location to save the Agora to file."""
@@ -93,8 +102,8 @@ class SaveToFileButton(Button):
         """Open the main file saving dialogue popup."""
         get_agora().stop_sim()
         content = SaveToFilePopup(save=self.save, cancel=self.dismiss_popup)
-        self.popup = Popup(title="Agora mentése", content=content,
-                           size_hint=(None, None), size=SETTINGS.popup_size_load)
+        self.popup = LocalizedPopup(title="Save current agora to file", content=content,
+                                    size_hint=(None, None), size=SETTINGS.popup_size_load)
         self.popup.open()
 
     def dismiss_popup(self):
@@ -115,8 +124,8 @@ class SaveToFileButton(Button):
     def show_overwrite_popup(self, *_):
         """Open another popup to ask for permission to overwrite existing file."""
         content = OverwritePopup(proceed=self.proceed, cancel=self.dismiss_overwrite_popup)
-        self.overwrite_popup = Popup(title="Meglévő fájl!", content=content,
-                                     size_hint=(None, None), size=SETTINGS.popup_size_fail)
+        self.overwrite_popup = LocalizedPopup(title="File already exists", content=content,
+                                              size_hint=(None, None), size=SETTINGS.popup_size_fail)
         self.overwrite_popup.open()
 
     def proceed(self):
@@ -146,8 +155,8 @@ class LoadFromFileButton(Button):
         """Open the main file loading dialogue popup."""
         get_agora().stop_sim()
         content = LoadFromFilePopup(load=self.load, cancel=self.dismiss_popup)
-        self.popup = Popup(title="Agora betöltése", content=content,
-                           size_hint=(None, None), size=SETTINGS.popup_size_load)
+        self.popup = LocalizedPopup(title="Load an agora from file", content=content,
+                                    size_hint=(None, None), size=SETTINGS.popup_size_load)
         self.popup.open()
 
     def load(self, _path, fileselection):
@@ -168,8 +177,8 @@ class LoadFromFileButton(Button):
     def show_fail_popup(self):
         """Open another popup to let the user know the file could not be loaded."""
         content = LoadFailedPopup(okay=self.dismiss_fail_popup)
-        self.fail_popup = Popup(title="Sikertelen betöltés", content=content,
-                                size_hint=(None, None), size=SETTINGS.popup_size_fail)
+        self.fail_popup = LocalizedPopup(title="Loading unsuccessful", content=content,
+                                         size_hint=(None, None), size=SETTINGS.popup_size_fail)
         self.fail_popup.open()
 
     def dismiss_fail_popup(self):
@@ -180,8 +189,8 @@ class StartStopSimButton(Button):
     """Runs or halts the simulation process."""
 
     sim = None
-    start_text = 'Csapassad neki!'
-    stop_text = 'Várj egy kicsit,\nlégy oly kedves!'
+    start_text = localize('Start')
+    stop_text = localize('Stop')
 
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
@@ -221,7 +230,7 @@ class FastForwardButton(Button):
         """Perform many iterations of the simulation at once ignoring graphics."""
         get_agora().stop_sim()
         content = FastForwardPopup(cancel=self.cancel_fast_forward)
-        self.popup = Popup(title="Folyamatban...", content=content,
+        self.popup = Popup(title="Running simulation...", content=content,
                            size_hint=(None, None), size=SETTINGS.popup_size_progress)
         self.popup.open()
         get_agora().start_stop_sim(fastforward=True)

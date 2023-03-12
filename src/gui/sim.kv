@@ -43,12 +43,12 @@
         id: save_to_file_button
         size_hint: None, None
         size: 160, 60
-        text: 'Mentsd ezt el!'
+        text: 'Save this agora'
     LoadFromFileButton:
         id: load_from_file_button
         size_hint: None, None
         size: 160, 60
-        text: 'Tölts be egy agorát!'
+        text: 'Load another agora'
     StartStopSimButton:
         id: start_stop_button
         size_hint: None, None
@@ -111,10 +111,10 @@
             height: 30
             Button:
                 id: save_button
-                text: "Mentsed"
+                text: "Save"
                 on_release: root.save(filechooser.path, text_input.text)
             Button:
-                text: "Hagyjad"
+                text: "Cancel"
                 on_release: root.cancel()
 
 <OverwritePopup>
@@ -123,16 +123,16 @@
         pos: root.pos
         orientation: "vertical"
         Label:
-            text: "Biztos felülírjam?"
+            text: "You sure you want to overwrite?"
         BoxLayout:
             orientation: "horizontal"
             size_hint_y: None
             height: 30
             Button:
-                text: "Felül"
+                text: "Yes, do it"
                 on_release: root.proceed()
             Button:
-                text: "Mégse"
+                text: "No"
                 on_release: root.cancel()
 
 <LoadFromFilePopup>
@@ -155,10 +155,10 @@
             height: 30
             Button:
                 id: save_button
-                text: "Töltsd be"
+                text: "Load it"
                 on_release: root.load(filechooser.path, filechooser.selection)
             Button:
-                text: "Hagyjad"
+                text: "Cancel"
                 on_release: root.cancel()
 
 <LoadFailedPopup>
@@ -167,9 +167,9 @@
         pos: root.pos
         orientation: "vertical"
         Label:
-            text: "Érvénytelen bemeneti fájl. :("
+            text: "Invalid input file."
         Button:
-            text: "Jól van, semmi cink"
+            text: "That's okay"
             size_hint_y: 0.5
             on_release: root.okay()
 
@@ -202,7 +202,7 @@
         text: str(progressbar.value)
     Button:
         id: cancel_button
-        text: "Mindegy, hagyjad!"
+        text: "Nevermind"
         pos_hint: {'center_x': 0.5}
         size_hint: None, None
         size: 150, 50

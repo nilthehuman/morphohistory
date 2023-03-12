@@ -11,6 +11,10 @@ from .paradigm import NounParadigm
 class _Settings:
     """A plain struct holding all relevant constants and parameters."""
 
+    class GuiLanguage(StrEnum):
+        ENG = "English"
+        HUN = "Hungarian"
+
     class DemoAgora(StrEnum):
         RAINBOW_9X9   = "Rainbow 9x9"
         RAINBOW_10X10 = "Rainbow 10x10"
@@ -35,6 +39,8 @@ class _Settings:
         RW       = 2
 
     def __init__(self):
+        self.gui_language = self.GuiLanguage.HUN
+
         self.agora_size = (600, 600)
         self.color_a = Color(1.0, 1.0, 0.0)
         self.color_b = Color(1.0, 0.0, 1.0)
