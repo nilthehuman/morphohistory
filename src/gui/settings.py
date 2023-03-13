@@ -13,7 +13,7 @@ from kivy.utils import get_color_from_hex, get_hex_from_color
 
 from .access_widgets import *
 from .confirm import ApplyConfirmedLabel, DiscardConfirmedLabel
-from .l10n import localize, localize_all_texts
+from .l10n import localize, unlocalize, localize_all_texts, unlocalize_all_texts
 
 from ..settings import SETTINGS
 
@@ -25,6 +25,14 @@ _SETTINGS_UI = [
     {
         "type": "title",
         "title": "Appearance"
+    },
+    {
+        "type": "options",
+        "title": "App language",
+        "desc": "The language of the application's user interface",
+        "section": "Appearance",
+        "key": "gui_language",
+        "options": ["English", "Hungarian"]
     },
     {
         "type": "color",
@@ -56,7 +64,7 @@ _SETTINGS_UI = [
     },
     {
         "type": "title",
-        "title": "Szimuláció"
+        "title": "Simulation"
     },
     {
         "type": "options",
@@ -182,7 +190,9 @@ class CustomSettings(Settings):
         self.reload_config_values()
 
     def on_gui_ready(self):
-        self.commit_settings(write_to_file=False)
+        """Pump the settings values read from file into the global SETTINGS object
+        and refresh the AgoraWidget's graphics on the main tab."""
+        self.commit_settings(write_to_file=False, force_update=True)
 
     def on_config_change(self, config, section, key, value):
         """Keep sensible value constraints and formatting in order when a new value is entered."""
@@ -210,12 +220,13 @@ class CustomSettings(Settings):
             self.reload_config_values(section, key)
         super().on_config_change(config, section, key, value)
 
-    def commit_settings(self, write_to_file=True):
+    def commit_settings(self, write_to_file=True, force_update=False):
         """Destructively set all values in the global SETTINGS to the current values
         in our ConfigParser instance, and also save them to file."""
-        update_colors = False
+        update_lang = force_update
+        update_colors = force_update
+        update_grid = force_update
         update_arrow = False
-        update_grid = False
         update_starting_experience = False
         for section in self.config.sections():
             for (key, new_value) in self.config.items(section):
@@ -223,7 +234,7 @@ class CustomSettings(Settings):
                 value_type = [item['type'] for item in _SETTINGS_UI if 'key' in item and key == item['key']][0]
                 if 'bool' == value_type:
                     new_value = '0' != new_value
-                    if 'draw_arrow' == key:
+                    if 'draw_arrow' == key and new_value == ('0' if getattr(SETTINGS, key) else '1'):
                         update_arrow = True
                 elif 'color' == value_type:
                     new_value = Color(*get_color_from_hex(new_value))
@@ -231,26 +242,34 @@ class CustomSettings(Settings):
                         update_colors = True
                 elif 'numeric' == value_type:
                     new_value = int(new_value)
-                    if 'starting_experience' == key:
+                    if 'starting_experience' == key and new_value != getattr(SETTINGS, key):
                         update_starting_experience = True
                 elif 'options' == value_type:
-                    string_to_enum = {
-                        localize('constant')  : SETTINGS.DistanceMetric.CONSTANT,
-                        localize('Manhattan') : SETTINGS.DistanceMetric.MANHATTAN,
-                        localize('Euclidean') : SETTINGS.DistanceMetric.EUCLIDEAN
-                    }
-                    new_value = string_to_enum[new_value]
-                    update_grid = True
+                    if new_value != getattr(SETTINGS, key):
+                        if 'gui_language' == key:
+                            update_lang = True
+                        elif 'sim_distance_metric' == key:
+                            update_grid = True
+                        else:
+                            assert False
                 elif 'string' == value_type:
                     if '%' == new_value[-1]:
                         # percentage to plain float
                         new_value = float(new_value[:-1]) / 100
                 else:
                     assert False
-                setattr(SETTINGS, key, new_value)
+                if not 'gui_language' == key:
+                    setattr(SETTINGS, key, new_value)
         if write_to_file:
             # save all settings to disk
             self.config.write()
+        # update application language
+        if update_lang:
+            unlocalize_all_texts(get_root())
+            SETTINGS.gui_language = unlocalize(self.config['Appearance']['gui_language'])
+            # prevent localized values from being written to the config file
+            self.config.set('Appearance', 'gui_language', SETTINGS.gui_language)
+            localize_all_texts(get_root())
         # update graphics on main tab
         if update_colors:
             get_agora().update_speakerdot_colors()
@@ -271,13 +290,6 @@ class CustomSettings(Settings):
                     old_value = '1' if old_value else '0'
                 elif isinstance(old_value, Color):
                     old_value = get_hex_from_color(old_value.rgb)
-                elif isinstance(old_value, SETTINGS.DistanceMetric):
-                    enum_to_string = {
-                        SETTINGS.DistanceMetric.CONSTANT  : localize('constant'),
-                        SETTINGS.DistanceMetric.MANHATTAN : localize('Manhattan'),
-                        SETTINGS.DistanceMetric.EUCLIDEAN : localize('Euclidean')
-                    }
-                    old_value = enum_to_string[old_value]
                 elif isinstance(old_value, float):
                     # plain float to percentage
                     old_value = str(100 * old_value) + '%'

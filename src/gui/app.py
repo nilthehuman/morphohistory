@@ -61,8 +61,6 @@ class MorphoHistoryApp(App):
                 child.on_gui_ready()
             except AttributeError:
                 pass  # that's fine
-        # translate the UI according to language setting
-        localize_all_texts(self.root)
 
 if __name__ == '__main__':
     MorphoHistoryApp().run()

@@ -29,10 +29,10 @@ class _Settings:
         RINGS_16_24   = "Rings 16+24"
         VILLAGES      = "Villages"
 
-    class DistanceMetric(Enum):
-        CONSTANT  = 1
-        MANHATTAN = 2
-        EUCLIDEAN = 3
+    class DistanceMetric(StrEnum):
+        CONSTANT  = "constant"
+        MANHATTAN = "Manhattan"
+        EUCLIDEAN = "Euclidean"
 
     class LearningModel(Enum):
         HARMONIC = 1

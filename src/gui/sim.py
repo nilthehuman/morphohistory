@@ -189,8 +189,8 @@ class StartStopSimButton(Button):
     """Runs or halts the simulation process."""
 
     sim = None
-    start_text = localize('Start')
-    stop_text = localize('Stop')
+    start_text = 'Start'
+    stop_text = 'Stop'
 
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
@@ -204,7 +204,7 @@ class StartStopSimButton(Button):
 
     def update_text(self):
         """Toggle button text to show what the button will do next."""
-        self.text = self.stop_text if get_agora().sim else self.start_text
+        self.text = localize(self.stop_text) if get_agora().sim else localize(self.start_text)
 
 class RewindButton(Button):
     """Restores the initial state of the Agora when loaded."""
@@ -589,7 +589,7 @@ class AgoraWidget(Widget, Agora):
     def update_iteration_counter(self):
         """Set the text on the button panel that shows how deep into the simulation we are."""
         iter_counter = get_button_layout().ids.iteration_counter
-        iter_counter.text = '%d iteráció' % self.state.sim_iteration_total
+        iter_counter.text = str(self.state.sim_iteration_total) + localize(' iterations')
 
     def update_talk_arrow(self):
         """Redraw the blue arrow between the current speaker and the current hearer."""

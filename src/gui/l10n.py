@@ -33,21 +33,37 @@ def localize(string):
 
 def unlocalize(string):
     """Translate a string from the currently set GUI language back to English."""
-    assert isinstance(string, LocalizedString)
+    if not isinstance(string, LocalizedString):
+        return string
     string.mask = []
     inv_texts_dict = _L10N_DICTS[SETTINGS.gui_language].inv_items()
-    return _substitute(string, inv_texts_dict)
+    # return a plain string
+    return str(_substitute(string, inv_texts_dict))
 
 
 def localize_all_texts(root):
     """Translate all user-visible strings in all UI Widgets down from 'root'
-    according to the current language setting."""
+    to the currently set GUI language."""
     if hasattr(root, 'text'):
         root.text = localize(root.text)
     # N.B.: Widget.walk() seems to be unreliable
     children = set(list(root.ids.values()) + root.children)
+    if hasattr(root, 'tab_list'):
+        children.update(root.tab_list)
     for child in children:
         localize_all_texts(child)
+
+def unlocalize_all_texts(root):
+    """Translate all user-visible strings in all UI Widgets down from 'root'
+    from the currently set GUI langauge back to English."""
+    if hasattr(root, 'text'):
+        root.text = unlocalize(root.text)
+    # N.B.: Widget.walk() seems to be unreliable
+    children = set(list(root.ids.values()) + root.children)
+    if hasattr(root, 'tab_list'):
+        children.update(root.tab_list)
+    for child in children:
+        unlocalize_all_texts(child)
 
 
 class L10nDict(dict):
@@ -84,8 +100,7 @@ _LOCALIZE_TEXTS_HUN = L10nDict({
     "Alright" : "Hát jó.",
     "Save this agora" : "Mentsd ezt el!",
     "Load another agora" : "Tölts be egy agorát!",
-    "Start" : "Csapassad neki!",
-    "Stop" : "Várj egy kicsit,\nlégy oly kedves!",
+    "iterations" : "iteráció",
     "Save current agora to file" : "Agora mentése",
     "File already exists" : "Meglévő fájl!",
     "Save" : "Mentsed",
@@ -102,6 +117,10 @@ _LOCALIZE_TEXTS_HUN = L10nDict({
     "Nevermind" : "Mindegy, hagyjad!",
     "Apply" : "Nosza!",
     "Appearance" : "Megjelenés",
+    "App language" : "Alkalmazás nyelve",
+    "The language of the application's user interface" : "Ezen a nyelven jelenik meg a felhasználói felület",
+    "English" : "angol",
+    "Hungarian" : "magyar",
     "Color A" : "A szín",
     "The color designating the first alternant" : "Az első alternánst jelölő szín",
     "Color B" : "B szín",
@@ -151,12 +170,14 @@ _LOCALIZE_TEXTS_HUN = L10nDict({
     "Rings 16+16" : "Gyűrűk 16+16",
     "Rings 16+24" : "Gyűrűk 16+24",
     "Villages" : "Falvak",
-    "[b]Our bias[/b] start, stop, step: " : "[b]Egyik bias[/b] eleje, vége, lépésköz:",
-    "[b]Their bias[/b] start, stop, step: ": "[b]Másik bias[/b] eleje, vége, lépésköz:",
-    "[b]Starting experience[/b] start, stop, step: " : "[b]Kezdeti tapasztalat[/b] eleje, vége, lépésköz:",
+    "[b]Our bias[/b] start, stop, step:" : "[b]Egyik bias[/b] eleje, vége, lépésköz:",
+    "[b]Their bias[/b] start, stop, step:": "[b]Másik bias[/b] eleje, vége, lépésköz:",
+    "[b]Starting experience[/b] start, stop, step:" : "[b]Kezdeti tapasztalat[/b] eleje, vége, lépésköz:",
     "[b]Inner ring radius[/b] start, stop, step:" : "[b]Belső gyűrű sugara[/b] eleje, vége, lépésköz:",
     "Repetitions per configuration:" : "Ismétlés beállításonként:",
-    "Go" : "Menjen!"
+    "Go" : "Menjen!",
+    "Start": "Csapassad neki!",
+    "Stop": "Várj egy kicsit,\nlégy oly kedves!"
 })
 
 
