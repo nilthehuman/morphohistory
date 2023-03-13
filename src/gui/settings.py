@@ -165,6 +165,7 @@ class CustomSettings(Settings):
         self.config = ConfigParser()
         self.config.setdefaults('Appearance',
                                 {
+                                    'gui_language': 'English',
                                     'color_a': '#ffff00',
                                     'color_b': '#ff00ff',
                                     'color_broadcaster': '#00ff00',

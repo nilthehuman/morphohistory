@@ -39,7 +39,7 @@ class _Settings:
         RW       = 2
 
     def __init__(self):
-        self.gui_language = self.GuiLanguage.HUN
+        self.gui_language = self.GuiLanguage.ENG
 
         self.agora_size = (600, 600)
         self.color_a = Color(1.0, 1.0, 0.0)
