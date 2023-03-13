@@ -1,6 +1,7 @@
 """The contents of the Settings tab: a list of user options to control the simulation parameters."""
 
 from copy import copy
+from logging import error
 from math import inf
 
 from kivy.app import App
@@ -21,7 +22,11 @@ Settings.interface_cls = InterfaceWithNoMenu
 
 _SETTINGS_FILE_PATH = 'user_settings.ini'
 
-_SETTINGS_UI = [
+class ConfigList(list):
+    def __getitem__(self, key):
+        return [item for item in _SETTINGS_UI if 'key' in item and key == item['key']][0]
+
+_SETTINGS_UI = ConfigList([
     {
         "type": "title",
         "title": "Appearance"
@@ -134,7 +139,7 @@ _SETTINGS_UI = [
         "section": "Termination",
         "key": "sim_max_iteration"
     }
-]
+])
 
 class SettingsTabLayout(BoxLayout):
     """The vertical BoxLayout for the CustomSettingsPanel and the Buttons at the bottom."""
@@ -232,7 +237,7 @@ class CustomSettings(Settings):
         for section in self.config.sections():
             for (key, new_value) in self.config.items(section):
                 # parse new_value from its raw string state
-                value_type = [item['type'] for item in _SETTINGS_UI if 'key' in item and key == item['key']][0]
+                value_type = _SETTINGS_UI[key]['type']
                 if 'bool' == value_type:
                     new_value = '0' != new_value
                     if 'draw_arrow' == key and new_value == ('0' if getattr(SETTINGS, key) else '1'):
@@ -261,9 +266,6 @@ class CustomSettings(Settings):
                     assert False
                 if not 'gui_language' == key:
                     setattr(SETTINGS, key, new_value)
-        if write_to_file:
-            # save all settings to disk
-            self.config.write()
         # update application language
         if update_lang:
             unlocalize_all_texts(get_root())
@@ -281,6 +283,9 @@ class CustomSettings(Settings):
             get_agora().update_grid()
         if update_starting_experience:
             get_agora().set_starting_experience()
+        # save all settings to disk
+        if write_to_file:
+            self.config.write()
 
     def load_settings_values(self):
         """Destructively (re)set all values in our ConfigParser instance to the current global SETTINGS."""
@@ -320,14 +325,24 @@ class CustomSettings(Settings):
         return panel
 
     def reload_config_values(self, section=None, key=None):
-        """Refresh all values displayed in the SettingsPanel from our ConfigParser instance."""
+        """Refresh values displayed in the SettingsPanel from our ConfigParser instance."""
         assert bool(section) == bool(key)
         settingspanel = self.interface.children[0].children[0]
         subtree = settingspanel.children
         for child in subtree:
             if isinstance(child, SettingItem):
                 if not key or section == child.section and key == child.key:
-                    child.value = self.config.get(child.section, child.key)
+                    value = self.config.get(child.section, child.key)
+                    # make sure we've got a legal value for this key
+                    value_type = _SETTINGS_UI[child.key]['type']
+                    if 'options' == value_type:
+                        options = _SETTINGS_UI[child.key]['options']
+                        if not value in options:
+                            error("Settings: Invalid option value '%s' given for %s, using '%s' instead." %
+                                  (value, child.key, options[0]))
+                            value = options[0]
+                            self.config.set(child.section, child.key, value)
+                    child.value = value
 
 class ApplySettingsButton(Button):
     """Button to destructively set the user's choices in the global settings object."""
