@@ -2,7 +2,10 @@
 
 #TODO: use observer pattern to spread changes
 
-from enum import Enum, StrEnum
+try:
+    from enum import Enum, StrEnum
+except ImportError:
+    from strenum import StrEnum
 
 from kivy.graphics import Color
 

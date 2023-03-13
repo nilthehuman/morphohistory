@@ -1,6 +1,5 @@
 """Translations of user interface labels to a couple different languages."""
 
-from enum import StrEnum
 from functools import partial
 
 from ..settings import SETTINGS
