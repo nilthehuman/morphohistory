@@ -188,7 +188,6 @@ class LoadFromFileButton(Button):
 class StartStopSimButton(Button):
     """Runs or halts the simulation process."""
 
-    sim = None
     start_text = 'Start'
     stop_text = 'Stop'
 
