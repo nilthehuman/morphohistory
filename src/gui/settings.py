@@ -293,7 +293,6 @@ class CustomSettings(Settings):
                 elif isinstance(old_value, float):
                     # plain float to percentage
                     old_value = str(100 * old_value) + '%'
-                #print("Setting", section, key, str(old_value))
                 self.config.set(section, key, str(old_value))
         # force the update of displayed values on GUI as well
         self.reload_config_values()
