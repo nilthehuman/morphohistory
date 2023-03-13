@@ -155,6 +155,7 @@ class CustomSettingsPanel(SettingsPanel):
             return
         self.config.set(section, key, value)
         #self.config.write() # don't write to file just yet
+        self.settings.dispatch('on_config_change', self.config, section, key, value)
 
 class CustomSettingOptions(SettingOptions):
     """Override base class to allow localization inside dynamically created options Popup."""
