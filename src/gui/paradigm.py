@@ -108,6 +108,11 @@ class ParadigmTable(GridLayout):
     def on_gui_ready(self):
         """Finish initializing once the root widget is ready."""
         self.save_or_load_cells()
+        get_single_cell_checkbox().bind(active=self.toggle_single_cell_setting)
+
+    def toggle_single_cell_setting(self, *_):
+        """Update the single cell vs whole paradigm switch in the global SETTINGS object."""
+        SETTINGS.sim_single_cell = get_single_cell_checkbox().active
 
     def save_or_load_cells(self, save=False):
         """Write the contents of all cells to speaker's paradigms, or reload cells from them."""
