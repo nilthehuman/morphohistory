@@ -4,6 +4,8 @@ from functools import partial
 
 from kivy.uix.popup import Popup
 
+from .access_widgets import forall_widgets
+
 from ..settings import SETTINGS
 
 
@@ -71,25 +73,21 @@ def unlocalize(string):
     return str(_substitute(string, inv_texts_dict))
 
 
-def _forall_subtree(callback, root):
-    """Recursively walk the subtree below and including the 'root' Widget
-    and update each text attribute that is found in any Widget."""
-    if hasattr(root, 'text'):
-        root.text = callback(root.text)
-    # N.B.: Widget.walk() seems to be unreliable
-    children = set(list(root.ids.values()) + root.children)
-    if hasattr(root, 'tab_list'):
-        children.update(root.tab_list)
-    for child in children:
-        _forall_subtree(callback, child)
-
 # Translate all user-visible strings in all UI Widgets down from a widget
 # to the currently set GUI language.
-localize_all_texts = partial(_forall_subtree, localize)
+def _localize_widget(widget):
+    widget.text = localize(widget.text)
+    widget.values = map(localize, widget.values)  # for the DemoSpinner's sake
+
+localize_all_texts = partial(forall_widgets, _localize_widget)
 
 # Translate all user-visible strings in all UI Widgets down from a widget
 # from the currently set GUI langauge back to English.
-unlocalize_all_texts = partial(_forall_subtree, unlocalize)
+def _unlocalize_widget(widget):
+    widget.text = unlocalize(widget.text)
+    widget.values = map(unlocalize, widget.values)  # for the DemoSpinner's sake
+
+unlocalize_all_texts = partial(forall_widgets, _unlocalize_widget)
 
 
 class L10nDict(dict):

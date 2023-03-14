@@ -34,3 +34,25 @@ def get_paradigm_table():
 def get_tuning_menu():
     """Returns the BoxLayout that takes up most of the Tuning tab."""
     return App.get_running_app().root.ids.tuning_layout.ids.tuning_menu
+
+def forall_widgets(callback, root):
+    """Walk the entire subtree below and including the 'root' Widget
+    and apply the callback to every Widget, tolerating failure."""
+    # N.B.: Widget.walk() seems to be unreliable, and naive recursion results in
+    # multiple calls to the same Widget due to id's being visible from higher up
+    all_children = set()
+    def collect_children(widget):
+        children = set(list(widget.ids.values()) + widget.children)
+        if hasattr(widget, 'tab_list'):
+            children.update(widget.tab_list)
+        all_children.update(children)
+        for child in children:
+            collect_children(child)
+    # collect all widgets in the entire (sub)tree
+    collect_children(root)
+    # visit all widgets
+    for child in all_children:
+        try:
+            callback(child)
+        except AttributeError:
+            pass  # that's fine

@@ -15,6 +15,7 @@ from kivy.app import App
 from kivy.core.window import Window
 from kivy.lang import Builder
 
+from .access_widgets import forall_widgets
 from .keyboardhandler import KeyboardHandler
 from .root import *
 from .sim import *
@@ -46,20 +47,7 @@ class MorphoHistoryApp(App):
 
     def on_start(self):
         """Prepare GUI elements that need to know about the Widget tree to complete their setup."""
-        all_children = set()
-        def collect_children(widget):
-            children = set(list(widget.ids.values()) + widget.children)
-            all_children.update(children)
-            for child in children:
-                collect_children(child)
-        # collect all widgets in the entire tree
-        collect_children(self.root)
-        # call on_child_ready setup function on all children
-        for child in all_children:
-            try:
-                child.on_gui_ready()
-            except AttributeError:
-                pass  # that's fine
+        forall_widgets(lambda w: w.on_gui_ready(), self.root)
 
 if __name__ == '__main__':
     MorphoHistoryApp().run()
