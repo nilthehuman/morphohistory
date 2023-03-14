@@ -28,7 +28,7 @@ from kivy.uix.widget import Widget
 
 from .access_widgets import get_root, get_agora, get_agora_layout, get_button_layout
 from .confirm import ApplyConfirmedLabel
-from .l10n import localize, localize_all_texts
+from .l10n import localize, localize_all_texts, LocalizedPopup
 
 from ..settings import SETTINGS
 from ..agora import Agora
@@ -58,13 +58,6 @@ class AgoraLayout(ScatterLayout):
 class ButtonLayout(GridLayout):
     """The bar with control buttons at the right edge of the screen."""
     pass
-
-class LocalizedPopup(Popup):
-    """Normal Kivy Popup windows but they automatically translate themselves."""
-    def open(self):
-        """Localize all user-visible strings inside our window before popping up."""
-        localize_all_texts(self)
-        super().open()
 
 class SaveToFilePopup(FloatLayout):
     """A popup window for picking a location to save the Agora to file."""

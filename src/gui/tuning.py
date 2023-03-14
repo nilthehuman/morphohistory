@@ -5,11 +5,10 @@ from kivy.clock import Clock
 from kivy.properties import ObjectProperty
 from kivy.uix.boxlayout import BoxLayout
 from kivy.uix.button import Button
-from kivy.uix.popup import Popup
 from kivy.uix.spinner import Spinner
 
 from .access_widgets import get_root, get_agora, get_tuning_menu
-from .l10n import localize, unlocalize
+from .l10n import localize, unlocalize, LocalizedPopup
 
 from ..agora import Agora
 from ..demos import DEMO_FACTORIES, DEFAULT_DEMO_ARGUMENTS
@@ -146,12 +145,12 @@ class LaunchTuningButton(Button):
         self.tuner.tuning_cancelled = True
 
 
-class TunerPopup(Tuner, Popup):
+class TunerPopup(Tuner, LocalizedPopup):
     """A simple graphical frontend to a Tuner to show its progress live."""
 
     def __init__(self, *args, **kwargs):
         Tuner.__init__(self, *args)
-        Popup.__init__(self, **kwargs)
+        LocalizedPopup.__init__(self, **kwargs)
         self.ids.container.children[0].ids.progressbar.max = self.num_total_setups * self.repetitions
 
     def run(self):

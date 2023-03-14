@@ -13,6 +13,15 @@ class LocalizedString(str):
         new_loc_string = super().__new__(cls, string)
         return new_loc_string
 
+
+class LocalizedPopup(Popup):
+    """Normal Kivy Popup windows but they automatically translate themselves."""
+    def open(self):
+        """Localize all user-visible strings inside our window before popping up."""
+        localize_all_texts(self)
+        super().open()
+
+
 def _substitute(string, l10n_dict):
     """Change each line of 'string' to its corresponding translation in 'l10n_dict'."""
     def disregard_brackets(func, line):
