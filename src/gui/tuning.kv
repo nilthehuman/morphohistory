@@ -49,131 +49,18 @@
             text_autoupdate: True
         Widget:
             size_hint_x: 1
-    # TODO: refactor the following BoxLayouts to avoid repetition, and to avoid repetition
-    BoxLayout:
+    ParamBoxLayout:
         id: our_bias_box
-        orientation: 'horizontal'
-        size_hint_y: None
-        height: 50
-        Widget:
-            size_hint_x: 1
-        Label:
-            text: "[b]Our bias[/b] start, stop, step:"
-            markup: True
-            text_size: self.size
-            size_hint_x: None
-            width: 300
-            halign: "center"
-            valign: "center"
-        Widget:
-            size_hint_x: 0.5
-        ParamInput:
-            id: our_bias_start_input
-        Widget:
-            size_hint_x: None
-            width: 35
-        ParamInput:
-            id: our_bias_stop_input
-        Widget:
-            size_hint_x: None
-            width: 35
-        ParamInput:
-            id: our_bias_step_input
-        Widget:
-            size_hint_x: 1
-    BoxLayout:
+        label: "[b]Our bias[/b] start, stop, step:"
+    ParamBoxLayout:
         id: their_bias_box
-        orientation: 'horizontal'
-        size_hint_y: None
-        height: 50
-        Widget:
-            size_hint_x: 1
-        Label:
-            text: "[b]Their bias[/b] start, stop, step:"
-            markup: True
-            text_size: self.size
-            size_hint_x: None
-            width: 300
-            halign: "center"
-            valign: "center"
-        Widget:
-            size_hint_x: 0.5
-        ParamInput:
-            id: their_bias_start_input
-        Widget:
-            size_hint_x: None
-            width: 35
-        ParamInput:
-            id: their_bias_stop_input
-        Widget:
-            size_hint_x: None
-            width: 35
-        ParamInput:
-            id: their_bias_step_input
-        Widget:
-            size_hint_x: 1
-    BoxLayout:
+        label: "[b]Their bias[/b] start, stop, step:"
+    ParamBoxLayout:
         id: starting_experience_box
-        orientation: 'horizontal'
-        size_hint_y: None
-        height: 50
-        Widget:
-            size_hint_x: 1
-        Label:
-            text: "[b]Starting experience[/b] start, stop, step:"
-            markup: True
-            text_size: self.size
-            size_hint_x: None
-            width: 300
-            halign: "center"
-            valign: "center"
-        Widget:
-            size_hint_x: 0.5
-        ParamInput:
-            id: starting_experience_start_input
-        Widget:
-            size_hint_x: None
-            width: 35
-        ParamInput:
-            id: starting_experience_stop_input
-        Widget:
-            size_hint_x: None
-            width: 35
-        ParamInput:
-            id: starting_experience_step_input
-        Widget:
-            size_hint_x: 1
-    BoxLayout:
+        label: "[b]Starting experience[/b] start, stop, step:"
+    ParamBoxLayout:
         id: inner_radius_box
-        orientation: 'horizontal'
-        size_hint_y: None
-        height: 50
-        Widget:
-            size_hint_x: 1
-        Label:
-            text: "[b]Inner ring radius[/b] start, stop, step:"
-            markup: True
-            text_size: self.size
-            size_hint_x: None
-            width: 300
-            halign: "center"
-            valign: "center"
-        Widget:
-            size_hint_x: 0.5
-        ParamInput:
-            id: inner_radius_start_input
-        Widget:
-            size_hint_x: None
-            width: 35
-        ParamInput:
-            id: inner_radius_stop_input
-        Widget:
-            size_hint_x: None
-            width: 35
-        ParamInput:
-            id: inner_radius_step_input
-        Widget:
-            size_hint_x: 1
+        label: "[b]Inner ring radius[/b] start, stop, step:"
     BoxLayout:
         orientation: 'horizontal'
         size_hint_y: None
@@ -192,6 +79,36 @@
         LaunchTuningButton:
             id: launch_tuning_button
 
+<ParamBoxLayout@BoxLayout>
+    orientation: 'horizontal'
+    size_hint_y: None
+    height: 50
+    Widget:
+        size_hint_x: 1
+    Label:
+        text: root.label
+        markup: True
+        text_size: self.size
+        size_hint_x: None
+        width: 300
+        halign: "center"
+        valign: "center"
+    Widget:
+        size_hint_x: 0.5
+    ParamInput:
+        id: start_input
+    Widget:
+        size_hint_x: None
+        width: 35
+    ParamInput:
+        id: stop_input
+    Widget:
+        size_hint_x: None
+        width: 35
+    ParamInput:
+        id: step_input
+    Widget:
+        size_hint_x: 1
 
 <ParamInput@TextInput>
     size_hint: None, None

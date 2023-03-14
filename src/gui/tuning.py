@@ -2,7 +2,7 @@
 on a variety of model parameters."""
 
 from kivy.clock import Clock
-from kivy.properties import ObjectProperty
+from kivy.properties import ObjectProperty, StringProperty
 from kivy.uix.boxlayout import BoxLayout
 from kivy.uix.button import Button
 from kivy.uix.spinner import Spinner
@@ -20,6 +20,11 @@ class TuningTabLayout(BoxLayout):
     """The vertical BoxLayout holding the demo selector Spinner, a few TextInputs to define
     parameter intervals and step, and a Button to launch the parametrized simulation."""
     pass
+
+
+class ParamBoxLayout(BoxLayout):
+    """The horizontal BoxLayout holding three TextInputs for the range of one parameter."""
+    label = StringProperty()
 
 
 class DemoSpinner(Spinner):
@@ -46,44 +51,44 @@ class DemoSpinner(Spinner):
         tuning_menu = get_tuning_menu()
         if DEFAULT_DEMO_ARGUMENTS[selected].our_bias is not None:
             tuning_menu.ids.our_bias_box.disabled = False
-            tuning_menu.ids.our_bias_start_input.text = str(DEFAULT_DEMO_ARGUMENTS[selected].our_bias)
-            tuning_menu.ids.our_bias_stop_input.text = str(abs(1 - DEFAULT_DEMO_ARGUMENTS[selected].our_bias))
-            tuning_menu.ids.our_bias_step_input.text = '0.1'
+            tuning_menu.ids.our_bias_box.ids.start_input.text = str(DEFAULT_DEMO_ARGUMENTS[selected].our_bias)
+            tuning_menu.ids.our_bias_box.ids.stop_input.text = str(abs(1 - DEFAULT_DEMO_ARGUMENTS[selected].our_bias))
+            tuning_menu.ids.our_bias_box.ids.step_input.text = '0.1'
         else:
             tuning_menu.ids.our_bias_box.disabled = True
-            tuning_menu.ids.our_bias_start_input.text = 'N/A'
-            tuning_menu.ids.our_bias_stop_input.text = 'N/A'
-            tuning_menu.ids.our_bias_step_input.text = 'N/A'
+            tuning_menu.ids.our_bias_box.ids.start_input.text = 'N/A'
+            tuning_menu.ids.our_bias_box.ids.stop_input.text = 'N/A'
+            tuning_menu.ids.our_bias_box.ids.step_input.text = 'N/A'
         if DEFAULT_DEMO_ARGUMENTS[selected].their_bias is not None:
             tuning_menu.ids.their_bias_box.disabled = False
-            tuning_menu.ids.their_bias_start_input.text = str(DEFAULT_DEMO_ARGUMENTS[selected].their_bias)
-            tuning_menu.ids.their_bias_stop_input.text = str(DEFAULT_DEMO_ARGUMENTS[selected].their_bias)
-            tuning_menu.ids.their_bias_step_input.text = '0.1'
+            tuning_menu.ids.their_bias_box.ids.start_input.text = str(DEFAULT_DEMO_ARGUMENTS[selected].their_bias)
+            tuning_menu.ids.their_bias_box.ids.stop_input.text = str(DEFAULT_DEMO_ARGUMENTS[selected].their_bias)
+            tuning_menu.ids.their_bias_box.ids.step_input.text = '0.1'
         else:
             tuning_menu.ids.their_bias_box.disabled = True
-            tuning_menu.ids.their_bias_start_input.text = 'N/A'
-            tuning_menu.ids.their_bias_stop_input.text = 'N/A'
-            tuning_menu.ids.their_bias_step_input.text = 'N/A'
+            tuning_menu.ids.their_bias_box.ids.start_input.text = 'N/A'
+            tuning_menu.ids.their_bias_box.ids.stop_input.text = 'N/A'
+            tuning_menu.ids.their_bias_box.ids.step_input.text = 'N/A'
         if DEFAULT_DEMO_ARGUMENTS[selected].starting_experience is not None:
             tuning_menu.ids.starting_experience_box.disabled = False
-            tuning_menu.ids.starting_experience_start_input.text = str(DEFAULT_DEMO_ARGUMENTS[selected].starting_experience)
-            tuning_menu.ids.starting_experience_stop_input.text = str(DEFAULT_DEMO_ARGUMENTS[selected].starting_experience)
-            tuning_menu.ids.starting_experience_step_input.text = '10'
+            tuning_menu.ids.starting_experience_box.ids.start_input.text = str(DEFAULT_DEMO_ARGUMENTS[selected].starting_experience)
+            tuning_menu.ids.starting_experience_box.ids.stop_input.text = str(DEFAULT_DEMO_ARGUMENTS[selected].starting_experience)
+            tuning_menu.ids.starting_experience_box.ids.step_input.text = '10'
         else:
             tuning_menu.ids.starting_experience_box.disabled = True
-            tuning_menu.ids.starting_experience_start_input.text = 'N/A'
-            tuning_menu.ids.starting_experience_stop_input.text = 'N/A'
-            tuning_menu.ids.starting_experience_step_input.text = 'N/A'
+            tuning_menu.ids.starting_experience_box.ids.start_input.text = 'N/A'
+            tuning_menu.ids.starting_experience_box.ids.stop_input.text = 'N/A'
+            tuning_menu.ids.starting_experience_box.ids.step_input.text = 'N/A'
         if DEFAULT_DEMO_ARGUMENTS[selected].inner_radius is not None:
             tuning_menu.ids.inner_radius_box.disabled = False
-            tuning_menu.ids.inner_radius_start_input.text = str(DEFAULT_DEMO_ARGUMENTS[selected].inner_radius)
-            tuning_menu.ids.inner_radius_stop_input.text = '0.9'
-            tuning_menu.ids.inner_radius_step_input.text = '0.125'
+            tuning_menu.ids.inner_radius_box.ids.start_input.text = str(DEFAULT_DEMO_ARGUMENTS[selected].inner_radius)
+            tuning_menu.ids.inner_radius_box.ids.stop_input.text = '0.9'
+            tuning_menu.ids.inner_radius_box.ids.step_input.text = '0.125'
         else:
             tuning_menu.ids.inner_radius_box.disabled = True
-            tuning_menu.ids.inner_radius_start_input.text = 'N/A'
-            tuning_menu.ids.inner_radius_stop_input.text = 'N/A'
-            tuning_menu.ids.inner_radius_step_input.text = 'N/A'
+            tuning_menu.ids.inner_radius_box.ids.start_input.text = 'N/A'
+            tuning_menu.ids.inner_radius_box.ids.stop_input.text = 'N/A'
+            tuning_menu.ids.inner_radius_box.ids.step_input.text = 'N/A'
 
 
 class TuningProgressPopup(BoxLayout):
