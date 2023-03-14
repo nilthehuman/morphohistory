@@ -112,6 +112,8 @@ _LOCALIZE_TEXTS_HUN = L10nDict({
     "Tuning" : "Hangolás",
     "Save this agora" : "Mentsd ezt el!",
     "Load another agora" : "Tölts be egy agorát!",
+    "Start": "Csapassad neki!",
+    "Stop": "Várj egy kicsit,\nlégy oly kedves!",
     "iterations" : "iteráció",
     "Save current agora to file" : "Agora mentése",
     "File already exists" : "Meglévő fájl!",
@@ -188,9 +190,7 @@ _LOCALIZE_TEXTS_HUN = L10nDict({
     "Inner ring radius" : "Belső gyűrű sugara",
     " start, stop, step:" : " eleje, vége, lépésköz:",
     "Repetitions per configuration:" : "Ismétlés beállításonként:",
-    "Go" : "Menjen!",
-    "Start": "Csapassad neki!",
-    "Stop": "Várj egy kicsit,\nlégy oly kedves!"
+    "Go" : "Menjen!"
 })
 
 
