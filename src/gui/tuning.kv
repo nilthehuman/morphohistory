@@ -51,6 +51,7 @@
             size_hint_x: 1
     # TODO: refactor the following BoxLayouts to avoid repetition, and to avoid repetition
     BoxLayout:
+        id: our_bias_box
         orientation: 'horizontal'
         size_hint_y: None
         height: 50
@@ -81,10 +82,10 @@
         Widget:
             size_hint_x: 1
     BoxLayout:
+        id: their_bias_box
         orientation: 'horizontal'
         size_hint_y: None
         height: 50
-        disabled: demo_spinner.text[:9] == "Egyensúly"
         Widget:
             size_hint_x: 1
         Label:
@@ -112,6 +113,7 @@
         Widget:
             size_hint_x: 1
     BoxLayout:
+        id: starting_experience_box
         orientation: 'horizontal'
         size_hint_y: None
         height: 50
@@ -142,10 +144,10 @@
         Widget:
             size_hint_x: 1
     BoxLayout:
+        id: inner_radius_box
         orientation: 'horizontal'
         size_hint_y: None
         height: 50
-        disabled: demo_spinner.text[:6] != "Gyűrűk"
         Widget:
             size_hint_x: 1
         Label:
