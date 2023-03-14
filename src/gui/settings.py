@@ -273,6 +273,8 @@ class CustomSettings(Settings):
             # prevent localized values from being written to the config file
             self.config.set('Appearance', 'gui_language', SETTINGS.gui_language)
             localize_all_texts(get_root())
+            # strings like "%d+ iterations" are currently not handled by the l10n system
+            get_agora().update_iteration_counter()
         # update graphics on main tab
         if update_colors:
             get_agora().update_speakerdot_colors()

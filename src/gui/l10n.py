@@ -114,7 +114,7 @@ _LOCALIZE_TEXTS_HUN = L10nDict({
     "Load another agora" : "Tölts be egy agorát!",
     "Start": "Csapassad neki!",
     "Stop": "Várj egy kicsit,\nlégy oly kedves!",
-    "iterations" : "iteráció",
+    " iterations" : " iteráció",
     "Save current agora to file" : "Agora mentése",
     "File already exists" : "Meglévő fájl!",
     "Save" : "Mentsed",
