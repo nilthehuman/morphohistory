@@ -6,7 +6,7 @@ from kivy.uix.label import Label
 from kivy.uix.gridlayout import GridLayout
 from kivy.uix.textinput import TextInput
 
-from .access_widgets import get_agora, get_single_cell_checkbox
+from .access_widgets import get_agora, get_single_cell_checkbox, get_paradigm_table
 from .confirm import ApplyConfirmedLabel, DiscardConfirmedLabel
 
 from ..settings import SETTINGS
