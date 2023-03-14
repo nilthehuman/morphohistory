@@ -4,7 +4,6 @@ from copy import copy
 from logging import error
 from math import inf
 
-from kivy.app import App
 from kivy.config import ConfigParser
 from kivy.graphics import Color
 from kivy.uix.boxlayout import BoxLayout
@@ -12,9 +11,9 @@ from kivy.uix.button import Button
 from kivy.uix.settings import InterfaceWithNoMenu, Settings, SettingItem, SettingOptions, SettingsPanel
 from kivy.utils import get_color_from_hex, get_hex_from_color
 
-from .access_widgets import *
+from .access_widgets import get_root, get_agora, get_settings
 from .confirm import ApplyConfirmedLabel, DiscardConfirmedLabel
-from .l10n import localize, unlocalize, localize_all_texts, unlocalize_all_texts
+from .l10n import unlocalize, localize_all_texts, unlocalize_all_texts
 
 from ..settings import SETTINGS
 

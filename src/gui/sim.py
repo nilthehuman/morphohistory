@@ -3,7 +3,7 @@
 from copy import deepcopy
 from functools import partial
 from json import JSONDecodeError
-from logging import debug, info
+from logging import debug
 from math import sqrt
 from os.path import isfile, join
 
@@ -26,7 +26,7 @@ from kivy.uix.slider import Slider
 from kivy.uix.stencilview import StencilView
 from kivy.uix.widget import Widget
 
-from .access_widgets import *
+from .access_widgets import get_root, get_agora, get_agora_layout, get_button_layout
 from .confirm import ApplyConfirmedLabel
 from .l10n import localize, localize_all_texts
 

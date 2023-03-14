@@ -16,7 +16,6 @@ from kivy.core.window import Window
 from kivy.lang import Builder
 
 from .keyboardhandler import KeyboardHandler
-from .l10n import localize_all_texts
 from .root import *
 from .sim import *
 from .settings import *

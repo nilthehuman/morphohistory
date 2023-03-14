@@ -1,13 +1,12 @@
 """The contents of the Paradigm tab: a complete noun paradigm with two different forms in each cell."""
 
-from kivy.app import App
 from kivy.uix.boxlayout import BoxLayout
 from kivy.uix.button import Button
 from kivy.uix.label import Label
 from kivy.uix.gridlayout import GridLayout
 from kivy.uix.textinput import TextInput
 
-from .access_widgets import *
+from .access_widgets import get_agora, get_single_cell_checkbox
 from .confirm import ApplyConfirmedLabel, DiscardConfirmedLabel
 
 from ..settings import SETTINGS

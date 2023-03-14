@@ -12,9 +12,8 @@ from kivy.uix.boxlayout import BoxLayout
 from kivy.uix.button import Button
 from kivy.uix.popup import Popup
 from kivy.uix.spinner import Spinner
-from kivy.uix.textinput import TextInput
 
-from .access_widgets import *
+from .access_widgets import get_root, get_agora, get_tuning_menu
 from .l10n import localize, unlocalize
 
 from ..agora import Agora

@@ -3,10 +3,11 @@ run simulation, stop simulation, fast forward etc. This class is probably going 
 
 from logging import info
 
+from kivy.app import App
 from kivy.uix.widget import Widget
 from kivy.core.window import Window
 
-from .access_widgets import *
+from .access_widgets import get_root, get_agora
 
 
 # Adapted from kivy.org/doc/stable/api-kivy.core.window.html
