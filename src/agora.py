@@ -180,6 +180,7 @@ class Agora:
                 speaker.experience = experience
 
     def passive_decay(self):
+        """Make all speakers on the sidelines gradually forget their underrepresented forms."""
         for speaker in self.state.speakers:
             current_picks = []
             if self.pick:

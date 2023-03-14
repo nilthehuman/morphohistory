@@ -102,4 +102,5 @@ class Speaker:
         self.principal_bias_cached = None
 
     def passive_decay(self):
+        """Tilt all biases slightly in favor of the preferred form, fading the opposite form."""
         self.para.passive_decay()
