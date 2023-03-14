@@ -2,6 +2,8 @@
 
 from functools import partial
 
+from kivy.uix.popup import Popup
+
 from ..settings import SETTINGS
 
 
