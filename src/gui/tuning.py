@@ -133,7 +133,7 @@ class LaunchTuningButton(Button):
                                 starting_experience_params,
                                 inner_radius_params,
                                 repetitions,
-                                title="Kis türelmet, ez eltarthat ám egy darabig...",
+                                title="Crunching numbers, hang tight...",
                                 content=content,
                                 size_hint=(None, None),
                                 size=SETTINGS.popup_size_progress)
@@ -178,6 +178,6 @@ class TunerPopup(Tuner, LocalizedPopup):
     def prepare_next_setup(self):
         """Initialize Agora according to next parameter setup."""
         super().prepare_next_setup()
-        self.ids.container.children[0].ids.progress_label.text = localize(
-            "Ez a(z) %d. beállítás %d közül..." % \
-            (self.current_setup, self.num_total_setups))
+        self.ids.container.children[0].ids.progress_label.text = \
+            localize("Running parameter setup %d out of %d...") % \
+            (self.current_setup, self.num_total_setups)

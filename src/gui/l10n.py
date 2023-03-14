@@ -24,7 +24,7 @@ class LocalizedPopup(Popup):
 
 def _substitute(string, l10n_dict):
     """Change each line of 'string' to its corresponding translation in 'l10n_dict'."""
-    def disregard_brackets(func, line):
+    def exclude_brackets(func, line):
         """Find and temporarily remove bracketed parts before applying 'func'."""
         bracketed_parts = []
         stuff = ['']
@@ -52,7 +52,7 @@ def _substitute(string, l10n_dict):
         # here's a limited regex solution for posterity if the code above turns out to be brittle:
         #pattern = r"(?P<leading_brackets>\[.*\])(?P<stuff>[^\[\]]+)(?P<trailing_brackets>\[.*\])(?P<more_stuff>[^\[\]]+)"
         #parts = re.fullmatch(pattern, line)
-    loc_lines = [disregard_brackets(lambda l: l10n_dict[l], l) for l in string.split("\n")]
+    loc_lines = [exclude_brackets(lambda l: l10n_dict[l], l) for l in string.split("\n")]
     loc_string = "\n".join(loc_lines)
     return loc_string
 
@@ -125,7 +125,7 @@ _LOCALIZE_TEXTS_HUN = L10nDict({
     "Load another agora" : "Tölts be egy agorát!",
     "Start": "Csapassad neki!",
     "Stop": "Várj egy kicsit,\nlégy oly kedves!",
-    " iterations" : " iteráció",
+    "%d iterations" : "%d iteráció",
     "Save current agora to file" : "Agora mentése",
     "File already exists" : "Meglévő fájl!",
     "Save" : "Mentsed",
@@ -201,7 +201,9 @@ _LOCALIZE_TEXTS_HUN = L10nDict({
     "Inner ring radius" : "Belső gyűrű sugara",
     " start, stop, step:" : " eleje, vége, lépésköz:",
     "Repetitions per configuration:" : "Ismétlés beállításonként:",
-    "Go" : "Menjen!"
+    "Go" : "Menjen!",
+    "Crunching numbers, hang tight..." : "Kis türelmet, ez eltarthat ám egy darabig...",
+    "Running parameter setup %d out of %d..." : "Ez a(z) %d. beállítás %d közül..."
 })
 
 

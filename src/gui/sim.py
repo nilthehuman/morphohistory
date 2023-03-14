@@ -581,7 +581,7 @@ class AgoraWidget(Widget, Agora):
     def update_iteration_counter(self):
         """Set the text on the button panel that shows how deep into the simulation we are."""
         iter_counter = get_button_layout().ids.iteration_counter
-        iter_counter.text = str(self.state.sim_iteration_total) + localize(' iterations')
+        iter_counter.text = localize('%d iterations') % self.state.sim_iteration_total
 
     def update_talk_arrow(self):
         """Redraw the blue arrow between the current speaker and the current hearer."""
