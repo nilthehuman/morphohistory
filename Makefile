@@ -3,6 +3,7 @@ PYTHON = python3
 .PHONY: init init_optional lint test clean run
 
 init:
+	$(PYTHON) -m pip install kivy[base] kivy_examples --pre --extra-index-url https://kivy.org/downloads/simple/
 	# maybe consider switching to Poetry later
 	$(PYTHON) -m pip install -r requirements.txt
 
