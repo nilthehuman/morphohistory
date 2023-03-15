@@ -254,8 +254,10 @@ class CustomSettings(Settings):
                     if new_value != getattr(SETTINGS, key):
                         new_value = unlocalize(new_value)
                         if 'gui_language' == key:
+                            new_value = SETTINGS.GuiLanguage(new_value)
                             update_lang = True
                         elif 'sim_distance_metric' == key:
+                            new_value = SETTINGS.DistanceMetric(new_value)
                             update_grid = True
                         else:
                             assert False
@@ -270,7 +272,7 @@ class CustomSettings(Settings):
         # update application language
         if update_lang:
             unlocalize_all_texts(get_root())
-            SETTINGS.gui_language = unlocalize(self.config['Appearance']['gui_language'])
+            SETTINGS.gui_language = SETTINGS.GuiLanguage(unlocalize(self.config['Appearance']['gui_language']))
             # prevent localized values from being written to the config file
             self.config.set('Appearance', 'gui_language', SETTINGS.gui_language)
             localize_all_texts(get_root())
