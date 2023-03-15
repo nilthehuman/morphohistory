@@ -84,16 +84,16 @@ class _Paradigm(ABC):
 
     @staticmethod
     @abstractmethod
-    def morphosyntactic_properties(i, j):
+    def morphosyntactic_properties(*indices):
         """Get the set of features describing a cell's context.
         (Gregory Stump's exact term if I'm not mistaken.)"""
 
     @abstractmethod
-    def nudge(self, amount, i, j):
+    def nudge(self, amount, *indices):
         """Adjust the weights in a single cell."""
 
     @abstractmethod
-    def propagate(self, amount, i, j):
+    def propagate(self, amount, *indices):
         """Spread a weight change down each dimension in the paradigm."""
 
     def to_dict(self):
