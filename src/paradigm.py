@@ -50,6 +50,11 @@ class _Cell(ABC):
         return "%g*\"%s\" + %g*\"%s\"" % \
             (self.bias_a, self.form_a, 1.0-self.bias_a, self.form_b)
 
+    def nudge(self, amount):
+        """Shift bias by the given amount."""
+        assert -1 <= amount <= 1
+        self.bias_a = _clamp(self.bias_a + amount)
+
 class _Paradigm(ABC):
     """A 2D or 5D matrix of competing noun of verb forms for given morphosyntactic contexts."""
     # pylint: disable=no-member
@@ -199,9 +204,8 @@ class NounParadigm(_Paradigm):
 
     def nudge(self, amount, i, j):
         """Adjust the weights in a single cell."""
-        assert -1 <= amount <= 1
         assert i < 2 and j < 13
-        self.para[i][j].bias_a = _clamp(self.para[i][j].bias_a + amount)
+        self.para[i][j].nudge(amount)
 
     def propagate(self, amount, i, j):
         """Spread a weight change down each dimension in the paradigm."""
@@ -250,9 +254,8 @@ class VerbParadigm(_Paradigm):
 
     def nudge(self, amount, i, j, k, l, m):
         """Adjust the weights in a single cell."""
-        assert 0 <= amount <= 1
         assert i < 3 and j < 2 and k < 2 and l < 2 and m < 3
-        self.para[i][j][k].bias_a = _clamp(self.para[i][j][k][l][m].bias_a + amount)
+        self.para[i][j][k][l][m].nudge(amount)
 
     def propagate(self, amount, i, j, k, l, m):
         """Spread a weight change down each dimension in the paradigm."""
