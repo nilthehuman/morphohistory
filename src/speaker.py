@@ -79,7 +79,7 @@ class Speaker:
             # pick a non-empty cell to share with the hearer
             while True:
                 i = RAND.next() % 2
-                j = RAND.next() % 18
+                j = RAND.next() % 13
                 if self.para.para[i][j].form_a:
                     break
         cum_weights = [self.para.para[i][j].bias_a, 1]
