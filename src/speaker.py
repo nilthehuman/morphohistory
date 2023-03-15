@@ -101,14 +101,14 @@ class Speaker:
             SETTINGS.LearningModel.RW_WEIGHTED : self._hear_noun_rw_weighted
         }
         learning_model_funcs[SETTINGS.sim_learning_model](i, j, form_a_used)
+        self.experience = self.experience + 1
+        self.principal_bias_cached = None
 
     def _hear_noun_harmonic(self, i, j, form_a_used):
         """The n'th interaction has +-1/n impact on the exact cell's bias."""
         delta = (1 if form_a_used else -1) / (self.experience + 1)
         self.para.nudge(delta, i, j)
         self.para.propagate(delta, i, j)
-        self.experience = self.experience + 1
-        self.principal_bias_cached = None
 
     def _hear_noun_rw_vanilla(self, i, j, form_a_used):
         """Vanilla implementation of the Rescorla-Wagner learning model.
