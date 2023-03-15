@@ -113,7 +113,8 @@ class Speaker:
     def _hear_noun_rw_vanilla(self, i, j, form_a_used):
         """Vanilla implementation of the Rescorla-Wagner learning model.
         All cells containing a substring of the string just heard are assumed to be activated."""
-        form = self.para.para[i][j].form_a if form_a_used else self.para.para[i][j].form_b
+        cell_used = self.para.para[i][j]
+        form = cell_used.form_a if form_a_used else cell_used.form_b
         activated = lambda c: c.form_a and (form.startswith(c.form_a) or form.startswith(c.form_b))
         activated_cells = [cell for cell in self.para if activated(cell)]
         lambda_ = 1  # maximum conditioning (in a single cell)
@@ -122,8 +123,8 @@ class Speaker:
         v_total = sum([cell.bias_a - (1 - cell.bias_a) for cell in activated_cells]) / max_activation
         # adjust affected cells only
         for cell in activated_cells:
-            alpha   = cell.prominence  # salience of conditioned stimulus
-            beta    = 1                # salience of unconditioned stimulus
+            alpha = cell.prominence       # salience of conditioned stimulus
+            beta  = cell_used.prominence  # salience of unconditioned stimulus
             surprise = lambda_ * (1 if form_a_used else -1) - v_total
             delta_v = alpha * beta * surprise
             cell.nudge(0.5 * delta_v)  # [-1,1] scaled to [0,1]
@@ -131,18 +132,19 @@ class Speaker:
     def _hear_noun_rw_weighted(self, i, j, form_a_used):
         """Tweaked implementation of the Rescorla-Wagner learning model where v_total is weighted
         according to the salience (prominence) of each conditioned stimulus."""
-        form = self.para.para[i][j].form_a if form_a_used else self.para.para[i][j].form_b
+        cell_used = self.para.para[i][j]
+        form = cell_used.form_a if form_a_used else cell_used.form_b
         activated = lambda c: c.form_a and (form.startswith(c.form_a) or form.startswith(c.form_b))
         activated_cells = [cell for cell in self.para if activated(cell)]
         prominence_total = sum([cell.prominence for cell in self.para])
         # total weight of associations
         v_total = sum([(cell.bias_a - (1 - cell.bias_a)) * cell.prominence
-                                              for cell in activated_cells]) / prominence_total
+                                               for cell in activated_cells]) / prominence_total
         # adjust affected cells only
         for cell in activated_cells:
-            alpha   = cell.prominence  # salience of conditioned stimulus
-            beta    = 1                # salience of unconditioned stimulus
-            lambda_ = 1                # maximum conditioning (in a single cell)
+            alpha   = cell.prominence       # salience of conditioned stimulus
+            beta    = cell_used.prominence  # salience of unconditioned stimulus
+            lambda_ = 1                     # maximum conditioning (in a single cell)
             surprise = lambda_ * (1 if form_a_used else -1) - v_total
             delta_v = alpha * beta * surprise
             cell.nudge(0.5 * delta_v)  # [-1,1] scaled to [0,1]
