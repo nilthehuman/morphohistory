@@ -8,6 +8,7 @@ def _clamp(value):
 
 class _Cell(ABC):
     """A weighted superposition of two word forms for the same morphosyntactic context."""
+    # TODO: disallow empty forms
     def __init__(self, bias_a=0.5, form_a='', form_b='', prominence=1.0):
         self.bias_a = bias_a
         self.form_a = form_a
