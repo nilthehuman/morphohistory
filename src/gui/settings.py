@@ -79,6 +79,14 @@ _SETTINGS_UI = ConfigList([
         "options": ["constant", "Manhattan", "Euclidean"]
     },
     {
+        "type": "options",
+        "title": "Learning model",
+        "desc": "Control how speakers update their biases after an interaction",
+        "section": "Simulation",
+        "key": "sim_learning_model",
+        "options": ["harmonic", "Rescorla-Wagner (vanilla)", "Rescorla-Wagner (weighted)"]
+    },
+    {
         "type": "bool",
         "title": "Self influence",
         "desc": "Should a speaker affect itself",
@@ -179,6 +187,7 @@ class CustomSettings(Settings):
         self.config.setdefaults('Simulation',
                                 {
                                     'sim_distance_metric': 'constant',
+                                    'sim_learning_model': 'harmonic',
                                     'sim_influence_self': 1,
                                     'sim_influence_mutual': 0,
                                     'sim_passive_decay': 0,
@@ -259,6 +268,8 @@ class CustomSettings(Settings):
                         elif 'sim_distance_metric' == key:
                             new_value = SETTINGS.DistanceMetric(new_value)
                             update_grid = True
+                        elif 'sim_learning_model' == key:
+                            new_value = SETTINGS.LearningModel(new_value)
                         else:
                             assert False
                 elif 'string' == value_type:

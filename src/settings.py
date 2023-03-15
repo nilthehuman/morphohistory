@@ -3,7 +3,7 @@
 #TODO: use observer pattern to spread changes
 
 try:
-    from enum import Enum, StrEnum
+    from enum import StrEnum
 except ImportError:
     from strenum import StrEnum
 
@@ -37,10 +37,10 @@ class _Settings:
         MANHATTAN = "Manhattan"
         EUCLIDEAN = "Euclidean"
 
-    class LearningModel(Enum):
-        HARMONIC    = 1
-        RW          = 2
-        RW_WEIGHTED = 3
+    class LearningModel(StrEnum):
+        HARMONIC    = "harmonic"
+        RW          = "Rescorla-Wagner (vanilla)"
+        RW_WEIGHTED = "Rescorla-Wagner (weighted)"
 
     def __init__(self):
         self.gui_language = self.GuiLanguage.ENG
@@ -70,7 +70,7 @@ class _Settings:
 
         self.sim_single_cell = True
         self.sim_distance_metric = self.DistanceMetric.CONSTANT
-        self.sim_learning_model = self.LearningModel.RW
+        self.sim_learning_model = self.LearningModel.HARMONIC
         self.sim_influence_self = True
         self.sim_influence_mutual = False
         self.sim_passive_decay = False
