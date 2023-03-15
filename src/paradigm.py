@@ -1,6 +1,7 @@
 """A simple probabilistic model of Hungarian noun and verb paradigms and their internal mechanics."""
 
 from abc import ABC, abstractmethod
+from itertools import chain
 
 def _clamp(value):
     return max(0., min(1., value))
@@ -65,6 +66,16 @@ class _Paradigm(ABC):
             below = filter(lambda cells: bool(len(cells)), below)
             return '[' + ', '.join(below) + ']'
         return descend(self.para)
+
+    def __iter__(self):
+        """Return an iterator that will loop through our cells in order."""
+        para_flattened = self.para
+        while True:
+            try:
+                para_flattened = list(chain.from_iterable(para_flattened))
+            except TypeError:
+                break
+        return para_flattened.__iter__()
 
     @staticmethod
     @abstractmethod
