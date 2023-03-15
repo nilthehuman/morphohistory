@@ -65,7 +65,7 @@ class _Settings:
         self.starting_experience = 1
         self.experience_threshold = 10
 
-        self.paradigm = NounParadigm(bias_a=0.5, form_a='rozéból', form_b='rozéből')
+        self.paradigm = NounParadigm(bias_a=0.5, form_a='fotelba', form_b='fotelbe')
 
         self.sim_single_cell = True
         self.sim_distance_metric = self.DistanceMetric.CONSTANT
