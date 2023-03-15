@@ -252,6 +252,7 @@ class CustomSettings(Settings):
                         update_starting_experience = True
                 elif 'options' == value_type:
                     if new_value != getattr(SETTINGS, key):
+                        new_value = unlocalize(new_value)
                         if 'gui_language' == key:
                             update_lang = True
                         elif 'sim_distance_metric' == key:
