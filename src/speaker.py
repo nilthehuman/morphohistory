@@ -91,15 +91,54 @@ class Speaker:
             self.hear_noun(i, j, form_a_used)
         return (i, j), form_a_used  # let the Agora know which form of which cell we used
 
-    def hear_noun(self, i, j, is_form_a):
+    def hear_noun(self, i, j, form_a_used):
         """Accept a given form from another Speaker and adjust own bias based on it."""
-        form = self.para.para[i][j].form_a if is_form_a else self.para.para[i][j].form_b
+        form = self.para.para[i][j].form_a if form_a_used else self.para.para[i][j].form_b
         debug("Speaker: I just heard '%s'" % form)
-        delta = (1 if is_form_a else -1) / (self.experience + 1)
+        learning_model_funcs = {
+            SETTINGS.LearningModel.HARMONIC    : self._hear_noun_harmonic,
+            SETTINGS.LearningModel.RW          : self._hear_noun_rw_vanilla,
+            SETTINGS.LearningModel.RW_WEIGHTED : self._hear_noun_rw_weighted
+        }
+        learning_model_funcs[SETTINGS.sim_learning_model](i, j, form_a_used)
+
+    def _hear_noun_harmonic(self, i, j, form_a_used):
+        """The n'th interaction has +-1/n impact on the exact cell's bias."""
+        delta = (1 if form_a_used else -1) / (self.experience + 1)
         self.para.nudge(delta, i, j)
         self.para.propagate(delta, i, j)
         self.experience = self.experience + 1
         self.principal_bias_cached = None
+
+    def _hear_noun_rw_vanilla(self, i, j, form_a_used):
+        """Vanilla implementation of the Rescorla-Wagner learning model.
+        All cells containing a substring of the string just heard are assumed to be activated."""
+        lambda_ = 1  # maximum conditioning
+        form = self.para.para[i][j].form_a if form_a_used else self.para.para[i][j].form_b
+        activated = lambda c: c.form_a and (form.startswith(c.form_a) or form.startswith(c.form_b))
+        v_total = sum([cell.bias_a - (1 - cell.bias_a) for cell in self.para if activated(cell)]) / (2 * 13)
+        v_total *= 1 if form_a_used else -1  # total weight of associations
+        for cell in self.para:
+            alpha = cell.prominence  # salience of conditioned stimulus
+            beta  = 1                # salience of unconditioned stimulus
+            delta_v = alpha * beta * (lambda_ - v_total)
+            cell.bias_a += delta_v
+
+    def _hear_noun_rw_weighted(self, i, j, form_a_used):
+        """Tweaked implementation of the Rescorla-Wagner learning model where v_total is weighted
+        according to the salience (prominence) of each conditioned stimulus."""
+        lambda_ = 1  # maximum conditioning
+        form = self.para.para[i][j].form_a if form_a_used else self.para.para[i][j].form_b
+        activated = lambda c: c.form_a and (form.startswith(c.form_a) or form.startswith(c.form_b))
+        prominence_total = sum([cell.prominence for cell in self.para])
+        v_total = sum([(cell.bias_a - (1 - cell.bias_a)) * cell.prominence
+                                 for cell in self.para if activated(cell)]) / prominence_total
+        v_total *= 1 if form_a_used else -1  # total weight of associations
+        for cell in self.para:
+            alpha = cell.prominence  # salience of conditioned stimulus
+            beta  = 1                # salience of unconditioned stimulus
+            delta_v = alpha * beta * (lambda_ - v_total)
+            cell.bias_a += delta_v
 
     def passive_decay(self):
         """Tilt all biases slightly in favor of the preferred form, fading the opposite form."""

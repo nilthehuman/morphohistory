@@ -38,8 +38,9 @@ class _Settings:
         EUCLIDEAN = "Euclidean"
 
     class LearningModel(Enum):
-        HARMONIC = 1
-        RW       = 2
+        HARMONIC    = 1
+        RW          = 2
+        RW_WEIGHTED = 3
 
     def __init__(self):
         self.gui_language = self.GuiLanguage.ENG
@@ -69,7 +70,7 @@ class _Settings:
 
         self.sim_single_cell = True
         self.sim_distance_metric = self.DistanceMetric.CONSTANT
-        #self.sim_learning_model = HARMONIC # TODO use this option
+        self.sim_learning_model = self.LearningModel.RW
         self.sim_influence_self = True
         self.sim_influence_mutual = False
         self.sim_passive_decay = False

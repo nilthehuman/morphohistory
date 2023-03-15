@@ -4,7 +4,7 @@ from copy import deepcopy
 from dataclasses import dataclass, field
 from itertools import product
 from json import dumps, load
-from logging import debug, info
+from logging import debug, info, warning
 from typing import List
 
 from .rng import RAND
@@ -209,6 +209,8 @@ class Agora:
         """Perform one iteration: pick two individuals to talk to each other
         and update the hearer's state based on the speaker's."""
         debug("Agora: Iterating simulation...")
+        if SETTINGS.sim_single_cell and SETTINGS.LearningModel.HARMONIC != SETTINGS.sim_learning_model:
+            warning("Agora: Running Rescorla-Wagner model with a single paradigm cell.")
         if self.pick_queue:
             # either the second half of a mutual exchange, or a broadcaster's picks
             self.pick = self.pick_queue.pop(0)
