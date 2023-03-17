@@ -4,13 +4,14 @@ from copy import copy
 from logging import info
 from os.path import isfile
 from time import gmtime, strftime, perf_counter
+from typing import Iterator, Tuple
 
 from .agora import Agora
 from .demos import DEMO_FACTORIES
 from .settings import SETTINGS
 
 
-def _float_range(start, stop, step):
+def _float_range(start: float, stop: float, step: float) -> Iterator[float]:
     """Interpolate between two values, like the standard range function.
     Attention: equality is allowed, so 'stop' is included in the range."""
     if start is None or stop is None:
@@ -28,7 +29,7 @@ def _float_range(start, stop, step):
         else:
             next_val -= step
 
-def _normalize_hungarian(string):
+def _normalize_hungarian(string: str) -> str:
     accentless = {
                    'Á':'AA', 'á':'aa',
                    'É':'EE', 'é':'ee',
@@ -71,19 +72,23 @@ class Tuner:
     }
 
     # why doesn't Python have macros?
-    def loop_our_bias(self):
+    def loop_our_bias(self) -> Iterator[float]:
         return _float_range(self.our_bias_params[0], self.our_bias_params[1], self.our_bias_params[2])
 
-    def loop_their_bias(self):
+    def loop_their_bias(self) -> Iterator[float]:
         return _float_range(self.their_bias_params[0], self.their_bias_params[1], self.their_bias_params[2])
 
-    def loop_starting_experience(self):
+    def loop_starting_experience(self) -> Iterator[int]:
         return _float_range(self.starting_experience_params[0], self.starting_experience_params[1], self.starting_experience_params[2])
 
-    def loop_inner_radius(self):
+    def loop_inner_radius(self) -> Iterator[float]:
         return _float_range(self.inner_radius_params[0], self.inner_radius_params[1], self.inner_radius_params[2])
 
-    def __init__(self, our_bias_params, their_bias_params, starting_experience_params, inner_radius_params, repetitions):
+    def __init__(self, our_bias_params: Tuple[float, float, float],
+                       their_bias_params: Tuple[float, float, float],
+                       starting_experience_params: Tuple[int, int, int],
+                       inner_radius_params: Tuple[float, float, float],
+                       repetitions: int) -> None:
         """Prepare for actually performing the simulations."""
         self.our_bias_params = our_bias_params
         self.their_bias_params = their_bias_params
@@ -117,7 +122,7 @@ class Tuner:
         self.output_filename = 'results.csv'
         self.initialize_csv_file()
 
-    def run(self):
+    def run(self) -> None:
         """Run the predefined number of repetitions for every possible model parameter setting
         in the predefined range."""
         self.on_start()
@@ -131,26 +136,26 @@ class Tuner:
             # we're done with all parameter settings
             self.on_finished()
 
-    def on_start(self):
+    def on_start(self) -> None:
         """Print and save the starting time of the tuning process."""
         info("Tuning: Exhaustive simulation started at %s" % strftime("%H:%M:%S", gmtime()))
         self.start_time = perf_counter()
 
-    def on_cancelled(self):
+    def on_cancelled(self) -> None:
         """Print the time the tuning process was cancelled."""
         end_time = perf_counter()
         info("Tuning: Exhaustive simulation cancelled at %s, took %s" % \
             (strftime("%H:%M:%S", gmtime()),
              strftime("%H:%M:%S", gmtime(end_time - self.start_time))))
 
-    def on_finished(self):
+    def on_finished(self) -> None:
         """Print the time the tuning process was finished."""
         end_time = perf_counter()
         info("Tuning: Exhaustive simulation finished at %s, took %s" % \
             (strftime("%H:%M:%S", gmtime()),
              strftime("%H:%M:%S", gmtime(end_time - self.start_time))))
 
-    def iterate_tuning(self):
+    def iterate_tuning(self) -> None:
         """Repeat the simulation several times for each parameter setup in the set of
         parameter combinations chosen by the user, then dump the results in a CSV file."""
         if self.tuning_cancelled:
@@ -185,7 +190,7 @@ class Tuner:
             self.prepare_next_setup()
         self.perform_next_rep()
 
-    def prepare_next_setup(self):
+    def prepare_next_setup(self) -> None:
         """Initialize Agora according to next parameter setup."""
         self.agora.load_demo_agora(DEMO_FACTORIES[SETTINGS.current_demo],
                                    self.our_bias,
@@ -200,7 +205,7 @@ class Tuner:
         self.current_setup += 1
         info("Tuning: Running setup %d out of %d..." % (self.current_setup, self.num_total_setups))
 
-    def perform_next_rep(self):
+    def perform_next_rep(self) -> None:
         """Perform a single simulation run for the current parameter setup."""
         self.agora.simulate_till_stable()
         dominant_form = self.agora.dominant_form()
@@ -214,7 +219,7 @@ class Tuner:
         self.current_rep += 1
         self.num_total_reps += 1
 
-    def initialize_csv_file(self):
+    def initialize_csv_file(self) -> None:
         """Create output CSV file and write the first row with the column names."""
         append_num = 0
         try:
@@ -229,7 +234,7 @@ class Tuner:
             csv_header = ','.join(keys_normalized)
             filehandle.write(csv_header)
 
-    def write_new_row_to_csv_file(self):
+    def write_new_row_to_csv_file(self) -> None:
         """Output next row of simulation results to target CSV file."""
         with open(self.output_filename, 'a', encoding='utf-8') as filehandle:
             # create CSV manually for now

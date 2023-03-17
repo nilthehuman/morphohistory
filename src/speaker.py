@@ -6,10 +6,12 @@ from logging import debug
 from .paradigm import NounParadigm
 from .rng import RAND
 from .settings import SETTINGS
+from typing import List, Optional, Self, Tuple, TypedDict
 
 class Speaker:
     """A simulated individual within the speaking community."""
-    def __init__(self, n, pos, para=None, experience=SETTINGS.starting_experience, is_broadcaster=False):
+    def __init__(self, n: int, pos: Tuple[float, float], para: Optional[NounParadigm]=None,
+                 experience: int=SETTINGS.starting_experience, is_broadcaster: bool=False) -> None:
         self.n = n
         self.pos = pos
         self.para = para
@@ -18,14 +20,15 @@ class Speaker:
         self.principal_bias_cached = None
 
     @classmethod
-    def fromspeaker(cls, speaker):
+    def fromspeaker(cls, speaker: Self) -> Self:
         """Copy an existing Speaker."""
         new_speaker = cls(speaker.n, speaker.pos, deepcopy(speaker.para),
                           speaker.experience, speaker.is_broadcaster)
         return new_speaker
 
     @classmethod
-    def frombias(cls, n, pos, bias_a, experience=SETTINGS.starting_experience, is_broadcaster=False):
+    def frombias(cls, n: int, pos: Tuple[float, float], bias_a: float,
+                 experience: int=SETTINGS.starting_experience, is_broadcaster: bool=False) -> Self:
         """Construct a Speaker from a single bias value."""
         para = NounParadigm(bias_a=bias_a, form_a=SETTINGS.paradigm.para[0][0].form_a,
                                            form_b=SETTINGS.paradigm.para[0][0].form_b)
@@ -40,7 +43,7 @@ class Speaker:
         return speaker_dict
 
     @staticmethod
-    def from_dict(speaker_dict):
+    def from_dict(speaker_dict) -> Self:
         """Reconstruct Speaker object from an imported JSON dictionary."""
         para = NounParadigm.from_dict(speaker_dict['para'])
         return Speaker(speaker_dict['n'],
@@ -49,7 +52,7 @@ class Speaker:
                        speaker_dict['experience'],
                        speaker_dict['is_broadcaster'])
 
-    def principal_bias(self):
+    def principal_bias(self) -> float:
         """Which way the speaker is leaning, summed up in a single float."""
         return self.para.para[0][0].bias_a
         # TODO: figure out why this function is slow
@@ -65,11 +68,11 @@ class Speaker:
         self.principal_bias_cached = sum_bias / sum_prominence
         return self.principal_bias_cached
 
-    def name_tag(self):
+    def name_tag(self) -> str:
         """Text to display next to SpeakerDot label on mouse hover."""
         return self.para[0][0].to_str_short() + "; xp:%d" % self.experience
 
-    def talk(self, pick):
+    def talk(self, pick: 'PairPick') -> Tuple[List[int], bool]:
         """Interact with and influence another Speaker in the Agora."""
         assert pick['speaker'] == self
         hearer = pick['hearer']
@@ -91,7 +94,7 @@ class Speaker:
             self.hear_noun(i, j, form_a_used)
         return (i, j), form_a_used  # let the Agora know which form of which cell we used
 
-    def hear_noun(self, i, j, form_a_used):
+    def hear_noun(self, i: int, j: int, form_a_used: bool) -> None:
         """Accept a given form from another Speaker and adjust own bias based on it."""
         form = self.para.para[i][j].form_a if form_a_used else self.para.para[i][j].form_b
         debug("Speaker: I just heard '%s'" % form)
@@ -104,13 +107,13 @@ class Speaker:
         self.experience = self.experience + 1
         self.principal_bias_cached = None
 
-    def _hear_noun_harmonic(self, i, j, form_a_used):
+    def _hear_noun_harmonic(self, i: int, j: int, form_a_used: bool) -> None:
         """The n'th interaction has +-1/n impact on the exact cell's bias."""
         delta = (1 if form_a_used else -1) / (self.experience + 1)
         self.para.nudge(delta, i, j)
         self.para.propagate(delta, i, j)
 
-    def _hear_noun_rw_vanilla(self, i, j, form_a_used):
+    def _hear_noun_rw_vanilla(self, i: int, j: int, form_a_used: bool) -> None:
         """Vanilla implementation of the Rescorla-Wagner learning model.
         All cells containing a substring of the string just heard are assumed to be activated."""
         cell_used = self.para.para[i][j]
@@ -129,7 +132,7 @@ class Speaker:
             delta_v = alpha * beta * surprise
             cell.nudge(0.5 * delta_v)  # [-1,1] scaled to [0,1]
 
-    def _hear_noun_rw_weighted(self, i, j, form_a_used):
+    def _hear_noun_rw_weighted(self, i: int, j: int, form_a_used: bool) -> None:
         """Tweaked implementation of the Rescorla-Wagner learning model where v_total is weighted
         according to the salience (prominence) of each conditioned stimulus."""
         cell_used = self.para.para[i][j]
@@ -149,6 +152,11 @@ class Speaker:
             delta_v = alpha * beta * surprise
             cell.nudge(0.5 * delta_v)  # [-1,1] scaled to [0,1]
 
-    def passive_decay(self):
+    def passive_decay(self) -> None:
         """Tilt all biases slightly in favor of the preferred form, fading the opposite form."""
         self.para.passive_decay()
+
+
+class PairPick(TypedDict):
+    speaker: Speaker
+    hearer : Speaker

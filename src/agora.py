@@ -5,22 +5,25 @@ from dataclasses import dataclass, field
 from itertools import product
 from json import dumps, load
 from logging import debug, info, warning
-from typing import List
+from typing import Callable, List, Optional, Self
 
+from .demos import DemoFactory
 from .rng import RAND
 from .settings import SETTINGS
-from .speaker import Speaker
+from .speaker import Speaker, PairPick
+from src.paradigm import NounParadigm
 
-def _inv_dist_sq_constant(_):
+
+def _inv_dist_sq_constant(_: PairPick) -> float:
     return 1
 
-def _inv_dist_sq_manhattan(pair):
+def _inv_dist_sq_manhattan(pair: PairPick) -> float:
     speaker = pair['speaker']
     hearer = pair['hearer']
     dist_sq = (abs(speaker.pos[0] - hearer.pos[0]) + abs(speaker.pos[1] - hearer.pos[1])) ** 2
     return 1 / dist_sq
 
-def _inv_dist_sq_euclidean(pair):
+def _inv_dist_sq_euclidean(pair: PairPick) -> float:
     speaker = pair['speaker']
     hearer = pair['hearer']
     dist_sq = (speaker.pos[0] - hearer.pos[0]) ** 2 + (speaker.pos[1] - hearer.pos[1]) ** 2
@@ -52,7 +55,7 @@ class Agora:
             """Returns own state for JSON serialization."""
             return self.__dict__
 
-    def __init__(self):
+    def __init__(self) -> None:
         self.state = self.State()
         self.starting_state = None
         self.history = []
@@ -71,20 +74,20 @@ class Agora:
                     'history' : self.history }
         return my_dict
 
-    def save_starting_state(self):
+    def save_starting_state(self) -> None:
         """Stash a snapshot of the current state of the Agora."""
         self.starting_state = self.State()
         # N.B. paradigms are deep copied by Speaker.fromspeaker
         self.starting_state.speakers = [Speaker.fromspeaker(s) for s in self.state.speakers]
         self.starting_state.sim_iteration_total = self.state.sim_iteration_total
 
-    def reset(self):
+    def reset(self) -> None:
         """Restore earlier speaker snapshot."""
         self.clear_speakers()
         self.load_speakers(self.starting_state.speakers)
         self.state.sim_iteration_total = self.starting_state.sim_iteration_total
 
-    def quick_reset(self):
+    def quick_reset(self) -> None:
         """Keep speakers but reset their biases and experience."""
         # FIXME: pair speakers based on their identifier 'n', not their raw index
         for i in range(len(self.state.speakers)):
@@ -94,25 +97,25 @@ class Agora:
         self.pick_queue = []
         self.state.sim_iteration_total = self.starting_state.sim_iteration_total
 
-    def clear_caches(self):
+    def clear_caches(self) -> None:
         """Invalidate cache variables."""
         # variables for expensive calculations
         self.speaker_pairs = None
         self.cum_weights = None
         self.pick_queue = []
 
-    def clear_dist_cache(self):
+    def clear_dist_cache(self) -> None:
         """Invalidate weights cache used for picking pairs."""
         self.cum_weights = None
 
-    def clear_speakers(self):
+    def clear_speakers(self) -> None:
         """Remove all speakers from the Agora."""
         self.state.speakers = []
         self.state.sim_iteration_total = 0
         self.clear_caches()
 
-    def load_demo_agora(self, demo_factory, our_bias=None, their_bias=None,
-        starting_experience=SETTINGS.starting_experience, inner_radius=None):
+    def load_demo_agora(self, demo_factory: DemoFactory, our_bias: Optional[float]=None, their_bias: Optional[float]=None,
+        starting_experience: int=SETTINGS.starting_experience, inner_radius: Optional[float]=None) -> None:
         """Replace current speaker community with a demo preset."""
         if our_bias is None and their_bias is None:
             # fall back on the default arguments
@@ -123,12 +126,12 @@ class Agora:
         self.load_speakers(speakers)
         self.save_starting_state()
 
-    def save_to_file(self, filepath):
+    def save_to_file(self, filepath: str) -> None:
         """Write current state to disk."""
         with open(filepath, 'w', encoding='utf-8') as stream:
             stream.write(dumps(self, indent=1, default=lambda x: x.to_dict()))
 
-    def load_from_file(self, filepath):
+    def load_from_file(self, filepath: str) -> None:
         """Restore an Agora state previously written to file."""
         with open(filepath, 'r', encoding='utf-8') as stream:
             loaded_dict = load(stream)
@@ -146,18 +149,18 @@ class Agora:
         self.save_starting_state()
         SETTINGS.paradigm = deepcopy(self.state.speakers[0].para)
 
-    def load_speakers(self, speakers):
+    def load_speakers(self, speakers: List[Speaker]) -> None:
         """Replace current speaker community with a copy of the argument."""
         self.state.speakers = [Speaker.fromspeaker(s) for s in speakers]
         assert not all(s.is_broadcaster for s in self.state.speakers)
         self.clear_caches()
 
-    def add_speaker(self, speaker):
+    def add_speaker(self, speaker: Speaker) -> None:
         """Add a virtual speaker to the simulated community."""
         self.state.speakers.append(Speaker.fromspeaker(speaker))
         self.clear_caches()
 
-    def set_paradigm(self, para):
+    def set_paradigm(self, para: NounParadigm) -> None:
         """Update the exact forms and prominence values in all cells of all
         speakers' (redundantly stored) paradigms based on the values in para."""
         for speaker in self.state.speakers:
@@ -167,7 +170,7 @@ class Agora:
                     speaker.para.para[num][case].form_b = para.para[num][case].form_b
                     speaker.para.para[num][case].prominence = para.para[num][case].prominence
 
-    def set_starting_experience(self, experience=None):
+    def set_starting_experience(self, experience: Optional[int]=None) -> None:
         """Set the experience value of each speaker in the saved snapshot,
         and also in the current state if it's identical to the snapshot."""
         # FIXME: defining a default argument value for experience failed for some reason
@@ -179,7 +182,7 @@ class Agora:
             for speaker in self.state.speakers:
                 speaker.experience = experience
 
-    def passive_decay(self):
+    def passive_decay(self) -> None:
         """Make all speakers on the sidelines gradually forget their underrepresented forms."""
         for speaker in self.state.speakers:
             current_picks = []
@@ -193,19 +196,19 @@ class Agora:
         if self.graphics_on:
             self.update_speakerdot_colors()
 
-    def dominant_form(self):
+    def dominant_form(self) -> Optional[str]:
         if all(s.principal_bias() > 0.5 for s in self.state.speakers):
             return self.state.speakers[0].para[0][0].form_a
         if all(s.principal_bias() < 0.5 for s in self.state.speakers):
             return self.state.speakers[0].para[0][0].form_b
         return None
 
-    def uniform_balance(self):
+    def uniform_balance(self) -> bool:
         """Detect a situation where no speaker is strongly biased either way."""
         return all(1 - SETTINGS.bias_threshold < s.principal_bias() < SETTINGS.bias_threshold
                    for s in self.state.speakers)
 
-    def simulate(self, *_): # TODO: use threading to perform independent picks in parallel
+    def simulate(self, *_) -> None: # TODO: use threading to perform independent picks in parallel
         """Perform one iteration: pick two individuals to talk to each other
         and update the hearer's state based on the speaker's."""
         debug("Agora: Iterating simulation...")
@@ -216,7 +219,7 @@ class Agora:
             self.pick = self.pick_queue.pop(0)
         else:
             if not self.speaker_pairs:
-                self.speaker_pairs = list({'speaker': s, 'hearer': h} for (s, h) in product(self.state.speakers, self.state.speakers) if s != h)
+                self.speaker_pairs = list(PairPick(speaker=s, hearer=h) for (s, h) in product(self.state.speakers, self.state.speakers) if s != h)
             if not self.cum_weights:
                 if SETTINGS.sim_distance_metric == SETTINGS.DistanceMetric.CONSTANT:
                     inv_dist_sq = _inv_dist_sq_constant
@@ -251,7 +254,7 @@ class Agora:
             self.passive_decay()
         self.state.sim_iteration_total += 1
 
-    def all_biased(self):
+    def all_biased(self) -> bool:
         """Criterion to stop the simulation: every speaker is sufficiently biased."""
         assert SETTINGS.bias_threshold >= 0.5
         def stable(speaker):
@@ -261,7 +264,7 @@ class Agora:
             return bias_enough
         return all(stable(s) for s in self.state.speakers)
 
-    def all_biased_and_experienced(self):
+    def all_biased_and_experienced(self) -> bool:
         """Criterion to stop the simulation: every speaker is sufficiently biased and experienced."""
         assert SETTINGS.bias_threshold >= 0.5
         def stable(speaker):
@@ -272,7 +275,7 @@ class Agora:
             return bias_enough and experience_enough
         return all(stable(s) for s in self.state.speakers)
 
-    def simulate_till_stable(self, batch_size=None, is_stable=all_biased_and_experienced):
+    def simulate_till_stable(self, batch_size: Optional[int]=None, is_stable: Callable[[Self], bool]=all_biased_and_experienced) -> bool:
         """Keep running the simulation until the stability condition is reached."""
         max_iteration = SETTINGS.sim_max_iteration
         if not self.sim_iteration:

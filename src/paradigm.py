@@ -2,14 +2,15 @@
 
 from abc import ABC, abstractmethod
 from itertools import chain
+from typing import Iterator, List, Self
 
-def _clamp(value):
+def _clamp(value: float) -> float:
     return max(0., min(1., value))
 
 class _Cell(ABC):
     """A weighted superposition of two word forms for the same morphosyntactic context."""
     # TODO: disallow empty forms
-    def __init__(self, bias_a=0.5, form_a='', form_b='', prominence=1.0):
+    def __init__(self, bias_a: float=0.5, form_a: str='', form_b: str='', prominence: float=1.0) -> None:
         self.bias_a = bias_a
         self.form_a = form_a
         self.form_b = form_b
@@ -18,17 +19,17 @@ class _Cell(ABC):
         else:
             self.prominence = prominence
 
-    def __bool__(self):
+    def __bool__(self) -> bool:
         return 0 != len(self.form_a)
 
-    def __str__(self):
+    def __str__(self) -> str:
         if not self:
             return ''
         return "(%s, %g * \"%s\" + %g * \"%s\")" % \
             (self.get_morphosyntactic_properties(), self.bias_a, self.form_a, 1.0-self.bias_a, self.form_b)
 
     @abstractmethod
-    def get_morphosyntactic_properties(self):
+    def get_morphosyntactic_properties(self) -> str:
         """Returns a string listing the cell's features."""
 
     def to_dict(self):
@@ -36,7 +37,7 @@ class _Cell(ABC):
         return self.__dict__
 
     @staticmethod
-    def from_dict(cell_dict):
+    def from_dict(cell_dict) -> Self:
         """Reconstruct cell object from an imported JSON dictionary."""
         return _NounCell(cell_dict['number'],
                          cell_dict['case'],
@@ -45,26 +46,26 @@ class _Cell(ABC):
                          cell_dict['form_b'],
                          cell_dict['prominence'])
 
-    def to_str_short(self):
+    def to_str_short(self) -> str:
         if 0 == len(self.form_a):
             return ''
         return "%g*\"%s\" + %g*\"%s\"" % \
             (self.bias_a, self.form_a, 1.0-self.bias_a, self.form_b)
 
-    def nudge(self, amount):
+    def nudge(self, delta: float) -> None:
         """Shift bias by the given amount."""
-        assert -1 <= amount <= 1
-        self.bias_a = _clamp(self.bias_a + amount)
+        assert -1 <= delta <= 1
+        self.bias_a = _clamp(self.bias_a + delta)
 
 class _Paradigm(ABC):
     """A 2D or 5D matrix of competing noun of verb forms for given morphosyntactic contexts."""
     # pylint: disable=no-member
 
-    def __getitem__(self, index):
+    def __getitem__(self, index: int) -> List[_Cell]:
         """Return a row of cells (assignable)."""
         return self.para[index]
 
-    def __str__(self):
+    def __str__(self) -> str:
         def descend(cells):
             if not isinstance(cells, list):
                 return str(cells)
@@ -73,7 +74,7 @@ class _Paradigm(ABC):
             return '[' + ', '.join(below) + ']'
         return descend(self.para)
 
-    def __iter__(self):
+    def __iter__(self) -> Iterator[_Cell]:
         """Return an iterator that will loop through our cells in order."""
         para_flattened = self.para
         while True:
@@ -85,16 +86,16 @@ class _Paradigm(ABC):
 
     @staticmethod
     @abstractmethod
-    def morphosyntactic_properties(*indices):
+    def morphosyntactic_properties(*indices) -> str:
         """Get the set of features describing a cell's context.
         (Gregory Stump's exact term if I'm not mistaken.)"""
 
     @abstractmethod
-    def nudge(self, amount, *indices):
+    def nudge(self, delta: float, *indices) -> None:
         """Adjust the weights in a single cell."""
 
     @abstractmethod
-    def propagate(self, amount, *indices):
+    def propagate(self, delta: float, *indices) -> None:
         """Spread a weight change down each dimension in the paradigm."""
 
     def to_dict(self):
@@ -112,7 +113,7 @@ class _Paradigm(ABC):
         return my_dict
 
     @staticmethod
-    def from_dict(para_dict):
+    def from_dict(para_dict) -> Self:
         """Reconstruct paradigm object from an imported JSON dictionary."""
         assert list(para_dict.keys()) == ['para']
         para_list = para_dict['para']
@@ -126,7 +127,7 @@ class _Paradigm(ABC):
                 new_para.para[cell.number][cell.case] = cell
         return new_para
 
-    def passive_decay(self):
+    def passive_decay(self) -> None:
         """Gradually forget underdog variants in each cell."""
         # TODO: optimize this if possible
         def descend(cells):
@@ -145,18 +146,19 @@ class _Paradigm(ABC):
 
 class _NounCell(_Cell):
     """A single cell in a noun paradigm for a given morphosyntactic context."""
-    def __init__(self, number=0, case=0, bias_a=0.5, form_a='', form_b='', prominence=1.0):
+    def __init__(self, number: int=0, case: int=0, bias_a: float=0.5, form_a: str='', form_b: str='', prominence: float=1.0) -> None:
         super().__init__(bias_a, form_a, form_b, prominence)
         self.number = number
         self.case = case
 
-    def get_morphosyntactic_properties(self):
+    def get_morphosyntactic_properties(self) -> str:
         """Returns a string listing the cell's features."""
         return NounParadigm.morphosyntactic_properties(self.number, self.case)
 
 class _VerbCell(_Cell):
     """A single cell in a verb paradigm for a given morphosyntactic context."""
-    def __init__(self, person=0, number=0, defness=0, tense=0, mood=0, bias_a=0.5, form_a='', form_b='', prominence=1.0):
+    def __init__(self, person: int=0, number: int=0, defness: int=0, tense: int=0, mood: int=0, bias_a: float=0.5,
+                 form_a: str='', form_b: str='', prominence: float=1.0) -> None:
         super().__init__(bias_a, form_a, form_b, prominence)
         self.person = person
         self.number = number
@@ -164,21 +166,21 @@ class _VerbCell(_Cell):
         self.tense = tense
         self.mood = mood
 
-    def get_morphosyntactic_properties(self):
+    def get_morphosyntactic_properties(self) -> str:
         """Returns a string listing the cell's features."""
         return VerbParadigm.morphosyntactic_properties(self.person, self.number, self.defness, self.tense, self.mood)
 
 class NounParadigm(_Paradigm):
     """A 2D matrix representing the competing forms of a single noun.
        Hungarian nouns inflect for number and case."""
-    def __init__(self, bias_a=0.5, form_a='', form_b=''):
+    def __init__(self, bias_a: float=0.5, form_a: str='', form_b: str='') -> None:
         self.para = [[_NounCell(i, j, bias_a) for j in range(13)] for i in range(2)]
         self.para[0][0].form_a = form_a
         self.para[0][0].form_b = form_b
         self.para[0][0].prominence = 1.0
 
     @staticmethod
-    def morphosyntactic_properties(i, j):
+    def morphosyntactic_properties(i: int, j: int) -> str:
         """Get the set of features describing a cell's context.
         (Gregory Stump's exact term if I'm not mistaken.)"""
         assert i < 2 and j < 13
@@ -203,14 +205,14 @@ class NounParadigm(_Paradigm):
         }
         return "{%s, %s}" % (numbers[i], cases[j])
 
-    def nudge(self, amount, i, j):
+    def nudge(self, delta: float, i: int, j: int) -> None:
         """Adjust the weights in a single cell."""
         assert i < 2 and j < 13
-        self.para[i][j].nudge(amount)
+        self.para[i][j].nudge(delta)
 
-    def propagate(self, amount, i, j):
+    def propagate(self, delta: float, i: int, j: int) -> None:
         """Spread a weight change down each dimension in the paradigm."""
-        delta = _clamp(self.para[i][j].prominence * amount)
+        delta = _clamp(self.para[i][j].prominence * delta)
         for self_i in range(2):
             if self_i != i:
                 self.nudge(delta, self_i, j)
@@ -221,11 +223,11 @@ class NounParadigm(_Paradigm):
 class VerbParadigm(_Paradigm):
     """A 5D matrix representing the competing forms of a single verb.
        Hungarian verbs inflect for person, number, object definiteness, tense and mood."""
-    def __init__(self, bias_a=0.5):
+    def __init__(self, bias_a: float=0.5) -> None:
         self.para = [[[[[_VerbCell(i, j, k, l, m, bias_a) for m in range(3)] for l in range(2)] for k in range(2)] for j in range(2)] for i in range(3)]
 
     @staticmethod
-    def morphosyntactic_properties(i, j, k, l, m):
+    def morphosyntactic_properties(i, j, k, l, m) -> str:
         """Get the set of features describing a cell's context.
         (Gregory Stump's exact term if I'm not mistaken.)"""
         assert i < 3 and j < 2 and k < 2 and l < 2 and m < 3
@@ -253,14 +255,15 @@ class VerbParadigm(_Paradigm):
         }
         return "{%s, %s, %s, %s, %s}" % (persons[i], numbers[j], defnesses[k], tenses[l], moods[m])
 
-    def nudge(self, amount, i, j, k, l, m):
+    def nudge(self, delta: float, i: int, j: int, k: int, l: int, m: int) -> None:
+
         """Adjust the weights in a single cell."""
         assert i < 3 and j < 2 and k < 2 and l < 2 and m < 3
-        self.para[i][j][k][l][m].nudge(amount)
+        self.para[i][j][k][l][m].nudge(delta)
 
-    def propagate(self, amount, i, j, k, l, m):
+    def propagate(self, delta: float, i: int, j: int, k: int, l: int, m: int) -> None:
         """Spread a weight change down each dimension in the paradigm."""
-        delta = _clamp(self.para[i][j][k][l][m].prominence * amount)
+        delta = _clamp(self.para[i][j][k][l][m].prominence * delta)
         for self_i in range(3):
             if self_i != i:
                 self.nudge(delta, self_i, j, k, l, m)

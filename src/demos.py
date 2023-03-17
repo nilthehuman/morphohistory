@@ -3,6 +3,7 @@
 from abc import ABC, abstractmethod
 from dataclasses import dataclass
 from math import sin, cos, pi
+from typing import List, Optional
 
 from .settings import SETTINGS
 from .speaker import Speaker
@@ -15,7 +16,7 @@ class _DefaultArguments:
     our_bias: float = 1
     their_bias: float = 0
     starting_experience: int = 1
-    inner_radius: float = None
+    inner_radius: float = 1
 
 # TODO: use these in the class method definitions below as well
 DEFAULT_DEMO_ARGUMENTS = {
@@ -27,25 +28,25 @@ DEFAULT_DEMO_ARGUMENTS = {
     SETTINGS.DemoAgora.ALONE         : _DefaultArguments(),
     SETTINGS.DemoAgora.CORE_9x9      : _DefaultArguments(our_bias=0.5),
     SETTINGS.DemoAgora.CORE_10x10    : _DefaultArguments(our_bias=0.5),
-    SETTINGS.DemoAgora.NEWS_ANCHOR   : _DefaultArguments(our_bias=1, their_bias=0.5, inner_radius=1),
+    SETTINGS.DemoAgora.NEWS_ANCHOR   : _DefaultArguments(our_bias=1, their_bias=0.5),
     SETTINGS.DemoAgora.RINGS_16_16   : _DefaultArguments(our_bias=1, their_bias=0, inner_radius=0.25),
     SETTINGS.DemoAgora.RINGS_16_24   : _DefaultArguments(our_bias=1, their_bias=0, inner_radius=0.25),
     SETTINGS.DemoAgora.VILLAGES      : _DefaultArguments()
 }
 
-class _DemoFactory(ABC):
+class DemoFactory(ABC):
     """Interface for demo generating factory classes."""
 
     @staticmethod
     @abstractmethod
-    def get_speakers(our_bias, their_bias, starting_experience, inner_radius):
+    def get_speakers(our_bias: Optional[float], their_bias: Optional[float], starting_experience: int, inner_radius: Optional[float]) -> List[Speaker]:
         """Return the starting state of the speaker population."""
 
-class Rainbow9x9(_DemoFactory):
+class Rainbow9x9(DemoFactory):
     """A 9x9 grid of speakers, pure A in the top left corner, pure B at bottom right and everything else in between."""
 
     @staticmethod
-    def get_speakers(our_bias=1, their_bias=0, starting_experience=1, _inner_radius=None):
+    def get_speakers(our_bias: float=1, their_bias: float=0, starting_experience: int=1, _inner_radius: Optional[float]=None) -> List[Speaker]:
         speakers = []
         for row in range(9):
             for col in range(9):
@@ -55,11 +56,11 @@ class Rainbow9x9(_DemoFactory):
                 speakers.append(Speaker.frombias(row * 9 + col, pos, bias_a, starting_experience))
         return speakers
 
-class Rainbow10x10(_DemoFactory):
+class Rainbow10x10(DemoFactory):
     """A 10x10 grid of speakers, pure A in the top left corner, pure B at bottom right and everything else in between."""
 
     @staticmethod
-    def get_speakers(our_bias=1, their_bias=0, starting_experience=1, _inner_radius=None):
+    def get_speakers(our_bias: float=1, their_bias: float=0, starting_experience: int=1, _inner_radius: Optional[float]=None) -> List[Speaker]:
         speakers = []
         pos = [None, None]
         for row in range(10):
@@ -70,11 +71,11 @@ class Rainbow10x10(_DemoFactory):
                 speakers.append(Speaker.frombias(row * 10 + col, pos, bias_a, starting_experience))
         return speakers
 
-class Balance(_DemoFactory):
+class Balance(DemoFactory):
     """A 10x10 grid of speakers, all undecided: a case of balanced alternatives."""
 
     @staticmethod
-    def get_speakers(our_bias=None, their_bias=None, starting_experience=1, _inner_radius=None):
+    def get_speakers(_our_bias: Optional[float]=None, _their_bias: Optional[float]=None, starting_experience: int=1, _inner_radius: Optional[float]=None) -> List[Speaker]:
         speakers = []
         pos = [None, None]
         for row in range(10):
@@ -84,11 +85,11 @@ class Balance(_DemoFactory):
                 speakers.append(Speaker.frombias(row * 10 + col, pos, 0.5, starting_experience))
         return speakers
 
-class BalanceLarge(_DemoFactory):
+class BalanceLarge(DemoFactory):
     """A 30x30 grid of speakers, all undecided: a case of balanced alternatives."""
 
     @staticmethod
-    def get_speakers(our_bias=None, their_bias=None, starting_experience=1, _inner_radius=None):
+    def get_speakers(_our_bias: Optional[float]=None, _their_bias: Optional[float]=None, starting_experience: int=1, _inner_radius: Optional[float]=None) -> List[Speaker]:
         SETTINGS.speakerdot_size = (12, 12) # TODO: integrate settings into Agora, I think
         _DOT_WIDTH, _DOT_HEIGHT = SETTINGS.speakerdot_size
         speakers = []
@@ -100,11 +101,11 @@ class BalanceLarge(_DemoFactory):
                 speakers.append(Speaker.frombias(row * 30 + col, pos, 0.5, starting_experience))
         return speakers
 
-class Checkers(_DemoFactory):
+class Checkers(DemoFactory):
     """An 8x8 grid of biased speakers arranged in an alternating pattern."""
 
     @staticmethod
-    def get_speakers(our_bias=1, their_bias=0, starting_experience=1, _inner_radius=None):
+    def get_speakers(our_bias: float=1, their_bias: float=0, starting_experience: int=1, _inner_radius: Optional[float]=None) -> List[Speaker]:
         speakers = []
         pos = [None, None]
         for row in range(8):
@@ -115,11 +116,11 @@ class Checkers(_DemoFactory):
                 speakers.append(Speaker.frombias(row * 8 + col, pos, bias_a, starting_experience))
         return speakers
 
-class AloneAgainstTheWorld(_DemoFactory):
+class AloneAgainstTheWorld(DemoFactory):
     """A 9x9 grid of speakers, all but one speaker biased towards A, the loner is biased towards B."""
 
     @staticmethod
-    def get_speakers(our_bias=1, their_bias=0, starting_experience=1, _inner_radius=None):
+    def get_speakers(our_bias: float=1, their_bias: float=0, starting_experience: int=1, _inner_radius: Optional[float]=None) -> List[Speaker]:
         speakers = []
         pos = [None, None]
         for row in range(9):
@@ -130,11 +131,11 @@ class AloneAgainstTheWorld(_DemoFactory):
                 speakers.append(Speaker.frombias(row * 9 + col, pos, bias_a, starting_experience))
         return speakers
 
-class CoreVsPeriphery9x9(_DemoFactory):
+class CoreVsPeriphery9x9(DemoFactory):
     """A 9x9 grid of speakers, neutral majority on the outside, biased minority on the inside."""
 
     @staticmethod
-    def get_speakers(our_bias=0.5, their_bias=0, starting_experience=1, _inner_radius=None):
+    def get_speakers(our_bias: float=0.5, their_bias: float=0, starting_experience: int=1, _inner_radius: Optional[float]=None) -> List[Speaker]:
         speakers = []
         pos = [None, None]
         for row in range(9):
@@ -145,11 +146,11 @@ class CoreVsPeriphery9x9(_DemoFactory):
                 speakers.append(Speaker.frombias(row * 9 + col, pos, bias_a, starting_experience))
         return speakers
 
-class CoreVsPeriphery10x10(_DemoFactory):
+class CoreVsPeriphery10x10(DemoFactory):
     """A 10x10 grid of speakers, neutral majority on the outside, biased minority on the inside."""
 
     @staticmethod
-    def get_speakers(our_bias=0.5, their_bias=0, starting_experience=1, _inner_radius=None):
+    def get_speakers(our_bias: float=0.5, their_bias: float=0, starting_experience: int=1, _inner_radius: Optional[float]=None) -> List[Speaker]:
         speakers = []
         pos = [None, None]
         for row in range(10):
@@ -160,11 +161,11 @@ class CoreVsPeriphery10x10(_DemoFactory):
                 speakers.append(Speaker.frombias(row * 10 + col, pos, bias_a, starting_experience))
         return speakers
 
-class NewsAnchor(_DemoFactory):
+class NewsAnchor(DemoFactory):
     """A circle of biased speakers around a broadcaster with the opposite bias."""
 
     @staticmethod
-    def get_speakers(our_bias=1, their_bias=0.0, starting_experience=1, _inner_radius=None):
+    def get_speakers(our_bias: float=1, their_bias: float=0.0, starting_experience: int=1, _inner_radius: Optional[float]=None) -> List[Speaker]:
         speakers = []
         pos = [None, None]
         for n in range(16):
@@ -178,11 +179,11 @@ class NewsAnchor(_DemoFactory):
         speakers.append(Speaker.frombias(16, pos, our_bias, starting_experience, is_broadcaster=True))
         return speakers
 
-class Rings16_16(_DemoFactory):
+class Rings16_16(DemoFactory):
     """A smaller ring of A speakers inside a wider ring of B speakers."""
 
     @staticmethod
-    def get_speakers(our_bias=1, their_bias=0, starting_experience=1, inner_radius=0.5):
+    def get_speakers(our_bias: float=1, their_bias: float=0, starting_experience: int=1, inner_radius: float=0.5) -> List[Speaker]:
         speakers = []
         for n in range(16):
             x = sin(2 * pi * float(n) / 16) * _WIDTH * 0.4 * inner_radius
@@ -198,11 +199,11 @@ class Rings16_16(_DemoFactory):
             speakers.append(Speaker.frombias(16 + n, pos, our_bias, starting_experience))
         return speakers
 
-class Rings16_24(_DemoFactory):
+class Rings16_24(DemoFactory):
     """A smaller ring of A speakers inside a wider ring of B speakers."""
 
     @staticmethod
-    def get_speakers(our_bias=1, their_bias=0, starting_experience=1, inner_radius=0.5):
+    def get_speakers(our_bias: float=1, their_bias: float=0, starting_experience: int=1, inner_radius: float=0.5) -> List[Speaker]:
         speakers = []
         for n in range(16):
             x = sin(2 * pi * float(n) / 16) * _WIDTH * 0.4 * inner_radius
@@ -218,11 +219,11 @@ class Rings16_24(_DemoFactory):
             speakers.append(Speaker.frombias(16 + n, pos, our_bias, starting_experience))
         return speakers
 
-class Villages(_DemoFactory):
+class Villages(DemoFactory):
     """Four different compact communities a bit further apart from each other."""
 
     @staticmethod
-    def get_speakers(our_bias=1, their_bias=0, starting_experience=1, _inner_radius=None):
+    def get_speakers(our_bias: float=1, their_bias: float=0, starting_experience: int=1, _inner_radius: Optional[float]=None) -> List[Speaker]:
         speakers = []
         pos = [None, None]
         for row in range(9):
