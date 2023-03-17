@@ -73,16 +73,16 @@ class Tuner:
 
     # why doesn't Python have macros?
     def loop_our_bias(self) -> Iterator[float]:
-        return _float_range(self.our_bias_params[0], self.our_bias_params[1], self.our_bias_params[2])
+        return _float_range(*self.our_bias_params)
 
     def loop_their_bias(self) -> Iterator[float]:
-        return _float_range(self.their_bias_params[0], self.their_bias_params[1], self.their_bias_params[2])
+        return _float_range(*self.their_bias_params)
 
     def loop_starting_experience(self) -> Iterator[int]:
-        return _float_range(self.starting_experience_params[0], self.starting_experience_params[1], self.starting_experience_params[2])
+        return _float_range(*self.starting_experience_params)
 
     def loop_inner_radius(self) -> Iterator[float]:
-        return _float_range(self.inner_radius_params[0], self.inner_radius_params[1], self.inner_radius_params[2])
+        return _float_range(*self.inner_radius_params)
 
     def __init__(self, our_bias_params: Tuple[float, float, float],
                        their_bias_params: Tuple[float, float, float],
