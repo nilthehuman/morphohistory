@@ -42,7 +42,7 @@ class MorphoHistoryApp(App):
         Window.minimum_width = (root.ids.sim_layout.ids.agora_layout.width +
                                 root.ids.sim_layout.ids.button_layout.width)
         Window.minimum_height = root.ids.sim_layout.ids.agora_layout.height
-        KeyboardHandler()
+        self.keyboardhandler = KeyboardHandler()
         return root
 
     def on_start(self) -> None:
