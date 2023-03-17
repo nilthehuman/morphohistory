@@ -111,30 +111,30 @@ class LaunchTuningButton(Button):
         # fetch the parameter ranges defined by user in the Tuning menu
         # why doesn't Python have macros?
         try:
-            our_bias_params = (float(tuning_menu.ids.our_bias_start_input.text),
-                               float(tuning_menu.ids.our_bias_stop_input.text),
-                               float(tuning_menu.ids.our_bias_step_input.text))
+            our_bias_params = (float(tuning_menu.ids.our_bias_box.ids.start_input.text),
+                               float(tuning_menu.ids.our_bias_box.ids.stop_input.text),
+                               float(tuning_menu.ids.our_bias_box.ids.step_input.text))
         except ValueError:
             # parameter not available
             our_bias_params = (None, None, None)
         try:
-            their_bias_params = (float(tuning_menu.ids.their_bias_start_input.text),
-                                 float(tuning_menu.ids.their_bias_stop_input.text),
-                                 float(tuning_menu.ids.their_bias_step_input.text))
+            their_bias_params = (float(tuning_menu.ids.their_bias_box.ids.start_input.text),
+                                 float(tuning_menu.ids.their_bias_box.ids.stop_input.text),
+                                 float(tuning_menu.ids.their_bias_box.ids.step_input.text))
         except ValueError:
             # parameter not available
             their_bias_params = (None, None, None)
         try:
-            starting_experience_params = (int(tuning_menu.ids.starting_experience_start_input.text),
-                                          int(tuning_menu.ids.starting_experience_stop_input.text),
-                                          int(tuning_menu.ids.starting_experience_step_input.text))
+            starting_experience_params = (int(tuning_menu.ids.starting_experience_box.ids.start_input.text),
+                                          int(tuning_menu.ids.starting_experience_box.ids.stop_input.text),
+                                          int(tuning_menu.ids.starting_experience_box.ids.step_input.text))
         except ValueError:
             # parameter not available
             starting_experience_params = (None, None, None)
         try:
-            inner_radius_params = (float(tuning_menu.ids.inner_radius_start_input.text),
-                                   float(tuning_menu.ids.inner_radius_stop_input.text),
-                                   float(tuning_menu.ids.inner_radius_step_input.text))
+            inner_radius_params = (float(tuning_menu.ids.inner_radius_box.ids.start_input.text),
+                                   float(tuning_menu.ids.inner_radius_box.ids.stop_input.text),
+                                   float(tuning_menu.ids.inner_radius_box.ids.step_input.text))
         except ValueError:
             # parameter not available
             inner_radius_params = (None, None, None)
