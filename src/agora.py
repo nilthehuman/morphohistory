@@ -8,10 +8,10 @@ from logging import debug, info, warning
 from typing import Callable, List, Optional, Self
 
 from .demos import DemoFactory
+from .paradigm import NounParadigm
 from .rng import RAND
 from .settings import SETTINGS
 from .speaker import Speaker, PairPick
-from src.paradigm import NounParadigm
 
 
 def _inv_dist_sq_constant(_: PairPick) -> float:
