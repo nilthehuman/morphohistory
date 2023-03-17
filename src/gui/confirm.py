@@ -10,13 +10,13 @@ class ConfirmedLabel(Label):
     """Common base class to ApplyConfirmedLabel and DiscardConfirmedLabel for convenience."""
     alpha = NumericProperty(1)
 
-    def __init__(self, **kwargs):
+    def __init__(self, **kwargs) -> None:
         super().__init__(**kwargs)
         Animation(alpha=0, d=1.5, t='in_quad').start(self)
         self.bind(alpha=self.on_fade)
         self.text = localize(self.text)  # need to do this by hand which is a bit unfortunate
 
-    def on_fade(self, _instance, value):
+    def on_fade(self, _instance, value: float) -> None:
         if 0 == value:
             self.parent.remove_widget(self)
 

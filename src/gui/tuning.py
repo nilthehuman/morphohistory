@@ -10,7 +10,6 @@ from kivy.uix.spinner import Spinner
 from .access_widgets import get_root, get_agora, get_tuning_menu
 from .l10n import localize, unlocalize, LocalizedPopup
 
-from ..agora import Agora
 from ..demos import DEMO_FACTORIES, DEFAULT_DEMO_ARGUMENTS
 from ..settings import SETTINGS
 from ..tuning import Tuner
@@ -30,15 +29,15 @@ class ParamBoxLayout(BoxLayout):
 class DemoSpinner(Spinner):
     """The Spinner Widget used to select the parametrizable demo agora the user wants to use."""
 
-    def __init__(self, **kwargs):
+    def __init__(self, **kwargs) -> None:
         super().__init__(**kwargs)
         self.values = [localize(factory_name) for factory_name in DEMO_FACTORIES.keys()]
 
-    def on_gui_ready(self):
+    def on_gui_ready(self) -> None:
         """Finish initializing: tell the Agora to load the first demo in the dropdown."""
         self.on_text()
 
-    def on_text(self, *_):
+    def on_text(self, *_) -> None:
         """Tell the Agora on the main tab to load the selected demo."""
         if not get_root():
             # Widget tree has not been built yet, leave job to on_gui_ready
@@ -100,12 +99,12 @@ class LaunchTuningButton(Button):
     """The Button to start the repeated exhaustive simulation of the model parameters
     as defined by the TextInputs above."""
 
-    def __init__(self, **kwargs):
+    def __init__(self, **kwargs) -> None:
         super().__init__(**kwargs)
         self.tuner = None
         self.bind(on_release=self.start_tuning)
 
-    def start_tuning(self, *_):
+    def start_tuning(self, *_) -> None:
         """Start the exhaustive simulation."""
         tuning_menu = get_tuning_menu()
         # fetch the parameter ranges defined by user in the Tuning menu
@@ -153,7 +152,7 @@ class LaunchTuningButton(Button):
         self.tuner.open()
         self.tuner.run()
 
-    def cancel_tuning(self, *_):
+    def cancel_tuning(self, *_) -> None:
         """Stop the simulation midway through."""
         self.tuner.tuning_cancelled = True
 
@@ -161,18 +160,18 @@ class LaunchTuningButton(Button):
 class TunerPopup(Tuner, LocalizedPopup):
     """A simple graphical frontend to a Tuner to show its progress live."""
 
-    def __init__(self, *args, **kwargs):
+    def __init__(self, *args, **kwargs) -> None:
         Tuner.__init__(self, *args)
         LocalizedPopup.__init__(self, **kwargs)
         self.ids.container.children[0].ids.progressbar.max = self.num_total_setups * self.repetitions
 
-    def run(self):
+    def run(self) -> None:
         """Schedule our own method driving the tuning in the Kivy event loop."""
         # attention: this method does *not* call its base class equivalent on purpose!
         self.on_start()
         self.tuning_event = Clock.schedule_interval(self.iterate_tuning, 0.0)
 
-    def iterate_tuning(self, *_):
+    def iterate_tuning(self, *_) -> None:
         """Repeat the simulation several times for each parameter setup in the set of
         parameter combinations chosen by the user, then dump the results in a CSV file."""
         try:
@@ -188,7 +187,7 @@ class TunerPopup(Tuner, LocalizedPopup):
             else:
                 self.on_finished()
 
-    def prepare_next_setup(self):
+    def prepare_next_setup(self) -> None:
         """Initialize Agora according to next parameter setup."""
         super().prepare_next_setup()
         self.ids.container.children[0].ids.progress_label.text = \

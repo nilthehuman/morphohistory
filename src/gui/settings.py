@@ -16,13 +16,16 @@ from .confirm import ApplyConfirmedLabel, DiscardConfirmedLabel
 from .l10n import unlocalize, localize_all_texts, unlocalize_all_texts
 
 from ..settings import SETTINGS
+from typing import Dict, List, Optional, Self, Union
 
 Settings.interface_cls = InterfaceWithNoMenu
 
 _SETTINGS_FILE_PATH = 'user_settings.ini'
 
-class ConfigList(list):
-    def __getitem__(self, key):
+ConfigItem = Dict[str, Union[str, List[str]]]
+
+class ConfigList(List[ConfigItem]):
+    def __getitem__(self, key: str) -> ConfigItem:
         return [item for item in _SETTINGS_UI if 'key' in item and key == item['key']][0]
 
 _SETTINGS_UI = ConfigList([
@@ -154,7 +157,7 @@ class SettingsTabLayout(BoxLayout):
 
 class CustomSettingsPanel(SettingsPanel):
     """Override base class to keep it from saving to file every time a setting is changed."""
-    def set_value(self, section, key, value):
+    def set_value(self, section: str, key: str, value: str) -> None:
         """Override base class method to keep it from saving to file
         every time a setting is changed."""
         current = self.get_value(section, key)
@@ -166,13 +169,13 @@ class CustomSettingsPanel(SettingsPanel):
 
 class CustomSettingOptions(SettingOptions):
     """Override base class to allow localization inside dynamically created options Popup."""
-    def _create_popup(self, instance):
+    def _create_popup(self, instance: Self) -> None:
         super()._create_popup(instance)
         localize_all_texts(self.popup)
 
 class CustomSettings(Settings):
     """A list of user preferences to control the appearance and operation of the application."""
-    def __init__(self, **kwargs):
+    def __init__(self, **kwargs) -> None:
         super().__init__(**kwargs)
         self.register_type('options', CustomSettingOptions)
         self.config = ConfigParser()
@@ -204,12 +207,12 @@ class CustomSettings(Settings):
         self.config.read(_SETTINGS_FILE_PATH)
         self.reload_config_values()
 
-    def on_gui_ready(self):
+    def on_gui_ready(self) -> None:
         """Pump the settings values read from file into the global SETTINGS object
         and refresh the AgoraWidget's graphics on the main tab."""
         self.commit_settings(write_to_file=False, force_update=True)
 
-    def on_config_change(self, config, section, key, value):
+    def on_config_change(self, config: ConfigParser, section: str, key: str, value: str) -> None:
         """Keep sensible value constraints and formatting in order when a new value is entered."""
         # enforce upper and lower bounds on user-supplied values
         bounds = {
@@ -235,7 +238,7 @@ class CustomSettings(Settings):
             self.reload_config_values(section, key)
         super().on_config_change(config, section, key, value)
 
-    def commit_settings(self, write_to_file=True, force_update=False):
+    def commit_settings(self, write_to_file: bool=True, force_update: bool=False) -> None:
         """Destructively set all values in the global SETTINGS to the current values
         in our ConfigParser instance, and also save them to file."""
         update_lang = force_update
@@ -303,7 +306,7 @@ class CustomSettings(Settings):
         if write_to_file:
             self.config.write()
 
-    def load_settings_values(self):
+    def load_settings_values(self) -> None:
         """Destructively (re)set all values in our ConfigParser instance to the current global SETTINGS."""
         for section in self.config.sections():
             for (key, _) in self.config.items(section):
@@ -319,7 +322,8 @@ class CustomSettings(Settings):
         # force the update of displayed values on GUI as well
         self.reload_config_values()
 
-    def create_json_panel(self, title, config, filename=None, data=None):
+    def create_json_panel(self, title: str, config: ConfigParser,
+                          filename: Optional[str]=None, data: Optional[ConfigList]=None) -> CustomSettingsPanel:
         """Override base class method to keep it from saving to file
         every time a setting is changed."""
         assert not filename and data
@@ -340,7 +344,7 @@ class CustomSettings(Settings):
             panel.add_widget(instance)
         return panel
 
-    def reload_config_values(self, section=None, key=None):
+    def reload_config_values(self, section: Optional[str]=None, key: Optional[str]=None) -> None:
         """Refresh values displayed in the SettingsPanel from our ConfigParser instance."""
         assert bool(section) == bool(key)
         settingspanel = self.interface.children[0].children[0]
@@ -362,11 +366,11 @@ class CustomSettings(Settings):
 
 class ApplySettingsButton(Button):
     """Button to destructively set the user's choices in the global settings object."""
-    def __init__(self, **kwargs):
+    def __init__(self, **kwargs) -> None:
         super().__init__(**kwargs)
         self.bind(on_release=self.apply_settings)
 
-    def apply_settings(self, *_):
+    def apply_settings(self, *_) -> None:
         """Overwrite current application settings with those in the SettingsPanel."""
         get_settings().commit_settings()
         label = ApplyConfirmedLabel()
@@ -374,11 +378,11 @@ class ApplySettingsButton(Button):
 
 class DiscardSettingsButton(Button):
     """Button to throw away all changes and restore previous settings."""
-    def __init__(self, **kwargs):
+    def __init__(self, **kwargs) -> None:
         super().__init__(**kwargs)
         self.bind(on_release=self.discard_settings)
 
-    def discard_settings(self, *_):
+    def discard_settings(self, *_) -> None:
         """Reset all items in SettingsPanel to the previous application settings."""
         get_settings().load_settings_values()
         label = DiscardConfirmedLabel()

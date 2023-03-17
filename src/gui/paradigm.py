@@ -19,34 +19,34 @@ class ParadigmTabLayout(BoxLayout):
 class CaseLabel(Label):
     """A simple label to help the user identify which row corresponds to which noun case."""
 
-    def __init__(self, text, **kwargs):
+    def __init__(self, text: str, **kwargs) -> None:
         super().__init__(**kwargs)
         self._text = text
 
-    def on_gui_ready(self):
+    def on_gui_ready(self) -> None:
         """Finish initializing once the root widget is ready."""
         self.toggle_text()
         get_single_cell_checkbox().bind(active=self.toggle_text)
 
-    def toggle_text(self, *_):
+    def toggle_text(self, *_) -> None:
         """Show or hide our own text depending on the state of the CheckBox above."""
         self.text = '' if get_single_cell_checkbox().active else self._text
 
 class CellTextInput(TextInput):
     """A text input box for one form of a cell in the paradigm table."""
 
-    def __init__(self, text='', **kwargs):
+    def __init__(self, text: str='', **kwargs) -> None:
         super().__init__(**kwargs)
         self.text = text
         self.multiline = False # FIXME: this does not work :/
         self.cursor_color = (0, 0, 0, 1)
 
-    def on_gui_ready(self):
+    def on_gui_ready(self) -> None:
         """Finish initializing once the root widget is ready."""
         self.toggle_disabled()
         get_single_cell_checkbox().bind(active=self.toggle_disabled)
 
-    def toggle_disabled(self, *_):
+    def toggle_disabled(self, *_) -> None:
         """Show or hide our own text depending on the state of the CheckBox above."""
         self.disabled = get_single_cell_checkbox().active
 
@@ -54,7 +54,7 @@ class ParadigmTable(GridLayout):
     """A 14 row (header + 13 cases) by 7 column (label col + 2 x (form A, form B, prominence)) table
     for the noun paradigm to be used in the simulation."""
 
-    def __init__(self, **kwargs):
+    def __init__(self, **kwargs) -> None:
         super().__init__(**kwargs)
 
         case_names = ["", "ACC", "DAT", "INS", "TRANS", "INE", "SUPE", "ADE",
@@ -105,16 +105,16 @@ class ParadigmTable(GridLayout):
             text_input = CellTextInput(size_hint_x=0.1, text='1')
             self.add_widget(text_input)
 
-    def on_gui_ready(self):
+    def on_gui_ready(self) -> None:
         """Finish initializing once the root widget is ready."""
         self.save_or_load_cells()
         get_single_cell_checkbox().bind(active=self.toggle_single_cell_setting)
 
-    def toggle_single_cell_setting(self, *_):
+    def toggle_single_cell_setting(self, *_) -> None:
         """Update the single cell vs whole paradigm switch in the global SETTINGS object."""
         SETTINGS.sim_single_cell = get_single_cell_checkbox().active
 
-    def save_or_load_cells(self, save=False):
+    def save_or_load_cells(self, save: bool=False) -> None:
         """Write the contents of all cells to speaker's paradigms, or reload cells from them."""
         def _process_subcell(num, case, subcell):
             # N.B. children are stored in reverse order
@@ -151,11 +151,11 @@ class ParadigmTable(GridLayout):
 class ApplyParadigmButton(Button):
     """Button to replace all word forms in the current simulation with the ones set on this tab."""
 
-    def __init__(self, **kwargs):
+    def __init__(self, **kwargs) -> None:
         super().__init__(**kwargs)
         self.bind(on_release=self.apply_paradigm)
 
-    def apply_paradigm(self, *_):
+    def apply_paradigm(self, *_) -> None:
         """Update all word forms in the simulated paradigm to the user's new inputs."""
         get_paradigm_table().save_or_load_cells(save=True)
         label = ApplyConfirmedLabel()
@@ -164,11 +164,11 @@ class ApplyParadigmButton(Button):
 class DiscardParadigmButton(Button):
     """Button to reset all word forms in this tab to the ones in the current simulation."""
 
-    def __init__(self, **kwargs):
+    def __init__(self, **kwargs) -> None:
         super().__init__(**kwargs)
         self.bind(on_release=self.discard_paradigm)
 
-    def discard_paradigm(self, *_):
+    def discard_paradigm(self, *_) -> None:
         """Reset all word forms in the paradigm table to their previous values."""
         get_paradigm_table().save_or_load_cells(save=False)
         label = DiscardConfirmedLabel()

@@ -35,7 +35,7 @@ for file in _KV_FILES:
     Builder.load_file(file)
 
 class MorphoHistoryApp(App):
-    def build(self):
+    def build(self) -> TopTabbedPanel:
         self.title = "morphohistory"
         self.icon = "assets/logo.png"
         root = TopTabbedPanel()
@@ -45,7 +45,7 @@ class MorphoHistoryApp(App):
         KeyboardHandler()
         return root
 
-    def on_start(self):
+    def on_start(self) -> None:
         """Prepare GUI elements that need to know about the Widget tree to complete their setup."""
         forall_widgets(lambda w: w.on_gui_ready(), self.root)
 

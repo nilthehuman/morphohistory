@@ -3,28 +3,51 @@
 from functools import partial
 
 from kivy.uix.popup import Popup
+from kivy.uix.widget import Widget
 
 from .access_widgets import forall_widgets
 
 from ..settings import SETTINGS
+from typing import Dict, Self
 
 
 class LocalizedString(str):
     """A user-facing character string already translated into the required language."""
-    def __new__(cls, string):
+    def __new__(cls, string: str) -> Self:
         new_loc_string = super().__new__(cls, string)
         return new_loc_string
 
 
 class LocalizedPopup(Popup):
     """Normal Kivy Popup windows but they automatically translate themselves."""
-    def open(self):
+    def open(self) -> None:
         """Localize all user-visible strings inside our window before popping up."""
         localize_all_texts(self)
         super().open()
 
 
-def _substitute(string, l10n_dict):
+class L10nDict(Dict[str, str]):
+    """An invertible dict that also lets unlisted keys pass through unchanged."""
+    def __getitem__(self, key: str) -> str:
+        try:
+            return super().__getitem__(key)
+        except KeyError:
+            return key
+
+    def inv_items(self) -> Self:
+        inv_me = L10nDict({ value : key for key, value in self.items() })
+        return inv_me
+
+
+class IdentityDict(Dict[str, str]):
+    def __getitem__(self, key: str) -> str:
+        return key
+
+    def inv_items(self) -> Self:
+        return self
+
+
+def _substitute(string: str, l10n_dict: L10nDict) -> str:
     """Change each line of 'string' to its corresponding translation in 'l10n_dict'."""
     def exclude_brackets(func, line):
         """Find and temporarily remove bracketed parts before applying 'func'."""
@@ -58,13 +81,13 @@ def _substitute(string, l10n_dict):
     loc_string = "\n".join(loc_lines)
     return loc_string
 
-def localize(string):
+def localize(string: str) -> LocalizedString:
     """Translate a string from English to the currently set GUI language."""
     texts_dict = _L10N_DICTS[SETTINGS.gui_language]
     # return a LocalizedString
     return LocalizedString(_substitute(string, texts_dict))
 
-def unlocalize(string):
+def unlocalize(string: str) -> str:
     """Translate a string from the currently set GUI language back to English."""
     if not isinstance(string, LocalizedString):
         return string
@@ -75,7 +98,7 @@ def unlocalize(string):
 
 # Translate all user-visible strings in all UI Widgets down from a widget
 # to the currently set GUI language.
-def _localize_widget(widget):
+def _localize_widget(widget: Widget) -> None:
     widget.text = localize(widget.text)
     widget.values = map(localize, widget.values)  # for the DemoSpinner's sake
 
@@ -83,36 +106,15 @@ localize_all_texts = partial(forall_widgets, _localize_widget)
 
 # Translate all user-visible strings in all UI Widgets down from a widget
 # from the currently set GUI langauge back to English.
-def _unlocalize_widget(widget):
+def _unlocalize_widget(widget: Widget) -> None:
     widget.text = unlocalize(widget.text)
     widget.values = map(unlocalize, widget.values)  # for the DemoSpinner's sake
 
 unlocalize_all_texts = partial(forall_widgets, _unlocalize_widget)
 
 
-class L10nDict(dict):
-    """An invertible dict that also lets unlisted keys pass through unchanged."""
-    def __getitem__(self, key):
-        try:
-            return super().__getitem__(key)
-        except KeyError:
-            return key
-
-    def inv_items(self):
-        inv_me = L10nDict({ value : key for key, value in self.items() })
-        return inv_me
-
-
-class IdentityDict(dict):
-    def __getitem__(self, key):
-        return key
-
-    def inv_items(self):
-        return self
-
 
 _LOCALIZE_TEXTS_ENG = IdentityDict()
-
 
 _LOCALIZE_TEXTS_HUN = L10nDict({
     "Simulation" : "Szimuláció",

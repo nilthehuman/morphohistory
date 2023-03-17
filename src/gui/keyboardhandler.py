@@ -2,6 +2,7 @@
 run simulation, stop simulation, fast forward etc. This class is probably going to be retired at some point."""
 
 from logging import info
+from typing import List, Tuple
 
 from kivy.app import App
 from kivy.uix.widget import Widget
@@ -14,12 +15,12 @@ from .access_widgets import get_root, get_agora
 class KeyboardHandler(Widget):
     """Handles hotkeys to the application's basic features."""
 
-    def __init__(self, **kwargs):
+    def __init__(self, **kwargs) -> None:
         super().__init__(**kwargs)
         self.keyboard = Window.request_keyboard(lambda: True, self)
         self.keyboard.bind(on_key_down=self.on_keypressed)
 
-    def on_keypressed(self, _keyboard, keycode, _text, modifiers):
+    def on_keypressed(self, _keyboard, keycode: Tuple[int, str], _text, modifiers: List[str]) -> bool:
         if keycode[1] == 'g':
             get_agora().start_stop_sim()
             return True
