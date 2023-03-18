@@ -16,6 +16,9 @@ lint:
 test:
 	pytest -x -ra
 
+typecheck:
+	mypy -p src --ignore-missing-imports
+
 clean:
 	rm -rf .pytest_cache/
 	rm -rf __pycache__/
