@@ -60,7 +60,7 @@ class Agora:
         self.starting_state: Optional[Agora.State] = None
         self.history: list[Agora.HistoryItem] = []
         self.clear_caches()
-        self.sim_iteration: Optional[int] = None
+        self.sim_iteration: int = 0
         self.sim_cancelled = False
         self.graphics_on = False
         self.speaker_pairs: Optional[list[PairPick]] = None
@@ -280,24 +280,23 @@ class Agora:
                              is_stable: Optional[Callable[[Self], bool]]=all_biased_and_experienced) -> bool:
         """Keep running the simulation until the stability condition is reached."""
         max_iteration = SETTINGS.sim_max_iteration
-        if not self.sim_iteration:
-            self.sim_iteration = 0
+        if self.sim_iteration == 0:
             info("Agora: Simulation until stable started.")
         until = self.sim_iteration + batch_size + 1 if batch_size else max_iteration + 1
         for self.sim_iteration in range(self.sim_iteration + 1, until):
             if self.sim_cancelled:
                 self.sim_cancelled = False
-                self.sim_iteration = None
+                self.sim_iteration = 0
                 info("Agora: Simulation until stable cancelled.")
-                return True
+                return False
             if is_stable and is_stable(self):
                 info("Agora: Simulation until stable finished (stability reached after %d iterations)." % self.sim_iteration)
-                self.sim_iteration = None
-                return True
+                self.sim_iteration = 0
+                return False
             self.simulate()
             # Make sure we stop eventually no matter what
             if max_iteration <= self.sim_iteration:
-                self.sim_iteration = None
+                self.sim_iteration = 0
                 info("Agora: Simulation until stable finished (max iteration reached).")
-                return True
-        return False
+                return False
+        return True

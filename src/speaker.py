@@ -76,6 +76,7 @@ class Speaker:
         assert pick['speaker'] == self
         hearer = pick['hearer']
         assert not hearer.is_broadcaster # broadcasters are deaf
+        index = CellIndex()
         if not SETTINGS.sim_single_cell:
             # pick a non-empty cell to share with the hearer
             while True:

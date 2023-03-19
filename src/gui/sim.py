@@ -9,7 +9,7 @@ from os.path import isfile, join
 from typing import Optional, Self
 
 from kivy.app import App
-from kivy.clock import Clock
+from kivy.clock import Clock, ClockEvent
 from kivy.core.window import Window
 from kivy.graphics import Color, Line
 from kivy.graphics.transformation import Matrix
@@ -89,8 +89,8 @@ class SaveToFileButton(Button):
     """Opens a popup window for writing the current configuration of the Agora to file."""
     def __init__(self, **kwargs) -> None:
         super().__init__(**kwargs)
-        self.popup = None
-        self.overwrite_popup = None
+        self.popup: Optional[LocalizedPopup] = None
+        self.overwrite_popup: Optional[LocalizedPopup] = None
         self.bind(on_release=self.show_save_popup)
 
     def show_save_popup(self, *_) -> None:
@@ -103,6 +103,7 @@ class SaveToFileButton(Button):
 
     def dismiss_popup(self) -> None:
         """Close the main file saving dialogue popup."""
+        assert self.popup
         self.popup.dismiss()
 
     def save(self, path: str, filename: str) -> None:
@@ -125,6 +126,7 @@ class SaveToFileButton(Button):
 
     def proceed(self) -> None:
         """Overwrite existing file anyway per user's request."""
+        assert self.popup
         filechooser = self.popup.ids.container.children[0].ids.filechooser
         text_input = self.popup.ids.container.children[0].ids.text_input
         fullpath = join(filechooser.path, text_input.text)
@@ -136,14 +138,15 @@ class SaveToFileButton(Button):
 
     def dismiss_overwrite_popup(self) -> None:
         """Close nested dialogue popup about overwriting existing file."""
+        assert self.overwrite_popup
         self.overwrite_popup.dismiss()
 
 class LoadFromFileButton(Button):
     """Opens a popup window for loading an Agora configuration from file."""
     def __init__(self, **kwargs) -> None:
         super().__init__(**kwargs)
-        self.popup = None
-        self.fail_popup = None
+        self.popup: Optional[LocalizedPopup] = None
+        self.fail_popup: Optional[LocalizedPopup] = None
         self.bind(on_release=self.show_load_popup)
 
     def show_load_popup(self, *_) -> None:
@@ -167,6 +170,7 @@ class LoadFromFileButton(Button):
 
     def dismiss_popup(self) -> None:
         """Close the main file loading dialogue popup."""
+        assert self.popup
         self.popup.dismiss()
 
     def show_fail_popup(self) -> None:
@@ -178,6 +182,7 @@ class LoadFromFileButton(Button):
 
     def dismiss_fail_popup(self) -> None:
         """Close nested dialogue popup about unsuccessful loading."""
+        assert self.fail_popup
         self.fail_popup.dismiss()
 
 class StartStopSimButton(Button):
@@ -217,7 +222,7 @@ class FastForwardButton(Button):
 
     def __init__(self, **kwargs) -> None:
         super().__init__(**kwargs)
-        self.popup = None
+        self.popup: Optional[Popup] = None
         self.bind(on_release=self.fastforward)
 
     def fastforward(self, *_) -> None:
@@ -323,6 +328,9 @@ class SpeakerDot(Speaker, DragBehavior, Widget):
 
     def talk(self, pick: PairPick) -> tuple[CellIndex, bool]:
         """Interact with and influence another Speaker in the Agora."""
+        assert pick['speaker'] == self
+        assert isinstance(pick['speaker'], SpeakerDot)
+        assert isinstance(pick['hearer'], SpeakerDot)
         retval = Speaker.talk(self, pick)
         if self.parent.graphics_on:
             pick['hearer'].update_color()
@@ -365,11 +373,10 @@ class AgoraWidget(Widget, Agora):
         Widget.__init__(self, **kwargs)
         Agora.__init__(self)
         self.state.speakers = speakers if speakers else []
-        self.sim = None
-        self.pick = []
-        self.slowdown_prev = None
-        self.talk_arrow_shaft = None
-        self.talk_arrow_tip = None
+        self.sim: Optional[ClockEvent] = None
+        self.slowdown_prev: Optional[float] = None
+        self.talk_arrow_shaft: Optional[Line] = None
+        self.talk_arrow_tip: Optional[Line] = None
         self.graphics_on = True
         self.bind(on_touch_down=partial(self.update_grid, highlight=True))
         self.bind(on_touch_up=partial(self.update_grid, highlight=False))
@@ -497,21 +504,22 @@ class AgoraWidget(Widget, Agora):
         self.update_talk_arrow()
         self.update_iteration_counter()
 
-    def simulate_till_stable(self, *_, batch_size=None) -> None:
+    def simulate_till_stable(self, *_, batch_size=None) -> bool:
         """Keep running the simulation until the stability condition is reached."""
         graphics_on_before = self.graphics_on
         self.graphics_on = False
-        done = super().simulate_till_stable(batch_size=batch_size)
+        keep_going = super().simulate_till_stable(batch_size=batch_size)
         self.graphics_on = graphics_on_before
-        if done:
+        if not keep_going:
             self.stop_sim()
             ff_button = get_button_layout().ids.fast_forward_button
             if ff_button.popup:
                 ff_button.popup.dismiss()
             self.pick = None
             self.update_speakerdot_colors()
-        else:
-            self.update_progressbar(self.sim_iteration)
+            return False
+        self.update_progressbar(self.sim_iteration)
+        return True
 
     def show_euclidean_grid(self, highlight: bool=False) -> None:
         """Draw a grid with circles behind the Agora to suggest the use of Euclidean distance."""

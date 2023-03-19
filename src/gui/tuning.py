@@ -1,6 +1,8 @@
 """The contents of the Tuning tab, where you can do brute force exhaustive simulation
 on a variety of model parameters."""
 
+from typing import Optional
+
 from kivy.clock import Clock
 from kivy.properties import ObjectProperty, StringProperty
 from kivy.uix.boxlayout import BoxLayout
@@ -42,7 +44,7 @@ class DemoSpinner(Spinner):
         if not get_root():
             # Widget tree has not been built yet, leave job to on_gui_ready
             return
-        selected = unlocalize(self.text)
+        selected = SETTINGS.DemoAgora(unlocalize(self.text))
         SETTINGS.current_demo = selected
         demo_factory = DEMO_FACTORIES[selected]
         get_agora().load_demo_agora(demo_factory, starting_experience=SETTINGS.starting_experience)
@@ -101,7 +103,7 @@ class LaunchTuningButton(Button):
 
     def __init__(self, **kwargs) -> None:
         super().__init__(**kwargs)
-        self.tuner = None
+        self.tuner: Optional[TunerPopup] = None
         self.bind(on_release=self.start_tuning)
 
     def start_tuning(self, *_) -> None:
@@ -154,6 +156,7 @@ class LaunchTuningButton(Button):
 
     def cancel_tuning(self, *_) -> None:
         """Stop the simulation midway through."""
+        assert self.tuner
         self.tuner.tuning_cancelled = True
 
 

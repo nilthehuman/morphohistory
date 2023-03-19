@@ -9,7 +9,7 @@ def _clamp(value: float) -> float:
 
 class _NounCellIndex(tuple[int, int]):
     """Identifies a single NounParadigm entry: a tuple of two non-negative integers."""
-    def __new__(cls, number: int, case: int) -> Self:
+    def __new__(cls, number: int=0, case: int=0) -> Self:
         assert number >= 0 and case >= 0
         assert number < 2 and case < 13
         new_cell_index = super().__new__(cls, (number, case))
