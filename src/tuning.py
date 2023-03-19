@@ -4,7 +4,7 @@ from copy import copy
 from logging import info
 from os.path import isfile
 from time import gmtime, strftime, perf_counter
-from typing import Iterator, Tuple
+from typing import Iterator
 
 from .agora import Agora
 from .demos import DEMO_FACTORIES
@@ -79,15 +79,15 @@ class Tuner:
         return _float_range(*self.their_bias_params)
 
     def loop_starting_experience(self) -> Iterator[int]:
-        return _float_range(*self.starting_experience_params)
+        return map(int, _float_range(*self.starting_experience_params))
 
     def loop_inner_radius(self) -> Iterator[float]:
         return _float_range(*self.inner_radius_params)
 
-    def __init__(self, our_bias_params: Tuple[float, float, float],
-                       their_bias_params: Tuple[float, float, float],
-                       starting_experience_params: Tuple[int, int, int],
-                       inner_radius_params: Tuple[float, float, float],
+    def __init__(self, our_bias_params: tuple[float, float, float],
+                       their_bias_params: tuple[float, float, float],
+                       starting_experience_params: tuple[int, int, int],
+                       inner_radius_params: tuple[float, float, float],
                        repetitions: int) -> None:
         """Prepare for actually performing the simulations."""
         self.our_bias_params = our_bias_params
@@ -104,7 +104,7 @@ class Tuner:
 
         # state to keep track of simulation parameters and results
         self.agora = Agora()
-        self.results = []
+        self.results: list[dict] = []
         self.current_setup = 0
         self.current_rep = 0
         self.num_total_reps = 0

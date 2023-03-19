@@ -3,14 +3,14 @@
 from copy import deepcopy
 from logging import debug
 
-from .paradigm import NounParadigm
+from .paradigm import CellIndex, NounParadigm
 from .rng import RAND
 from .settings import SETTINGS
-from typing import List, Optional, Self, Tuple, TypedDict
+from typing import Optional, Self, TypedDict
 
 class Speaker:
     """A simulated individual within the speaking community."""
-    def __init__(self, n: int, pos: Tuple[float, float], para: Optional[NounParadigm]=None,
+    def __init__(self, n: int, pos: tuple[float, float], para: NounParadigm,
                  experience: int=SETTINGS.starting_experience, is_broadcaster: bool=False) -> None:
         self.n = n
         self.pos = pos
@@ -27,7 +27,7 @@ class Speaker:
         return new_speaker
 
     @classmethod
-    def frombias(cls, n: int, pos: Tuple[float, float], bias_a: float,
+    def frombias(cls, n: int, pos: tuple[float, float], bias_a: float,
                  experience: int=SETTINGS.starting_experience, is_broadcaster: bool=False) -> Self:
         """Construct a Speaker from a single bias value."""
         para = NounParadigm(bias_a=bias_a, form_a=SETTINGS.paradigm.para[0][0].form_a,
@@ -42,29 +42,28 @@ class Speaker:
         del speaker_dict['principal_bias_cached']
         return speaker_dict
 
-    @staticmethod
-    def from_dict(speaker_dict) -> Self:
-        """Reconstruct Speaker object from an imported JSON dictionary."""
+    @classmethod
+    def from_dict(cls, speaker_dict) -> Self:
+        """Construct Speaker object from an imported JSON dictionary."""
         para = NounParadigm.from_dict(speaker_dict['para'])
-        return Speaker(speaker_dict['n'],
-                       speaker_dict['pos'],
-                       para,
-                       speaker_dict['experience'],
-                       speaker_dict['is_broadcaster'])
+        return cls(speaker_dict['n'],
+                   speaker_dict['pos'],
+                   para,
+                   speaker_dict['experience'],
+                   speaker_dict['is_broadcaster'])
 
     def principal_bias(self) -> float:
         """Which way the speaker is leaning, summed up in a single float."""
-        return self.para.para[0][0].bias_a
+        return self.para[0][0].bias_a
         # TODO: figure out why this function is slow
         if self.principal_bias_cached:
             return self.principal_bias_cached
         sum_bias = 0
         sum_prominence = 0
-        for cases in self.para.para:
-            for cell in cases:
-                if cell.form_a:
-                    sum_bias += cell.bias_a * cell.prominence
-                    sum_prominence += cell.prominence
+        for cell in self.para:
+            if cell.form_a:
+                sum_bias += cell.bias_a * cell.prominence
+                sum_prominence += cell.prominence
         self.principal_bias_cached = sum_bias / sum_prominence
         return self.principal_bias_cached
 
@@ -72,51 +71,49 @@ class Speaker:
         """Text to display next to SpeakerDot label on mouse hover."""
         return self.para[0][0].to_str_short() + "; xp:%d" % self.experience
 
-    def talk(self, pick: 'PairPick') -> Tuple[List[int], bool]:
+    def talk(self, pick: 'PairPick') -> tuple[CellIndex, bool]:
         """Interact with and influence another Speaker in the Agora."""
         assert pick['speaker'] == self
         hearer = pick['hearer']
         assert not hearer.is_broadcaster # broadcasters are deaf
-        i, j = 0, 0
         if not SETTINGS.sim_single_cell:
             # pick a non-empty cell to share with the hearer
             while True:
-                i = RAND.next() % 2
-                j = RAND.next() % 13
-                if self.para.para[i][j].form_a:
+                index = CellIndex(RAND.next() % 2, RAND.next() % 13)
+                if self.para[index].form_a:
                     break
-        cum_weights = [self.para.para[i][j].bias_a, 1]
+        cum_weights = [self.para[index].bias_a, 1]
         form_a_used = RAND.choices([True, False], cum_weights=cum_weights)[0]
         if SETTINGS.sim_prefer_opposite:
             form_a_used = not form_a_used
-        hearer.hear_noun(i, j, form_a_used)
+        hearer.hear_noun(index, form_a_used)
         if SETTINGS.sim_influence_self:
-            self.hear_noun(i, j, form_a_used)
-        return (i, j), form_a_used  # let the Agora know which form of which cell we used
+            self.hear_noun(index, form_a_used)
+        return index, form_a_used  # let the Agora know which form of which cell we used
 
-    def hear_noun(self, i: int, j: int, form_a_used: bool) -> None:
+    def hear_noun(self, index: CellIndex, form_a_used: bool) -> None:
         """Accept a given form from another Speaker and adjust own bias based on it."""
-        form = self.para.para[i][j].form_a if form_a_used else self.para.para[i][j].form_b
+        form = self.para[index].form_a if form_a_used else self.para[index].form_b
         debug("Speaker: I just heard '%s'" % form)
         learning_model_funcs = {
             SETTINGS.LearningModel.HARMONIC    : self._hear_noun_harmonic,
             SETTINGS.LearningModel.RW          : self._hear_noun_rw_vanilla,
             SETTINGS.LearningModel.RW_WEIGHTED : self._hear_noun_rw_weighted
         }
-        learning_model_funcs[SETTINGS.sim_learning_model](i, j, form_a_used)
+        learning_model_funcs[SETTINGS.sim_learning_model](index, form_a_used)
         self.experience = self.experience + 1
         self.principal_bias_cached = None
 
-    def _hear_noun_harmonic(self, i: int, j: int, form_a_used: bool) -> None:
+    def _hear_noun_harmonic(self, index: CellIndex, form_a_used: bool) -> None:
         """The n'th interaction has +-1/n impact on the exact cell's bias."""
         delta = (1 if form_a_used else -1) / (self.experience + 1)
-        self.para.nudge(delta, i, j)
-        self.para.propagate(delta, i, j)
+        self.para.nudge(delta, index)
+        self.para.propagate(delta, index)
 
-    def _hear_noun_rw_vanilla(self, i: int, j: int, form_a_used: bool) -> None:
+    def _hear_noun_rw_vanilla(self, index: CellIndex, form_a_used: bool) -> None:
         """Vanilla implementation of the Rescorla-Wagner learning model.
         All cells containing a substring of the string just heard are assumed to be activated."""
-        cell_used = self.para.para[i][j]
+        cell_used = self.para[index]
         form = cell_used.form_a if form_a_used else cell_used.form_b
         activated = lambda c: c.form_a and (form.startswith(c.form_a) or form.startswith(c.form_b))
         activated_cells = [cell for cell in self.para if activated(cell)]
@@ -132,10 +129,10 @@ class Speaker:
             delta_v = alpha * beta * surprise
             cell.nudge(0.5 * delta_v)  # [-1,1] scaled to [0,1]
 
-    def _hear_noun_rw_weighted(self, i: int, j: int, form_a_used: bool) -> None:
+    def _hear_noun_rw_weighted(self, index: CellIndex, form_a_used: bool) -> None:
         """Tweaked implementation of the Rescorla-Wagner learning model where v_total is weighted
         according to the salience (prominence) of each conditioned stimulus."""
-        cell_used = self.para.para[i][j]
+        cell_used = self.para[index]
         form = cell_used.form_a if form_a_used else cell_used.form_b
         activated = lambda c: c.form_a and (form.startswith(c.form_a) or form.startswith(c.form_b))
         activated_cells = [cell for cell in self.para if activated(cell)]

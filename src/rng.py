@@ -1,5 +1,5 @@
 """See if we have simplerandom available. If not, fall back on standard random."""
-from typing import List, TypeVar
+from typing import TypeVar
 
 T = TypeVar('T')
 
@@ -16,7 +16,7 @@ try:
         def next(self) -> int:
             return next(self.mwc)
 
-        def choices(self, population: List[T], cum_weights: List[float]) -> List[T]:
+        def choices(self, population: list[T], cum_weights: list[float]) -> list[T]:
             assert len(population) == len(cum_weights)
             scale = cum_weights[-1] + 0.0
             random = next(self.mwc) / 2**32
@@ -32,7 +32,7 @@ except ImportError:
         def next(self) -> int:
             return randrange(2**32)
 
-        def choices(self, population: List[T], cum_weights: List[float]) -> List[T]:
+        def choices(self, population: list[T], cum_weights: list[float]) -> list[T]:
             return choices(population, cum_weights=cum_weights)
 
 

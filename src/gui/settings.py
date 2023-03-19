@@ -16,15 +16,15 @@ from .confirm import ApplyConfirmedLabel, DiscardConfirmedLabel
 from .l10n import unlocalize, localize_all_texts, unlocalize_all_texts
 
 from ..settings import SETTINGS
-from typing import Dict, List, Optional, Self, Union
+from typing import Dict, Optional, Self, Union
 
 Settings.interface_cls = InterfaceWithNoMenu
 
 _SETTINGS_FILE_PATH = 'user_settings.ini'
 
-ConfigItem = Dict[str, Union[str, List[str]]]
+ConfigItem = Dict[str, Union[str, list[str]]]
 
-class ConfigList(List[ConfigItem]):
+class ConfigList(list[ConfigItem]):
     def __getitem__(self, key: str) -> ConfigItem:
         return [item for item in _SETTINGS_UI if 'key' in item and key == item['key']][0]
 

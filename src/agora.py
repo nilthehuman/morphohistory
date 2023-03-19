@@ -5,10 +5,10 @@ from dataclasses import dataclass, field
 from itertools import product
 from json import dumps, load
 from logging import debug, info, warning
-from typing import Callable, List, Optional, Self
+from typing import Callable, Optional, Self
 
 from .demos import DemoFactory
-from .paradigm import NounParadigm
+from .paradigm import CellIndex, NounParadigm
 from .rng import RAND
 from .settings import SETTINGS
 from .speaker import Speaker, PairPick
@@ -32,13 +32,13 @@ def _inv_dist_sq_euclidean(pair: PairPick) -> float:
 class Agora:
     """A collection of simulated speakers influencing each other."""
 
-    @dataclass
+    @dataclass(frozen=True)
     class HistoryItem:
         """A single entry in the list of interactions that constitute the Agora's past history.
         Basically stores a pick and which cell and form was used in the interaction."""
         speaker: int
         hearer: int
-        cell: (int, int)
+        cell: CellIndex
         form_a: bool
 
         def to_dict(self):
@@ -48,7 +48,7 @@ class Agora:
     @dataclass
     class State:
         """The essential variables that define the current state of an Agora."""
-        speakers: List[Speaker] = field(default_factory=lambda: [])
+        speakers: list[Speaker] = field(default_factory=list)
         sim_iteration_total: int = 0
 
         def to_dict(self):
@@ -56,17 +56,17 @@ class Agora:
             return self.__dict__
 
     def __init__(self) -> None:
-        self.state = self.State()
-        self.starting_state = None
-        self.history = []
+        self.state: Agora.State = self.State()
+        self.starting_state: Optional[Agora.State] = None
+        self.history: list[Agora.HistoryItem] = []
         self.clear_caches()
-        self.sim_iteration = None
+        self.sim_iteration: Optional[int] = None
         self.sim_cancelled = False
         self.graphics_on = False
-        self.speaker_pairs = None
-        self.cum_weights = None
-        self.pick = None
-        self.pick_queue = []
+        self.speaker_pairs: Optional[list[PairPick]] = None
+        self.cum_weights: Optional[list[float]] = None
+        self.pick: Optional[PairPick] = None
+        self.pick_queue: list[PairPick] = []
 
     def to_dict(self):
         """Returns own state for JSON serialization."""
@@ -76,6 +76,7 @@ class Agora:
 
     def save_starting_state(self) -> None:
         """Stash a snapshot of the current state of the Agora."""
+        # TODO: consider freezing with 'gelidum'
         self.starting_state = self.State()
         # N.B. paradigms are deep copied by Speaker.fromspeaker
         self.starting_state.speakers = [Speaker.fromspeaker(s) for s in self.state.speakers]
@@ -83,12 +84,14 @@ class Agora:
 
     def reset(self) -> None:
         """Restore earlier speaker snapshot."""
+        assert self.starting_state
         self.clear_speakers()
         self.load_speakers(self.starting_state.speakers)
         self.state.sim_iteration_total = self.starting_state.sim_iteration_total
 
     def quick_reset(self) -> None:
         """Keep speakers but reset their biases and experience."""
+        assert self.starting_state
         # FIXME: pair speakers based on their identifier 'n', not their raw index
         for i in range(len(self.state.speakers)):
             self.state.speakers[i].para = deepcopy(self.starting_state.speakers[i].para)
@@ -149,7 +152,7 @@ class Agora:
         self.save_starting_state()
         SETTINGS.paradigm = deepcopy(self.state.speakers[0].para)
 
-    def load_speakers(self, speakers: List[Speaker]) -> None:
+    def load_speakers(self, speakers: list[Speaker]) -> None:
         """Replace current speaker community with a copy of the argument."""
         self.state.speakers = [Speaker.fromspeaker(s) for s in speakers]
         assert not all(s.is_broadcaster for s in self.state.speakers)
@@ -173,6 +176,7 @@ class Agora:
     def set_starting_experience(self, experience: Optional[int]=None) -> None:
         """Set the experience value of each speaker in the saved snapshot,
         and also in the current state if it's identical to the snapshot."""
+        assert self.starting_state
         # FIXME: defining a default argument value for experience failed for some reason
         if experience is None:
             experience = SETTINGS.starting_experience
@@ -192,9 +196,6 @@ class Agora:
                 current_picks += [pick['speaker'].n, pick['hearer'].n]
             if speaker.n not in current_picks:
                 speaker.passive_decay()
-        # TODO move to sim.py
-        if self.graphics_on:
-            self.update_speakerdot_colors()
 
     def dominant_form(self) -> Optional[str]:
         if all(s.principal_bias() > 0.5 for s in self.state.speakers):
@@ -239,10 +240,10 @@ class Agora:
                     break
             if self.pick['speaker'].is_broadcaster:
                 s = self.pick['speaker']
-                self.pick_queue = [ {'speaker': s, 'hearer': h} for h in self.state.speakers if h != s ]
+                self.pick_queue = [ PairPick(speaker=s, hearer=h) for h in self.state.speakers if h != s ]
                 self.pick = self.pick_queue.pop(0)
             elif SETTINGS.sim_influence_mutual:
-                reverse_pick = {'speaker': self.pick['hearer'], 'hearer': self.pick['speaker']}
+                reverse_pick = PairPick(speaker=self.pick['hearer'], hearer=self.pick['speaker'])
                 self.pick_queue.append(reverse_pick)
         debug("Agora: %d picked to talk to %d" % (self.pick['speaker'].n, self.pick['hearer'].n))
         cell, form_a_used = self.pick['speaker'].talk(self.pick)
@@ -275,7 +276,8 @@ class Agora:
             return bias_enough and experience_enough
         return all(stable(s) for s in self.state.speakers)
 
-    def simulate_till_stable(self, batch_size: Optional[int]=None, is_stable: Callable[[Self], bool]=all_biased_and_experienced) -> bool:
+    def simulate_till_stable(self, batch_size: Optional[int]=None,
+                             is_stable: Optional[Callable[[Self], bool]]=all_biased_and_experienced) -> bool:
         """Keep running the simulation until the stability condition is reached."""
         max_iteration = SETTINGS.sim_max_iteration
         if not self.sim_iteration:

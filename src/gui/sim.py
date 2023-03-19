@@ -6,7 +6,7 @@ from json import JSONDecodeError
 from logging import debug
 from math import sqrt
 from os.path import isfile, join
-from typing import List, Optional, Self, Tuple
+from typing import Optional, Self
 
 from kivy.app import App
 from kivy.clock import Clock
@@ -33,7 +33,7 @@ from .l10n import localize, localize_all_texts, LocalizedPopup
 
 from ..settings import SETTINGS
 from ..agora import Agora
-from ..paradigm import NounParadigm
+from ..paradigm import CellIndex, NounParadigm
 from ..speaker import Speaker, PairPick
 
 
@@ -154,7 +154,7 @@ class LoadFromFileButton(Button):
                                     size_hint=(None, None), size=SETTINGS.popup_size_load)
         self.popup.open()
 
-    def load(self, _path, fileselection: List[str]) -> None:
+    def load(self, _path, fileselection: list[str]) -> None:
         """Read and set new Agora state from file."""
         if not fileselection:
             return
@@ -256,7 +256,7 @@ class SpeakerDot(Speaker, DragBehavior, Widget):
 
     color = ColorProperty()
 
-    def __init__(self, n: int, pos: Tuple[float, float], para: NounParadigm, experience: int, **kwargs) -> None:
+    def __init__(self, n: int, pos: tuple[float, float], para: NounParadigm, experience: int, **kwargs) -> None:
         Speaker.__init__(self, n, pos, para, experience, False)
         DragBehavior.__init__(self, **kwargs)
         Widget.__init__(self, **kwargs)
@@ -275,7 +275,7 @@ class SpeakerDot(Speaker, DragBehavior, Widget):
             return BroadcasterSpeakerDot(speaker.n, speaker.pos, deepcopy(speaker.para), speaker.experience)
         return SpeakerDot(speaker.n, speaker.pos, deepcopy(speaker.para), speaker.experience)
 
-    def on_mouse_pos(self, _window, pos: Tuple[float, float]) -> None:
+    def on_mouse_pos(self, _window, pos: tuple[float, float]) -> None:
         """Show/hide NameTag on hover."""
         if not self.parent:
             # why do SpeakerDots stay alive after AgoraWidget.clear_widgets(), this is stupid
@@ -321,7 +321,7 @@ class SpeakerDot(Speaker, DragBehavior, Widget):
         self.color = [sum(x) for x in zip([bias * c for c in color_a.rgb],
                                           [(1-bias) * c for c in color_b.rgb])]
 
-    def talk(self, pick: PairPick) -> Tuple[List[int], bool]:
+    def talk(self, pick: PairPick) -> tuple[CellIndex, bool]:
         """Interact with and influence another Speaker in the Agora."""
         retval = Speaker.talk(self, pick)
         if self.parent.graphics_on:
@@ -333,7 +333,7 @@ class SpeakerDot(Speaker, DragBehavior, Widget):
 class BroadcasterSpeakerDot(SpeakerDot):
     """The GUI representation of a broadcasting speaker who never listens to anyone."""
 
-    def __init__(self, n: int, pos: Tuple[float, float], para: NounParadigm, experience: int, **kwargs):
+    def __init__(self, n: int, pos: tuple[float, float], para: NounParadigm, experience: int, **kwargs):
         super().__init__(n, pos, para, experience, **kwargs)
         self.is_broadcaster = True
         self.update_color()
@@ -350,7 +350,7 @@ class NameTag(Label):
         super().__init__(**kwargs)
         Window.bind(mouse_pos=self.on_mouse_pos)
 
-    def on_mouse_pos(self, _window, pos: Tuple[float, float]) -> None:
+    def on_mouse_pos(self, _window, pos: tuple[float, float]) -> None:
         """Follow hovering mouse cursor."""
         if not App.get_running_app():
             # the App has been stopped, we're just about to exit for good
@@ -361,7 +361,7 @@ class NameTag(Label):
 class AgoraWidget(Widget, Agora):
     """An agora of speakers visualized on the screen."""
 
-    def __init__(self, speakers: Optional[List[Speaker]]=None, **kwargs) -> None:
+    def __init__(self, speakers: Optional[list[Speaker]]=None, **kwargs) -> None:
         Widget.__init__(self, **kwargs)
         Agora.__init__(self)
         self.state.speakers = speakers if speakers else []
@@ -437,7 +437,7 @@ class AgoraWidget(Widget, Agora):
         self.clear_widgets()
         self.clear_talk_arrow()
 
-    def load_speakers(self, speakers: List[Speaker]) -> None:
+    def load_speakers(self, speakers: list[Speaker]) -> None:
         """Add an array of pre-built Speakers."""
         # Attention: base class method is *not* called here
         for speaker in speakers:
@@ -484,6 +484,12 @@ class AgoraWidget(Widget, Agora):
             self.sim = None
             start_stop_button = get_button_layout().ids.start_stop_button
             start_stop_button.update_text()
+
+    def passive_decay(self) -> None:
+        """Make all speakers on the sidelines gradually forget their underrepresented forms."""
+        super().passive_decay()
+        if self.graphics_on:
+            self.update_speakerdot_colors()
 
     def simulate(self, *_) -> None:
         """Perform a single step of simulation: let one speaker talk to another."""

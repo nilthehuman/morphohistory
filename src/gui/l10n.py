@@ -39,7 +39,7 @@ class L10nDict(Dict[str, str]):
         return inv_me
 
 
-class IdentityDict(Dict[str, str]):
+class IdentityDict(L10nDict):
     def __getitem__(self, key: str) -> str:
         return key
 

@@ -2,10 +2,29 @@
 
 from abc import ABC, abstractmethod
 from itertools import chain
-from typing import Iterator, List, Self
+from typing import Iterator, overload, Self, Union
 
 def _clamp(value: float) -> float:
     return max(0., min(1., value))
+
+class _NounCellIndex(tuple[int, int]):
+    """Identifies a single NounParadigm entry: a tuple of two non-negative integers."""
+    def __new__(cls, number: int, case: int) -> Self:
+        assert number >= 0 and case >= 0
+        assert number < 2 and case < 13
+        new_cell_index = super().__new__(cls, (number, case))
+        return new_cell_index
+
+#class _VerbCellIndex(tuple[int, int]):
+#    """Identifies a single VerbParadigm entry: a tuple of five non-negative integers."""
+#    def __new__(cls, person: int, number: int, defness: int, tense: int, mood: int) -> Self:
+#        assert person >= 0 and number >= 0 and defness >= 0 and tense >= 0 and mood >= 0
+#        assert person < 3 and number < 2 and defness < 2 and tense < 2 and mood < 3
+#        new_cell_index = super().__new__(cls, (person, number, defness, tense, mood))
+#        return new_cell_index
+
+CellIndex = _NounCellIndex
+#CellIndex = Union[_NounCellIndex, _VerbCellIndex]
 
 class _Cell(ABC):
     """A weighted superposition of two word forms for the same morphosyntactic context."""
@@ -15,7 +34,7 @@ class _Cell(ABC):
         self.form_a = form_a
         self.form_b = form_b
         if not form_a and not form_b:
-            self.prominence = 0
+            self.prominence = 0.0
         else:
             self.prominence = prominence
 
@@ -36,15 +55,10 @@ class _Cell(ABC):
         """Returns own state for JSON serialization."""
         return self.__dict__
 
-    @staticmethod
-    def from_dict(cell_dict) -> Self:
-        """Reconstruct cell object from an imported JSON dictionary."""
-        return _NounCell(cell_dict['number'],
-                         cell_dict['case'],
-                         cell_dict['bias_a'],
-                         cell_dict['form_a'],
-                         cell_dict['form_b'],
-                         cell_dict['prominence'])
+    @classmethod
+    @abstractmethod
+    def from_dict(cls, cell_dict) -> Self:
+        """Construct cell object from an imported JSON dictionary."""
 
     def to_str_short(self) -> str:
         if 0 == len(self.form_a):
@@ -61,9 +75,17 @@ class _Paradigm(ABC):
     """A 2D or 5D matrix of competing noun of verb forms for given morphosyntactic contexts."""
     # pylint: disable=no-member
 
-    def __getitem__(self, index: int) -> List[_Cell]:
-        """Return a row of cells (assignable)."""
-        return self.para[index]
+    @overload
+    def __getitem__(self, index: CellIndex) -> _Cell:
+        pass
+
+    @overload
+    def __getitem__(self, index: int) -> list[_Cell]:
+        pass
+
+    @abstractmethod
+    def __getitem__(self, index: Union[CellIndex, int]) -> Union[_Cell, list[_Cell]]:
+        """Return a row of cells or a specific cell (assignable)."""
 
     def __str__(self) -> str:
         def descend(cells):
@@ -86,46 +108,26 @@ class _Paradigm(ABC):
 
     @staticmethod
     @abstractmethod
-    def morphosyntactic_properties(*indices) -> str:
+    def morphosyntactic_properties(index: CellIndex) -> str:
         """Get the set of features describing a cell's context.
         (Gregory Stump's exact term if I'm not mistaken.)"""
 
     @abstractmethod
-    def nudge(self, delta: float, *indices) -> None:
+    def nudge(self, delta: float, index: CellIndex) -> None:
         """Adjust the weights in a single cell."""
 
     @abstractmethod
-    def propagate(self, delta: float, *indices) -> None:
+    def propagate(self, delta: float, index: CellIndex) -> None:
         """Spread a weight change down each dimension in the paradigm."""
 
+    @abstractmethod
     def to_dict(self):
         """Returns own state for JSON serialization."""
-        # output non-empty cells only to save space
-        dense_para = []
-        assert len(self.para) <= 2
-        for num in self.para:
-            assert len(num) <= 13
-            dense_para.append([])
-            for cell in num:
-                if cell:
-                    dense_para[-1].append(cell)
-        my_dict = { 'para': dense_para }
-        return my_dict
 
-    @staticmethod
-    def from_dict(para_dict) -> Self:
-        """Reconstruct paradigm object from an imported JSON dictionary."""
-        assert list(para_dict.keys()) == ['para']
-        para_list = para_dict['para']
-        new_para = NounParadigm()  # TODO: generalize to *Paradigm
-        assert len(para_list) <= 2
-        while para_list:
-            list_below = para_list.pop(0)
-            assert len(list_below) <= 13
-            while list_below:
-                cell = _Cell.from_dict(list_below.pop(0))
-                new_para.para[cell.number][cell.case] = cell
-        return new_para
+    @classmethod
+    @abstractmethod
+    def from_dict(cls, para_dict) -> Self:
+        """Construct paradigm object from an imported JSON dictionary."""
 
     def passive_decay(self) -> None:
         """Gradually forget underdog variants in each cell."""
@@ -151,9 +153,19 @@ class _NounCell(_Cell):
         self.number = number
         self.case = case
 
+    @classmethod
+    def from_dict(cls, cell_dict) -> Self:
+        """Construct NounCell object from an imported JSON dictionary."""
+        return cls(cell_dict['number'],
+                   cell_dict['case'],
+                   cell_dict['bias_a'],
+                   cell_dict['form_a'],
+                   cell_dict['form_b'],
+                   cell_dict['prominence'])
+
     def get_morphosyntactic_properties(self) -> str:
         """Returns a string listing the cell's features."""
-        return NounParadigm.morphosyntactic_properties(self.number, self.case)
+        return NounParadigm.morphosyntactic_properties(CellIndex(self.number, self.case))
 
 class _VerbCell(_Cell):
     """A single cell in a verb paradigm for a given morphosyntactic context."""
@@ -165,6 +177,19 @@ class _VerbCell(_Cell):
         self.defness = defness
         self.tense = tense
         self.mood = mood
+
+    @classmethod
+    def from_dict(cls, cell_dict) -> Self:
+        """Construct VerbCell object from an imported JSON dictionary."""
+        return cls(cell_dict['person'],
+                   cell_dict['number'],
+                   cell_dict['defness'],
+                   cell_dict['tense'],
+                   cell_dict['mood'],
+                   cell_dict['bias_a'],
+                   cell_dict['form_a'],
+                   cell_dict['form_b'],
+                   cell_dict['prominence'])
 
     def get_morphosyntactic_properties(self) -> str:
         """Returns a string listing the cell's features."""
@@ -179,11 +204,60 @@ class NounParadigm(_Paradigm):
         self.para[0][0].form_b = form_b
         self.para[0][0].prominence = 1.0
 
+    @classmethod
+    def from_dict(cls, para_dict) -> Self:
+        """Construct paradigm object from an imported JSON dictionary."""
+        assert list(para_dict.keys()) == ['para']
+        para_list = para_dict['para']
+        new_para = cls()
+        assert len(para_list) <= 2
+        while para_list:
+            list_below = para_list.pop(0)
+            assert len(list_below) <= 13
+            while list_below:
+                cell = _NounCell.from_dict(list_below.pop(0))
+                new_para.para[cell.number][cell.case] = cell
+        return new_para
+
+    def to_dict(self):
+        """Returns own state for JSON serialization."""
+        # output non-empty cells only to save space
+        dense_para = []
+        assert len(self.para) <= 2
+        for num in self.para:
+            assert len(num) <= 13
+            dense_para.append([])
+            for cell in num:
+                if cell:
+                    dense_para[-1].append(cell)
+        my_dict = { 'para': dense_para }
+        return my_dict
+
+    @overload
+    def __getitem__(self, index: CellIndex) -> _Cell:
+        pass
+
+    @overload
+    def __getitem__(self, index: int) -> list[_Cell]:
+        pass
+
+    def __getitem__(self, index: Union[CellIndex, int]) -> Union[_Cell, list[_Cell]]:
+        """Return a row of cells or a specific cell (assignable)."""
+        if isinstance(index, CellIndex):
+            num = index[0]
+            cas = index[1]
+            return self.para[num][cas]
+        elif isinstance(index, int):
+            return self.para[index]
+        else:
+            raise TypeError
+
     @staticmethod
-    def morphosyntactic_properties(i: int, j: int) -> str:
+    def morphosyntactic_properties(index: CellIndex) -> str:
         """Get the set of features describing a cell's context.
         (Gregory Stump's exact term if I'm not mistaken.)"""
-        assert i < 2 and j < 13
+        num = index[0]
+        cas = index[1]
         numbers = {
             0 : 'sg',
             1 : 'pl'
@@ -203,22 +277,25 @@ class NounParadigm(_Paradigm):
            11 : 'del',
            12 : 'abl'
         }
-        return "{%s, %s}" % (numbers[i], cases[j])
+        return "{%s, %s}" % (numbers[num], cases[cas])
 
-    def nudge(self, delta: float, i: int, j: int) -> None:
+    def nudge(self, delta: float, index: CellIndex) -> None:
         """Adjust the weights in a single cell."""
-        assert i < 2 and j < 13
-        self.para[i][j].nudge(delta)
+        num = index[0]
+        cas = index[1]
+        self.para[num][cas].nudge(delta)
 
-    def propagate(self, delta: float, i: int, j: int) -> None:
+    def propagate(self, delta: float, index: CellIndex) -> None:
         """Spread a weight change down each dimension in the paradigm."""
-        delta = _clamp(self.para[i][j].prominence * delta)
-        for self_i in range(2):
-            if self_i != i:
-                self.nudge(delta, self_i, j)
-        for self_j in range(13):
-            if self_j != j:
-                self.nudge(delta, i, self_j)
+        num = index[0]
+        cas = index[1]
+        delta = _clamp(self.para[num][cas].prominence * delta)
+        for own_num in range(2):
+            if own_num != num:
+                self.nudge(delta, CellIndex(own_num, cas))
+        for own_cas in range(13):
+            if own_cas != cas:
+                self.nudge(delta, CellIndex(num, own_cas))
 
 class VerbParadigm(_Paradigm):
     """A 5D matrix representing the competing forms of a single verb.
