@@ -20,10 +20,10 @@ class LocalizedString(str):
 
 class LocalizedPopup(Popup):
     """Normal Kivy Popup windows but they automatically translate themselves."""
-    def open(self) -> None:
+    def open(self, *args, **kwargs) -> None:
         """Localize all user-visible strings inside our window before popping up."""
         localize_all_texts(self)
-        super().open()
+        super().open(*args, **kwargs)
 
 
 class L10nDict(Dict[str, str]):
@@ -34,7 +34,7 @@ class L10nDict(Dict[str, str]):
         except KeyError:
             return key
 
-    def inv_items(self) -> Self:
+    def inv_items(self) -> L10nDict:
         inv_me = L10nDict({ value : key for key, value in self.items() })
         return inv_me
 
