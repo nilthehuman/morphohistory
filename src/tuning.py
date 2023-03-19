@@ -192,11 +192,12 @@ class Tuner:
 
     def prepare_next_setup(self) -> None:
         """Initialize Agora according to next parameter setup."""
-        self.agora.load_demo_agora(DEMO_FACTORIES[SETTINGS.current_demo],
-                                   self.our_bias,
-                                   self.their_bias,
-                                   self.starting_experience,
-                                   self.inner_radius)
+        demo_factory = DEMO_FACTORIES[SETTINGS.current_demo]
+        demo_args = DemoArguments(our_bias=self.our_bias,
+                                  their_bias=self.their_bias,
+                                  starting_experience=self.starting_experience,
+                                  inner_radius=self.inner_radius)
+        self.agora.load_demo_agora(demo_factory, demo_args)
         self.new_result = copy(self.result_item)
         self.new_result['egyik_bias'] = self.our_bias
         self.new_result['masik_bias'] = self.their_bias
