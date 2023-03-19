@@ -13,7 +13,7 @@ from kivy.utils import get_color_from_hex, get_hex_from_color
 
 from .access_widgets import get_root, get_agora, get_settings
 from .confirm import ApplyConfirmedLabel, DiscardConfirmedLabel
-from .l10n import unlocalize, localize_all_texts, unlocalize_all_texts
+from .l10n import LocalizedString, unlocalize, localize_all_texts, unlocalize_all_texts
 
 from ..settings import SETTINGS
 from typing import Dict, Optional, Self, Union
@@ -236,6 +236,19 @@ class CustomSettings(Settings):
                 clamped_value += '%'
             self.config.set(section, key, clamped_value)
             self.reload_config_values(section, key)
+        elif isinstance(value, LocalizedString):
+            # prevent localized string values from seeping into the ConfigParser
+            unloc_value = unlocalize(value)
+            if 'gui_language' == key:
+                unloc_value = SETTINGS.GuiLanguage(unloc_value)
+            elif 'sim_distance_metric' == key:
+                unloc_value = SETTINGS.DistanceMetric(unloc_value)
+            elif 'sim_learning_model' == key:
+                unloc_value = SETTINGS.LearningModel(unloc_value)
+            else:
+                assert False
+            self.config.set(section, key, unloc_value)
+            # no reload on purpose: preserve localized strings on user interface
         super().on_config_change(config, section, key, value)
 
     def commit_settings(self, write_to_file: bool=True, force_update: bool=False) -> None:
@@ -248,6 +261,7 @@ class CustomSettings(Settings):
         update_starting_experience = False
         for section in self.config.sections():
             for (key, new_value) in self.config.items(section):
+                assert not isinstance(new_value, LocalizedString)
                 # parse new_value from its raw string state
                 value_type = _SETTINGS_UI[key]['type']
                 if 'bool' == value_type:
@@ -264,15 +278,12 @@ class CustomSettings(Settings):
                         update_starting_experience = True
                 elif 'options' == value_type:
                     if new_value != getattr(SETTINGS, key):
-                        new_value = unlocalize(new_value)
                         if 'gui_language' == key:
-                            new_value = SETTINGS.GuiLanguage(new_value)
                             update_lang = True
                         elif 'sim_distance_metric' == key:
-                            new_value = SETTINGS.DistanceMetric(new_value)
                             update_grid = True
                         elif 'sim_learning_model' == key:
-                            new_value = SETTINGS.LearningModel(new_value)
+                            pass
                         else:
                             assert False
                 elif 'string' == value_type:
@@ -286,9 +297,7 @@ class CustomSettings(Settings):
         # update application language
         if update_lang:
             unlocalize_all_texts(get_root())
-            SETTINGS.gui_language = SETTINGS.GuiLanguage(unlocalize(self.config['Appearance']['gui_language']))
-            # prevent localized values from being written to the config file
-            self.config.set('Appearance', 'gui_language', SETTINGS.gui_language)
+            SETTINGS.gui_language = SETTINGS.GuiLanguage(self.config['Appearance']['gui_language'])
             localize_all_texts(get_root())
             # strings like "%d+ iterations" are currently not handled by the l10n system
             get_agora().update_iteration_counter()
