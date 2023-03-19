@@ -56,7 +56,4 @@ def forall_widgets(callback: Callable[[Widget], None], root: Widget) -> None:
     collect_children(root)
     # visit all widgets
     for child in all_children:
-        try:
-            callback(child)
-        except AttributeError:
-            pass  # that's fine
+        callback(child)

@@ -99,16 +99,22 @@ def unlocalize(string: str) -> str:
 # Translate all user-visible strings in all UI Widgets down from a widget
 # to the currently set GUI language.
 def _localize_widget(widget: Widget) -> None:
-    widget.text = localize(widget.text)
-    widget.values = map(localize, widget.values)  # for the DemoSpinner's sake
+    try:
+        widget.text = localize(widget.text)
+        widget.values = map(localize, widget.values)  # for the DemoSpinner's sake
+    except AttributeError:
+        pass  # that's fine
 
 localize_all_texts = partial(forall_widgets, _localize_widget)
 
 # Translate all user-visible strings in all UI Widgets down from a widget
 # from the currently set GUI langauge back to English.
 def _unlocalize_widget(widget: Widget) -> None:
-    widget.text = unlocalize(widget.text)
-    widget.values = map(unlocalize, widget.values)  # for the DemoSpinner's sake
+    try:
+        widget.text = unlocalize(widget.text)
+        widget.values = map(unlocalize, widget.values)  # for the DemoSpinner's sake
+    except AttributeError:
+        pass  # that's fine
 
 unlocalize_all_texts = partial(forall_widgets, _unlocalize_widget)
 

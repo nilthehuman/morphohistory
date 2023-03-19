@@ -47,7 +47,7 @@ class MorphoHistoryApp(App):
 
     def on_start(self) -> None:
         """Prepare GUI elements that need to know about the Widget tree to complete their setup."""
-        forall_widgets(lambda w: w.on_gui_ready(), self.root)
+        forall_widgets(lambda w: w.on_gui_ready() if hasattr(w, 'on_gui_ready') else None, self.root)
 
 if __name__ == '__main__':
     MorphoHistoryApp().run()
