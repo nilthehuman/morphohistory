@@ -166,6 +166,8 @@ _LOCALIZE_TEXTS_HUN = L10nDict({
     "constant" : "konstans",
     "Manhattan" : "Manhattan",
     "Euclidean" : "euklideszi",
+    "Learning model" : "Tanulási modell",
+    "Control how speakers update their biases after an interaction" : "Hogyan frissüljenek a beszélők súlyai egy interakciót követően",
     "harmonic" : "harmonikus lecsengés",
     "Rescorla-Wagner (vanilla)" : "Rescorla-Wagner (hagyományos)",
     "Rescorla-Wagner (weighted)" : "Rescorla-Wagner (súlyozott)",
