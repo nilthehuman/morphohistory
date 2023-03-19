@@ -26,6 +26,8 @@ clean:
 	rm -rf src/gui/__pycache__/
 	rm -rf tests/__pycache__/
 	rm -rf build/
+	rm -rf .mypy_cache/
+	rm -rf .pytest_cache/
 
 run:
 	$(PYTHON) .
