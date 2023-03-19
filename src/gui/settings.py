@@ -13,7 +13,7 @@ from kivy.utils import get_color_from_hex, get_hex_from_color
 
 from .access_widgets import get_root, get_agora, get_settings
 from .confirm import ApplyConfirmedLabel, DiscardConfirmedLabel
-from .l10n import LocalizedString, unlocalize, localize_all_texts, unlocalize_all_texts
+from .l10n import LocalizedString, localize, unlocalize, localize_all_texts, unlocalize_all_texts
 
 from ..settings import SETTINGS
 from typing import Dict, Optional, Self, Union
@@ -371,7 +371,7 @@ class CustomSettings(Settings):
                                   (value, child.key, options[0]))
                             value = options[0]
                             self.config.set(child.section, child.key, value)
-                    child.value = value
+                    child.value = localize(value)
 
 class ApplySettingsButton(Button):
     """Button to destructively set the user's choices in the global settings object."""
