@@ -23,7 +23,7 @@ from kivy.app import App
 
 # kludge relative import for Python REPL
 sys_path.append('..')
-from src.gui.app import MorphoHistoryApp
+from ..src.gui.app import MorphoHistoryApp
 
 # suppress warnings about internal Kivy warning
 pytestmark = pytest.mark.filterwarnings("ignore:The 'warn' method is deprecated")
