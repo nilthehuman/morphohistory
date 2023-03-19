@@ -447,8 +447,11 @@ class AgoraWidget(Widget, Agora):
     def load_speakers(self, speakers: list[Speaker]) -> None:
         """Add an array of pre-built Speakers."""
         # Attention: base class method is *not* called here
+        assert not self.state.speakers
+        assert not self.speaker_pairs
         for speaker in speakers:
             self.add_speakerdot(SpeakerDot.fromspeaker(speaker))
+        assert self.state.speakers
         assert not all(s.is_broadcaster for s in self.state.speakers)
 
     def start_sim(self) -> None:

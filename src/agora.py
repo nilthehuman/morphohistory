@@ -154,9 +154,11 @@ class Agora:
 
     def load_speakers(self, speakers: list[Speaker]) -> None:
         """Replace current speaker community with a copy of the argument."""
+        assert not self.state.speakers
+        assert not self.speaker_pairs
         self.state.speakers = [Speaker.fromspeaker(s) for s in speakers]
+        assert self.state.speakers
         assert not all(s.is_broadcaster for s in self.state.speakers)
-        self.clear_caches()
 
     def add_speaker(self, speaker: Speaker) -> None:
         """Add a virtual speaker to the simulated community."""
