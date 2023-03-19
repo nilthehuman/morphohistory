@@ -31,7 +31,8 @@ pytestmark = pytest.mark.filterwarnings("ignore:The 'warn' method is deprecated"
 # PyAutoGUI will look for these GUI elements on the screen
 _IMAGE_DIRECTORY = join(dirname(__file__), "images")
 _IMAGE_PATHS = {
-    'start_stop_button'   : join(_IMAGE_DIRECTORY, "start_stop_button.png"),
+    'start_button'        : join(_IMAGE_DIRECTORY, "start_button.png"),
+    'stop_button'         : join(_IMAGE_DIRECTORY, "stop_button.png"),
     'speed_slider_knob'   : join(_IMAGE_DIRECTORY, "speed_slider_knob.png"),
     'fast_forward_button' : join(_IMAGE_DIRECTORY, "fast_forward_button.png"),
     'rewind_button'       : join(_IMAGE_DIRECTORY, "rewind_button.png"),
@@ -64,9 +65,8 @@ def test_survive_keypresses(keys):
 
 @pytest.mark.parametrize("buttons",
                          [
-                             ['start_stop_button'],
-                             # FIXME: button text changes when clicked...
-                             #['start_stop_button', 'start_stop_button'],
+                             ['start_button'],
+                             ['start_button', 'stop_button'],
                              ['fast_forward_button'],
                              ['fast_forward_button', 'rewind_button'],
                              ['second_tab_header', 'first_tab_header']
@@ -98,7 +98,7 @@ def test_survive_simulation_speed_adjustment():
     def delayed_user_actions():
         global _FAIL_MSG
         sleep(2)
-        button = 'start_stop_button'
+        button = 'start_button'
         button_pos = pyautogui.locateCenterOnScreen(_IMAGE_PATHS[button])
         if button_pos is None:
             _FAIL_MSG = 'Unable to locate %s on screen' % button
