@@ -51,10 +51,10 @@ _FAIL_MSG = None
                          ])
 def test_survive_keypresses(keys):
     def delayed_user_actions():
-        sleep(2)
+        sleep(1)
         for key in keys:
             input_module.press(key)
-            sleep(2)
+            sleep(1)
         input_module.press('q') # quit application
         sleep(1)
     test_thread = Thread(target=delayed_user_actions)
@@ -75,16 +75,17 @@ def test_survive_button_clicks(buttons):
     def delayed_user_actions():
         global _FAIL_MSG
         for button in buttons:
+            sleep(1)
             button_pos = pyautogui.locateCenterOnScreen(_IMAGE_PATHS[button])
             if button_pos is None:
                 _FAIL_MSG = 'Unable to locate %s on screen' % button
                 App.get_running_app().stop()
                 return
             input_module.click(*button_pos)
-            sleep(2)
+            sleep(1)
             input_module.move(-300, 0) # move cursor off button
         input_module.press('q') # quit application
-        sleep(2)
+        sleep(1)
     test_thread = Thread(target=delayed_user_actions)
     test_thread.start()
     MorphoHistoryApp().run()
@@ -97,7 +98,7 @@ def test_survive_button_clicks(buttons):
 def test_survive_simulation_speed_adjustment():
     def delayed_user_actions():
         global _FAIL_MSG
-        sleep(2)
+        sleep(1)
         button = 'start_button'
         button_pos = pyautogui.locateCenterOnScreen(_IMAGE_PATHS[button])
         if button_pos is None:
@@ -114,7 +115,7 @@ def test_survive_simulation_speed_adjustment():
             return
         input_module.moveTo(knob_pos)
         input_module.drag(50, 0, 1, button='left')
-        sleep(2)
+        sleep(1)
         input_module.press('q') # quit application
         sleep(1)
     test_thread = Thread(target=delayed_user_actions)
