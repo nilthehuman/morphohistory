@@ -1,5 +1,7 @@
 """Smoke tests to ensure the basic stability of the application."""
 
+from logging import getLogger, WARNING
+getLogger().setLevel(WARNING)
 from os.path import dirname, join
 
 import pyautogui
