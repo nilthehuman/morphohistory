@@ -212,6 +212,7 @@ class Agora:
     def simulate(self, *_) -> None: # TODO: use threading to perform independent picks in parallel
         """Perform one iteration: pick two individuals to talk to each other
         and update the hearer's state based on the speaker's."""
+        assert self.state and self.state.speakers
         debug("Agora: Iterating simulation...")
         if SETTINGS.sim_single_cell and SETTINGS.LearningModel.HARMONIC != SETTINGS.sim_learning_model:
             warning("Agora: Running Rescorla-Wagner model with a single paradigm cell.")
