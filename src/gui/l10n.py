@@ -34,7 +34,7 @@ class L10nDict(Dict[str, str]):
         except KeyError:
             return key
 
-    def inv_items(self) -> L10nDict:
+    def inv_items(self) -> 'L10nDict':
         inv_me = L10nDict({ value : key for key, value in self.items() })
         return inv_me
 
