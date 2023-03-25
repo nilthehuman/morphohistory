@@ -30,6 +30,7 @@ class Speaker:
     def frombias(cls, n: int, pos: tuple[float, float], bias_a: float,
                  experience: int=SETTINGS.starting_experience, is_broadcaster: bool=False) -> Self:
         """Construct a Speaker from a single bias value."""
+        assert SETTINGS.paradigm.para is not None
         para = NounParadigm(bias_a=bias_a, form_a=SETTINGS.paradigm.para[0][0].form_a,
                                            form_b=SETTINGS.paradigm.para[0][0].form_b)
         new_speaker = cls(n, pos, para, experience, is_broadcaster)
