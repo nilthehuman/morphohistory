@@ -105,6 +105,7 @@ class Tuner:
         # state to keep track of simulation parameters and results
         self.agora = Agora()
         self.results: list[dict] = []
+        self.new_result = copy(self.result_item)
         self.current_setup = 0
         self.current_rep = 0
         self.num_total_reps = 0
