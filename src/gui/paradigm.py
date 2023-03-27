@@ -87,10 +87,7 @@ class ParadigmTable(GridLayout):
         header_label = Label(text="prominence", size_hint_x=0.1)
         self.add_widget(header_label)
         for row in range(1, 15):
-            if row == 1:
-                text_input = CellTextInput(always_enabled=True, size_hint_x=0.1, text='1')
-            else:
-                text_input = CellTextInput(size_hint_x=0.1, text='1')
+            text_input = CellTextInput(size_hint_x=0.1, text='1')
             self.add_widget(text_input)
 
         header_label = Label(text="PLUR (form A)", size_hint_x=0.175)
