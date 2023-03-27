@@ -16,6 +16,9 @@ lint:
 test:
 	pytest -x -ra
 
+test_redux:
+	pytest -x -ra tests/test_regress.py tests/test_unit.py
+
 typecheck:
 	mypy -p src --ignore-missing-imports
 
