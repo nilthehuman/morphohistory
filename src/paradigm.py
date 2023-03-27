@@ -306,7 +306,7 @@ class NounParadigm(_Paradigm):
         assert isinstance(index, _NounCellIndex)
         num = index[0]
         cas = index[1]
-        delta = _clamp(self.para[num][cas].prominence * delta)
+        delta = self.para[num][cas].prominence * delta
         for own_num in range(2):
             if own_num != num:
                 self.nudge(delta, _NounCellIndex(own_num, cas))
