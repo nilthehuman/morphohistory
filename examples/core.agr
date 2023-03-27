@@ -7972,7 +7972,7 @@
        "case": 0
       },
       {
-       "bias_a": 0.5,
+       "bias_a": 0.0,
        "form_a": "roz\u00e9t",
        "form_b": "roz\u00e9t",
        "prominence": 1.0,
@@ -7980,7 +7980,7 @@
        "case": 1
       },
       {
-       "bias_a": 0.5,
+       "bias_a": 0.0,
        "form_a": "roz\u00e9nak",
        "form_b": "roz\u00e9nek",
        "prominence": 1.0,
@@ -7988,7 +7988,7 @@
        "case": 2
       },
       {
-       "bias_a": 0.5,
+       "bias_a": 0.0,
        "form_a": "roz\u00e9val",
        "form_b": "roz\u00e9vel",
        "prominence": 1.0,
@@ -7996,7 +7996,7 @@
        "case": 3
       },
       {
-       "bias_a": 0.5,
+       "bias_a": 0.0,
        "form_a": "roz\u00e9v\u00e1",
        "form_b": "roz\u00e9v\u00e9",
        "prominence": 1.0,
@@ -8004,7 +8004,7 @@
        "case": 4
       },
       {
-       "bias_a": 0.5,
+       "bias_a": 0.0,
        "form_a": "roz\u00e9ban",
        "form_b": "roz\u00e9ben",
        "prominence": 1.0,
@@ -8012,7 +8012,7 @@
        "case": 5
       },
       {
-       "bias_a": 0.5,
+       "bias_a": 0.0,
        "form_a": "roz\u00e9n",
        "form_b": "roz\u00e9n",
        "prominence": 1.0,
@@ -8020,7 +8020,7 @@
        "case": 6
       },
       {
-       "bias_a": 0.5,
+       "bias_a": 0.0,
        "form_a": "roz\u00e9n\u00e1l",
        "form_b": "roz\u00e9n\u00e9l",
        "prominence": 1.0,
@@ -8028,7 +8028,7 @@
        "case": 7
       },
       {
-       "bias_a": 0.5,
+       "bias_a": 0.0,
        "form_a": "roz\u00e9ba",
        "form_b": "roz\u00e9be",
        "prominence": 1.0,
@@ -8036,7 +8036,7 @@
        "case": 8
       },
       {
-       "bias_a": 0.5,
+       "bias_a": 0.0,
        "form_a": "roz\u00e9ra",
        "form_b": "roz\u00e9re",
        "prominence": 1.0,
@@ -8044,7 +8044,7 @@
        "case": 9
       },
       {
-       "bias_a": 0.5,
+       "bias_a": 0.0,
        "form_a": "roz\u00e9hoz",
        "form_b": "roz\u00e9hez",
        "prominence": 1.0,
@@ -8052,7 +8052,7 @@
        "case": 10
       },
       {
-       "bias_a": 0.5,
+       "bias_a": 0.0,
        "form_a": "roz\u00e9b\u00f3l",
        "form_b": "roz\u00e9b\u0151l",
        "prominence": 1.0,
@@ -8060,7 +8060,7 @@
        "case": 11
       },
       {
-       "bias_a": 0.5,
+       "bias_a": 0.0,
        "form_a": "roz\u00e9r\u00f3l",
        "form_b": "roz\u00e9r\u0151l",
        "prominence": 1.0,
@@ -8068,7 +8068,7 @@
        "case": 12
       },
       {
-       "bias_a": 0.5,
+       "bias_a": 0.0,
        "form_a": "roz\u00e9t\u00f3l",
        "form_b": "roz\u00e9t\u0151l",
        "prominence": 1.0,
@@ -8078,7 +8078,7 @@
      ],
      [
       {
-       "bias_a": 0.5,
+       "bias_a": 0.0,
        "form_a": "roz\u00e9k",
        "form_b": "roz\u00e9k",
        "prominence": 1.0,
@@ -8086,7 +8086,7 @@
        "case": 0
       },
       {
-       "bias_a": 0.5,
+       "bias_a": 0.0,
        "form_a": "roz\u00e9kat",
        "form_b": "roz\u00e9ket",
        "prominence": 1.0,
@@ -8094,7 +8094,7 @@
        "case": 1
       },
       {
-       "bias_a": 0.5,
+       "bias_a": 0.0,
        "form_a": "roz\u00e9knak",
        "form_b": "roz\u00e9knek",
        "prominence": 1.0,
@@ -8102,7 +8102,7 @@
        "case": 2
       },
       {
-       "bias_a": 0.5,
+       "bias_a": 0.0,
        "form_a": "roz\u00e9kkal",
        "form_b": "roz\u00e9kkel",
        "prominence": 1.0,
@@ -8110,7 +8110,7 @@
        "case": 3
       },
       {
-       "bias_a": 0.5,
+       "bias_a": 0.0,
        "form_a": "roz\u00e9kk\u00e1",
        "form_b": "roz\u00e9kk\u00e9",
        "prominence": 1.0,
@@ -8118,7 +8118,7 @@
        "case": 4
       },
       {
-       "bias_a": 0.5,
+       "bias_a": 0.0,
        "form_a": "roz\u00e9kban",
        "form_b": "roz\u00e9kben",
        "prominence": 1.0,
@@ -8126,7 +8126,7 @@
        "case": 5
       },
       {
-       "bias_a": 0.5,
+       "bias_a": 0.0,
        "form_a": "roz\u00e9kon",
        "form_b": "roz\u00e9ken",
        "prominence": 1.0,
@@ -8134,7 +8134,7 @@
        "case": 6
       },
       {
-       "bias_a": 0.5,
+       "bias_a": 0.0,
        "form_a": "roz\u00e9kn\u00e1l",
        "form_b": "roz\u00e9kn\u00e9l",
        "prominence": 1.0,
@@ -8142,7 +8142,7 @@
        "case": 7
       },
       {
-       "bias_a": 0.5,
+       "bias_a": 0.0,
        "form_a": "roz\u00e9kba",
        "form_b": "roz\u00e9kbe",
        "prominence": 1.0,
@@ -8150,7 +8150,7 @@
        "case": 8
       },
       {
-       "bias_a": 0.5,
+       "bias_a": 0.0,
        "form_a": "roz\u00e9kra",
        "form_b": "roz\u00e9kre",
        "prominence": 1.0,
@@ -8158,7 +8158,7 @@
        "case": 9
       },
       {
-       "bias_a": 0.5,
+       "bias_a": 0.0,
        "form_a": "roz\u00e9khoz",
        "form_b": "roz\u00e9khez",
        "prominence": 1.0,
@@ -8166,7 +8166,7 @@
        "case": 10
       },
       {
-       "bias_a": 0.5,
+       "bias_a": 0.0,
        "form_a": "roz\u00e9kb\u00f3l",
        "form_b": "roz\u00e9kb\u0151l",
        "prominence": 1.0,
@@ -8174,7 +8174,7 @@
        "case": 11
       },
       {
-       "bias_a": 0.5,
+       "bias_a": 0.0,
        "form_a": "roz\u00e9kr\u00f3l",
        "form_b": "roz\u00e9kr\u0151l",
        "prominence": 1.0,
@@ -8182,7 +8182,7 @@
        "case": 12
       },
       {
-       "bias_a": 0.5,
+       "bias_a": 0.0,
        "form_a": "roz\u00e9kt\u00f3l",
        "form_b": "roz\u00e9kt\u0151l",
        "prominence": 1.0,
@@ -8213,7 +8213,7 @@
        "case": 0
       },
       {
-       "bias_a": 0.5,
+       "bias_a": 0.0,
        "form_a": "roz\u00e9t",
        "form_b": "roz\u00e9t",
        "prominence": 1.0,
@@ -8221,7 +8221,7 @@
        "case": 1
       },
       {
-       "bias_a": 0.5,
+       "bias_a": 0.0,
        "form_a": "roz\u00e9nak",
        "form_b": "roz\u00e9nek",
        "prominence": 1.0,
@@ -8229,7 +8229,7 @@
        "case": 2
       },
       {
-       "bias_a": 0.5,
+       "bias_a": 0.0,
        "form_a": "roz\u00e9val",
        "form_b": "roz\u00e9vel",
        "prominence": 1.0,
@@ -8237,7 +8237,7 @@
        "case": 3
       },
       {
-       "bias_a": 0.5,
+       "bias_a": 0.0,
        "form_a": "roz\u00e9v\u00e1",
        "form_b": "roz\u00e9v\u00e9",
        "prominence": 1.0,
@@ -8245,7 +8245,7 @@
        "case": 4
       },
       {
-       "bias_a": 0.5,
+       "bias_a": 0.0,
        "form_a": "roz\u00e9ban",
        "form_b": "roz\u00e9ben",
        "prominence": 1.0,
@@ -8253,7 +8253,7 @@
        "case": 5
       },
       {
-       "bias_a": 0.5,
+       "bias_a": 0.0,
        "form_a": "roz\u00e9n",
        "form_b": "roz\u00e9n",
        "prominence": 1.0,
@@ -8261,7 +8261,7 @@
        "case": 6
       },
       {
-       "bias_a": 0.5,
+       "bias_a": 0.0,
        "form_a": "roz\u00e9n\u00e1l",
        "form_b": "roz\u00e9n\u00e9l",
        "prominence": 1.0,
@@ -8269,7 +8269,7 @@
        "case": 7
       },
       {
-       "bias_a": 0.5,
+       "bias_a": 0.0,
        "form_a": "roz\u00e9ba",
        "form_b": "roz\u00e9be",
        "prominence": 1.0,
@@ -8277,7 +8277,7 @@
        "case": 8
       },
       {
-       "bias_a": 0.5,
+       "bias_a": 0.0,
        "form_a": "roz\u00e9ra",
        "form_b": "roz\u00e9re",
        "prominence": 1.0,
@@ -8285,7 +8285,7 @@
        "case": 9
       },
       {
-       "bias_a": 0.5,
+       "bias_a": 0.0,
        "form_a": "roz\u00e9hoz",
        "form_b": "roz\u00e9hez",
        "prominence": 1.0,
@@ -8293,7 +8293,7 @@
        "case": 10
       },
       {
-       "bias_a": 0.5,
+       "bias_a": 0.0,
        "form_a": "roz\u00e9b\u00f3l",
        "form_b": "roz\u00e9b\u0151l",
        "prominence": 1.0,
@@ -8301,7 +8301,7 @@
        "case": 11
       },
       {
-       "bias_a": 0.5,
+       "bias_a": 0.0,
        "form_a": "roz\u00e9r\u00f3l",
        "form_b": "roz\u00e9r\u0151l",
        "prominence": 1.0,
@@ -8309,7 +8309,7 @@
        "case": 12
       },
       {
-       "bias_a": 0.5,
+       "bias_a": 0.0,
        "form_a": "roz\u00e9t\u00f3l",
        "form_b": "roz\u00e9t\u0151l",
        "prominence": 1.0,
@@ -8319,7 +8319,7 @@
      ],
      [
       {
-       "bias_a": 0.5,
+       "bias_a": 0.0,
        "form_a": "roz\u00e9k",
        "form_b": "roz\u00e9k",
        "prominence": 1.0,
@@ -8327,7 +8327,7 @@
        "case": 0
       },
       {
-       "bias_a": 0.5,
+       "bias_a": 0.0,
        "form_a": "roz\u00e9kat",
        "form_b": "roz\u00e9ket",
        "prominence": 1.0,
@@ -8335,7 +8335,7 @@
        "case": 1
       },
       {
-       "bias_a": 0.5,
+       "bias_a": 0.0,
        "form_a": "roz\u00e9knak",
        "form_b": "roz\u00e9knek",
        "prominence": 1.0,
@@ -8343,7 +8343,7 @@
        "case": 2
       },
       {
-       "bias_a": 0.5,
+       "bias_a": 0.0,
        "form_a": "roz\u00e9kkal",
        "form_b": "roz\u00e9kkel",
        "prominence": 1.0,
@@ -8351,7 +8351,7 @@
        "case": 3
       },
       {
-       "bias_a": 0.5,
+       "bias_a": 0.0,
        "form_a": "roz\u00e9kk\u00e1",
        "form_b": "roz\u00e9kk\u00e9",
        "prominence": 1.0,
@@ -8359,7 +8359,7 @@
        "case": 4
       },
       {
-       "bias_a": 0.5,
+       "bias_a": 0.0,
        "form_a": "roz\u00e9kban",
        "form_b": "roz\u00e9kben",
        "prominence": 1.0,
@@ -8367,7 +8367,7 @@
        "case": 5
       },
       {
-       "bias_a": 0.5,
+       "bias_a": 0.0,
        "form_a": "roz\u00e9kon",
        "form_b": "roz\u00e9ken",
        "prominence": 1.0,
@@ -8375,7 +8375,7 @@
        "case": 6
       },
       {
-       "bias_a": 0.5,
+       "bias_a": 0.0,
        "form_a": "roz\u00e9kn\u00e1l",
        "form_b": "roz\u00e9kn\u00e9l",
        "prominence": 1.0,
@@ -8383,7 +8383,7 @@
        "case": 7
       },
       {
-       "bias_a": 0.5,
+       "bias_a": 0.0,
        "form_a": "roz\u00e9kba",
        "form_b": "roz\u00e9kbe",
        "prominence": 1.0,
@@ -8391,7 +8391,7 @@
        "case": 8
       },
       {
-       "bias_a": 0.5,
+       "bias_a": 0.0,
        "form_a": "roz\u00e9kra",
        "form_b": "roz\u00e9kre",
        "prominence": 1.0,
@@ -8399,7 +8399,7 @@
        "case": 9
       },
       {
-       "bias_a": 0.5,
+       "bias_a": 0.0,
        "form_a": "roz\u00e9khoz",
        "form_b": "roz\u00e9khez",
        "prominence": 1.0,
@@ -8407,7 +8407,7 @@
        "case": 10
       },
       {
-       "bias_a": 0.5,
+       "bias_a": 0.0,
        "form_a": "roz\u00e9kb\u00f3l",
        "form_b": "roz\u00e9kb\u0151l",
        "prominence": 1.0,
@@ -8415,7 +8415,7 @@
        "case": 11
       },
       {
-       "bias_a": 0.5,
+       "bias_a": 0.0,
        "form_a": "roz\u00e9kr\u00f3l",
        "form_b": "roz\u00e9kr\u0151l",
        "prominence": 1.0,
@@ -8423,7 +8423,7 @@
        "case": 12
       },
       {
-       "bias_a": 0.5,
+       "bias_a": 0.0,
        "form_a": "roz\u00e9kt\u00f3l",
        "form_b": "roz\u00e9kt\u0151l",
        "prominence": 1.0,
@@ -8454,7 +8454,7 @@
        "case": 0
       },
       {
-       "bias_a": 0.5,
+       "bias_a": 0.0,
        "form_a": "roz\u00e9t",
        "form_b": "roz\u00e9t",
        "prominence": 1.0,
@@ -8462,7 +8462,7 @@
        "case": 1
       },
       {
-       "bias_a": 0.5,
+       "bias_a": 0.0,
        "form_a": "roz\u00e9nak",
        "form_b": "roz\u00e9nek",
        "prominence": 1.0,
@@ -8470,7 +8470,7 @@
        "case": 2
       },
       {
-       "bias_a": 0.5,
+       "bias_a": 0.0,
        "form_a": "roz\u00e9val",
        "form_b": "roz\u00e9vel",
        "prominence": 1.0,
@@ -8478,7 +8478,7 @@
        "case": 3
       },
       {
-       "bias_a": 0.5,
+       "bias_a": 0.0,
        "form_a": "roz\u00e9v\u00e1",
        "form_b": "roz\u00e9v\u00e9",
        "prominence": 1.0,
@@ -8486,7 +8486,7 @@
        "case": 4
       },
       {
-       "bias_a": 0.5,
+       "bias_a": 0.0,
        "form_a": "roz\u00e9ban",
        "form_b": "roz\u00e9ben",
        "prominence": 1.0,
@@ -8494,7 +8494,7 @@
        "case": 5
       },
       {
-       "bias_a": 0.5,
+       "bias_a": 0.0,
        "form_a": "roz\u00e9n",
        "form_b": "roz\u00e9n",
        "prominence": 1.0,
@@ -8502,7 +8502,7 @@
        "case": 6
       },
       {
-       "bias_a": 0.5,
+       "bias_a": 0.0,
        "form_a": "roz\u00e9n\u00e1l",
        "form_b": "roz\u00e9n\u00e9l",
        "prominence": 1.0,
@@ -8510,7 +8510,7 @@
        "case": 7
       },
       {
-       "bias_a": 0.5,
+       "bias_a": 0.0,
        "form_a": "roz\u00e9ba",
        "form_b": "roz\u00e9be",
        "prominence": 1.0,
@@ -8518,7 +8518,7 @@
        "case": 8
       },
       {
-       "bias_a": 0.5,
+       "bias_a": 0.0,
        "form_a": "roz\u00e9ra",
        "form_b": "roz\u00e9re",
        "prominence": 1.0,
@@ -8526,7 +8526,7 @@
        "case": 9
       },
       {
-       "bias_a": 0.5,
+       "bias_a": 0.0,
        "form_a": "roz\u00e9hoz",
        "form_b": "roz\u00e9hez",
        "prominence": 1.0,
@@ -8534,7 +8534,7 @@
        "case": 10
       },
       {
-       "bias_a": 0.5,
+       "bias_a": 0.0,
        "form_a": "roz\u00e9b\u00f3l",
        "form_b": "roz\u00e9b\u0151l",
        "prominence": 1.0,
@@ -8542,7 +8542,7 @@
        "case": 11
       },
       {
-       "bias_a": 0.5,
+       "bias_a": 0.0,
        "form_a": "roz\u00e9r\u00f3l",
        "form_b": "roz\u00e9r\u0151l",
        "prominence": 1.0,
@@ -8550,7 +8550,7 @@
        "case": 12
       },
       {
-       "bias_a": 0.5,
+       "bias_a": 0.0,
        "form_a": "roz\u00e9t\u00f3l",
        "form_b": "roz\u00e9t\u0151l",
        "prominence": 1.0,
@@ -8560,7 +8560,7 @@
      ],
      [
       {
-       "bias_a": 0.5,
+       "bias_a": 0.0,
        "form_a": "roz\u00e9k",
        "form_b": "roz\u00e9k",
        "prominence": 1.0,
@@ -8568,7 +8568,7 @@
        "case": 0
       },
       {
-       "bias_a": 0.5,
+       "bias_a": 0.0,
        "form_a": "roz\u00e9kat",
        "form_b": "roz\u00e9ket",
        "prominence": 1.0,
@@ -8576,7 +8576,7 @@
        "case": 1
       },
       {
-       "bias_a": 0.5,
+       "bias_a": 0.0,
        "form_a": "roz\u00e9knak",
        "form_b": "roz\u00e9knek",
        "prominence": 1.0,
@@ -8584,7 +8584,7 @@
        "case": 2
       },
       {
-       "bias_a": 0.5,
+       "bias_a": 0.0,
        "form_a": "roz\u00e9kkal",
        "form_b": "roz\u00e9kkel",
        "prominence": 1.0,
@@ -8592,7 +8592,7 @@
        "case": 3
       },
       {
-       "bias_a": 0.5,
+       "bias_a": 0.0,
        "form_a": "roz\u00e9kk\u00e1",
        "form_b": "roz\u00e9kk\u00e9",
        "prominence": 1.0,
@@ -8600,7 +8600,7 @@
        "case": 4
       },
       {
-       "bias_a": 0.5,
+       "bias_a": 0.0,
        "form_a": "roz\u00e9kban",
        "form_b": "roz\u00e9kben",
        "prominence": 1.0,
@@ -8608,7 +8608,7 @@
        "case": 5
       },
       {
-       "bias_a": 0.5,
+       "bias_a": 0.0,
        "form_a": "roz\u00e9kon",
        "form_b": "roz\u00e9ken",
        "prominence": 1.0,
@@ -8616,7 +8616,7 @@
        "case": 6
       },
       {
-       "bias_a": 0.5,
+       "bias_a": 0.0,
        "form_a": "roz\u00e9kn\u00e1l",
        "form_b": "roz\u00e9kn\u00e9l",
        "prominence": 1.0,
@@ -8624,7 +8624,7 @@
        "case": 7
       },
       {
-       "bias_a": 0.5,
+       "bias_a": 0.0,
        "form_a": "roz\u00e9kba",
        "form_b": "roz\u00e9kbe",
        "prominence": 1.0,
@@ -8632,7 +8632,7 @@
        "case": 8
       },
       {
-       "bias_a": 0.5,
+       "bias_a": 0.0,
        "form_a": "roz\u00e9kra",
        "form_b": "roz\u00e9kre",
        "prominence": 1.0,
@@ -8640,7 +8640,7 @@
        "case": 9
       },
       {
-       "bias_a": 0.5,
+       "bias_a": 0.0,
        "form_a": "roz\u00e9khoz",
        "form_b": "roz\u00e9khez",
        "prominence": 1.0,
@@ -8648,7 +8648,7 @@
        "case": 10
       },
       {
-       "bias_a": 0.5,
+       "bias_a": 0.0,
        "form_a": "roz\u00e9kb\u00f3l",
        "form_b": "roz\u00e9kb\u0151l",
        "prominence": 1.0,
@@ -8656,7 +8656,7 @@
        "case": 11
       },
       {
-       "bias_a": 0.5,
+       "bias_a": 0.0,
        "form_a": "roz\u00e9kr\u00f3l",
        "form_b": "roz\u00e9kr\u0151l",
        "prominence": 1.0,
@@ -8664,7 +8664,7 @@
        "case": 12
       },
       {
-       "bias_a": 0.5,
+       "bias_a": 0.0,
        "form_a": "roz\u00e9kt\u00f3l",
        "form_b": "roz\u00e9kt\u0151l",
        "prominence": 1.0,
@@ -8695,7 +8695,7 @@
        "case": 0
       },
       {
-       "bias_a": 0.5,
+       "bias_a": 0.0,
        "form_a": "roz\u00e9t",
        "form_b": "roz\u00e9t",
        "prominence": 1.0,
@@ -8703,7 +8703,7 @@
        "case": 1
       },
       {
-       "bias_a": 0.5,
+       "bias_a": 0.0,
        "form_a": "roz\u00e9nak",
        "form_b": "roz\u00e9nek",
        "prominence": 1.0,
@@ -8711,7 +8711,7 @@
        "case": 2
       },
       {
-       "bias_a": 0.5,
+       "bias_a": 0.0,
        "form_a": "roz\u00e9val",
        "form_b": "roz\u00e9vel",
        "prominence": 1.0,
@@ -8719,7 +8719,7 @@
        "case": 3
       },
       {
-       "bias_a": 0.5,
+       "bias_a": 0.0,
        "form_a": "roz\u00e9v\u00e1",
        "form_b": "roz\u00e9v\u00e9",
        "prominence": 1.0,
@@ -8727,7 +8727,7 @@
        "case": 4
       },
       {
-       "bias_a": 0.5,
+       "bias_a": 0.0,
        "form_a": "roz\u00e9ban",
        "form_b": "roz\u00e9ben",
        "prominence": 1.0,
@@ -8735,7 +8735,7 @@
        "case": 5
       },
       {
-       "bias_a": 0.5,
+       "bias_a": 0.0,
        "form_a": "roz\u00e9n",
        "form_b": "roz\u00e9n",
        "prominence": 1.0,
@@ -8743,7 +8743,7 @@
        "case": 6
       },
       {
-       "bias_a": 0.5,
+       "bias_a": 0.0,
        "form_a": "roz\u00e9n\u00e1l",
        "form_b": "roz\u00e9n\u00e9l",
        "prominence": 1.0,
@@ -8751,7 +8751,7 @@
        "case": 7
       },
       {
-       "bias_a": 0.5,
+       "bias_a": 0.0,
        "form_a": "roz\u00e9ba",
        "form_b": "roz\u00e9be",
        "prominence": 1.0,
@@ -8759,7 +8759,7 @@
        "case": 8
       },
       {
-       "bias_a": 0.5,
+       "bias_a": 0.0,
        "form_a": "roz\u00e9ra",
        "form_b": "roz\u00e9re",
        "prominence": 1.0,
@@ -8767,7 +8767,7 @@
        "case": 9
       },
       {
-       "bias_a": 0.5,
+       "bias_a": 0.0,
        "form_a": "roz\u00e9hoz",
        "form_b": "roz\u00e9hez",
        "prominence": 1.0,
@@ -8775,7 +8775,7 @@
        "case": 10
       },
       {
-       "bias_a": 0.5,
+       "bias_a": 0.0,
        "form_a": "roz\u00e9b\u00f3l",
        "form_b": "roz\u00e9b\u0151l",
        "prominence": 1.0,
@@ -8783,7 +8783,7 @@
        "case": 11
       },
       {
-       "bias_a": 0.5,
+       "bias_a": 0.0,
        "form_a": "roz\u00e9r\u00f3l",
        "form_b": "roz\u00e9r\u0151l",
        "prominence": 1.0,
@@ -8791,7 +8791,7 @@
        "case": 12
       },
       {
-       "bias_a": 0.5,
+       "bias_a": 0.0,
        "form_a": "roz\u00e9t\u00f3l",
        "form_b": "roz\u00e9t\u0151l",
        "prominence": 1.0,
@@ -8801,7 +8801,7 @@
      ],
      [
       {
-       "bias_a": 0.5,
+       "bias_a": 0.0,
        "form_a": "roz\u00e9k",
        "form_b": "roz\u00e9k",
        "prominence": 1.0,
@@ -8809,7 +8809,7 @@
        "case": 0
       },
       {
-       "bias_a": 0.5,
+       "bias_a": 0.0,
        "form_a": "roz\u00e9kat",
        "form_b": "roz\u00e9ket",
        "prominence": 1.0,
@@ -8817,7 +8817,7 @@
        "case": 1
       },
       {
-       "bias_a": 0.5,
+       "bias_a": 0.0,
        "form_a": "roz\u00e9knak",
        "form_b": "roz\u00e9knek",
        "prominence": 1.0,
@@ -8825,7 +8825,7 @@
        "case": 2
       },
       {
-       "bias_a": 0.5,
+       "bias_a": 0.0,
        "form_a": "roz\u00e9kkal",
        "form_b": "roz\u00e9kkel",
        "prominence": 1.0,
@@ -8833,7 +8833,7 @@
        "case": 3
       },
       {
-       "bias_a": 0.5,
+       "bias_a": 0.0,
        "form_a": "roz\u00e9kk\u00e1",
        "form_b": "roz\u00e9kk\u00e9",
        "prominence": 1.0,
@@ -8841,7 +8841,7 @@
        "case": 4
       },
       {
-       "bias_a": 0.5,
+       "bias_a": 0.0,
        "form_a": "roz\u00e9kban",
        "form_b": "roz\u00e9kben",
        "prominence": 1.0,
@@ -8849,7 +8849,7 @@
        "case": 5
       },
       {
-       "bias_a": 0.5,
+       "bias_a": 0.0,
        "form_a": "roz\u00e9kon",
        "form_b": "roz\u00e9ken",
        "prominence": 1.0,
@@ -8857,7 +8857,7 @@
        "case": 6
       },
       {
-       "bias_a": 0.5,
+       "bias_a": 0.0,
        "form_a": "roz\u00e9kn\u00e1l",
        "form_b": "roz\u00e9kn\u00e9l",
        "prominence": 1.0,
@@ -8865,7 +8865,7 @@
        "case": 7
       },
       {
-       "bias_a": 0.5,
+       "bias_a": 0.0,
        "form_a": "roz\u00e9kba",
        "form_b": "roz\u00e9kbe",
        "prominence": 1.0,
@@ -8873,7 +8873,7 @@
        "case": 8
       },
       {
-       "bias_a": 0.5,
+       "bias_a": 0.0,
        "form_a": "roz\u00e9kra",
        "form_b": "roz\u00e9kre",
        "prominence": 1.0,
@@ -8881,7 +8881,7 @@
        "case": 9
       },
       {
-       "bias_a": 0.5,
+       "bias_a": 0.0,
        "form_a": "roz\u00e9khoz",
        "form_b": "roz\u00e9khez",
        "prominence": 1.0,
@@ -8889,7 +8889,7 @@
        "case": 10
       },
       {
-       "bias_a": 0.5,
+       "bias_a": 0.0,
        "form_a": "roz\u00e9kb\u00f3l",
        "form_b": "roz\u00e9kb\u0151l",
        "prominence": 1.0,
@@ -8897,7 +8897,7 @@
        "case": 11
       },
       {
-       "bias_a": 0.5,
+       "bias_a": 0.0,
        "form_a": "roz\u00e9kr\u00f3l",
        "form_b": "roz\u00e9kr\u0151l",
        "prominence": 1.0,
@@ -8905,7 +8905,7 @@
        "case": 12
       },
       {
-       "bias_a": 0.5,
+       "bias_a": 0.0,
        "form_a": "roz\u00e9kt\u00f3l",
        "form_b": "roz\u00e9kt\u0151l",
        "prominence": 1.0,
@@ -10382,7 +10382,7 @@
        "case": 0
       },
       {
-       "bias_a": 0.5,
+       "bias_a": 0.0,
        "form_a": "roz\u00e9t",
        "form_b": "roz\u00e9t",
        "prominence": 1.0,
@@ -10390,7 +10390,7 @@
        "case": 1
       },
       {
-       "bias_a": 0.5,
+       "bias_a": 0.0,
        "form_a": "roz\u00e9nak",
        "form_b": "roz\u00e9nek",
        "prominence": 1.0,
@@ -10398,7 +10398,7 @@
        "case": 2
       },
       {
-       "bias_a": 0.5,
+       "bias_a": 0.0,
        "form_a": "roz\u00e9val",
        "form_b": "roz\u00e9vel",
        "prominence": 1.0,
@@ -10406,7 +10406,7 @@
        "case": 3
       },
       {
-       "bias_a": 0.5,
+       "bias_a": 0.0,
        "form_a": "roz\u00e9v\u00e1",
        "form_b": "roz\u00e9v\u00e9",
        "prominence": 1.0,
@@ -10414,7 +10414,7 @@
        "case": 4
       },
       {
-       "bias_a": 0.5,
+       "bias_a": 0.0,
        "form_a": "roz\u00e9ban",
        "form_b": "roz\u00e9ben",
        "prominence": 1.0,
@@ -10422,7 +10422,7 @@
        "case": 5
       },
       {
-       "bias_a": 0.5,
+       "bias_a": 0.0,
        "form_a": "roz\u00e9n",
        "form_b": "roz\u00e9n",
        "prominence": 1.0,
@@ -10430,7 +10430,7 @@
        "case": 6
       },
       {
-       "bias_a": 0.5,
+       "bias_a": 0.0,
        "form_a": "roz\u00e9n\u00e1l",
        "form_b": "roz\u00e9n\u00e9l",
        "prominence": 1.0,
@@ -10438,7 +10438,7 @@
        "case": 7
       },
       {
-       "bias_a": 0.5,
+       "bias_a": 0.0,
        "form_a": "roz\u00e9ba",
        "form_b": "roz\u00e9be",
        "prominence": 1.0,
@@ -10446,7 +10446,7 @@
        "case": 8
       },
       {
-       "bias_a": 0.5,
+       "bias_a": 0.0,
        "form_a": "roz\u00e9ra",
        "form_b": "roz\u00e9re",
        "prominence": 1.0,
@@ -10454,7 +10454,7 @@
        "case": 9
       },
       {
-       "bias_a": 0.5,
+       "bias_a": 0.0,
        "form_a": "roz\u00e9hoz",
        "form_b": "roz\u00e9hez",
        "prominence": 1.0,
@@ -10462,7 +10462,7 @@
        "case": 10
       },
       {
-       "bias_a": 0.5,
+       "bias_a": 0.0,
        "form_a": "roz\u00e9b\u00f3l",
        "form_b": "roz\u00e9b\u0151l",
        "prominence": 1.0,
@@ -10470,7 +10470,7 @@
        "case": 11
       },
       {
-       "bias_a": 0.5,
+       "bias_a": 0.0,
        "form_a": "roz\u00e9r\u00f3l",
        "form_b": "roz\u00e9r\u0151l",
        "prominence": 1.0,
@@ -10478,7 +10478,7 @@
        "case": 12
       },
       {
-       "bias_a": 0.5,
+       "bias_a": 0.0,
        "form_a": "roz\u00e9t\u00f3l",
        "form_b": "roz\u00e9t\u0151l",
        "prominence": 1.0,
@@ -10488,7 +10488,7 @@
      ],
      [
       {
-       "bias_a": 0.5,
+       "bias_a": 0.0,
        "form_a": "roz\u00e9k",
        "form_b": "roz\u00e9k",
        "prominence": 1.0,
@@ -10496,7 +10496,7 @@
        "case": 0
       },
       {
-       "bias_a": 0.5,
+       "bias_a": 0.0,
        "form_a": "roz\u00e9kat",
        "form_b": "roz\u00e9ket",
        "prominence": 1.0,
@@ -10504,7 +10504,7 @@
        "case": 1
       },
       {
-       "bias_a": 0.5,
+       "bias_a": 0.0,
        "form_a": "roz\u00e9knak",
        "form_b": "roz\u00e9knek",
        "prominence": 1.0,
@@ -10512,7 +10512,7 @@
        "case": 2
       },
       {
-       "bias_a": 0.5,
+       "bias_a": 0.0,
        "form_a": "roz\u00e9kkal",
        "form_b": "roz\u00e9kkel",
        "prominence": 1.0,
@@ -10520,7 +10520,7 @@
        "case": 3
       },
       {
-       "bias_a": 0.5,
+       "bias_a": 0.0,
        "form_a": "roz\u00e9kk\u00e1",
        "form_b": "roz\u00e9kk\u00e9",
        "prominence": 1.0,
@@ -10528,7 +10528,7 @@
        "case": 4
       },
       {
-       "bias_a": 0.5,
+       "bias_a": 0.0,
        "form_a": "roz\u00e9kban",
        "form_b": "roz\u00e9kben",
        "prominence": 1.0,
@@ -10536,7 +10536,7 @@
        "case": 5
       },
       {
-       "bias_a": 0.5,
+       "bias_a": 0.0,
        "form_a": "roz\u00e9kon",
        "form_b": "roz\u00e9ken",
        "prominence": 1.0,
@@ -10544,7 +10544,7 @@
        "case": 6
       },
       {
-       "bias_a": 0.5,
+       "bias_a": 0.0,
        "form_a": "roz\u00e9kn\u00e1l",
        "form_b": "roz\u00e9kn\u00e9l",
        "prominence": 1.0,
@@ -10552,7 +10552,7 @@
        "case": 7
       },
       {
-       "bias_a": 0.5,
+       "bias_a": 0.0,
        "form_a": "roz\u00e9kba",
        "form_b": "roz\u00e9kbe",
        "prominence": 1.0,
@@ -10560,7 +10560,7 @@
        "case": 8
       },
       {
-       "bias_a": 0.5,
+       "bias_a": 0.0,
        "form_a": "roz\u00e9kra",
        "form_b": "roz\u00e9kre",
        "prominence": 1.0,
@@ -10568,7 +10568,7 @@
        "case": 9
       },
       {
-       "bias_a": 0.5,
+       "bias_a": 0.0,
        "form_a": "roz\u00e9khoz",
        "form_b": "roz\u00e9khez",
        "prominence": 1.0,
@@ -10576,7 +10576,7 @@
        "case": 10
       },
       {
-       "bias_a": 0.5,
+       "bias_a": 0.0,
        "form_a": "roz\u00e9kb\u00f3l",
        "form_b": "roz\u00e9kb\u0151l",
        "prominence": 1.0,
@@ -10584,7 +10584,7 @@
        "case": 11
       },
       {
-       "bias_a": 0.5,
+       "bias_a": 0.0,
        "form_a": "roz\u00e9kr\u00f3l",
        "form_b": "roz\u00e9kr\u0151l",
        "prominence": 1.0,
@@ -10592,7 +10592,7 @@
        "case": 12
       },
       {
-       "bias_a": 0.5,
+       "bias_a": 0.0,
        "form_a": "roz\u00e9kt\u00f3l",
        "form_b": "roz\u00e9kt\u0151l",
        "prominence": 1.0,
@@ -10623,7 +10623,7 @@
        "case": 0
       },
       {
-       "bias_a": 0.5,
+       "bias_a": 0.0,
        "form_a": "roz\u00e9t",
        "form_b": "roz\u00e9t",
        "prominence": 1.0,
@@ -10631,7 +10631,7 @@
        "case": 1
       },
       {
-       "bias_a": 0.5,
+       "bias_a": 0.0,
        "form_a": "roz\u00e9nak",
        "form_b": "roz\u00e9nek",
        "prominence": 1.0,
@@ -10639,7 +10639,7 @@
        "case": 2
       },
       {
-       "bias_a": 0.5,
+       "bias_a": 0.0,
        "form_a": "roz\u00e9val",
        "form_b": "roz\u00e9vel",
        "prominence": 1.0,
@@ -10647,7 +10647,7 @@
        "case": 3
       },
       {
-       "bias_a": 0.5,
+       "bias_a": 0.0,
        "form_a": "roz\u00e9v\u00e1",
        "form_b": "roz\u00e9v\u00e9",
        "prominence": 1.0,
@@ -10655,7 +10655,7 @@
        "case": 4
       },
       {
-       "bias_a": 0.5,
+       "bias_a": 0.0,
        "form_a": "roz\u00e9ban",
        "form_b": "roz\u00e9ben",
        "prominence": 1.0,
@@ -10663,7 +10663,7 @@
        "case": 5
       },
       {
-       "bias_a": 0.5,
+       "bias_a": 0.0,
        "form_a": "roz\u00e9n",
        "form_b": "roz\u00e9n",
        "prominence": 1.0,
@@ -10671,7 +10671,7 @@
        "case": 6
       },
       {
-       "bias_a": 0.5,
+       "bias_a": 0.0,
        "form_a": "roz\u00e9n\u00e1l",
        "form_b": "roz\u00e9n\u00e9l",
        "prominence": 1.0,
@@ -10679,7 +10679,7 @@
        "case": 7
       },
       {
-       "bias_a": 0.5,
+       "bias_a": 0.0,
        "form_a": "roz\u00e9ba",
        "form_b": "roz\u00e9be",
        "prominence": 1.0,
@@ -10687,7 +10687,7 @@
        "case": 8
       },
       {
-       "bias_a": 0.5,
+       "bias_a": 0.0,
        "form_a": "roz\u00e9ra",
        "form_b": "roz\u00e9re",
        "prominence": 1.0,
@@ -10695,7 +10695,7 @@
        "case": 9
       },
       {
-       "bias_a": 0.5,
+       "bias_a": 0.0,
        "form_a": "roz\u00e9hoz",
        "form_b": "roz\u00e9hez",
        "prominence": 1.0,
@@ -10703,7 +10703,7 @@
        "case": 10
       },
       {
-       "bias_a": 0.5,
+       "bias_a": 0.0,
        "form_a": "roz\u00e9b\u00f3l",
        "form_b": "roz\u00e9b\u0151l",
        "prominence": 1.0,
@@ -10711,7 +10711,7 @@
        "case": 11
       },
       {
-       "bias_a": 0.5,
+       "bias_a": 0.0,
        "form_a": "roz\u00e9r\u00f3l",
        "form_b": "roz\u00e9r\u0151l",
        "prominence": 1.0,
@@ -10719,7 +10719,7 @@
        "case": 12
       },
       {
-       "bias_a": 0.5,
+       "bias_a": 0.0,
        "form_a": "roz\u00e9t\u00f3l",
        "form_b": "roz\u00e9t\u0151l",
        "prominence": 1.0,
@@ -10729,7 +10729,7 @@
      ],
      [
       {
-       "bias_a": 0.5,
+       "bias_a": 0.0,
        "form_a": "roz\u00e9k",
        "form_b": "roz\u00e9k",
        "prominence": 1.0,
@@ -10737,7 +10737,7 @@
        "case": 0
       },
       {
-       "bias_a": 0.5,
+       "bias_a": 0.0,
        "form_a": "roz\u00e9kat",
        "form_b": "roz\u00e9ket",
        "prominence": 1.0,
@@ -10745,7 +10745,7 @@
        "case": 1
       },
       {
-       "bias_a": 0.5,
+       "bias_a": 0.0,
        "form_a": "roz\u00e9knak",
        "form_b": "roz\u00e9knek",
        "prominence": 1.0,
@@ -10753,7 +10753,7 @@
        "case": 2
       },
       {
-       "bias_a": 0.5,
+       "bias_a": 0.0,
        "form_a": "roz\u00e9kkal",
        "form_b": "roz\u00e9kkel",
        "prominence": 1.0,
@@ -10761,7 +10761,7 @@
        "case": 3
       },
       {
-       "bias_a": 0.5,
+       "bias_a": 0.0,
        "form_a": "roz\u00e9kk\u00e1",
        "form_b": "roz\u00e9kk\u00e9",
        "prominence": 1.0,
@@ -10769,7 +10769,7 @@
        "case": 4
       },
       {
-       "bias_a": 0.5,
+       "bias_a": 0.0,
        "form_a": "roz\u00e9kban",
        "form_b": "roz\u00e9kben",
        "prominence": 1.0,
@@ -10777,7 +10777,7 @@
        "case": 5
       },
       {
-       "bias_a": 0.5,
+       "bias_a": 0.0,
        "form_a": "roz\u00e9kon",
        "form_b": "roz\u00e9ken",
        "prominence": 1.0,
@@ -10785,7 +10785,7 @@
        "case": 6
       },
       {
-       "bias_a": 0.5,
+       "bias_a": 0.0,
        "form_a": "roz\u00e9kn\u00e1l",
        "form_b": "roz\u00e9kn\u00e9l",
        "prominence": 1.0,
@@ -10793,7 +10793,7 @@
        "case": 7
       },
       {
-       "bias_a": 0.5,
+       "bias_a": 0.0,
        "form_a": "roz\u00e9kba",
        "form_b": "roz\u00e9kbe",
        "prominence": 1.0,
@@ -10801,7 +10801,7 @@
        "case": 8
       },
       {
-       "bias_a": 0.5,
+       "bias_a": 0.0,
        "form_a": "roz\u00e9kra",
        "form_b": "roz\u00e9kre",
        "prominence": 1.0,
@@ -10809,7 +10809,7 @@
        "case": 9
       },
       {
-       "bias_a": 0.5,
+       "bias_a": 0.0,
        "form_a": "roz\u00e9khoz",
        "form_b": "roz\u00e9khez",
        "prominence": 1.0,
@@ -10817,7 +10817,7 @@
        "case": 10
       },
       {
-       "bias_a": 0.5,
+       "bias_a": 0.0,
        "form_a": "roz\u00e9kb\u00f3l",
        "form_b": "roz\u00e9kb\u0151l",
        "prominence": 1.0,
@@ -10825,7 +10825,7 @@
        "case": 11
       },
       {
-       "bias_a": 0.5,
+       "bias_a": 0.0,
        "form_a": "roz\u00e9kr\u00f3l",
        "form_b": "roz\u00e9kr\u0151l",
        "prominence": 1.0,
@@ -10833,7 +10833,7 @@
        "case": 12
       },
       {
-       "bias_a": 0.5,
+       "bias_a": 0.0,
        "form_a": "roz\u00e9kt\u00f3l",
        "form_b": "roz\u00e9kt\u0151l",
        "prominence": 1.0,
@@ -10864,7 +10864,7 @@
        "case": 0
       },
       {
-       "bias_a": 0.5,
+       "bias_a": 0.0,
        "form_a": "roz\u00e9t",
        "form_b": "roz\u00e9t",
        "prominence": 1.0,
@@ -10872,7 +10872,7 @@
        "case": 1
       },
       {
-       "bias_a": 0.5,
+       "bias_a": 0.0,
        "form_a": "roz\u00e9nak",
        "form_b": "roz\u00e9nek",
        "prominence": 1.0,
@@ -10880,7 +10880,7 @@
        "case": 2
       },
       {
-       "bias_a": 0.5,
+       "bias_a": 0.0,
        "form_a": "roz\u00e9val",
        "form_b": "roz\u00e9vel",
        "prominence": 1.0,
@@ -10888,7 +10888,7 @@
        "case": 3
       },
       {
-       "bias_a": 0.5,
+       "bias_a": 0.0,
        "form_a": "roz\u00e9v\u00e1",
        "form_b": "roz\u00e9v\u00e9",
        "prominence": 1.0,
@@ -10896,7 +10896,7 @@
        "case": 4
       },
       {
-       "bias_a": 0.5,
+       "bias_a": 0.0,
        "form_a": "roz\u00e9ban",
        "form_b": "roz\u00e9ben",
        "prominence": 1.0,
@@ -10904,7 +10904,7 @@
        "case": 5
       },
       {
-       "bias_a": 0.5,
+       "bias_a": 0.0,
        "form_a": "roz\u00e9n",
        "form_b": "roz\u00e9n",
        "prominence": 1.0,
@@ -10912,7 +10912,7 @@
        "case": 6
       },
       {
-       "bias_a": 0.5,
+       "bias_a": 0.0,
        "form_a": "roz\u00e9n\u00e1l",
        "form_b": "roz\u00e9n\u00e9l",
        "prominence": 1.0,
@@ -10920,7 +10920,7 @@
        "case": 7
       },
       {
-       "bias_a": 0.5,
+       "bias_a": 0.0,
        "form_a": "roz\u00e9ba",
        "form_b": "roz\u00e9be",
        "prominence": 1.0,
@@ -10928,7 +10928,7 @@
        "case": 8
       },
       {
-       "bias_a": 0.5,
+       "bias_a": 0.0,
        "form_a": "roz\u00e9ra",
        "form_b": "roz\u00e9re",
        "prominence": 1.0,
@@ -10936,7 +10936,7 @@
        "case": 9
       },
       {
-       "bias_a": 0.5,
+       "bias_a": 0.0,
        "form_a": "roz\u00e9hoz",
        "form_b": "roz\u00e9hez",
        "prominence": 1.0,
@@ -10944,7 +10944,7 @@
        "case": 10
       },
       {
-       "bias_a": 0.5,
+       "bias_a": 0.0,
        "form_a": "roz\u00e9b\u00f3l",
        "form_b": "roz\u00e9b\u0151l",
        "prominence": 1.0,
@@ -10952,7 +10952,7 @@
        "case": 11
       },
       {
-       "bias_a": 0.5,
+       "bias_a": 0.0,
        "form_a": "roz\u00e9r\u00f3l",
        "form_b": "roz\u00e9r\u0151l",
        "prominence": 1.0,
@@ -10960,7 +10960,7 @@
        "case": 12
       },
       {
-       "bias_a": 0.5,
+       "bias_a": 0.0,
        "form_a": "roz\u00e9t\u00f3l",
        "form_b": "roz\u00e9t\u0151l",
        "prominence": 1.0,
@@ -10970,7 +10970,7 @@
      ],
      [
       {
-       "bias_a": 0.5,
+       "bias_a": 0.0,
        "form_a": "roz\u00e9k",
        "form_b": "roz\u00e9k",
        "prominence": 1.0,
@@ -10978,7 +10978,7 @@
        "case": 0
       },
       {
-       "bias_a": 0.5,
+       "bias_a": 0.0,
        "form_a": "roz\u00e9kat",
        "form_b": "roz\u00e9ket",
        "prominence": 1.0,
@@ -10986,7 +10986,7 @@
        "case": 1
       },
       {
-       "bias_a": 0.5,
+       "bias_a": 0.0,
        "form_a": "roz\u00e9knak",
        "form_b": "roz\u00e9knek",
        "prominence": 1.0,
@@ -10994,7 +10994,7 @@
        "case": 2
       },
       {
-       "bias_a": 0.5,
+       "bias_a": 0.0,
        "form_a": "roz\u00e9kkal",
        "form_b": "roz\u00e9kkel",
        "prominence": 1.0,
@@ -11002,7 +11002,7 @@
        "case": 3
       },
       {
-       "bias_a": 0.5,
+       "bias_a": 0.0,
        "form_a": "roz\u00e9kk\u00e1",
        "form_b": "roz\u00e9kk\u00e9",
        "prominence": 1.0,
@@ -11010,7 +11010,7 @@
        "case": 4
       },
       {
-       "bias_a": 0.5,
+       "bias_a": 0.0,
        "form_a": "roz\u00e9kban",
        "form_b": "roz\u00e9kben",
        "prominence": 1.0,
@@ -11018,7 +11018,7 @@
        "case": 5
       },
       {
-       "bias_a": 0.5,
+       "bias_a": 0.0,
        "form_a": "roz\u00e9kon",
        "form_b": "roz\u00e9ken",
        "prominence": 1.0,
@@ -11026,7 +11026,7 @@
        "case": 6
       },
       {
-       "bias_a": 0.5,
+       "bias_a": 0.0,
        "form_a": "roz\u00e9kn\u00e1l",
        "form_b": "roz\u00e9kn\u00e9l",
        "prominence": 1.0,
@@ -11034,7 +11034,7 @@
        "case": 7
       },
       {
-       "bias_a": 0.5,
+       "bias_a": 0.0,
        "form_a": "roz\u00e9kba",
        "form_b": "roz\u00e9kbe",
        "prominence": 1.0,
@@ -11042,7 +11042,7 @@
        "case": 8
       },
       {
-       "bias_a": 0.5,
+       "bias_a": 0.0,
        "form_a": "roz\u00e9kra",
        "form_b": "roz\u00e9kre",
        "prominence": 1.0,
@@ -11050,7 +11050,7 @@
        "case": 9
       },
       {
-       "bias_a": 0.5,
+       "bias_a": 0.0,
        "form_a": "roz\u00e9khoz",
        "form_b": "roz\u00e9khez",
        "prominence": 1.0,
@@ -11058,7 +11058,7 @@
        "case": 10
       },
       {
-       "bias_a": 0.5,
+       "bias_a": 0.0,
        "form_a": "roz\u00e9kb\u00f3l",
        "form_b": "roz\u00e9kb\u0151l",
        "prominence": 1.0,
@@ -11066,7 +11066,7 @@
        "case": 11
       },
       {
-       "bias_a": 0.5,
+       "bias_a": 0.0,
        "form_a": "roz\u00e9kr\u00f3l",
        "form_b": "roz\u00e9kr\u0151l",
        "prominence": 1.0,
@@ -11074,7 +11074,7 @@
        "case": 12
       },
       {
-       "bias_a": 0.5,
+       "bias_a": 0.0,
        "form_a": "roz\u00e9kt\u00f3l",
        "form_b": "roz\u00e9kt\u0151l",
        "prominence": 1.0,
@@ -11105,7 +11105,7 @@
        "case": 0
       },
       {
-       "bias_a": 0.5,
+       "bias_a": 0.0,
        "form_a": "roz\u00e9t",
        "form_b": "roz\u00e9t",
        "prominence": 1.0,
@@ -11113,7 +11113,7 @@
        "case": 1
       },
       {
-       "bias_a": 0.5,
+       "bias_a": 0.0,
        "form_a": "roz\u00e9nak",
        "form_b": "roz\u00e9nek",
        "prominence": 1.0,
@@ -11121,7 +11121,7 @@
        "case": 2
       },
       {
-       "bias_a": 0.5,
+       "bias_a": 0.0,
        "form_a": "roz\u00e9val",
        "form_b": "roz\u00e9vel",
        "prominence": 1.0,
@@ -11129,7 +11129,7 @@
        "case": 3
       },
       {
-       "bias_a": 0.5,
+       "bias_a": 0.0,
        "form_a": "roz\u00e9v\u00e1",
        "form_b": "roz\u00e9v\u00e9",
        "prominence": 1.0,
@@ -11137,7 +11137,7 @@
        "case": 4
       },
       {
-       "bias_a": 0.5,
+       "bias_a": 0.0,
        "form_a": "roz\u00e9ban",
        "form_b": "roz\u00e9ben",
        "prominence": 1.0,
@@ -11145,7 +11145,7 @@
        "case": 5
       },
       {
-       "bias_a": 0.5,
+       "bias_a": 0.0,
        "form_a": "roz\u00e9n",
        "form_b": "roz\u00e9n",
        "prominence": 1.0,
@@ -11153,7 +11153,7 @@
        "case": 6
       },
       {
-       "bias_a": 0.5,
+       "bias_a": 0.0,
        "form_a": "roz\u00e9n\u00e1l",
        "form_b": "roz\u00e9n\u00e9l",
        "prominence": 1.0,
@@ -11161,7 +11161,7 @@
        "case": 7
       },
       {
-       "bias_a": 0.5,
+       "bias_a": 0.0,
        "form_a": "roz\u00e9ba",
        "form_b": "roz\u00e9be",
        "prominence": 1.0,
@@ -11169,7 +11169,7 @@
        "case": 8
       },
       {
-       "bias_a": 0.5,
+       "bias_a": 0.0,
        "form_a": "roz\u00e9ra",
        "form_b": "roz\u00e9re",
        "prominence": 1.0,
@@ -11177,7 +11177,7 @@
        "case": 9
       },
       {
-       "bias_a": 0.5,
+       "bias_a": 0.0,
        "form_a": "roz\u00e9hoz",
        "form_b": "roz\u00e9hez",
        "prominence": 1.0,
@@ -11185,7 +11185,7 @@
        "case": 10
       },
       {
-       "bias_a": 0.5,
+       "bias_a": 0.0,
        "form_a": "roz\u00e9b\u00f3l",
        "form_b": "roz\u00e9b\u0151l",
        "prominence": 1.0,
@@ -11193,7 +11193,7 @@
        "case": 11
       },
       {
-       "bias_a": 0.5,
+       "bias_a": 0.0,
        "form_a": "roz\u00e9r\u00f3l",
        "form_b": "roz\u00e9r\u0151l",
        "prominence": 1.0,
@@ -11201,7 +11201,7 @@
        "case": 12
       },
       {
-       "bias_a": 0.5,
+       "bias_a": 0.0,
        "form_a": "roz\u00e9t\u00f3l",
        "form_b": "roz\u00e9t\u0151l",
        "prominence": 1.0,
@@ -11211,7 +11211,7 @@
      ],
      [
       {
-       "bias_a": 0.5,
+       "bias_a": 0.0,
        "form_a": "roz\u00e9k",
        "form_b": "roz\u00e9k",
        "prominence": 1.0,
@@ -11219,7 +11219,7 @@
        "case": 0
       },
       {
-       "bias_a": 0.5,
+       "bias_a": 0.0,
        "form_a": "roz\u00e9kat",
        "form_b": "roz\u00e9ket",
        "prominence": 1.0,
@@ -11227,7 +11227,7 @@
        "case": 1
       },
       {
-       "bias_a": 0.5,
+       "bias_a": 0.0,
        "form_a": "roz\u00e9knak",
        "form_b": "roz\u00e9knek",
        "prominence": 1.0,
@@ -11235,7 +11235,7 @@
        "case": 2
       },
       {
-       "bias_a": 0.5,
+       "bias_a": 0.0,
        "form_a": "roz\u00e9kkal",
        "form_b": "roz\u00e9kkel",
        "prominence": 1.0,
@@ -11243,7 +11243,7 @@
        "case": 3
       },
       {
-       "bias_a": 0.5,
+       "bias_a": 0.0,
        "form_a": "roz\u00e9kk\u00e1",
        "form_b": "roz\u00e9kk\u00e9",
        "prominence": 1.0,
@@ -11251,7 +11251,7 @@
        "case": 4
       },
       {
-       "bias_a": 0.5,
+       "bias_a": 0.0,
        "form_a": "roz\u00e9kban",
        "form_b": "roz\u00e9kben",
        "prominence": 1.0,
@@ -11259,7 +11259,7 @@
        "case": 5
       },
       {
-       "bias_a": 0.5,
+       "bias_a": 0.0,
        "form_a": "roz\u00e9kon",
        "form_b": "roz\u00e9ken",
        "prominence": 1.0,
@@ -11267,7 +11267,7 @@
        "case": 6
       },
       {
-       "bias_a": 0.5,
+       "bias_a": 0.0,
        "form_a": "roz\u00e9kn\u00e1l",
        "form_b": "roz\u00e9kn\u00e9l",
        "prominence": 1.0,
@@ -11275,7 +11275,7 @@
        "case": 7
       },
       {
-       "bias_a": 0.5,
+       "bias_a": 0.0,
        "form_a": "roz\u00e9kba",
        "form_b": "roz\u00e9kbe",
        "prominence": 1.0,
@@ -11283,7 +11283,7 @@
        "case": 8
       },
       {
-       "bias_a": 0.5,
+       "bias_a": 0.0,
        "form_a": "roz\u00e9kra",
        "form_b": "roz\u00e9kre",
        "prominence": 1.0,
@@ -11291,7 +11291,7 @@
        "case": 9
       },
       {
-       "bias_a": 0.5,
+       "bias_a": 0.0,
        "form_a": "roz\u00e9khoz",
        "form_b": "roz\u00e9khez",
        "prominence": 1.0,
@@ -11299,7 +11299,7 @@
        "case": 10
       },
       {
-       "bias_a": 0.5,
+       "bias_a": 0.0,
        "form_a": "roz\u00e9kb\u00f3l",
        "form_b": "roz\u00e9kb\u0151l",
        "prominence": 1.0,
@@ -11307,7 +11307,7 @@
        "case": 11
       },
       {
-       "bias_a": 0.5,
+       "bias_a": 0.0,
        "form_a": "roz\u00e9kr\u00f3l",
        "form_b": "roz\u00e9kr\u0151l",
        "prominence": 1.0,
@@ -11315,7 +11315,7 @@
        "case": 12
       },
       {
-       "bias_a": 0.5,
+       "bias_a": 0.0,
        "form_a": "roz\u00e9kt\u00f3l",
        "form_b": "roz\u00e9kt\u0151l",
        "prominence": 1.0,
@@ -12792,7 +12792,7 @@
        "case": 0
       },
       {
-       "bias_a": 0.5,
+       "bias_a": 0.0,
        "form_a": "roz\u00e9t",
        "form_b": "roz\u00e9t",
        "prominence": 1.0,
@@ -12800,7 +12800,7 @@
        "case": 1
       },
       {
-       "bias_a": 0.5,
+       "bias_a": 0.0,
        "form_a": "roz\u00e9nak",
        "form_b": "roz\u00e9nek",
        "prominence": 1.0,
@@ -12808,7 +12808,7 @@
        "case": 2
       },
       {
-       "bias_a": 0.5,
+       "bias_a": 0.0,
        "form_a": "roz\u00e9val",
        "form_b": "roz\u00e9vel",
        "prominence": 1.0,
@@ -12816,7 +12816,7 @@
        "case": 3
       },
       {
-       "bias_a": 0.5,
+       "bias_a": 0.0,
        "form_a": "roz\u00e9v\u00e1",
        "form_b": "roz\u00e9v\u00e9",
        "prominence": 1.0,
@@ -12824,7 +12824,7 @@
        "case": 4
       },
       {
-       "bias_a": 0.5,
+       "bias_a": 0.0,
        "form_a": "roz\u00e9ban",
        "form_b": "roz\u00e9ben",
        "prominence": 1.0,
@@ -12832,7 +12832,7 @@
        "case": 5
       },
       {
-       "bias_a": 0.5,
+       "bias_a": 0.0,
        "form_a": "roz\u00e9n",
        "form_b": "roz\u00e9n",
        "prominence": 1.0,
@@ -12840,7 +12840,7 @@
        "case": 6
       },
       {
-       "bias_a": 0.5,
+       "bias_a": 0.0,
        "form_a": "roz\u00e9n\u00e1l",
        "form_b": "roz\u00e9n\u00e9l",
        "prominence": 1.0,
@@ -12848,7 +12848,7 @@
        "case": 7
       },
       {
-       "bias_a": 0.5,
+       "bias_a": 0.0,
        "form_a": "roz\u00e9ba",
        "form_b": "roz\u00e9be",
        "prominence": 1.0,
@@ -12856,7 +12856,7 @@
        "case": 8
       },
       {
-       "bias_a": 0.5,
+       "bias_a": 0.0,
        "form_a": "roz\u00e9ra",
        "form_b": "roz\u00e9re",
        "prominence": 1.0,
@@ -12864,7 +12864,7 @@
        "case": 9
       },
       {
-       "bias_a": 0.5,
+       "bias_a": 0.0,
        "form_a": "roz\u00e9hoz",
        "form_b": "roz\u00e9hez",
        "prominence": 1.0,
@@ -12872,7 +12872,7 @@
        "case": 10
       },
       {
-       "bias_a": 0.5,
+       "bias_a": 0.0,
        "form_a": "roz\u00e9b\u00f3l",
        "form_b": "roz\u00e9b\u0151l",
        "prominence": 1.0,
@@ -12880,7 +12880,7 @@
        "case": 11
       },
       {
-       "bias_a": 0.5,
+       "bias_a": 0.0,
        "form_a": "roz\u00e9r\u00f3l",
        "form_b": "roz\u00e9r\u0151l",
        "prominence": 1.0,
@@ -12888,7 +12888,7 @@
        "case": 12
       },
       {
-       "bias_a": 0.5,
+       "bias_a": 0.0,
        "form_a": "roz\u00e9t\u00f3l",
        "form_b": "roz\u00e9t\u0151l",
        "prominence": 1.0,
@@ -12898,7 +12898,7 @@
      ],
      [
       {
-       "bias_a": 0.5,
+       "bias_a": 0.0,
        "form_a": "roz\u00e9k",
        "form_b": "roz\u00e9k",
        "prominence": 1.0,
@@ -12906,7 +12906,7 @@
        "case": 0
       },
       {
-       "bias_a": 0.5,
+       "bias_a": 0.0,
        "form_a": "roz\u00e9kat",
        "form_b": "roz\u00e9ket",
        "prominence": 1.0,
@@ -12914,7 +12914,7 @@
        "case": 1
       },
       {
-       "bias_a": 0.5,
+       "bias_a": 0.0,
        "form_a": "roz\u00e9knak",
        "form_b": "roz\u00e9knek",
        "prominence": 1.0,
@@ -12922,7 +12922,7 @@
        "case": 2
       },
       {
-       "bias_a": 0.5,
+       "bias_a": 0.0,
        "form_a": "roz\u00e9kkal",
        "form_b": "roz\u00e9kkel",
        "prominence": 1.0,
@@ -12930,7 +12930,7 @@
        "case": 3
       },
       {
-       "bias_a": 0.5,
+       "bias_a": 0.0,
        "form_a": "roz\u00e9kk\u00e1",
        "form_b": "roz\u00e9kk\u00e9",
        "prominence": 1.0,
@@ -12938,7 +12938,7 @@
        "case": 4
       },
       {
-       "bias_a": 0.5,
+       "bias_a": 0.0,
        "form_a": "roz\u00e9kban",
        "form_b": "roz\u00e9kben",
        "prominence": 1.0,
@@ -12946,7 +12946,7 @@
        "case": 5
       },
       {
-       "bias_a": 0.5,
+       "bias_a": 0.0,
        "form_a": "roz\u00e9kon",
        "form_b": "roz\u00e9ken",
        "prominence": 1.0,
@@ -12954,7 +12954,7 @@
        "case": 6
       },
       {
-       "bias_a": 0.5,
+       "bias_a": 0.0,
        "form_a": "roz\u00e9kn\u00e1l",
        "form_b": "roz\u00e9kn\u00e9l",
        "prominence": 1.0,
@@ -12962,7 +12962,7 @@
        "case": 7
       },
       {
-       "bias_a": 0.5,
+       "bias_a": 0.0,
        "form_a": "roz\u00e9kba",
        "form_b": "roz\u00e9kbe",
        "prominence": 1.0,
@@ -12970,7 +12970,7 @@
        "case": 8
       },
       {
-       "bias_a": 0.5,
+       "bias_a": 0.0,
        "form_a": "roz\u00e9kra",
        "form_b": "roz\u00e9kre",
        "prominence": 1.0,
@@ -12978,7 +12978,7 @@
        "case": 9
       },
       {
-       "bias_a": 0.5,
+       "bias_a": 0.0,
        "form_a": "roz\u00e9khoz",
        "form_b": "roz\u00e9khez",
        "prominence": 1.0,
@@ -12986,7 +12986,7 @@
        "case": 10
       },
       {
-       "bias_a": 0.5,
+       "bias_a": 0.0,
        "form_a": "roz\u00e9kb\u00f3l",
        "form_b": "roz\u00e9kb\u0151l",
        "prominence": 1.0,
@@ -12994,7 +12994,7 @@
        "case": 11
       },
       {
-       "bias_a": 0.5,
+       "bias_a": 0.0,
        "form_a": "roz\u00e9kr\u00f3l",
        "form_b": "roz\u00e9kr\u0151l",
        "prominence": 1.0,
@@ -13002,7 +13002,7 @@
        "case": 12
       },
       {
-       "bias_a": 0.5,
+       "bias_a": 0.0,
        "form_a": "roz\u00e9kt\u00f3l",
        "form_b": "roz\u00e9kt\u0151l",
        "prominence": 1.0,
@@ -13033,7 +13033,7 @@
        "case": 0
       },
       {
-       "bias_a": 0.5,
+       "bias_a": 0.0,
        "form_a": "roz\u00e9t",
        "form_b": "roz\u00e9t",
        "prominence": 1.0,
@@ -13041,7 +13041,7 @@
        "case": 1
       },
       {
-       "bias_a": 0.5,
+       "bias_a": 0.0,
        "form_a": "roz\u00e9nak",
        "form_b": "roz\u00e9nek",
        "prominence": 1.0,
@@ -13049,7 +13049,7 @@
        "case": 2
       },
       {
-       "bias_a": 0.5,
+       "bias_a": 0.0,
        "form_a": "roz\u00e9val",
        "form_b": "roz\u00e9vel",
        "prominence": 1.0,
@@ -13057,7 +13057,7 @@
        "case": 3
       },
       {
-       "bias_a": 0.5,
+       "bias_a": 0.0,
        "form_a": "roz\u00e9v\u00e1",
        "form_b": "roz\u00e9v\u00e9",
        "prominence": 1.0,
@@ -13065,7 +13065,7 @@
        "case": 4
       },
       {
-       "bias_a": 0.5,
+       "bias_a": 0.0,
        "form_a": "roz\u00e9ban",
        "form_b": "roz\u00e9ben",
        "prominence": 1.0,
@@ -13073,7 +13073,7 @@
        "case": 5
       },
       {
-       "bias_a": 0.5,
+       "bias_a": 0.0,
        "form_a": "roz\u00e9n",
        "form_b": "roz\u00e9n",
        "prominence": 1.0,
@@ -13081,7 +13081,7 @@
        "case": 6
       },
       {
-       "bias_a": 0.5,
+       "bias_a": 0.0,
        "form_a": "roz\u00e9n\u00e1l",
        "form_b": "roz\u00e9n\u00e9l",
        "prominence": 1.0,
@@ -13089,7 +13089,7 @@
        "case": 7
       },
       {
-       "bias_a": 0.5,
+       "bias_a": 0.0,
        "form_a": "roz\u00e9ba",
        "form_b": "roz\u00e9be",
        "prominence": 1.0,
@@ -13097,7 +13097,7 @@
        "case": 8
       },
       {
-       "bias_a": 0.5,
+       "bias_a": 0.0,
        "form_a": "roz\u00e9ra",
        "form_b": "roz\u00e9re",
        "prominence": 1.0,
@@ -13105,7 +13105,7 @@
        "case": 9
       },
       {
-       "bias_a": 0.5,
+       "bias_a": 0.0,
        "form_a": "roz\u00e9hoz",
        "form_b": "roz\u00e9hez",
        "prominence": 1.0,
@@ -13113,7 +13113,7 @@
        "case": 10
       },
       {
-       "bias_a": 0.5,
+       "bias_a": 0.0,
        "form_a": "roz\u00e9b\u00f3l",
        "form_b": "roz\u00e9b\u0151l",
        "prominence": 1.0,
@@ -13121,7 +13121,7 @@
        "case": 11
       },
       {
-       "bias_a": 0.5,
+       "bias_a": 0.0,
        "form_a": "roz\u00e9r\u00f3l",
        "form_b": "roz\u00e9r\u0151l",
        "prominence": 1.0,
@@ -13129,7 +13129,7 @@
        "case": 12
       },
       {
-       "bias_a": 0.5,
+       "bias_a": 0.0,
        "form_a": "roz\u00e9t\u00f3l",
        "form_b": "roz\u00e9t\u0151l",
        "prominence": 1.0,
@@ -13139,7 +13139,7 @@
      ],
      [
       {
-       "bias_a": 0.5,
+       "bias_a": 0.0,
        "form_a": "roz\u00e9k",
        "form_b": "roz\u00e9k",
        "prominence": 1.0,
@@ -13147,7 +13147,7 @@
        "case": 0
       },
       {
-       "bias_a": 0.5,
+       "bias_a": 0.0,
        "form_a": "roz\u00e9kat",
        "form_b": "roz\u00e9ket",
        "prominence": 1.0,
@@ -13155,7 +13155,7 @@
        "case": 1
       },
       {
-       "bias_a": 0.5,
+       "bias_a": 0.0,
        "form_a": "roz\u00e9knak",
        "form_b": "roz\u00e9knek",
        "prominence": 1.0,
@@ -13163,7 +13163,7 @@
        "case": 2
       },
       {
-       "bias_a": 0.5,
+       "bias_a": 0.0,
        "form_a": "roz\u00e9kkal",
        "form_b": "roz\u00e9kkel",
        "prominence": 1.0,
@@ -13171,7 +13171,7 @@
        "case": 3
       },
       {
-       "bias_a": 0.5,
+       "bias_a": 0.0,
        "form_a": "roz\u00e9kk\u00e1",
        "form_b": "roz\u00e9kk\u00e9",
        "prominence": 1.0,
@@ -13179,7 +13179,7 @@
        "case": 4
       },
       {
-       "bias_a": 0.5,
+       "bias_a": 0.0,
        "form_a": "roz\u00e9kban",
        "form_b": "roz\u00e9kben",
        "prominence": 1.0,
@@ -13187,7 +13187,7 @@
        "case": 5
       },
       {
-       "bias_a": 0.5,
+       "bias_a": 0.0,
        "form_a": "roz\u00e9kon",
        "form_b": "roz\u00e9ken",
        "prominence": 1.0,
@@ -13195,7 +13195,7 @@
        "case": 6
       },
       {
-       "bias_a": 0.5,
+       "bias_a": 0.0,
        "form_a": "roz\u00e9kn\u00e1l",
        "form_b": "roz\u00e9kn\u00e9l",
        "prominence": 1.0,
@@ -13203,7 +13203,7 @@
        "case": 7
       },
       {
-       "bias_a": 0.5,
+       "bias_a": 0.0,
        "form_a": "roz\u00e9kba",
        "form_b": "roz\u00e9kbe",
        "prominence": 1.0,
@@ -13211,7 +13211,7 @@
        "case": 8
       },
       {
-       "bias_a": 0.5,
+       "bias_a": 0.0,
        "form_a": "roz\u00e9kra",
        "form_b": "roz\u00e9kre",
        "prominence": 1.0,
@@ -13219,7 +13219,7 @@
        "case": 9
       },
       {
-       "bias_a": 0.5,
+       "bias_a": 0.0,
        "form_a": "roz\u00e9khoz",
        "form_b": "roz\u00e9khez",
        "prominence": 1.0,
@@ -13227,7 +13227,7 @@
        "case": 10
       },
       {
-       "bias_a": 0.5,
+       "bias_a": 0.0,
        "form_a": "roz\u00e9kb\u00f3l",
        "form_b": "roz\u00e9kb\u0151l",
        "prominence": 1.0,
@@ -13235,7 +13235,7 @@
        "case": 11
       },
       {
-       "bias_a": 0.5,
+       "bias_a": 0.0,
        "form_a": "roz\u00e9kr\u00f3l",
        "form_b": "roz\u00e9kr\u0151l",
        "prominence": 1.0,
@@ -13243,7 +13243,7 @@
        "case": 12
       },
       {
-       "bias_a": 0.5,
+       "bias_a": 0.0,
        "form_a": "roz\u00e9kt\u00f3l",
        "form_b": "roz\u00e9kt\u0151l",
        "prominence": 1.0,
@@ -13274,7 +13274,7 @@
        "case": 0
       },
       {
-       "bias_a": 0.5,
+       "bias_a": 0.0,
        "form_a": "roz\u00e9t",
        "form_b": "roz\u00e9t",
        "prominence": 1.0,
@@ -13282,7 +13282,7 @@
        "case": 1
       },
       {
-       "bias_a": 0.5,
+       "bias_a": 0.0,
        "form_a": "roz\u00e9nak",
        "form_b": "roz\u00e9nek",
        "prominence": 1.0,
@@ -13290,7 +13290,7 @@
        "case": 2
       },
       {
-       "bias_a": 0.5,
+       "bias_a": 0.0,
        "form_a": "roz\u00e9val",
        "form_b": "roz\u00e9vel",
        "prominence": 1.0,
@@ -13298,7 +13298,7 @@
        "case": 3
       },
       {
-       "bias_a": 0.5,
+       "bias_a": 0.0,
        "form_a": "roz\u00e9v\u00e1",
        "form_b": "roz\u00e9v\u00e9",
        "prominence": 1.0,
@@ -13306,7 +13306,7 @@
        "case": 4
       },
       {
-       "bias_a": 0.5,
+       "bias_a": 0.0,
        "form_a": "roz\u00e9ban",
        "form_b": "roz\u00e9ben",
        "prominence": 1.0,
@@ -13314,7 +13314,7 @@
        "case": 5
       },
       {
-       "bias_a": 0.5,
+       "bias_a": 0.0,
        "form_a": "roz\u00e9n",
        "form_b": "roz\u00e9n",
        "prominence": 1.0,
@@ -13322,7 +13322,7 @@
        "case": 6
       },
       {
-       "bias_a": 0.5,
+       "bias_a": 0.0,
        "form_a": "roz\u00e9n\u00e1l",
        "form_b": "roz\u00e9n\u00e9l",
        "prominence": 1.0,
@@ -13330,7 +13330,7 @@
        "case": 7
       },
       {
-       "bias_a": 0.5,
+       "bias_a": 0.0,
        "form_a": "roz\u00e9ba",
        "form_b": "roz\u00e9be",
        "prominence": 1.0,
@@ -13338,7 +13338,7 @@
        "case": 8
       },
       {
-       "bias_a": 0.5,
+       "bias_a": 0.0,
        "form_a": "roz\u00e9ra",
        "form_b": "roz\u00e9re",
        "prominence": 1.0,
@@ -13346,7 +13346,7 @@
        "case": 9
       },
       {
-       "bias_a": 0.5,
+       "bias_a": 0.0,
        "form_a": "roz\u00e9hoz",
        "form_b": "roz\u00e9hez",
        "prominence": 1.0,
@@ -13354,7 +13354,7 @@
        "case": 10
       },
       {
-       "bias_a": 0.5,
+       "bias_a": 0.0,
        "form_a": "roz\u00e9b\u00f3l",
        "form_b": "roz\u00e9b\u0151l",
        "prominence": 1.0,
@@ -13362,7 +13362,7 @@
        "case": 11
       },
       {
-       "bias_a": 0.5,
+       "bias_a": 0.0,
        "form_a": "roz\u00e9r\u00f3l",
        "form_b": "roz\u00e9r\u0151l",
        "prominence": 1.0,
@@ -13370,7 +13370,7 @@
        "case": 12
       },
       {
-       "bias_a": 0.5,
+       "bias_a": 0.0,
        "form_a": "roz\u00e9t\u00f3l",
        "form_b": "roz\u00e9t\u0151l",
        "prominence": 1.0,
@@ -13380,7 +13380,7 @@
      ],
      [
       {
-       "bias_a": 0.5,
+       "bias_a": 0.0,
        "form_a": "roz\u00e9k",
        "form_b": "roz\u00e9k",
        "prominence": 1.0,
@@ -13388,7 +13388,7 @@
        "case": 0
       },
       {
-       "bias_a": 0.5,
+       "bias_a": 0.0,
        "form_a": "roz\u00e9kat",
        "form_b": "roz\u00e9ket",
        "prominence": 1.0,
@@ -13396,7 +13396,7 @@
        "case": 1
       },
       {
-       "bias_a": 0.5,
+       "bias_a": 0.0,
        "form_a": "roz\u00e9knak",
        "form_b": "roz\u00e9knek",
        "prominence": 1.0,
@@ -13404,7 +13404,7 @@
        "case": 2
       },
       {
-       "bias_a": 0.5,
+       "bias_a": 0.0,
        "form_a": "roz\u00e9kkal",
        "form_b": "roz\u00e9kkel",
        "prominence": 1.0,
@@ -13412,7 +13412,7 @@
        "case": 3
       },
       {
-       "bias_a": 0.5,
+       "bias_a": 0.0,
        "form_a": "roz\u00e9kk\u00e1",
        "form_b": "roz\u00e9kk\u00e9",
        "prominence": 1.0,
@@ -13420,7 +13420,7 @@
        "case": 4
       },
       {
-       "bias_a": 0.5,
+       "bias_a": 0.0,
        "form_a": "roz\u00e9kban",
        "form_b": "roz\u00e9kben",
        "prominence": 1.0,
@@ -13428,7 +13428,7 @@
        "case": 5
       },
       {
-       "bias_a": 0.5,
+       "bias_a": 0.0,
        "form_a": "roz\u00e9kon",
        "form_b": "roz\u00e9ken",
        "prominence": 1.0,
@@ -13436,7 +13436,7 @@
        "case": 6
       },
       {
-       "bias_a": 0.5,
+       "bias_a": 0.0,
        "form_a": "roz\u00e9kn\u00e1l",
        "form_b": "roz\u00e9kn\u00e9l",
        "prominence": 1.0,
@@ -13444,7 +13444,7 @@
        "case": 7
       },
       {
-       "bias_a": 0.5,
+       "bias_a": 0.0,
        "form_a": "roz\u00e9kba",
        "form_b": "roz\u00e9kbe",
        "prominence": 1.0,
@@ -13452,7 +13452,7 @@
        "case": 8
       },
       {
-       "bias_a": 0.5,
+       "bias_a": 0.0,
        "form_a": "roz\u00e9kra",
        "form_b": "roz\u00e9kre",
        "prominence": 1.0,
@@ -13460,7 +13460,7 @@
        "case": 9
       },
       {
-       "bias_a": 0.5,
+       "bias_a": 0.0,
        "form_a": "roz\u00e9khoz",
        "form_b": "roz\u00e9khez",
        "prominence": 1.0,
@@ -13468,7 +13468,7 @@
        "case": 10
       },
       {
-       "bias_a": 0.5,
+       "bias_a": 0.0,
        "form_a": "roz\u00e9kb\u00f3l",
        "form_b": "roz\u00e9kb\u0151l",
        "prominence": 1.0,
@@ -13476,7 +13476,7 @@
        "case": 11
       },
       {
-       "bias_a": 0.5,
+       "bias_a": 0.0,
        "form_a": "roz\u00e9kr\u00f3l",
        "form_b": "roz\u00e9kr\u0151l",
        "prominence": 1.0,
@@ -13484,7 +13484,7 @@
        "case": 12
       },
       {
-       "bias_a": 0.5,
+       "bias_a": 0.0,
        "form_a": "roz\u00e9kt\u00f3l",
        "form_b": "roz\u00e9kt\u0151l",
        "prominence": 1.0,
@@ -13515,7 +13515,7 @@
        "case": 0
       },
       {
-       "bias_a": 0.5,
+       "bias_a": 0.0,
        "form_a": "roz\u00e9t",
        "form_b": "roz\u00e9t",
        "prominence": 1.0,
@@ -13523,7 +13523,7 @@
        "case": 1
       },
       {
-       "bias_a": 0.5,
+       "bias_a": 0.0,
        "form_a": "roz\u00e9nak",
        "form_b": "roz\u00e9nek",
        "prominence": 1.0,
@@ -13531,7 +13531,7 @@
        "case": 2
       },
       {
-       "bias_a": 0.5,
+       "bias_a": 0.0,
        "form_a": "roz\u00e9val",
        "form_b": "roz\u00e9vel",
        "prominence": 1.0,
@@ -13539,7 +13539,7 @@
        "case": 3
       },
       {
-       "bias_a": 0.5,
+       "bias_a": 0.0,
        "form_a": "roz\u00e9v\u00e1",
        "form_b": "roz\u00e9v\u00e9",
        "prominence": 1.0,
@@ -13547,7 +13547,7 @@
        "case": 4
       },
       {
-       "bias_a": 0.5,
+       "bias_a": 0.0,
        "form_a": "roz\u00e9ban",
        "form_b": "roz\u00e9ben",
        "prominence": 1.0,
@@ -13555,7 +13555,7 @@
        "case": 5
       },
       {
-       "bias_a": 0.5,
+       "bias_a": 0.0,
        "form_a": "roz\u00e9n",
        "form_b": "roz\u00e9n",
        "prominence": 1.0,
@@ -13563,7 +13563,7 @@
        "case": 6
       },
       {
-       "bias_a": 0.5,
+       "bias_a": 0.0,
        "form_a": "roz\u00e9n\u00e1l",
        "form_b": "roz\u00e9n\u00e9l",
        "prominence": 1.0,
@@ -13571,7 +13571,7 @@
        "case": 7
       },
       {
-       "bias_a": 0.5,
+       "bias_a": 0.0,
        "form_a": "roz\u00e9ba",
        "form_b": "roz\u00e9be",
        "prominence": 1.0,
@@ -13579,7 +13579,7 @@
        "case": 8
       },
       {
-       "bias_a": 0.5,
+       "bias_a": 0.0,
        "form_a": "roz\u00e9ra",
        "form_b": "roz\u00e9re",
        "prominence": 1.0,
@@ -13587,7 +13587,7 @@
        "case": 9
       },
       {
-       "bias_a": 0.5,
+       "bias_a": 0.0,
        "form_a": "roz\u00e9hoz",
        "form_b": "roz\u00e9hez",
        "prominence": 1.0,
@@ -13595,7 +13595,7 @@
        "case": 10
       },
       {
-       "bias_a": 0.5,
+       "bias_a": 0.0,
        "form_a": "roz\u00e9b\u00f3l",
        "form_b": "roz\u00e9b\u0151l",
        "prominence": 1.0,
@@ -13603,7 +13603,7 @@
        "case": 11
       },
       {
-       "bias_a": 0.5,
+       "bias_a": 0.0,
        "form_a": "roz\u00e9r\u00f3l",
        "form_b": "roz\u00e9r\u0151l",
        "prominence": 1.0,
@@ -13611,7 +13611,7 @@
        "case": 12
       },
       {
-       "bias_a": 0.5,
+       "bias_a": 0.0,
        "form_a": "roz\u00e9t\u00f3l",
        "form_b": "roz\u00e9t\u0151l",
        "prominence": 1.0,
@@ -13621,7 +13621,7 @@
      ],
      [
       {
-       "bias_a": 0.5,
+       "bias_a": 0.0,
        "form_a": "roz\u00e9k",
        "form_b": "roz\u00e9k",
        "prominence": 1.0,
@@ -13629,7 +13629,7 @@
        "case": 0
       },
       {
-       "bias_a": 0.5,
+       "bias_a": 0.0,
        "form_a": "roz\u00e9kat",
        "form_b": "roz\u00e9ket",
        "prominence": 1.0,
@@ -13637,7 +13637,7 @@
        "case": 1
       },
       {
-       "bias_a": 0.5,
+       "bias_a": 0.0,
        "form_a": "roz\u00e9knak",
        "form_b": "roz\u00e9knek",
        "prominence": 1.0,
@@ -13645,7 +13645,7 @@
        "case": 2
       },
       {
-       "bias_a": 0.5,
+       "bias_a": 0.0,
        "form_a": "roz\u00e9kkal",
        "form_b": "roz\u00e9kkel",
        "prominence": 1.0,
@@ -13653,7 +13653,7 @@
        "case": 3
       },
       {
-       "bias_a": 0.5,
+       "bias_a": 0.0,
        "form_a": "roz\u00e9kk\u00e1",
        "form_b": "roz\u00e9kk\u00e9",
        "prominence": 1.0,
@@ -13661,7 +13661,7 @@
        "case": 4
       },
       {
-       "bias_a": 0.5,
+       "bias_a": 0.0,
        "form_a": "roz\u00e9kban",
        "form_b": "roz\u00e9kben",
        "prominence": 1.0,
@@ -13669,7 +13669,7 @@
        "case": 5
       },
       {
-       "bias_a": 0.5,
+       "bias_a": 0.0,
        "form_a": "roz\u00e9kon",
        "form_b": "roz\u00e9ken",
        "prominence": 1.0,
@@ -13677,7 +13677,7 @@
        "case": 6
       },
       {
-       "bias_a": 0.5,
+       "bias_a": 0.0,
        "form_a": "roz\u00e9kn\u00e1l",
        "form_b": "roz\u00e9kn\u00e9l",
        "prominence": 1.0,
@@ -13685,7 +13685,7 @@
        "case": 7
       },
       {
-       "bias_a": 0.5,
+       "bias_a": 0.0,
        "form_a": "roz\u00e9kba",
        "form_b": "roz\u00e9kbe",
        "prominence": 1.0,
@@ -13693,7 +13693,7 @@
        "case": 8
       },
       {
-       "bias_a": 0.5,
+       "bias_a": 0.0,
        "form_a": "roz\u00e9kra",
        "form_b": "roz\u00e9kre",
        "prominence": 1.0,
@@ -13701,7 +13701,7 @@
        "case": 9
       },
       {
-       "bias_a": 0.5,
+       "bias_a": 0.0,
        "form_a": "roz\u00e9khoz",
        "form_b": "roz\u00e9khez",
        "prominence": 1.0,
@@ -13709,7 +13709,7 @@
        "case": 10
       },
       {
-       "bias_a": 0.5,
+       "bias_a": 0.0,
        "form_a": "roz\u00e9kb\u00f3l",
        "form_b": "roz\u00e9kb\u0151l",
        "prominence": 1.0,
@@ -13717,7 +13717,7 @@
        "case": 11
       },
       {
-       "bias_a": 0.5,
+       "bias_a": 0.0,
        "form_a": "roz\u00e9kr\u00f3l",
        "form_b": "roz\u00e9kr\u0151l",
        "prominence": 1.0,
@@ -13725,7 +13725,7 @@
        "case": 12
       },
       {
-       "bias_a": 0.5,
+       "bias_a": 0.0,
        "form_a": "roz\u00e9kt\u00f3l",
        "form_b": "roz\u00e9kt\u0151l",
        "prominence": 1.0,
@@ -15202,7 +15202,7 @@
        "case": 0
       },
       {
-       "bias_a": 0.5,
+       "bias_a": 0.0,
        "form_a": "roz\u00e9t",
        "form_b": "roz\u00e9t",
        "prominence": 1.0,
@@ -15210,7 +15210,7 @@
        "case": 1
       },
       {
-       "bias_a": 0.5,
+       "bias_a": 0.0,
        "form_a": "roz\u00e9nak",
        "form_b": "roz\u00e9nek",
        "prominence": 1.0,
@@ -15218,7 +15218,7 @@
        "case": 2
       },
       {
-       "bias_a": 0.5,
+       "bias_a": 0.0,
        "form_a": "roz\u00e9val",
        "form_b": "roz\u00e9vel",
        "prominence": 1.0,
@@ -15226,7 +15226,7 @@
        "case": 3
       },
       {
-       "bias_a": 0.5,
+       "bias_a": 0.0,
        "form_a": "roz\u00e9v\u00e1",
        "form_b": "roz\u00e9v\u00e9",
        "prominence": 1.0,
@@ -15234,7 +15234,7 @@
        "case": 4
       },
       {
-       "bias_a": 0.5,
+       "bias_a": 0.0,
        "form_a": "roz\u00e9ban",
        "form_b": "roz\u00e9ben",
        "prominence": 1.0,
@@ -15242,7 +15242,7 @@
        "case": 5
       },
       {
-       "bias_a": 0.5,
+       "bias_a": 0.0,
        "form_a": "roz\u00e9n",
        "form_b": "roz\u00e9n",
        "prominence": 1.0,
@@ -15250,7 +15250,7 @@
        "case": 6
       },
       {
-       "bias_a": 0.5,
+       "bias_a": 0.0,
        "form_a": "roz\u00e9n\u00e1l",
        "form_b": "roz\u00e9n\u00e9l",
        "prominence": 1.0,
@@ -15258,7 +15258,7 @@
        "case": 7
       },
       {
-       "bias_a": 0.5,
+       "bias_a": 0.0,
        "form_a": "roz\u00e9ba",
        "form_b": "roz\u00e9be",
        "prominence": 1.0,
@@ -15266,7 +15266,7 @@
        "case": 8
       },
       {
-       "bias_a": 0.5,
+       "bias_a": 0.0,
        "form_a": "roz\u00e9ra",
        "form_b": "roz\u00e9re",
        "prominence": 1.0,
@@ -15274,7 +15274,7 @@
        "case": 9
       },
       {
-       "bias_a": 0.5,
+       "bias_a": 0.0,
        "form_a": "roz\u00e9hoz",
        "form_b": "roz\u00e9hez",
        "prominence": 1.0,
@@ -15282,7 +15282,7 @@
        "case": 10
       },
       {
-       "bias_a": 0.5,
+       "bias_a": 0.0,
        "form_a": "roz\u00e9b\u00f3l",
        "form_b": "roz\u00e9b\u0151l",
        "prominence": 1.0,
@@ -15290,7 +15290,7 @@
        "case": 11
       },
       {
-       "bias_a": 0.5,
+       "bias_a": 0.0,
        "form_a": "roz\u00e9r\u00f3l",
        "form_b": "roz\u00e9r\u0151l",
        "prominence": 1.0,
@@ -15298,7 +15298,7 @@
        "case": 12
       },
       {
-       "bias_a": 0.5,
+       "bias_a": 0.0,
        "form_a": "roz\u00e9t\u00f3l",
        "form_b": "roz\u00e9t\u0151l",
        "prominence": 1.0,
@@ -15308,7 +15308,7 @@
      ],
      [
       {
-       "bias_a": 0.5,
+       "bias_a": 0.0,
        "form_a": "roz\u00e9k",
        "form_b": "roz\u00e9k",
        "prominence": 1.0,
@@ -15316,7 +15316,7 @@
        "case": 0
       },
       {
-       "bias_a": 0.5,
+       "bias_a": 0.0,
        "form_a": "roz\u00e9kat",
        "form_b": "roz\u00e9ket",
        "prominence": 1.0,
@@ -15324,7 +15324,7 @@
        "case": 1
       },
       {
-       "bias_a": 0.5,
+       "bias_a": 0.0,
        "form_a": "roz\u00e9knak",
        "form_b": "roz\u00e9knek",
        "prominence": 1.0,
@@ -15332,7 +15332,7 @@
        "case": 2
       },
       {
-       "bias_a": 0.5,
+       "bias_a": 0.0,
        "form_a": "roz\u00e9kkal",
        "form_b": "roz\u00e9kkel",
        "prominence": 1.0,
@@ -15340,7 +15340,7 @@
        "case": 3
       },
       {
-       "bias_a": 0.5,
+       "bias_a": 0.0,
        "form_a": "roz\u00e9kk\u00e1",
        "form_b": "roz\u00e9kk\u00e9",
        "prominence": 1.0,
@@ -15348,7 +15348,7 @@
        "case": 4
       },
       {
-       "bias_a": 0.5,
+       "bias_a": 0.0,
        "form_a": "roz\u00e9kban",
        "form_b": "roz\u00e9kben",
        "prominence": 1.0,
@@ -15356,7 +15356,7 @@
        "case": 5
       },
       {
-       "bias_a": 0.5,
+       "bias_a": 0.0,
        "form_a": "roz\u00e9kon",
        "form_b": "roz\u00e9ken",
        "prominence": 1.0,
@@ -15364,7 +15364,7 @@
        "case": 6
       },
       {
-       "bias_a": 0.5,
+       "bias_a": 0.0,
        "form_a": "roz\u00e9kn\u00e1l",
        "form_b": "roz\u00e9kn\u00e9l",
        "prominence": 1.0,
@@ -15372,7 +15372,7 @@
        "case": 7
       },
       {
-       "bias_a": 0.5,
+       "bias_a": 0.0,
        "form_a": "roz\u00e9kba",
        "form_b": "roz\u00e9kbe",
        "prominence": 1.0,
@@ -15380,7 +15380,7 @@
        "case": 8
       },
       {
-       "bias_a": 0.5,
+       "bias_a": 0.0,
        "form_a": "roz\u00e9kra",
        "form_b": "roz\u00e9kre",
        "prominence": 1.0,
@@ -15388,7 +15388,7 @@
        "case": 9
       },
       {
-       "bias_a": 0.5,
+       "bias_a": 0.0,
        "form_a": "roz\u00e9khoz",
        "form_b": "roz\u00e9khez",
        "prominence": 1.0,
@@ -15396,7 +15396,7 @@
        "case": 10
       },
       {
-       "bias_a": 0.5,
+       "bias_a": 0.0,
        "form_a": "roz\u00e9kb\u00f3l",
        "form_b": "roz\u00e9kb\u0151l",
        "prominence": 1.0,
@@ -15404,7 +15404,7 @@
        "case": 11
       },
       {
-       "bias_a": 0.5,
+       "bias_a": 0.0,
        "form_a": "roz\u00e9kr\u00f3l",
        "form_b": "roz\u00e9kr\u0151l",
        "prominence": 1.0,
@@ -15412,7 +15412,7 @@
        "case": 12
       },
       {
-       "bias_a": 0.5,
+       "bias_a": 0.0,
        "form_a": "roz\u00e9kt\u00f3l",
        "form_b": "roz\u00e9kt\u0151l",
        "prominence": 1.0,
@@ -15443,7 +15443,7 @@
        "case": 0
       },
       {
-       "bias_a": 0.5,
+       "bias_a": 0.0,
        "form_a": "roz\u00e9t",
        "form_b": "roz\u00e9t",
        "prominence": 1.0,
@@ -15451,7 +15451,7 @@
        "case": 1
       },
       {
-       "bias_a": 0.5,
+       "bias_a": 0.0,
        "form_a": "roz\u00e9nak",
        "form_b": "roz\u00e9nek",
        "prominence": 1.0,
@@ -15459,7 +15459,7 @@
        "case": 2
       },
       {
-       "bias_a": 0.5,
+       "bias_a": 0.0,
        "form_a": "roz\u00e9val",
        "form_b": "roz\u00e9vel",
        "prominence": 1.0,
@@ -15467,7 +15467,7 @@
        "case": 3
       },
       {
-       "bias_a": 0.5,
+       "bias_a": 0.0,
        "form_a": "roz\u00e9v\u00e1",
        "form_b": "roz\u00e9v\u00e9",
        "prominence": 1.0,
@@ -15475,7 +15475,7 @@
        "case": 4
       },
       {
-       "bias_a": 0.5,
+       "bias_a": 0.0,
        "form_a": "roz\u00e9ban",
        "form_b": "roz\u00e9ben",
        "prominence": 1.0,
@@ -15483,7 +15483,7 @@
        "case": 5
       },
       {
-       "bias_a": 0.5,
+       "bias_a": 0.0,
        "form_a": "roz\u00e9n",
        "form_b": "roz\u00e9n",
        "prominence": 1.0,
@@ -15491,7 +15491,7 @@
        "case": 6
       },
       {
-       "bias_a": 0.5,
+       "bias_a": 0.0,
        "form_a": "roz\u00e9n\u00e1l",
        "form_b": "roz\u00e9n\u00e9l",
        "prominence": 1.0,
@@ -15499,7 +15499,7 @@
        "case": 7
       },
       {
-       "bias_a": 0.5,
+       "bias_a": 0.0,
        "form_a": "roz\u00e9ba",
        "form_b": "roz\u00e9be",
        "prominence": 1.0,
@@ -15507,7 +15507,7 @@
        "case": 8
       },
       {
-       "bias_a": 0.5,
+       "bias_a": 0.0,
        "form_a": "roz\u00e9ra",
        "form_b": "roz\u00e9re",
        "prominence": 1.0,
@@ -15515,7 +15515,7 @@
        "case": 9
       },
       {
-       "bias_a": 0.5,
+       "bias_a": 0.0,
        "form_a": "roz\u00e9hoz",
        "form_b": "roz\u00e9hez",
        "prominence": 1.0,
@@ -15523,7 +15523,7 @@
        "case": 10
       },
       {
-       "bias_a": 0.5,
+       "bias_a": 0.0,
        "form_a": "roz\u00e9b\u00f3l",
        "form_b": "roz\u00e9b\u0151l",
        "prominence": 1.0,
@@ -15531,7 +15531,7 @@
        "case": 11
       },
       {
-       "bias_a": 0.5,
+       "bias_a": 0.0,
        "form_a": "roz\u00e9r\u00f3l",
        "form_b": "roz\u00e9r\u0151l",
        "prominence": 1.0,
@@ -15539,7 +15539,7 @@
        "case": 12
       },
       {
-       "bias_a": 0.5,
+       "bias_a": 0.0,
        "form_a": "roz\u00e9t\u00f3l",
        "form_b": "roz\u00e9t\u0151l",
        "prominence": 1.0,
@@ -15549,7 +15549,7 @@
      ],
      [
       {
-       "bias_a": 0.5,
+       "bias_a": 0.0,
        "form_a": "roz\u00e9k",
        "form_b": "roz\u00e9k",
        "prominence": 1.0,
@@ -15557,7 +15557,7 @@
        "case": 0
       },
       {
-       "bias_a": 0.5,
+       "bias_a": 0.0,
        "form_a": "roz\u00e9kat",
        "form_b": "roz\u00e9ket",
        "prominence": 1.0,
@@ -15565,7 +15565,7 @@
        "case": 1
       },
       {
-       "bias_a": 0.5,
+       "bias_a": 0.0,
        "form_a": "roz\u00e9knak",
        "form_b": "roz\u00e9knek",
        "prominence": 1.0,
@@ -15573,7 +15573,7 @@
        "case": 2
       },
       {
-       "bias_a": 0.5,
+       "bias_a": 0.0,
        "form_a": "roz\u00e9kkal",
        "form_b": "roz\u00e9kkel",
        "prominence": 1.0,
@@ -15581,7 +15581,7 @@
        "case": 3
       },
       {
-       "bias_a": 0.5,
+       "bias_a": 0.0,
        "form_a": "roz\u00e9kk\u00e1",
        "form_b": "roz\u00e9kk\u00e9",
        "prominence": 1.0,
@@ -15589,7 +15589,7 @@
        "case": 4
       },
       {
-       "bias_a": 0.5,
+       "bias_a": 0.0,
        "form_a": "roz\u00e9kban",
        "form_b": "roz\u00e9kben",
        "prominence": 1.0,
@@ -15597,7 +15597,7 @@
        "case": 5
       },
       {
-       "bias_a": 0.5,
+       "bias_a": 0.0,
        "form_a": "roz\u00e9kon",
        "form_b": "roz\u00e9ken",
        "prominence": 1.0,
@@ -15605,7 +15605,7 @@
        "case": 6
       },
       {
-       "bias_a": 0.5,
+       "bias_a": 0.0,
        "form_a": "roz\u00e9kn\u00e1l",
        "form_b": "roz\u00e9kn\u00e9l",
        "prominence": 1.0,
@@ -15613,7 +15613,7 @@
        "case": 7
       },
       {
-       "bias_a": 0.5,
+       "bias_a": 0.0,
        "form_a": "roz\u00e9kba",
        "form_b": "roz\u00e9kbe",
        "prominence": 1.0,
@@ -15621,7 +15621,7 @@
        "case": 8
       },
       {
-       "bias_a": 0.5,
+       "bias_a": 0.0,
        "form_a": "roz\u00e9kra",
        "form_b": "roz\u00e9kre",
        "prominence": 1.0,
@@ -15629,7 +15629,7 @@
        "case": 9
       },
       {
-       "bias_a": 0.5,
+       "bias_a": 0.0,
        "form_a": "roz\u00e9khoz",
        "form_b": "roz\u00e9khez",
        "prominence": 1.0,
@@ -15637,7 +15637,7 @@
        "case": 10
       },
       {
-       "bias_a": 0.5,
+       "bias_a": 0.0,
        "form_a": "roz\u00e9kb\u00f3l",
        "form_b": "roz\u00e9kb\u0151l",
        "prominence": 1.0,
@@ -15645,7 +15645,7 @@
        "case": 11
       },
       {
-       "bias_a": 0.5,
+       "bias_a": 0.0,
        "form_a": "roz\u00e9kr\u00f3l",
        "form_b": "roz\u00e9kr\u0151l",
        "prominence": 1.0,
@@ -15653,7 +15653,7 @@
        "case": 12
       },
       {
-       "bias_a": 0.5,
+       "bias_a": 0.0,
        "form_a": "roz\u00e9kt\u00f3l",
        "form_b": "roz\u00e9kt\u0151l",
        "prominence": 1.0,
@@ -15684,7 +15684,7 @@
        "case": 0
       },
       {
-       "bias_a": 0.5,
+       "bias_a": 0.0,
        "form_a": "roz\u00e9t",
        "form_b": "roz\u00e9t",
        "prominence": 1.0,
@@ -15692,7 +15692,7 @@
        "case": 1
       },
       {
-       "bias_a": 0.5,
+       "bias_a": 0.0,
        "form_a": "roz\u00e9nak",
        "form_b": "roz\u00e9nek",
        "prominence": 1.0,
@@ -15700,7 +15700,7 @@
        "case": 2
       },
       {
-       "bias_a": 0.5,
+       "bias_a": 0.0,
        "form_a": "roz\u00e9val",
        "form_b": "roz\u00e9vel",
        "prominence": 1.0,
@@ -15708,7 +15708,7 @@
        "case": 3
       },
       {
-       "bias_a": 0.5,
+       "bias_a": 0.0,
        "form_a": "roz\u00e9v\u00e1",
        "form_b": "roz\u00e9v\u00e9",
        "prominence": 1.0,
@@ -15716,7 +15716,7 @@
        "case": 4
       },
       {
-       "bias_a": 0.5,
+       "bias_a": 0.0,
        "form_a": "roz\u00e9ban",
        "form_b": "roz\u00e9ben",
        "prominence": 1.0,
@@ -15724,7 +15724,7 @@
        "case": 5
       },
       {
-       "bias_a": 0.5,
+       "bias_a": 0.0,
        "form_a": "roz\u00e9n",
        "form_b": "roz\u00e9n",
        "prominence": 1.0,
@@ -15732,7 +15732,7 @@
        "case": 6
       },
       {
-       "bias_a": 0.5,
+       "bias_a": 0.0,
        "form_a": "roz\u00e9n\u00e1l",
        "form_b": "roz\u00e9n\u00e9l",
        "prominence": 1.0,
@@ -15740,7 +15740,7 @@
        "case": 7
       },
       {
-       "bias_a": 0.5,
+       "bias_a": 0.0,
        "form_a": "roz\u00e9ba",
        "form_b": "roz\u00e9be",
        "prominence": 1.0,
@@ -15748,7 +15748,7 @@
        "case": 8
       },
       {
-       "bias_a": 0.5,
+       "bias_a": 0.0,
        "form_a": "roz\u00e9ra",
        "form_b": "roz\u00e9re",
        "prominence": 1.0,
@@ -15756,7 +15756,7 @@
        "case": 9
       },
       {
-       "bias_a": 0.5,
+       "bias_a": 0.0,
        "form_a": "roz\u00e9hoz",
        "form_b": "roz\u00e9hez",
        "prominence": 1.0,
@@ -15764,7 +15764,7 @@
        "case": 10
       },
       {
-       "bias_a": 0.5,
+       "bias_a": 0.0,
        "form_a": "roz\u00e9b\u00f3l",
        "form_b": "roz\u00e9b\u0151l",
        "prominence": 1.0,
@@ -15772,7 +15772,7 @@
        "case": 11
       },
       {
-       "bias_a": 0.5,
+       "bias_a": 0.0,
        "form_a": "roz\u00e9r\u00f3l",
        "form_b": "roz\u00e9r\u0151l",
        "prominence": 1.0,
@@ -15780,7 +15780,7 @@
        "case": 12
       },
       {
-       "bias_a": 0.5,
+       "bias_a": 0.0,
        "form_a": "roz\u00e9t\u00f3l",
        "form_b": "roz\u00e9t\u0151l",
        "prominence": 1.0,
@@ -15790,7 +15790,7 @@
      ],
      [
       {
-       "bias_a": 0.5,
+       "bias_a": 0.0,
        "form_a": "roz\u00e9k",
        "form_b": "roz\u00e9k",
        "prominence": 1.0,
@@ -15798,7 +15798,7 @@
        "case": 0
       },
       {
-       "bias_a": 0.5,
+       "bias_a": 0.0,
        "form_a": "roz\u00e9kat",
        "form_b": "roz\u00e9ket",
        "prominence": 1.0,
@@ -15806,7 +15806,7 @@
        "case": 1
       },
       {
-       "bias_a": 0.5,
+       "bias_a": 0.0,
        "form_a": "roz\u00e9knak",
        "form_b": "roz\u00e9knek",
        "prominence": 1.0,
@@ -15814,7 +15814,7 @@
        "case": 2
       },
       {
-       "bias_a": 0.5,
+       "bias_a": 0.0,
        "form_a": "roz\u00e9kkal",
        "form_b": "roz\u00e9kkel",
        "prominence": 1.0,
@@ -15822,7 +15822,7 @@
        "case": 3
       },
       {
-       "bias_a": 0.5,
+       "bias_a": 0.0,
        "form_a": "roz\u00e9kk\u00e1",
        "form_b": "roz\u00e9kk\u00e9",
        "prominence": 1.0,
@@ -15830,7 +15830,7 @@
        "case": 4
       },
       {
-       "bias_a": 0.5,
+       "bias_a": 0.0,
        "form_a": "roz\u00e9kban",
        "form_b": "roz\u00e9kben",
        "prominence": 1.0,
@@ -15838,7 +15838,7 @@
        "case": 5
       },
       {
-       "bias_a": 0.5,
+       "bias_a": 0.0,
        "form_a": "roz\u00e9kon",
        "form_b": "roz\u00e9ken",
        "prominence": 1.0,
@@ -15846,7 +15846,7 @@
        "case": 6
       },
       {
-       "bias_a": 0.5,
+       "bias_a": 0.0,
        "form_a": "roz\u00e9kn\u00e1l",
        "form_b": "roz\u00e9kn\u00e9l",
        "prominence": 1.0,
@@ -15854,7 +15854,7 @@
        "case": 7
       },
       {
-       "bias_a": 0.5,
+       "bias_a": 0.0,
        "form_a": "roz\u00e9kba",
        "form_b": "roz\u00e9kbe",
        "prominence": 1.0,
@@ -15862,7 +15862,7 @@
        "case": 8
       },
       {
-       "bias_a": 0.5,
+       "bias_a": 0.0,
        "form_a": "roz\u00e9kra",
        "form_b": "roz\u00e9kre",
        "prominence": 1.0,
@@ -15870,7 +15870,7 @@
        "case": 9
       },
       {
-       "bias_a": 0.5,
+       "bias_a": 0.0,
        "form_a": "roz\u00e9khoz",
        "form_b": "roz\u00e9khez",
        "prominence": 1.0,
@@ -15878,7 +15878,7 @@
        "case": 10
       },
       {
-       "bias_a": 0.5,
+       "bias_a": 0.0,
        "form_a": "roz\u00e9kb\u00f3l",
        "form_b": "roz\u00e9kb\u0151l",
        "prominence": 1.0,
@@ -15886,7 +15886,7 @@
        "case": 11
       },
       {
-       "bias_a": 0.5,
+       "bias_a": 0.0,
        "form_a": "roz\u00e9kr\u00f3l",
        "form_b": "roz\u00e9kr\u0151l",
        "prominence": 1.0,
@@ -15894,7 +15894,7 @@
        "case": 12
       },
       {
-       "bias_a": 0.5,
+       "bias_a": 0.0,
        "form_a": "roz\u00e9kt\u00f3l",
        "form_b": "roz\u00e9kt\u0151l",
        "prominence": 1.0,
@@ -15925,7 +15925,7 @@
        "case": 0
       },
       {
-       "bias_a": 0.5,
+       "bias_a": 0.0,
        "form_a": "roz\u00e9t",
        "form_b": "roz\u00e9t",
        "prominence": 1.0,
@@ -15933,7 +15933,7 @@
        "case": 1
       },
       {
-       "bias_a": 0.5,
+       "bias_a": 0.0,
        "form_a": "roz\u00e9nak",
        "form_b": "roz\u00e9nek",
        "prominence": 1.0,
@@ -15941,7 +15941,7 @@
        "case": 2
       },
       {
-       "bias_a": 0.5,
+       "bias_a": 0.0,
        "form_a": "roz\u00e9val",
        "form_b": "roz\u00e9vel",
        "prominence": 1.0,
@@ -15949,7 +15949,7 @@
        "case": 3
       },
       {
-       "bias_a": 0.5,
+       "bias_a": 0.0,
        "form_a": "roz\u00e9v\u00e1",
        "form_b": "roz\u00e9v\u00e9",
        "prominence": 1.0,
@@ -15957,7 +15957,7 @@
        "case": 4
       },
       {
-       "bias_a": 0.5,
+       "bias_a": 0.0,
        "form_a": "roz\u00e9ban",
        "form_b": "roz\u00e9ben",
        "prominence": 1.0,
@@ -15965,7 +15965,7 @@
        "case": 5
       },
       {
-       "bias_a": 0.5,
+       "bias_a": 0.0,
        "form_a": "roz\u00e9n",
        "form_b": "roz\u00e9n",
        "prominence": 1.0,
@@ -15973,7 +15973,7 @@
        "case": 6
       },
       {
-       "bias_a": 0.5,
+       "bias_a": 0.0,
        "form_a": "roz\u00e9n\u00e1l",
        "form_b": "roz\u00e9n\u00e9l",
        "prominence": 1.0,
@@ -15981,7 +15981,7 @@
        "case": 7
       },
       {
-       "bias_a": 0.5,
+       "bias_a": 0.0,
        "form_a": "roz\u00e9ba",
        "form_b": "roz\u00e9be",
        "prominence": 1.0,
@@ -15989,7 +15989,7 @@
        "case": 8
       },
       {
-       "bias_a": 0.5,
+       "bias_a": 0.0,
        "form_a": "roz\u00e9ra",
        "form_b": "roz\u00e9re",
        "prominence": 1.0,
@@ -15997,7 +15997,7 @@
        "case": 9
       },
       {
-       "bias_a": 0.5,
+       "bias_a": 0.0,
        "form_a": "roz\u00e9hoz",
        "form_b": "roz\u00e9hez",
        "prominence": 1.0,
@@ -16005,7 +16005,7 @@
        "case": 10
       },
       {
-       "bias_a": 0.5,
+       "bias_a": 0.0,
        "form_a": "roz\u00e9b\u00f3l",
        "form_b": "roz\u00e9b\u0151l",
        "prominence": 1.0,
@@ -16013,7 +16013,7 @@
        "case": 11
       },
       {
-       "bias_a": 0.5,
+       "bias_a": 0.0,
        "form_a": "roz\u00e9r\u00f3l",
        "form_b": "roz\u00e9r\u0151l",
        "prominence": 1.0,
@@ -16021,7 +16021,7 @@
        "case": 12
       },
       {
-       "bias_a": 0.5,
+       "bias_a": 0.0,
        "form_a": "roz\u00e9t\u00f3l",
        "form_b": "roz\u00e9t\u0151l",
        "prominence": 1.0,
@@ -16031,7 +16031,7 @@
      ],
      [
       {
-       "bias_a": 0.5,
+       "bias_a": 0.0,
        "form_a": "roz\u00e9k",
        "form_b": "roz\u00e9k",
        "prominence": 1.0,
@@ -16039,7 +16039,7 @@
        "case": 0
       },
       {
-       "bias_a": 0.5,
+       "bias_a": 0.0,
        "form_a": "roz\u00e9kat",
        "form_b": "roz\u00e9ket",
        "prominence": 1.0,
@@ -16047,7 +16047,7 @@
        "case": 1
       },
       {
-       "bias_a": 0.5,
+       "bias_a": 0.0,
        "form_a": "roz\u00e9knak",
        "form_b": "roz\u00e9knek",
        "prominence": 1.0,
@@ -16055,7 +16055,7 @@
        "case": 2
       },
       {
-       "bias_a": 0.5,
+       "bias_a": 0.0,
        "form_a": "roz\u00e9kkal",
        "form_b": "roz\u00e9kkel",
        "prominence": 1.0,
@@ -16063,7 +16063,7 @@
        "case": 3
       },
       {
-       "bias_a": 0.5,
+       "bias_a": 0.0,
        "form_a": "roz\u00e9kk\u00e1",
        "form_b": "roz\u00e9kk\u00e9",
        "prominence": 1.0,
@@ -16071,7 +16071,7 @@
        "case": 4
       },
       {
-       "bias_a": 0.5,
+       "bias_a": 0.0,
        "form_a": "roz\u00e9kban",
        "form_b": "roz\u00e9kben",
        "prominence": 1.0,
@@ -16079,7 +16079,7 @@
        "case": 5
       },
       {
-       "bias_a": 0.5,
+       "bias_a": 0.0,
        "form_a": "roz\u00e9kon",
        "form_b": "roz\u00e9ken",
        "prominence": 1.0,
@@ -16087,7 +16087,7 @@
        "case": 6
       },
       {
-       "bias_a": 0.5,
+       "bias_a": 0.0,
        "form_a": "roz\u00e9kn\u00e1l",
        "form_b": "roz\u00e9kn\u00e9l",
        "prominence": 1.0,
@@ -16095,7 +16095,7 @@
        "case": 7
       },
       {
-       "bias_a": 0.5,
+       "bias_a": 0.0,
        "form_a": "roz\u00e9kba",
        "form_b": "roz\u00e9kbe",
        "prominence": 1.0,
@@ -16103,7 +16103,7 @@
        "case": 8
       },
       {
-       "bias_a": 0.5,
+       "bias_a": 0.0,
        "form_a": "roz\u00e9kra",
        "form_b": "roz\u00e9kre",
        "prominence": 1.0,
@@ -16111,7 +16111,7 @@
        "case": 9
       },
       {
-       "bias_a": 0.5,
+       "bias_a": 0.0,
        "form_a": "roz\u00e9khoz",
        "form_b": "roz\u00e9khez",
        "prominence": 1.0,
@@ -16119,7 +16119,7 @@
        "case": 10
       },
       {
-       "bias_a": 0.5,
+       "bias_a": 0.0,
        "form_a": "roz\u00e9kb\u00f3l",
        "form_b": "roz\u00e9kb\u0151l",
        "prominence": 1.0,
@@ -16127,7 +16127,7 @@
        "case": 11
       },
       {
-       "bias_a": 0.5,
+       "bias_a": 0.0,
        "form_a": "roz\u00e9kr\u00f3l",
        "form_b": "roz\u00e9kr\u0151l",
        "prominence": 1.0,
@@ -16135,7 +16135,7 @@
        "case": 12
       },
       {
-       "bias_a": 0.5,
+       "bias_a": 0.0,
        "form_a": "roz\u00e9kt\u00f3l",
        "form_b": "roz\u00e9kt\u0151l",
        "prominence": 1.0,
