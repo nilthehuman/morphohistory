@@ -167,7 +167,7 @@ class Agora:
         speakers' (redundantly stored) paradigms based on the values in para."""
         for speaker in self.state.speakers:
             for num in range(0, 2):
-                for case in range(0, 13):
+                for case in range(0, 14):
                     speaker.para.para[num][case].form_a = para.para[num][case].form_a
                     speaker.para.para[num][case].form_b = para.para[num][case].form_b
                     speaker.para.para[num][case].prominence = para.para[num][case].prominence

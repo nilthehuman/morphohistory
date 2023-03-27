@@ -35,73 +35,79 @@ class CaseLabel(Label):
 class CellTextInput(TextInput):
     """A text input box for one form of a cell in the paradigm table."""
 
-    def __init__(self, text: str='', **kwargs) -> None:
+    def __init__(self, always_enabled: bool=False, text: str='', **kwargs) -> None:
         super().__init__(**kwargs)
+        self.always_enabled = always_enabled
         self.text = text
+        self.font_size = 14
         self.multiline = False # FIXME: this does not work :/
         self.cursor_color = (0, 0, 0, 1)
 
     def on_gui_ready(self) -> None:
         """Finish initializing once the root widget is ready."""
-        self.toggle_disabled()
-        get_single_cell_checkbox().bind(active=self.toggle_disabled)
+        if not self.always_enabled:
+            self.toggle_disabled()
+            get_single_cell_checkbox().bind(active=self.toggle_disabled)
 
     def toggle_disabled(self, *_) -> None:
         """Show or hide our own text depending on the state of the CheckBox above."""
         self.disabled = get_single_cell_checkbox().active
 
 class ParadigmTable(GridLayout):
-    """A 14 row (header + 13 cases) by 7 column (label col + 2 x (form A, form B, prominence)) table
+    """A 15 row (header + 14 cases) by 7 column (label col + 2 x (form A, form B, prominence)) table
     for the noun paradigm to be used in the simulation."""
 
     def __init__(self, **kwargs) -> None:
         super().__init__(**kwargs)
 
-        case_names = ["", "ACC", "DAT", "INS", "TRANS", "INE", "SUPE", "ADE",
+        case_names = ["", "NOM", "ACC", "DAT", "INS", "TRANS", "INE", "SUPE", "ADE",
                       "ILL", "SUBL", "ALL", "ELA", "DEL", "ABL"]
-        for row in range(0, 14):
+        for row in range(0, 15):
             case_label = CaseLabel(text=case_names[row], size_hint_x=0.1)
             self.add_widget(case_label)
 
         header_label = Label(text="SING (form A)", size_hint_x=0.175)
         self.add_widget(header_label)
-        first_textinput = TextInput(size_hint_x=0.175, cursor_color=(0, 0, 0, 1))
-        self.add_widget(first_textinput)
-        for row in range(2, 14):
-            text_input = CellTextInput(size_hint_x=0.175)
+        for row in range(1, 15):
+            if row == 1:
+                text_input = CellTextInput(always_enabled=True, size_hint_x=0.175)
+            else:
+                text_input = CellTextInput(size_hint_x=0.175)
             self.add_widget(text_input)
 
         header_label = Label(text="SING (form B)", size_hint_x=0.175)
         self.add_widget(header_label)
-        first_textinput = TextInput(size_hint_x=0.175, cursor_color=(0, 0, 0, 1))
-        self.add_widget(first_textinput)
-        for row in range(2, 14):
-            text_input = CellTextInput(size_hint_x=0.175)
+        for row in range(1, 15):
+            if row == 1:
+                text_input = CellTextInput(always_enabled=True, size_hint_x=0.175)
+            else:
+                text_input = CellTextInput(size_hint_x=0.175)
             self.add_widget(text_input)
 
         header_label = Label(text="prominence", size_hint_x=0.1)
         self.add_widget(header_label)
-        first_textinput = TextInput(size_hint_x=0.1, text='1', cursor_color=(0, 0, 0, 1))
-        self.add_widget(first_textinput)
-        for row in range(2, 14):
-            text_input = CellTextInput(size_hint_x=0.1, text='1')
+        for row in range(1, 15):
+            if row == 1:
+                text_input = CellTextInput(always_enabled=True, size_hint_x=0.1, text='1')
+            else:
+                text_input = CellTextInput(size_hint_x=0.1, text='1')
             self.add_widget(text_input)
 
         header_label = Label(text="PLUR (form A)", size_hint_x=0.175)
         self.add_widget(header_label)
-        for row in range(1, 14):
+        for row in range(1, 15):
             text_input = CellTextInput(size_hint_x=0.175)
             self.add_widget(text_input)
 
         header_label = Label(text="PLUR (form B)", size_hint_x=0.175)
         self.add_widget(header_label)
-        for row in range(1, 14):
+        for row in range(1, 15):
             text_input = CellTextInput(size_hint_x=0.175)
             self.add_widget(text_input)
 
         header_label = Label(text="prominence", size_hint_x=0.1)
         self.add_widget(header_label)
-        for row in range(1, 14):
+        for row in range(1, 15):
             text_input = CellTextInput(size_hint_x=0.1, text='1')
             self.add_widget(text_input)
 
@@ -118,7 +124,7 @@ class ParadigmTable(GridLayout):
         """Write the contents of all cells to speaker's paradigms, or reload cells from them."""
         def _process_subcell(num, case, subcell):
             # N.B. children are stored in reverse order
-            child_number = 14 * 7 - ((1 + 3*num + subcell) * 14 + 2 + case) # why do I need to add 2 here instead of 1??
+            child_number = 15 * 7 - ((1 + 3*num + subcell) * 15 + 2 + case) # why do I need to add 2 here instead of 1??
             text_input = self.children[child_number]
             if 0 == subcell:
                 if save:
@@ -143,7 +149,7 @@ class ParadigmTable(GridLayout):
                 _process_subcell(0, 0, subcell)
         else:
             for num in range(0, 2):
-                for case in range(0, 13):
+                for case in range(0, 14):
                     for subcell in range(0, 3):
                         _process_subcell(num, case, subcell)
         get_agora().set_paradigm(SETTINGS.paradigm)

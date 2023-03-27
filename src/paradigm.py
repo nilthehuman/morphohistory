@@ -11,7 +11,7 @@ class _NounCellIndex(tuple):
     """Identifies a single NounParadigm entry: a tuple of two non-negative integers."""
     def __new__(cls, number: int=0, case: int=0) -> Self:
         assert number >= 0 and case >= 0
-        assert number < 2 and case < 13
+        assert number < 2 and case < 14
         new_cell_index = super(_NounCellIndex, cls).__new__(cls, [number, case])  # type: ignore[list-item]
         return new_cell_index
 
@@ -208,7 +208,7 @@ class NounParadigm(_Paradigm):
     """A 2D matrix representing the competing forms of a single noun.
        Hungarian nouns inflect for number and case."""
     def __init__(self, bias_a: float=0.5, form_a: str='', form_b: str='') -> None:
-        self.para = [[_NounCell(i, j, bias_a) for j in range(13)] for i in range(2)]
+        self.para = [[_NounCell(i, j, bias_a) for j in range(14)] for i in range(2)]
         self.para[0][0].form_a = form_a
         self.para[0][0].form_b = form_b
         self.para[0][0].prominence = 1.0
@@ -223,7 +223,7 @@ class NounParadigm(_Paradigm):
         assert len(para_list) <= 2
         while para_list:
             list_below = para_list.pop(0)
-            assert len(list_below) <= 13
+            assert len(list_below) <= 14
             while list_below:
                 cell = _NounCell.from_dict(list_below.pop(0))
                 new_para.para[cell.number][cell.case] = cell
@@ -236,7 +236,7 @@ class NounParadigm(_Paradigm):
         assert self.para is not None
         assert len(self.para) <= 2
         for num in self.para:
-            assert len(num) <= 13
+            assert len(num) <= 14
             dense_para.append([])
             for cell in num:
                 if cell:
@@ -275,19 +275,20 @@ class NounParadigm(_Paradigm):
             1 : 'pl'
         }
         cases = {
-            0 : 'acc',
-            1 : 'dat',
-            2 : 'ins',
-            3 : 'transl',
-            4 : 'ine',
-            5 : 'supe',
-            6 : 'ade',
-            7 : 'ill',
-            8 : 'subl',
-            9 : 'all',
-           10 : 'ela',
-           11 : 'del',
-           12 : 'abl'
+            0 : 'nom',
+            1 : 'acc',
+            2 : 'dat',
+            3 : 'ins',
+            4 : 'transl',
+            5 : 'ine',
+            6 : 'supe',
+            7 : 'ade',
+            8 : 'ill',
+            9 : 'subl',
+           10 : 'all',
+           11 : 'ela',
+           12 : 'del',
+           13 : 'abl'
         }
         return "{%s, %s}" % (numbers[num], cases[cas])
 
@@ -309,7 +310,7 @@ class NounParadigm(_Paradigm):
         for own_num in range(2):
             if own_num != num:
                 self.nudge(delta, _NounCellIndex(own_num, cas))
-        for own_cas in range(13):
+        for own_cas in range(14):
             if own_cas != cas:
                 self.nudge(delta, _NounCellIndex(num, own_cas))
 

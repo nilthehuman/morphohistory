@@ -70,7 +70,7 @@ class Speaker:
 
     def name_tag(self) -> str:
         """Text to display next to SpeakerDot label on mouse hover."""
-        return self.para[0][0].to_str_short() + "; xp:%d" % self.experience
+        return self.para[0][2].to_str_short() + "; xp:%d" % self.experience
 
     def talk(self, pick: 'PairPick') -> tuple[CellIndex, bool]:
         """Interact with and influence another Speaker in the Agora."""
@@ -81,7 +81,7 @@ class Speaker:
         if not SETTINGS.sim_single_cell:
             # pick a non-empty cell to share with the hearer
             while True:
-                index = CellIndex(RAND.next() % 2, RAND.next() % 13)
+                index = CellIndex(RAND.next() % 2, RAND.next() % 14)
                 if self.para[index].form_a:
                     break
         cum_weights = [self.para[index].bias_a, 1]
