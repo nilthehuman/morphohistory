@@ -97,6 +97,9 @@ class Speaker:
         """Accept a given form from another Speaker and adjust own bias based on it."""
         form = self.para[index].form_a if form_a_used else self.para[index].form_b
         debug("Speaker: I just heard '%s'" % form)
+        if self.para[index].form_a == self.para[index].form_b:
+            # impossible to tell which kind of form we got
+            return
         learning_model_funcs = {
             SETTINGS.LearningModel.HARMONIC    : self._hear_noun_harmonic,
             SETTINGS.LearningModel.RW          : self._hear_noun_rw_vanilla,
