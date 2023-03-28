@@ -318,11 +318,11 @@ class SpeakerDot(Speaker, DragBehavior, Widget):
         else:
             pass # no need to propagate upwards to DragBehavior
 
-    def update_color(self) -> None:
+    def update_color(self, force_update: bool=False) -> None:
         """Refresh own color based on current paradigm bias."""
         color_a = SETTINGS.color_a
         color_b = SETTINGS.color_b
-        bias = self.principal_bias()
+        bias = self.principal_bias(force_update=force_update)
         self.color = [sum(x) for x in zip([bias * c for c in color_a.rgb],
                                           [(1-bias) * c for c in color_b.rgb])]
 
@@ -644,7 +644,7 @@ class AgoraWidget(Widget, Agora):
         if not self.graphics_on:
             return
         for speaker in self.state.speakers:
-            speaker.update_color()
+            speaker.update_color(force_update=True)
 
     def update_progressbar(self, sim_iteration: int) -> None:
         """Display number of simulation cycles performed in the progress bar popup."""

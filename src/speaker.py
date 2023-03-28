@@ -53,11 +53,9 @@ class Speaker:
                    speaker_dict['experience'],
                    speaker_dict['is_broadcaster'])
 
-    def principal_bias(self) -> float:
+    def principal_bias(self, force_update: bool=False) -> float:
         """Which way the speaker is leaning, summed up in a single float."""
-        return self.para[0][0].bias_a
-        # TODO: figure out why this function is slow
-        if self.principal_bias_cached:
+        if not force_update and self.principal_bias_cached is not None:
             return self.principal_bias_cached
         sum_bias = 0
         sum_prominence = 0
