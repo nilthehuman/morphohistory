@@ -62,7 +62,7 @@ class Speaker:
         sum_bias = 0
         sum_prominence = 0
         for cell in self.para:
-            if cell.form_a:
+            if cell.alternates():
                 sum_bias += cell.bias_a * cell.prominence
                 sum_prominence += cell.prominence
         self.principal_bias_cached = sum_bias / sum_prominence
@@ -97,7 +97,7 @@ class Speaker:
         """Accept a given form from another Speaker and adjust own bias based on it."""
         form = self.para[index].form_a if form_a_used else self.para[index].form_b
         debug("Speaker: I just heard '%s'" % form)
-        if self.para[index].form_a == self.para[index].form_b:
+        if not self.para[index].alternates():
             # impossible to tell which kind of form we got
             return
         learning_model_funcs = {

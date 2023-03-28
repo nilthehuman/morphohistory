@@ -47,6 +47,10 @@ class _Cell(ABC):
         return "(%s, %g * \"%s\" + %g * \"%s\")" % \
             (self.get_morphosyntactic_properties(), self.bias_a, self.form_a, 1.0-self.bias_a, self.form_b)
 
+    def alternates(self) -> bool:
+        """Tells you if the cell has two different forms in it."""
+        return self.form_a != self.form_b
+
     @abstractmethod
     def get_morphosyntactic_properties(self) -> str:
         """Returns a string listing the cell's features."""
@@ -69,7 +73,8 @@ class _Cell(ABC):
     def nudge(self, delta: float) -> None:
         """Shift bias by the given amount."""
         assert -1 <= delta <= 1
-        self.bias_a = _clamp(self.bias_a + delta)
+        if self.alternates():
+            self.bias_a = _clamp(self.bias_a + delta)
 
 class _Paradigm(ABC):
     """A 2D or 5D matrix of competing noun of verb forms for given morphosyntactic contexts."""
