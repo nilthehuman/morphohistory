@@ -70,7 +70,10 @@ class Speaker:
 
     def name_tag(self) -> str:
         """Text to display next to SpeakerDot label on mouse hover."""
-        return self.para[0][2].to_str_short() + "; xp:%d" % self.experience
+        for main_cell in self.para:
+            if main_cell.alternates():
+                break
+        return main_cell.to_str_short() + "; xp:%d" % self.experience
 
     def talk(self, pick: 'PairPick') -> tuple[CellIndex, bool]:
         """Interact with and influence another Speaker in the Agora."""
