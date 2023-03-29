@@ -33,10 +33,7 @@ class _Cell(ABC):
         self.bias_a = bias_a
         self.form_a = form_a
         self.form_b = form_b
-        if not form_a and not form_b:
-            self.prominence = 0.0
-        else:
-            self.prominence = prominence
+        self.prominence = prominence
 
     def __bool__(self) -> bool:
         return 0 != len(self.form_a)
