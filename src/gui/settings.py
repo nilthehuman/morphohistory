@@ -3,6 +3,7 @@
 from copy import copy
 from logging import error
 from math import inf
+from typing import Dict, Optional, Self, Union
 
 from kivy.config import ConfigParser
 from kivy.graphics import Color
@@ -16,7 +17,6 @@ from .confirm import ApplyConfirmedLabel, DiscardConfirmedLabel
 from .l10n import LocalizedString, localize, unlocalize, localize_all_texts, unlocalize_all_texts
 
 from ..settings import SETTINGS
-from typing import Dict, Optional, Self, Union
 
 Settings.interface_cls = InterfaceWithNoMenu
 

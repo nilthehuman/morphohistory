@@ -1,6 +1,7 @@
 """Translations of user interface labels to a couple different languages."""
 
 from functools import partial
+from typing import Dict, Self
 
 from kivy.uix.popup import Popup
 from kivy.uix.widget import Widget
@@ -8,7 +9,6 @@ from kivy.uix.widget import Widget
 from .access_widgets import forall_widgets
 
 from ..settings import SETTINGS
-from typing import Dict, Self
 
 
 class LocalizedString(str):
