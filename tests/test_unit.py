@@ -42,17 +42,28 @@ def test_simulation_harmonic():
 
 def test_simulation_RW_vanilla():
     SETTINGS.sim_learning_model = SETTINGS.LearningModel.RW
-    agora = Agora()
+    SETTINGS.sim_rw_default_rate = 1.0
+    agora1 = Agora()
     noun_para_tomayto = NounParadigm(0.0, 'tomahto', 'tomayto')
-    agora.add_speaker(Speaker(0, (-100, 0), noun_para_tomayto))
+    agora1.add_speaker(Speaker(0, (-100, 0), noun_para_tomayto))
     noun_para_tomahto = NounParadigm(1.0, 'tomahto', 'tomayto')
-    agora.add_speaker(Speaker(1, (+100, 0), noun_para_tomahto))
-    assert 0.0 == agora.state.speakers[0].principal_bias()
-    assert 1.0 == agora.state.speakers[1].principal_bias()
-    agora.simulate()
-    assert (0.0 == agora.state.speakers[0].principal_bias() == agora.state.speakers[1].principal_bias()) or \
-           (1.0 == agora.state.speakers[0].principal_bias() == agora.state.speakers[1].principal_bias())
-    assert 2 == agora.state.speakers[0].experience and 2 == agora.state.speakers[1].experience
+    agora1.add_speaker(Speaker(1, (+100, 0), noun_para_tomahto))
+    assert 0.0 == agora1.state.speakers[0].principal_bias()
+    assert 1.0 == agora1.state.speakers[1].principal_bias()
+    agora1.simulate()
+    assert (0.0 == agora1.state.speakers[0].principal_bias() == agora1.state.speakers[1].principal_bias()) or \
+           (1.0 == agora1.state.speakers[0].principal_bias() == agora1.state.speakers[1].principal_bias())
+    assert 2 == agora1.state.speakers[0].experience and 2 == agora1.state.speakers[1].experience
+    SETTINGS.sim_rw_default_rate = 0.1
+    agora2 = Agora()
+    noun_para_currently = NounParadigm(0.0, 'right now', 'currently')
+    agora2.add_speaker(Speaker(0, (-100, 0), noun_para_currently))
+    noun_para_right_now = NounParadigm(1.0, 'right now', 'currently')
+    agora2.add_speaker(Speaker(1, (+100, 0), noun_para_right_now))
+    agora2.simulate()
+    assert (0.0 == agora2.state.speakers[0].principal_bias() and 0.9 == agora2.state.speakers[1].principal_bias()) or \
+           (0.1 == agora2.state.speakers[0].principal_bias() and 1.0 == agora2.state.speakers[1].principal_bias())
+    assert 2 == agora2.state.speakers[0].experience and 2 == agora2.state.speakers[1].experience
 
 def test_l10n_to_English():
     SETTINGS.gui_language = SETTINGS.GuiLanguage.ENG

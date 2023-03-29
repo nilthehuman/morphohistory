@@ -132,7 +132,7 @@ class Speaker:
             alpha = cell.prominence       # salience of conditioned stimulus
             beta  = cell_used.prominence  # salience of unconditioned stimulus
             surprise = lambda_ * (1 if form_a_used else -1) - v_total
-            delta_v = alpha * beta * surprise
+            delta_v = SETTINGS.sim_rw_default_rate * alpha * beta * surprise
             cell.nudge(0.5 * delta_v)  # [-1,1] scaled to [0,1]
 
     def _hear_noun_rw_weighted(self, index: CellIndex, form_a_used: bool) -> None:
@@ -152,7 +152,7 @@ class Speaker:
             beta    = cell_used.prominence  # salience of unconditioned stimulus
             lambda_ = 1                     # maximum conditioning (in a single cell)
             surprise = lambda_ * (1 if form_a_used else -1) - v_total
-            delta_v = alpha * beta * surprise
+            delta_v = SETTINGS.sim_rw_default_rate * alpha * beta * surprise
             cell.nudge(0.5 * delta_v)  # [-1,1] scaled to [0,1]
 
     def passive_decay(self) -> None:

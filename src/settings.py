@@ -71,6 +71,7 @@ class _Settings:
         self.sim_single_cell = True
         self.sim_distance_metric = self.DistanceMetric.CONSTANT
         self.sim_learning_model = self.LearningModel.HARMONIC
+        self.sim_rw_default_rate = 0.1
         self.sim_influence_self = True
         self.sim_influence_mutual = False
         self.sim_passive_decay = False
