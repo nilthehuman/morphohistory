@@ -20,7 +20,7 @@ class KeyboardHandler(Widget):
         self.keyboard.bind(on_key_down=self.on_keypressed)
 
     def on_keypressed(self, _keyboard, keycode: tuple[int, str], _text, modifiers: list[str]) -> bool:
-        if keycode[1] == 'g':
+        if keycode[1] == 's':
             get_agora().start_stop_sim()
             return True
         if keycode[1] == 'f':
