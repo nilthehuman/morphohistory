@@ -27,7 +27,7 @@ from kivy.uix.slider import Slider
 from kivy.uix.stencilview import StencilView
 from kivy.uix.widget import Widget
 
-from .access_widgets import get_root, get_agora, get_agora_layout, get_button_layout
+from .access_widgets import get_root, get_agora, get_agora_layout, get_button_layout, get_paradigm_table
 from .confirm import ApplyConfirmedLabel
 from .l10n import localize, localize_all_texts, LocalizedPopup
 
@@ -164,6 +164,7 @@ class LoadFromFileButton(Button):
         fullpath = fileselection[0]
         try:
             get_agora().load_from_file(fullpath)
+            get_paradigm_table().save_or_load_cells(save=False)
             self.dismiss_popup()
         except (JSONDecodeError, UnicodeDecodeError, TypeError):
             self.show_fail_popup()
