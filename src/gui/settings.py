@@ -3,6 +3,8 @@
 from copy import copy
 from logging import error
 from math import inf
+from os.path import join
+from sys import path
 from typing import Dict, Optional, Self, Union
 
 from kivy.config import ConfigParser
@@ -20,7 +22,7 @@ from ..settings import SETTINGS
 
 Settings.interface_cls = InterfaceWithNoMenu
 
-_SETTINGS_FILE_PATH = 'user_settings.ini'
+_SETTINGS_FILE_PATH = join(path[0], 'user_settings.ini')
 
 ConfigItem = Dict[str, Union[str, list[str]]]
 

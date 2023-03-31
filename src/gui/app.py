@@ -3,6 +3,7 @@
 # pylint: disable=wildcard-import, unused-wildcard-import
 from os.path import dirname, join
 from platform import system
+from sys import path
 
 from kivy.config import Config
 Config.set('input', 'mouse', 'mouse,multitouch_on_demand')
@@ -14,6 +15,7 @@ kivy_require('2.1.0')
 from kivy.app import App
 from kivy.core.window import Window
 from kivy.lang import Builder
+from kivy.resources import resource_add_path, resource_find
 
 from .access_widgets import forall_widgets
 from .keyboardhandler import KeyboardHandler
@@ -37,7 +39,9 @@ for file in _KV_FILES:
 class MorphoHistoryApp(App):
     def build(self) -> TopTabbedPanel:
         self.title = "morphohistory"
-        self.icon = "assets/logo.png"
+        resource_add_path(path[0])
+        resource_add_path(join(path[0], "assets"))
+        self.icon = resource_find("logo.png")
         root = TopTabbedPanel()
         Window.minimum_width = (root.ids.sim_layout.ids.agora_layout.width +
                                 root.ids.sim_layout.ids.button_layout.width)

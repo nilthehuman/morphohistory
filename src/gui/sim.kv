@@ -190,11 +190,11 @@
     orientation: "vertical"
     ProgressBar:
         canvas:
-            # code cribbed form stackoverflow.com/questions/51719374/how-to-change-color-of-progress-bar-kivy
+            # code cribbed from stackoverflow.com/questions/51719374/how-to-change-color-of-progress-bar-kivy
             BorderImage:
                 pos: self.x, self.center_y - 8
                 size: self.width * (self.value / self.max) if self.max else 0, 16
-                source: 'assets/progressbar.png'
+                source: 'progressbar.png'
         id: progressbar
         max: 10000
         pos_hint: {'center_x': 0.5}
