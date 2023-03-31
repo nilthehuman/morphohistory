@@ -37,14 +37,17 @@ class DemoSpinner(Spinner):
 
     def on_gui_ready(self) -> None:
         """Finish initializing: tell the Agora to load the first demo in the dropdown."""
-        self.on_text()
+        self.on_text(selected=SETTINGS.startup_demo)
 
-    def on_text(self, *_) -> None:
+    def on_text(self, *_, selected: Optional[SETTINGS.DemoAgora]=None) -> None:
         """Tell the Agora on the main tab to load the selected demo."""
         if not get_root():
             # Widget tree has not been built yet, leave job to on_gui_ready
             return
-        selected = SETTINGS.DemoAgora(unlocalize(self.text))
+        if not selected:
+            selected = SETTINGS.DemoAgora(unlocalize(self.text))
+        if SETTINGS.current_demo == selected:
+            return
         SETTINGS.current_demo = selected
         demo_factory = DEMO_FACTORIES[selected]
         demo_args = DEFAULT_DEMO_ARGUMENTS[selected]

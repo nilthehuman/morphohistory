@@ -60,7 +60,8 @@ class _Settings:
         self.popup_size_fail = (250, 200)
         self.popup_size_progress = (500, 250)
 
-        self.current_demo = self.DemoAgora.RAINBOW_9X9
+        self.startup_demo = self.DemoAgora.RAINBOW_9X9
+        self.current_demo = None
 
         self.bias_threshold = 0.8
         self.starting_experience = 1
