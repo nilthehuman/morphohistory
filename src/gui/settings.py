@@ -227,7 +227,11 @@ class CustomSettings(Settings):
             clamped_value = value
             if clamped_value[-1] == '%':
                 clamped_value = clamped_value[:-1]
-            clamped_value = float(clamped_value)
+            try:
+                clamped_value = float(clamped_value)
+            except ValueError:
+                get_settings().load_settings_values(section, key)
+                return
             clamped_value = max(clamped_value, bounds[(section, key)][0])
             clamped_value = min(clamped_value, bounds[(section, key)][1])
             if key != 'bias_threshold':
@@ -317,19 +321,20 @@ class CustomSettings(Settings):
         if write_to_file:
             self.config.write()
 
-    def load_settings_values(self) -> None:
+    def load_settings_values(self, section: Optional[str]=None, key: Optional[str]=None) -> None:
         """Destructively (re)set all values in our ConfigParser instance to the current global SETTINGS."""
-        for section in self.config.sections():
-            for (key, _) in self.config.items(section):
-                old_value = getattr(SETTINGS, key)
-                if isinstance(old_value, bool):
-                    old_value = '1' if old_value else '0'
-                elif isinstance(old_value, Color):
-                    old_value = get_hex_from_color(old_value.rgb)
-                elif isinstance(old_value, float):
-                    # plain float to percentage
-                    old_value = str(100 * old_value) + '%'
-                self.config.set(section, key, str(old_value))
+        for config_section in self.config.sections():
+            for (config_key, _) in self.config.items(config_section):
+                if not key or section == config_section and key == config_key:
+                    old_value = getattr(SETTINGS, config_key)
+                    if isinstance(old_value, bool):
+                        old_value = '1' if old_value else '0'
+                    elif isinstance(old_value, Color):
+                        old_value = get_hex_from_color(old_value.rgb)
+                    elif isinstance(old_value, float):
+                        # plain float to percentage
+                        old_value = str(100 * old_value) + '%'
+                    self.config.set(config_section, config_key, str(old_value))
         # force the update of displayed values on GUI as well
         self.reload_config_values()
 
