@@ -225,7 +225,7 @@ class CustomSettings(Settings):
         }
         if (section, key) in bounds:
             clamped_value = value
-            if key == 'bias_threshold':
+            if clamped_value[-1] == '%':
                 clamped_value = clamped_value[:-1]
             clamped_value = float(clamped_value)
             clamped_value = max(clamped_value, bounds[(section, key)][0])
