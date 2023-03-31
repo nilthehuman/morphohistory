@@ -1,5 +1,7 @@
 """The contents of the Paradigm tab: a complete noun paradigm with two different forms in each cell."""
 
+from logging import error
+
 from kivy.uix.boxlayout import BoxLayout
 from kivy.uix.button import Button
 from kivy.uix.label import Label
@@ -8,6 +10,7 @@ from kivy.uix.textinput import TextInput
 
 from .access_widgets import get_agora, get_single_cell_checkbox, get_paradigm_table
 from .confirm import ApplyConfirmedLabel, DiscardConfirmedLabel
+from .l10n import localize
 
 from ..settings import SETTINGS
 
@@ -119,10 +122,27 @@ class ParadigmTable(GridLayout):
 
     def save_or_load_cells(self, save: bool=False) -> None:
         """Write the contents of all cells to speaker's paradigms, or reload cells from them."""
+        def get_text_input_index(num, case, subcell):
+            return 15 * 7 - ((1 + 3*num + subcell) * 15 + 2 + case) # why do I need to add 2 here instead of 1??
+        if save:
+            sum_prominence = 0
+            for num in range(0, 2):
+                for case in range(0, 14):
+                    form_a_index = get_text_input_index(num, case, 0)
+                    form_a_text_input = self.children[form_a_index]
+                    form_b_index = get_text_input_index(num, case, 1)
+                    form_b_text_input = self.children[form_b_index]
+                    if form_a_text_input.disabled == False and form_a_text_input.text != form_b_text_input.text:
+                        prominence_index = get_text_input_index(num, case, 2)
+                        prominence_text_input = self.children[prominence_index]
+                        sum_prominence += float(prominence_text_input.text)
+            print("sum_prominence:", sum_prominence)
+            if 0 == sum_prominence:
+                raise ZeroDivisionError
         def _process_subcell(num, case, subcell):
             # N.B. children are stored in reverse order
-            child_number = 15 * 7 - ((1 + 3*num + subcell) * 15 + 2 + case) # why do I need to add 2 here instead of 1??
-            text_input = self.children[child_number]
+            child_index = get_text_input_index(num, case, subcell)
+            text_input = self.children[child_index]
             if not save:
                 was_disabled = text_input.disabled
                 text_input.disabled = False
@@ -161,9 +181,15 @@ class ApplyParadigmButton(Button):
 
     def apply_paradigm(self, *_) -> None:
         """Update all word forms in the simulated paradigm to the user's new inputs."""
-        get_paradigm_table().save_or_load_cells(save=True)
-        label = ApplyConfirmedLabel()
-        self.parent.add_widget(label)
+        try:
+            get_paradigm_table().save_or_load_cells(save=True)
+            label = ApplyConfirmedLabel()
+            self.parent.add_widget(label)
+        except ZeroDivisionError:
+            error("Cells with non-identical forms have zero total prominence.")
+            label = DiscardConfirmedLabel()
+            label.text = localize("Zero total prominence.")
+            self.parent.add_widget(label)
 
 class DiscardParadigmButton(Button):
     """Button to reset all word forms in this tab to the ones in the current simulation."""

@@ -194,6 +194,7 @@ _LOCALIZE_TEXTS_HUN = L10nDict({
     "prominence" : "prominencia",
     "PLUR (form A)" : "PLUR (A alak)",
     "PLUR (form B)" : "PLUR (B alak)",
+    "Zero total prominence." : "Össz prominencia nulla.",
     "Starting agora:" : "Kiinduló agora:",
     "Rainbow 9x9" : "Szivárvány 9x9",
     "Rainbow 10x10" : "Szivárvány 10x10",

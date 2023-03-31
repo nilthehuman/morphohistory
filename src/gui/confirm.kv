@@ -4,7 +4,7 @@
 <ConfirmedLabel>
     pos: (Window.width - self.width) / 2, (Window.height - self.height) / 2
     size_hint: None, None
-    size: 100, 40
+    size: max(100, 8*len(self.text)), 40
     color: 1, 1, 1, self.alpha
 
 <ApplyConfirmedLabel>
