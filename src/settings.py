@@ -43,6 +43,9 @@ class _Settings:
         RW_WEIGHTED = "Rescorla-Wagner (weighted)"
 
     def __init__(self) -> None:
+        self.reset()
+
+    def reset(self) -> None:
         self.gui_language = self.GuiLanguage.ENG
 
         self.agora_size = (600, 600)

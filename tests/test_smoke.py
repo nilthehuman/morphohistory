@@ -24,6 +24,7 @@ from kivy.app import App
 # kludge relative import for Python REPL
 sys_path.append('..')
 from ..src.gui.app import MorphoHistoryApp
+from ..src.settings import SETTINGS
 
 # suppress warnings about internal Kivy warning
 pytestmark = pytest.mark.filterwarnings("ignore:The 'warn' method is deprecated")
@@ -59,6 +60,7 @@ def test_survive_keypresses(keys):
         sleep(1)
     test_thread = Thread(target=delayed_user_actions)
     test_thread.start()
+    SETTINGS.reset()
     MorphoHistoryApp().run()
     test_thread.join()
     assert App.get_running_app() is None
@@ -88,6 +90,7 @@ def test_survive_button_clicks(buttons):
         sleep(1)
     test_thread = Thread(target=delayed_user_actions)
     test_thread.start()
+    SETTINGS.reset()
     MorphoHistoryApp().run()
     test_thread.join()
     # if an error happened on test_thread, we still need to fail on the main thread
@@ -120,6 +123,7 @@ def test_survive_simulation_speed_adjustment():
         sleep(1)
     test_thread = Thread(target=delayed_user_actions)
     test_thread.start()
+    SETTINGS.reset()
     MorphoHistoryApp().run()
     test_thread.join()
     # if an error happened on test_thread, we still need to fail on the main thread
