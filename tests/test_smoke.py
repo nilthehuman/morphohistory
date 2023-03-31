@@ -46,8 +46,8 @@ _FAIL_MSG = None
 @pytest.mark.parametrize("keys",
                          [
                              [],
-                             ['g'],
-                             ['g','g']
+                             ['s'],
+                             ['s','s']
                          ])
 def test_survive_keypresses(keys):
     def delayed_user_actions():
