@@ -123,6 +123,9 @@ class ParadigmTable(GridLayout):
             # N.B. children are stored in reverse order
             child_number = 15 * 7 - ((1 + 3*num + subcell) * 15 + 2 + case) # why do I need to add 2 here instead of 1??
             text_input = self.children[child_number]
+            if not save:
+                was_disabled = text_input.disabled
+                text_input.disabled = False
             if 0 == subcell:
                 if save:
                     SETTINGS.paradigm.para[num][case].form_a = text_input.text
@@ -141,14 +144,12 @@ class ParadigmTable(GridLayout):
                         text_input.text = str(SETTINGS.paradigm.para[num][case].prominence)
                 except ValueError:
                     pass
-        if get_single_cell_checkbox().active:
-            for subcell in range(0, 3):
-                _process_subcell(0, 0, subcell)
-        else:
-            for num in range(0, 2):
-                for case in range(0, 14):
-                    for subcell in range(0, 3):
-                        _process_subcell(num, case, subcell)
+            if not save:
+                text_input.disabled = was_disabled
+        for num in range(0, 2):
+            for case in range(0, 14):
+                for subcell in range(0, 3):
+                    _process_subcell(num, case, subcell)
         get_agora().set_paradigm(SETTINGS.paradigm)
 
 class ApplyParadigmButton(Button):
