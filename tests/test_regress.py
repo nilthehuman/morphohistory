@@ -8,7 +8,7 @@ from kivy.graphics.vertex_instructions import Line
 
 from ..src.gui.access_widgets import *
 from ..src.gui.sim import AgoraWidget
-from ..src.demos import Rainbow9x9
+from ..src.settings import SETTINGS
 
 
 _REAL_GET_BUTTON_LAYOUT = modules['morphohistory.src.gui.access_widgets'].get_button_layout
@@ -40,7 +40,7 @@ def mock_setup():
 
 def test_arrow_and_iteration_counter_after_reset(mock_setup):
     agora = AgoraWidget()
-    agora.load_demo_agora(Rainbow9x9)
+    agora.load_demo_agora(SETTINGS.DemoAgora.RAINBOW_9X9)
     agora.save_starting_state()
     for _ in range(3):
         agora.simulate()
@@ -54,7 +54,7 @@ def test_arrow_and_iteration_counter_after_reset(mock_setup):
 
 def test_arrow_and_iteration_counter_after_quick_reset(mock_setup):
     agora = AgoraWidget()
-    agora.load_demo_agora(Rainbow9x9)
+    agora.load_demo_agora(SETTINGS.DemoAgora.RAINBOW_9X9)
     agora.save_starting_state()
     for _ in range(3):
         agora.simulate()

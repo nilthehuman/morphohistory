@@ -7,7 +7,7 @@ from json import dumps, load
 from logging import debug, info, warning
 from typing import Callable, Optional, Self
 
-from .demos import DemoArguments, DemoFactory, DEFAULT_DEMO_ARGUMENTS
+from .demos import DemoArguments, DemoFactory, DEMO_FACTORIES, DEFAULT_DEMO_ARGUMENTS
 from .paradigm import CellIndex, NounParadigm
 from .rng import RAND
 from .settings import SETTINGS
@@ -117,9 +117,10 @@ class Agora:
         self.state.sim_iteration_total = 0
         self.clear_caches()
 
-    def load_demo_agora(self, demo_factory: DemoFactory, demo_args: Optional[DemoArguments]=None) -> None:
+    def load_demo_agora(self, demo_name: SETTINGS.DemoAgora, demo_args: Optional[DemoArguments]=None) -> None:
         """Replace current speaker community with a demo preset."""
-        args = demo_args if demo_args else DEFAULT_DEMO_ARGUMENTS[SETTINGS.current_demo]
+        demo_factory = DEMO_FACTORIES[demo_name]
+        args = demo_args if demo_args else DEFAULT_DEMO_ARGUMENTS[demo_name]
         speakers = demo_factory.get_speakers(args)
         assert speakers
         self.clear_speakers()
