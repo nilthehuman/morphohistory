@@ -40,7 +40,7 @@ class CellTextInput(TextInput):
         self.always_enabled = always_enabled
         self.text = text
         self.font_size = 14
-        self.multiline = False # FIXME: this does not work :/
+        self.multiline = False
         self.cursor_color = (0, 0, 0, 1)
 
     def on_gui_ready(self) -> None:
