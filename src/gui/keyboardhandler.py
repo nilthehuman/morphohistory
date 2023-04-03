@@ -20,16 +20,18 @@ class KeyboardHandler(Widget):
         self.keyboard.bind(on_key_down=self.on_keypressed)
 
     def on_keypressed(self, _keyboard, keycode: tuple[int, str], _text, modifiers: list[str]) -> bool:
-        if keycode[1] == 's':
-            get_agora().start_stop_sim()
-            return True
-        if keycode[1] == 'f':
-            get_agora().start_stop_sim(fastforward=True)
-            return True
-        if keycode[1] == 'r':
-            get_agora().stop_sim()
-            get_agora().quick_reset()
-            return True
+        if get_root().current_tab == get_root().tab_list[-1]:
+            # we're on the main tab panel
+            if keycode[1] == 's':
+                get_agora().start_stop_sim()
+                return True
+            if keycode[1] == 'f':
+                get_agora().start_stop_sim(fastforward=True)
+                return True
+            if keycode[1] == 'r':
+                get_agora().stop_sim()
+                get_agora().quick_reset()
+                return True
         if keycode[1] == 'q':
             info("KeyboardHandler: Exiting app...")
             App.get_running_app().stop()
