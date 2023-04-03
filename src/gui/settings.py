@@ -221,7 +221,7 @@ class CustomSettings(Settings):
             ('Simulation' , 'starting_experience')  : (  0, inf),
             ('Termination', 'bias_threshold')       : ( 50, 100),
             ('Termination', 'experience_threshold') : (  0, inf),
-            ('Termination', 'sim_max_iteration')    : (100, inf)
+            ('Termination', 'sim_max_iteration')    : (100, 1e20)
         }
         if (section, key) in bounds:
             clamped_value = value
