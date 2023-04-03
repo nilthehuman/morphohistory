@@ -67,6 +67,7 @@ class Agora:
         self.cum_weights: Optional[list[float]] = None
         self.pick: Optional[PairPick] = None
         self.pick_queue: list[PairPick] = []
+        self.rw_warned_already = False
 
     def to_dict(self):
         """Returns own state for JSON serialization."""
@@ -214,8 +215,9 @@ class Agora:
         and update the hearer's state based on the speaker's."""
         assert self.state and self.state.speakers
         debug("Agora: Iterating simulation...")
-        if SETTINGS.sim_single_cell and SETTINGS.LearningModel.HARMONIC != SETTINGS.sim_learning_model:
+        if not self.rw_warned_already and SETTINGS.sim_single_cell and SETTINGS.LearningModel.HARMONIC != SETTINGS.sim_learning_model:
             warning("Agora: Running Rescorla-Wagner model with a single paradigm cell.")
+            self.rw_warned_already = True
         if self.pick_queue:
             # either the second half of a mutual exchange, or a broadcaster's picks
             self.pick = self.pick_queue.pop(0)
@@ -291,8 +293,8 @@ class Agora:
                 info("Agora: Simulation until stable cancelled.")
                 return False
             if is_stable and is_stable(self):
-                info("Agora: Simulation until stable finished (stability reached after %d iterations)." % self.sim_iteration)
                 self.sim_iteration = 0
+                info("Agora: Simulation until stable finished (stability reached after %d iterations)." % self.sim_iteration)
                 return False
             self.simulate()
             # Make sure we stop eventually no matter what

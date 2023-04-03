@@ -495,6 +495,7 @@ class AgoraWidget(Widget, Agora):
             self.sim = None
             start_stop_button = get_button_layout().ids.start_stop_button
             start_stop_button.update_text()
+            self.rw_warned_already = False
 
     def passive_decay(self) -> None:
         """Make all speakers on the sidelines gradually forget their underrepresented forms."""
