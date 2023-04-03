@@ -136,7 +136,6 @@ class ParadigmTable(GridLayout):
                         prominence_index = get_text_input_index(num, case, 2)
                         prominence_text_input = self.children[prominence_index]
                         sum_prominence += float(prominence_text_input.text)
-            print("sum_prominence:", sum_prominence)
             if 0 == sum_prominence:
                 raise ZeroDivisionError
         def _process_subcell(num, case, subcell):
