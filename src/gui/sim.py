@@ -50,11 +50,13 @@ class AgoraLayout(ScatterLayout):
     def on_touch_up(self, touch) -> None:
         """Handle zooming in or out by mouse wheel."""
         if touch.is_mouse_scrolling:
+            factor = 1
             if touch.button == 'scrolldown':
                 factor = 1.02
             if touch.button == 'scrollup':
                 factor = 1 / 1.02
-            self.apply_transform(Matrix().scale(factor, factor, 1), anchor=self.center)
+            if factor != 1:
+                self.apply_transform(Matrix().scale(factor, factor, 1), anchor=self.center)
         super().on_touch_up(touch)
 
 class ButtonLayout(GridLayout):
