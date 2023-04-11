@@ -31,8 +31,13 @@ class Speaker:
                  experience: int=SETTINGS.starting_experience, is_broadcaster: bool=False) -> Self:
         """Construct a Speaker from a single bias value."""
         assert SETTINGS.paradigm.para is not None
-        para = NounParadigm(bias_a=bias_a, form_a=SETTINGS.paradigm.para[0][0].form_a,
-                                           form_b=SETTINGS.paradigm.para[0][0].form_b)
+        if SETTINGS.sim_single_cell:
+            para = NounParadigm(bias_a=bias_a, form_a=SETTINGS.paradigm.para[0][0].form_a,
+                                               form_b=SETTINGS.paradigm.para[0][0].form_b)
+        else:
+            para = deepcopy(SETTINGS.paradigm)
+            for cell in para:
+                cell.bias_a = bias_a
         new_speaker = cls(n, pos, para, experience, is_broadcaster)
         return new_speaker
 
