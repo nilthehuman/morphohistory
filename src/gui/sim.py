@@ -349,7 +349,7 @@ class BroadcasterSpeakerDot(SpeakerDot):
         self.is_broadcaster = True
         self.update_color()
 
-    def update_color(self, _force_update: bool=False) -> None:
+    def update_color(self, force_update: bool=False) -> None:
         """Set own color to special color to stand apart from the rest of the speakers."""
         self.color = SETTINGS.color_broadcaster.rgb
 
