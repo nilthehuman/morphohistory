@@ -148,8 +148,12 @@ class Speaker:
         All cells containing a substring of the string just heard are assumed to be activated."""
         cell_used = self.para[index]
         form = cell_used.form_a if form_a_used else cell_used.form_b
-        activated = lambda c: c.alternates() and (form.startswith(c.form_a) or form.startswith(c.form_b))
-        activated_cells = [cell for cell in self.para if activated(cell)]
+        if SETTINGS.sim_single_cell:
+            assert index == CellIndex()
+            activated_cells = [cell_used]
+        else:
+            activated = lambda c: c.alternates() and (form.startswith(c.form_a) or form.startswith(c.form_b))
+            activated_cells = [cell for cell in self.para if activated(cell)]
         lambda_ = 1  # maximum conditioning (in a single cell)
         v_max = lambda_ * len(activated_cells)
         # total weight of associations
@@ -167,8 +171,12 @@ class Speaker:
         according to the salience (prominence) of each conditioned stimulus."""
         cell_used = self.para[index]
         form = cell_used.form_a if form_a_used else cell_used.form_b
-        activated = lambda c: c.alternates() and (form.startswith(c.form_a) or form.startswith(c.form_b))
-        activated_cells = [cell for cell in self.para if activated(cell)]
+        if SETTINGS.sim_single_cell:
+            assert index == CellIndex()
+            activated_cells = [cell_used]
+        else:
+            activated = lambda c: c.alternates() and (form.startswith(c.form_a) or form.startswith(c.form_b))
+            activated_cells = [cell for cell in self.para if activated(cell)]
         lambda_ = 1  # maximum conditioning (in a single cell)
         v_max = lambda_ * len(activated_cells)
         # total weight of associations
