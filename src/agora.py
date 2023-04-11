@@ -67,6 +67,7 @@ class Agora:
         self.cum_weights: Optional[list[float]] = None
         self.pick: Optional[PairPick] = None
         self.pick_queue: list[PairPick] = []
+        self.identical_warned_already = False
         self.rw_warned_already = False
 
     def to_dict(self):
@@ -220,6 +221,11 @@ class Agora:
         and update the hearer's state based on the speaker's."""
         assert self.state and self.state.speakers
         debug("Agora: Iterating simulation...")
+        if not self.identical_warned_already and SETTINGS.sim_single_cell:
+            main_cell = SETTINGS.paradigm[CellIndex()]
+            if not main_cell.alternates():
+                warning("Agora: Single cell contains identical word forms. This probably isn't what you want.")
+                self.identical_warned_already = True
         if not self.rw_warned_already and SETTINGS.sim_single_cell and SETTINGS.LearningModel.HARMONIC != SETTINGS.sim_learning_model:
             warning("Agora: Running Rescorla-Wagner model with a single paradigm cell.")
             self.rw_warned_already = True
