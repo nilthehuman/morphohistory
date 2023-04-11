@@ -210,6 +210,11 @@ class Agora:
         return all(1 - SETTINGS.bias_threshold < s.principal_bias() < SETTINGS.bias_threshold
                    for s in self.state.speakers)
 
+    def uniform_paradigms_only(self, strong=False) -> bool:
+        """Detect a situation where all speakers' paradigms are uniformly tilted
+        towards either the A or the B forms (may vary across speakers though)."""
+        return all(s.uniform_paradigm(strong) for s in self.state.speakers)
+
     def simulate(self, *_) -> None: # TODO: use threading to perform independent picks in parallel
         """Perform one iteration: pick two individuals to talk to each other
         and update the hearer's state based on the speaker's."""

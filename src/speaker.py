@@ -71,6 +71,25 @@ class Speaker:
         self.principal_bias_cached = sum_bias / sum_prominence
         return self.principal_bias_cached
 
+    def uniform_paradigm(self, strong=False) -> bool:
+        """Is the speaker consistently biased towards the same kind of alternants?"""
+        if strong:
+            assert SETTINGS.bias_threshold >= 0.5
+            threshold = SETTINGS.bias_threshold
+        else:
+            threshold = 0.5
+        if SETTINGS.sim_single_cell:
+            main_cell = self.para[CellIndex()]
+            if not main_cell.alternates():
+                # no bias possible at all
+                return False
+            uniformly_a = main_cell.bias_a >     threshold
+            uniformly_b = main_cell.bias_a < 1 - threshold
+        else:
+            uniformly_a = all(cell.bias_a >     threshold for cell in self.para if cell.alternates())
+            uniformly_b = all(cell.bias_a < 1 - threshold for cell in self.para if cell.alternates())
+        return uniformly_a or uniformly_b
+
     def name_tag(self) -> str:
         """Text to display next to SpeakerDot label on mouse hover."""
         for main_cell in self.para:
