@@ -71,7 +71,10 @@ class Speaker:
         for main_cell in self.para:
             if main_cell.alternates():
                 break
-        return main_cell.to_str_short() + "; xp:%d" % self.experience
+        bias = self.principal_bias()
+        form_a = main_cell.form_a
+        form_b = main_cell.form_b
+        return "%g*\"%s\" + %g*\"%s\"; xp:%d" % (bias, form_a, 1-bias, form_b, self.experience)
 
     def talk(self, pick: 'PairPick') -> tuple[CellIndex, bool]:
         """Interact with and influence another Speaker in the Agora."""
