@@ -127,9 +127,9 @@ class Speaker:
         activated = lambda c: c.alternates() and (form.startswith(c.form_a) or form.startswith(c.form_b))
         activated_cells = [cell for cell in self.para if activated(cell)]
         lambda_ = 1  # maximum conditioning (in a single cell)
-        max_activation = lambda_ * len(activated_cells)
+        v_max = lambda_ * len(activated_cells)
         # total weight of associations
-        v_total = sum([cell.bias_a - (1 - cell.bias_a) for cell in activated_cells]) / max_activation
+        v_total = sum(cell.bias_a - (1 - cell.bias_a) for cell in activated_cells) / v_max
         # adjust affected cells only
         for cell in activated_cells:
             alpha = cell.prominence       # salience of conditioned stimulus
@@ -145,15 +145,14 @@ class Speaker:
         form = cell_used.form_a if form_a_used else cell_used.form_b
         activated = lambda c: c.alternates() and (form.startswith(c.form_a) or form.startswith(c.form_b))
         activated_cells = [cell for cell in self.para if activated(cell)]
-        prominence_total = sum([cell.prominence for cell in self.para])
+        lambda_ = 1  # maximum conditioning (in a single cell)
+        v_max = lambda_ * len(activated_cells)
         # total weight of associations
-        v_total = sum([(cell.bias_a - (1 - cell.bias_a)) * cell.prominence
-                                               for cell in activated_cells]) / prominence_total
+        v_total = sum((cell.bias_a - (1 - cell.bias_a)) * cell.prominence for cell in activated_cells) / v_max
         # adjust affected cells only
         for cell in activated_cells:
             alpha   = cell.prominence       # salience of conditioned stimulus
             beta    = cell_used.prominence  # salience of unconditioned stimulus
-            lambda_ = 1                     # maximum conditioning (in a single cell)
             surprise = lambda_ * (1 if form_a_used else -1) - v_total
             delta_v = SETTINGS.sim_rw_default_rate * alpha * beta * surprise
             cell.nudge(0.5 * delta_v)  # [-1,1] scaled to [0,1]
