@@ -201,9 +201,9 @@ class Agora:
 
     def dominant_form(self) -> Optional[str]:
         if all(s.principal_bias() > 0.5 for s in self.state.speakers):
-            return self.state.speakers[0].para[0][0].form_a
+            return 'A'
         if all(s.principal_bias() < 0.5 for s in self.state.speakers):
-            return self.state.speakers[0].para[0][0].form_b
+            return 'B'
         return None
 
     def uniform_balance(self) -> bool:

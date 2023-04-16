@@ -65,8 +65,8 @@ class Tuner:
         'masik_bias' : None,
         'kezdo_tapasztalat' : None,
         'belso_gyuru_sugara' : None,
-        SETTINGS.paradigm.para[0][0].form_a : 0,
-        SETTINGS.paradigm.para[0][0].form_b : 0,
+        'A' : 0,
+        'B' : 0,
         'egyik_sem' : 0,
         'uniform_egyensuly' : 0
     }
