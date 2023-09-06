@@ -150,7 +150,7 @@ Below this button we find a smaller button labeled "<<" (for "rewind") which ser
 the speech community to its initial state, and another by its side labeled ">>" (for "fast
 forward") which runs the simulation at full speed ignoring the graphical display of the speech
 community, which will only be updated once the simulation halts. The halting (or termination)
-conditions can be found and adjusted on the Settings tab panel.
+conditions can be found and adjusted on the *Settings* tab panel.
 
 The slider control below can be used to change the simulation speed when the *Start* button is
 used (the fast forward function ignores it). Finally, the total count of simulated iterations so
@@ -261,11 +261,11 @@ As the application is still under development, users may experience unexpected o
 behaviour at any time. A few typical problems and the recommended checks and actions to fix
 them are listed below.
 
-**Problem.** The simulation on the main tab seems to be doing nothing. I've clicked the Start
+**Problem.** The simulation on the main tab seems to be doing nothing. I've clicked the *Start*
 button but nothing happened.  
 **Solution.** If you're using the "harmonic" learning model, please check if the starting
-experience setting is too high on the Settings tab. If on the other hand you're using the
-Rescorla−Wagner model, check the Paradigm tab to see if the prominence values look okay;
+experience setting is too high on the *Settings* tab. If on the other hand you're using the
+Rescorla−Wagner model, check the *Paradigm* tab to see if the prominence values look okay;
 in particular, make sure to have at least one pair of variants that are different and have a
 positive prominence. Especially if you're using a single-cell paradigm, that cell needs to have
 two different word forms, otherwise there is no way for the speakers to influence each other
@@ -273,9 +273,9 @@ during the simulation.
 
 **Problem.** The simulation seems stuck. I've clicked the fast forward (">>") button but
 nothing happened.  
-**Solution.** When the termination criteria (as specified on the Settings tab) have already been
-met, the fast forward function will stop immediately. Please adjust the termination criteria
-or use the Start button above to keep running the simulation beyond that point.
+**Solution.** When the termination criteria (as specified on the *Settings* tab) have already
+been met, the fast forward function will stop immediately. Please adjust the termination criteria
+or use the *Start* button above to keep running the simulation beyond that point.
 
 **Problem.** The graphics on the main tab seem to be broken: the tooltip supposed to be shown
 hovering over the speaker appears way off.  
@@ -287,7 +287,7 @@ the *Change the size of text, apps and other items* option is set to 100%.
 **Solution.** Unfortunately there is no support for adjusting the biases from within the
 application at this time. However the .agr files containing the latest state of a speech
 community are written and formatted in human-readable JavaScript Object Notation and can
-be opened and changed manually in any text editor. Look for the bias_a variable to set a
+be opened and changed manually in any text editor. Look for the ```bias_a``` variable to set a
 certain speaker's bias associated with form A (the left one in the table on the *Paradigm*
 tab panel) in a particular cell.
 
