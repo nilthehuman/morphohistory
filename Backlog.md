@@ -9,7 +9,6 @@
 # Housekeeping and maintenance
 * Make smoke tests work on both Linux and Windows
 * Add GitHub Action to install and run tests after every push
-* Pimp up the README
 * Write smoke tests for saving/loading
 * Regression tests to ensure that base class objects and derived GUI objects are Liskov substitutable
 * Basic performance tests
