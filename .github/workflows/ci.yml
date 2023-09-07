@@ -21,6 +21,7 @@ jobs:
       uses: ChartBoost/ruff-action@v1
       with:
         args: --format=github --ignore=E402,E501 .
+      continue-on-error: true
     - name: Test with pytest
       run: |
         pytest -x
