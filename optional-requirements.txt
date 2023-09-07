@@ -1,5 +1,5 @@
 mypy
-pylint
+ruff
 pytest
 pyautogui
 pydirectinput

@@ -15,7 +15,6 @@
 
 # Development tasks:
 * Implement convolution-based learning model
-* Figure out pylint license compatibility issue (GPL vs MIT)
 * Duplicate same Confirm/Discard user logic on Tuning tab as on the other tabs?
 * Upon double click show the speaker's bias in all paradigm cells
 * Show unusual settings on special warning label in the agora's bottom right corner

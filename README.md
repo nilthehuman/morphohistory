@@ -24,7 +24,7 @@ provided in the [Installation instructions](#installation-instructions) below.
 | python        | 3.11.0 or newer   | the official Python interpreter to run the application | yes       |
 | kivy          | 2.0.0 or newer    | GUI library providing graphics and event services      | yes       |
 | mypy          | any (?)           | static analysis tool for type correctness              | no        |
-| pylint        | any (?)           | static analysis tool for software best practices       | no        |
+| ruff          | any (?)           | static analysis tool for software best practices       | no        |
 | pytest        | any (?)           | standard Python unit testing utility                   | no        |
 | pydirectinput | any (?)           | automatic mouse and keyboard input in tests (extended) | no        |
 | pyautogui     | any (?)           | automatic mouse and keyboard input in tests (fallback) | no        |

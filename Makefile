@@ -11,7 +11,7 @@ init_optional:
 	$(PYTHON) -m pip install -r optional-requirements.txt
 
 lint:
-	pylint src tests
+	ruff --ignore=E402,E501 src tests
 
 test:
 	pytest -x -ra
