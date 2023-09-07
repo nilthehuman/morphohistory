@@ -11,7 +11,7 @@ init_optional:
 	$(PYTHON) -m pip install -r optional-requirements.txt
 
 lint:
-	ruff --ignore=E402,E501 src tests
+	ruff --ignore=E402,E501,E741,F403 src tests
 
 test:
 	pytest -x -ra

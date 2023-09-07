@@ -19,7 +19,7 @@ jobs:
         pip install -r requirements.txt
     - name: Lint with ruff
       run: |
-        ruff --format=github --ignore=E402,E501 . | sed s/^::error/::warning/
+        ruff --format=github ruff --ignore=E402,E501,E741,F403 . | sed s/^::error/::warning/
       continue-on-error: true
     - name: Test with pytest
       run: |
