@@ -75,7 +75,6 @@ class _Cell(ABC):
 
 class _Paradigm(ABC):
     """A 2D or 5D matrix of competing noun of verb forms for given morphosyntactic contexts."""
-    # pylint: disable=no-member
 
     def __init__(self) -> None:
         self.para: Optional[list] = None

@@ -1,6 +1,5 @@
 """Main entry point of the application."""
 
-# pylint: disable=wildcard-import, unused-wildcard-import
 from os.path import dirname, join
 from platform import system
 from sys import path
