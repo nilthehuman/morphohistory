@@ -132,7 +132,7 @@ class ParadigmTable(GridLayout):
                     form_a_text_input = self.children[form_a_index]
                     form_b_index = get_text_input_index(num, case, 1)
                     form_b_text_input = self.children[form_b_index]
-                    if form_a_text_input.disabled == False and form_a_text_input.text != form_b_text_input.text:
+                    if not form_a_text_input.disabled and form_a_text_input.text != form_b_text_input.text:
                         prominence_index = get_text_input_index(num, case, 2)
                         prominence_text_input = self.children[prominence_index]
                         sum_prominence += float(prominence_text_input.text)

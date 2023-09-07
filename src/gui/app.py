@@ -19,7 +19,7 @@ from kivy.resources import resource_add_path, resource_find
 
 from .access_widgets import forall_widgets
 from .keyboardhandler import KeyboardHandler
-from .root import *
+from .root import TopTabbedPanel
 from .sim import *
 from .settings import *
 from .paradigm import *

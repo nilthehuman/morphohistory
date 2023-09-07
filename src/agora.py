@@ -7,7 +7,7 @@ from json import dumps, load
 from logging import debug, info, warning
 from typing import Callable, Optional, Self
 
-from .demos import DemoArguments, DemoFactory, DEMO_FACTORIES, DEFAULT_DEMO_ARGUMENTS
+from .demos import DemoArguments, DEMO_FACTORIES, DEFAULT_DEMO_ARGUMENTS
 from .paradigm import CellIndex, NounParadigm
 from .rng import RAND
 from .settings import SETTINGS

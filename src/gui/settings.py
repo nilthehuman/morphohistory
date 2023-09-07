@@ -373,7 +373,7 @@ class CustomSettings(Settings):
                     value_type = _SETTINGS_UI[child.key]['type']
                     if 'options' == value_type:
                         options = _SETTINGS_UI[child.key]['options']
-                        if not value in options:
+                        if value not in options:
                             error("Settings: Invalid option value '%s' given for %s, using '%s' instead." %
                                   (value, child.key, options[0]))
                             value = options[0]

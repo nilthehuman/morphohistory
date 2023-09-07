@@ -6,7 +6,7 @@ from logging import debug
 from .paradigm import CellIndex, NounParadigm
 from .rng import RAND
 from .settings import SETTINGS
-from typing import Optional, Self, TypedDict
+from typing import Self, TypedDict
 
 class Speaker:
     """A simulated individual within the speaking community."""
@@ -152,7 +152,8 @@ class Speaker:
             assert index == CellIndex()
             activated_cells = [cell_used]
         else:
-            activated = lambda c: c.alternates() and (form.startswith(c.form_a) or form.startswith(c.form_b))
+            def activated(c):
+                return c.alternates() and (form.startswith(c.form_a) or form.startswith(c.form_b))
             activated_cells = [cell for cell in self.para if activated(cell)]
         lambda_ = 1  # maximum conditioning (in a single cell)
         v_max = lambda_ * len(activated_cells)
@@ -175,7 +176,8 @@ class Speaker:
             assert index == CellIndex()
             activated_cells = [cell_used]
         else:
-            activated = lambda c: c.alternates() and (form.startswith(c.form_a) or form.startswith(c.form_b))
+            def activated(c):
+                return c.alternates() and (form.startswith(c.form_a) or form.startswith(c.form_b))
             activated_cells = [cell for cell in self.para if activated(cell)]
         lambda_ = 1  # maximum conditioning (in a single cell)
         v_max = lambda_ * len(activated_cells)

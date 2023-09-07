@@ -7,7 +7,7 @@ from time import gmtime, strftime, perf_counter
 from typing import Iterator
 
 from .agora import Agora
-from .demos import DemoArguments, DEMO_FACTORIES
+from .demos import DemoArguments
 from .settings import SETTINGS
 
 

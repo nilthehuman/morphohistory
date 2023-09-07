@@ -27,7 +27,8 @@ def mock_setup():
     _mock_button_layout.ids.iteration_counter.text = ''
     # I have no idea what I'm doing here really
     global get_button_layout
-    get_button_layout = lambda: _mock_button_layout
+    def get_button_layout():
+        return _mock_button_layout
     modules['morphohistory.src.gui.access_widgets'].get_button_layout = lambda: _mock_button_layout
     reload(modules['morphohistory.src.gui.sim'])
     # setup ends here

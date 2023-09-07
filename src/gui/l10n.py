@@ -77,7 +77,7 @@ def _substitute(string: str, l10n_dict: L10nDict) -> str:
         # here's a limited regex solution for posterity if the code above turns out to be brittle:
         #pattern = r"(?P<leading_brackets>\[.*\])(?P<stuff>[^\[\]]+)(?P<trailing_brackets>\[.*\])(?P<more_stuff>[^\[\]]+)"
         #parts = re.fullmatch(pattern, line)
-    loc_lines = [exclude_brackets(lambda l: l10n_dict[l], l) for l in string.split("\n")]
+    loc_lines = [exclude_brackets(lambda x: l10n_dict[x], line) for line in string.split("\n")]
     loc_string = "\n".join(loc_lines)
     return loc_string
 

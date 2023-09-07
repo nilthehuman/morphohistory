@@ -29,7 +29,7 @@ from kivy.uix.widget import Widget
 
 from .access_widgets import get_root, get_agora, get_agora_layout, get_button_layout, get_paradigm_table
 from .confirm import ApplyConfirmedLabel
-from .l10n import localize, localize_all_texts, LocalizedPopup
+from .l10n import localize, LocalizedPopup
 
 from ..settings import SETTINGS
 from ..agora import Agora
