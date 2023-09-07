@@ -39,7 +39,7 @@ fairly trivial by today's standards:
 
 | resource          | requirement                 |
 |:------------------|:----------------------------|
-| CPU               | Intel Core i3 or equivalent | 
+| CPU               | Intel Core i3 or equivalent |
 | RAM               | 500 MB                      |
 | Screen resolution | 800x600 or higher           |
 
@@ -243,16 +243,16 @@ Finally the user may specify the amount of repeated simulations to be performed 
 same starting conditions. The default amount of 100 is both performed relatively quickly and
 is practical because it translates directly to percentages.
 
-When the *Go* button is pressed the repeated simulations start and a small popup window 
-appears showing a progress bar that tracks the number of parameter configurations already 
-tested. The output is written to a text file in Comma-Separated Values format in the 
-application's directory where each line shows the aggregate outcomes from one specific 
+When the *Go* button is pressed the repeated simulations start and a small popup window
+appears showing a progress bar that tracks the number of parameter configurations already
+tested. The output is written to a text file in Comma-Separated Values format in the
+application's directory where each line shows the aggregate outcomes from one specific
 parameter configuration, in the following order:
 
 | our bias | their bias | starting experience | inner radius |  number of simulation runs where form A became dominant | number of simulation runs where form B became dominant | number of simulation runs where neither became dominant | number of simulation runs where both stayed roughly equally relevant |
 |:---------|:-----------|:--------------------|:-------------|:--------------------------------------------------------|:-------------------------------------------------------|:--------------------------------------------------------|:---------------------------------------------------------------------|
 
-The output file should contain as many lines as there are possible parameter combinations, 
+The output file should contain as many lines as there are possible parameter combinations,
 unless the user cancels the tuning process.
 
 ## Troubleshooting common issues
@@ -324,7 +324,7 @@ maximum number of iterations using the fast forward function is further limited 
 
 If you find any sort of bugs, errors or odd behaviours in the program that keep bothering you,
 or have a cool idea for a new feature, please consider filing an issue
-[on the official GitHub page](https://github.com/nilthehuman/morphohistory/issues) 
+[on the official GitHub page](https://github.com/nilthehuman/morphohistory/issues)
 or letting the maintainer know by email: my contacts are found on
 [the official webpage of the Hungarian Research Centre for Linguistics](https://nytud.hu/en/colleague/daniel-arato/profile).
 And if you mysteriously enjoy using the application in its incomplete state on the other hand,
