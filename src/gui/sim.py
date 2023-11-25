@@ -274,7 +274,7 @@ class SpeakerDot(Speaker, DragBehavior, Widget):
         self.nametag_on = False
         Window.bind(mouse_pos=self.on_mouse_pos)
         self.bind(pos=self.on_pos_changed)
-        self.bind(on_touch_up=self.on_right_click)
+        self.bind(on_touch_up=self.on_click)
 
     @classmethod
     def fromspeaker(cls, speaker: Speaker) -> Self:
@@ -312,14 +312,23 @@ class SpeakerDot(Speaker, DragBehavior, Widget):
         """Invalidate the whole distance calculation cache when any speaker is moved."""
         get_agora().clear_dist_cache()
 
-    def on_right_click(self, _instance, touch) -> None:
-        """Remove this speaker when right clicked."""
-        if touch.button == 'right' and self.collide_point(*touch.pos):
-            self.parent.remove_widget(self.nametag)
-            self.nametag_on = False
-            get_agora().remove_speakerdot(self)
-        else:
-            pass # no need to propagate upwards to DragBehavior
+    def on_click(self, _instance, touch) -> None:
+        """Show brain view if double clicked or remove this speaker if right clicked."""
+        if self.collide_point(*touch.pos):
+            if touch.button == 'right':
+                self.parent.remove_widget(self.nametag)
+                self.nametag_on = False
+                get_agora().remove_speakerdot(self)
+                return True
+            touch.grab(self)
+            if touch.is_double_tap and touch.grab_current is self:
+                touch.ungrab(self)
+                get_agora().stop_sim()
+                self.popup = Popup(title=f"Brain view #{self.n}", content=BrainViewTable(self),
+                                   size_hint=(0.8, 0.9))
+                self.popup.open()
+                return True
+        return False # no need to propagate upwards to DragBehavior
 
     def update_color(self, force_update: bool=False) -> None:
         """Refresh own color based on current paradigm bias."""
@@ -368,6 +377,23 @@ class NameTag(Label):
             return
         transformed_pos = get_agora_layout().transform_inv.transform_point(*pos, 0)
         self.pos = transformed_pos[0:2]
+
+class BrainViewTable(GridLayout):
+    """A popup table showing a specific Speaker's current idea of the paradigm."""
+
+    def __init__(self, speaker, **kwargs) -> None:
+        super().__init__(**kwargs)
+        self.columns = 8
+        self.rows = 14
+        for case in range(0, 14):
+            self.add_widget(Label(text=SETTINGS.paradigm.para[0][case].form_a))
+            self.add_widget(Label(text=str(round(speaker.para[0][case].bias_a, 3))))
+            self.add_widget(Label(text=SETTINGS.paradigm.para[0][case].form_b))
+            self.add_widget(Label(text=str(round(1 - speaker.para[0][case].bias_a, 3))))
+            self.add_widget(Label(text=SETTINGS.paradigm.para[1][case].form_a))
+            self.add_widget(Label(text=str(round(speaker.para[1][case].bias_a, 3))))
+            self.add_widget(Label(text=SETTINGS.paradigm.para[1][case].form_b))
+            self.add_widget(Label(text=str(round(1 - speaker.para[1][case].bias_a, 3))))
 
 class AgoraWidget(Widget, Agora):
     """An agora of speakers visualized on the screen."""
