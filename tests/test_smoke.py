@@ -7,7 +7,7 @@ from os.path import dirname, join
 import pyautogui
 try:
     import pydirectinput as input_module
-except ImportError:
+except (ImportError, AttributeError):
     import pyautogui as input_module
 import pytest
 from sys import path as sys_path
