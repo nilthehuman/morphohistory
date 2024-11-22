@@ -137,15 +137,43 @@ class Agora:
     def load_from_file(self, filepath: str) -> None:
         """Restore an Agora state previously written to file."""
         with open(filepath, 'r', encoding='utf-8') as stream:
-            loaded_dict = load(stream)
-        try:
-            speakers = [Speaker.from_dict(s) for s in loaded_dict['state']['speakers']]
-            sim_iteration_total = loaded_dict['state']['sim_iteration_total']
-            self.history = loaded_dict['history']
-        except KeyError:
-            # old file format had no history in it
-            speakers = [Speaker.from_dict(s) for s in loaded_dict['speakers']]
-            sim_iteration_total = loaded_dict['sim_iteration_total']
+            if filepath[-3:] == 'csv':
+                loaded_csv = stream.readlines()
+            else:
+                loaded_dict = load(stream)
+        if filepath[-3:] == 'csv':
+            # create speakers from a custom CSV format
+            sep_char = next((c for c in loaded_csv[0] if not c.isalnum()), ';')
+            all_coords = sum([list(filter(lambda val: ',' in val, row.split(sep_char))) for row in loaded_csv], [])
+            all_coords_parsed = [ list(map(float, coord.split(','))) for coord in all_coords ]
+            # N.B. latitude comes before longitude
+            mean_x = sum([c[1] for c in all_coords_parsed]) / len(all_coords_parsed)
+            mean_y = sum([c[0] for c in all_coords_parsed]) / len(all_coords_parsed)
+            speakers = []
+            for line in loaded_csv[1:]:  # skip the header line
+                if not bool(line) or '#' == line[0]:
+                    continue
+                record = line.split(sep_char)
+                # center speakers about middle of canvas
+                coords = tuple(map(float, record[4].split(',')))
+                pos = [300-10+50*(coords[1]-mean_x),
+                       300-10+50*(coords[0]-mean_y)]
+                while pos in map(lambda s: s.pos, speakers):
+                    pos[1] += 10
+                record[4] = pos
+                speakers.append(Speaker.from_csv(record))
+            sim_iteration_total = 0
+            # turn off all paradigm cells except one
+            SETTINGS.sim_single_cell = True
+        else:
+            try:
+                speakers = [Speaker.from_dict(s) for s in loaded_dict['state']['speakers']]
+                sim_iteration_total = loaded_dict['state']['sim_iteration_total']
+                self.history = loaded_dict['history']
+            except KeyError:
+                # old file format had no history in it
+                speakers = [Speaker.from_dict(s) for s in loaded_dict['speakers']]
+                sim_iteration_total = loaded_dict['sim_iteration_total']
         self.clear_speakers()
         self.load_speakers(speakers)
         self.state.sim_iteration_total = sim_iteration_total

@@ -49,6 +49,17 @@ class Speaker:
         return speaker_dict
 
     @classmethod
+    def from_csv(cls, speaker_csv) -> Self:
+        """Construct Speaker object from a record of a custom CSV format."""
+        name = speaker_csv[0]
+        pos = speaker_csv[4]
+        new_speaker = cls(name, pos, NounParadigm(), 1, False)
+        new_speaker.para.para[0][0].bias_a = float(speaker_csv[3])
+        new_speaker.para.para[0][0].form_a = 'NG'
+        new_speaker.para.para[0][0].form_b = 'VG'
+        return new_speaker
+
+    @classmethod
     def from_dict(cls, speaker_dict) -> Self:
         """Construct Speaker object from an imported JSON dictionary."""
         para = NounParadigm.from_dict(speaker_dict['para'])
