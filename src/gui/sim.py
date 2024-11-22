@@ -325,7 +325,7 @@ class SpeakerDot(Speaker, DragBehavior, Widget):
                 touch.ungrab(self)
                 get_agora().stop_sim()
                 self.popup = Popup(title=f"Brain view: {self.name}", content=BrainViewTable(self),
-                                   size_hint=(0.8, 0.9))
+                                   size_hint=(0.25, 0.15) if SETTINGS.sim_single_cell else (0.8, 0.9))
                 self.popup.open()
                 return True
         return False # no need to propagate upwards to DragBehavior
@@ -383,17 +383,25 @@ class BrainViewTable(GridLayout):
 
     def __init__(self, speaker, **kwargs) -> None:
         super().__init__(**kwargs)
-        self.columns = 8
-        self.rows = 14
-        for case in range(0, 14):
-            self.add_widget(Label(text=SETTINGS.paradigm.para[0][case].form_a))
-            self.add_widget(Label(text=str(round(speaker.para[0][case].bias_a, 3))))
-            self.add_widget(Label(text=SETTINGS.paradigm.para[0][case].form_b))
-            self.add_widget(Label(text=str(round(1 - speaker.para[0][case].bias_a, 3))))
-            self.add_widget(Label(text=SETTINGS.paradigm.para[1][case].form_a))
-            self.add_widget(Label(text=str(round(speaker.para[1][case].bias_a, 3))))
-            self.add_widget(Label(text=SETTINGS.paradigm.para[1][case].form_b))
-            self.add_widget(Label(text=str(round(1 - speaker.para[1][case].bias_a, 3))))
+        if SETTINGS.sim_single_cell:
+            self.columns = 4
+            self.rows = 1
+            self.add_widget(Label(text=SETTINGS.paradigm.para[0][0].form_a))
+            self.add_widget(Label(text=str(round(speaker.para[0][0].bias_a, 3))))
+            self.add_widget(Label(text=SETTINGS.paradigm.para[0][0].form_b))
+            self.add_widget(Label(text=str(round(1 - speaker.para[0][0].bias_a, 3))))
+        else:
+            self.columns = 8
+            self.rows = 14
+            for case in range(0, 14):
+                self.add_widget(Label(text=SETTINGS.paradigm.para[0][case].form_a))
+                self.add_widget(Label(text=str(round(speaker.para[0][case].bias_a, 3))))
+                self.add_widget(Label(text=SETTINGS.paradigm.para[0][case].form_b))
+                self.add_widget(Label(text=str(round(1 - speaker.para[0][case].bias_a, 3))))
+                self.add_widget(Label(text=SETTINGS.paradigm.para[1][case].form_a))
+                self.add_widget(Label(text=str(round(speaker.para[1][case].bias_a, 3))))
+                self.add_widget(Label(text=SETTINGS.paradigm.para[1][case].form_b))
+                self.add_widget(Label(text=str(round(1 - speaker.para[1][case].bias_a, 3))))
 
 class AgoraWidget(Widget, Agora):
     """An agora of speakers visualized on the screen."""
