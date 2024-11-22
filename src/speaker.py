@@ -10,9 +10,9 @@ from typing import Self, TypedDict
 
 class Speaker:
     """A simulated individual within the speaking community."""
-    def __init__(self, n: int, pos: tuple[float, float], para: NounParadigm,
+    def __init__(self, name: str, pos: tuple[float, float], para: NounParadigm,
                  experience: int=SETTINGS.starting_experience, is_broadcaster: bool=False) -> None:
-        self.n = n
+        self.name = name
         self.pos = pos
         self.para = para
         self.experience = experience
@@ -22,12 +22,12 @@ class Speaker:
     @classmethod
     def fromspeaker(cls, speaker: Self) -> Self:
         """Copy an existing Speaker."""
-        new_speaker = cls(speaker.n, speaker.pos, deepcopy(speaker.para),
+        new_speaker = cls(speaker.name, speaker.pos, deepcopy(speaker.para),
                           speaker.experience, speaker.is_broadcaster)
         return new_speaker
 
     @classmethod
-    def frombias(cls, n: int, pos: tuple[float, float], bias_a: float,
+    def frombias(cls, name: str, pos: tuple[float, float], bias_a: float,
                  experience: int=SETTINGS.starting_experience, is_broadcaster: bool=False) -> Self:
         """Construct a Speaker from a single bias value."""
         assert SETTINGS.paradigm.para is not None
@@ -38,7 +38,7 @@ class Speaker:
             para = deepcopy(SETTINGS.paradigm)
             for cell in para:
                 cell.bias_a = bias_a
-        new_speaker = cls(n, pos, para, experience, is_broadcaster)
+        new_speaker = cls(name, pos, para, experience, is_broadcaster)
         return new_speaker
 
     def to_dict(self):

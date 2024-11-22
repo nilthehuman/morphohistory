@@ -193,10 +193,10 @@ class Agora:
         for speaker in self.state.speakers:
             current_picks = []
             if self.pick:
-                current_picks += [self.pick['speaker'].n, self.pick['hearer'].n]
+                current_picks += [self.pick['speaker'].name, self.pick['hearer'].name]
             for pick in self.pick_queue:
-                current_picks += [pick['speaker'].n, pick['hearer'].n]
-            if speaker.n not in current_picks:
+                current_picks += [pick['speaker'].name, pick['hearer'].name]
+            if speaker.name not in current_picks:
                 speaker.passive_decay()
 
     def dominant_form(self) -> Optional[str]:
@@ -259,10 +259,10 @@ class Agora:
             elif SETTINGS.sim_influence_mutual:
                 reverse_pick = PairPick(speaker=self.pick['hearer'], hearer=self.pick['speaker'])
                 self.pick_queue.append(reverse_pick)
-        debug("Agora: %d picked to talk to %d" % (self.pick['speaker'].n, self.pick['hearer'].n))
+        debug("Agora: %s picked to talk to %s" % (self.pick['speaker'].name, self.pick['hearer'].name))
         cell, form_a_used = self.pick['speaker'].talk(self.pick)
-        self.history.append(self.HistoryItem(self.pick['speaker'].n,
-                                             self.pick['hearer'].n,
+        self.history.append(self.HistoryItem(self.pick['speaker'].name,
+                                             self.pick['hearer'].name,
                                              cell,
                                              form_a_used))
         if SETTINGS.sim_passive_decay:

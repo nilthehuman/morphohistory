@@ -264,13 +264,13 @@ class SpeakerDot(Speaker, DragBehavior, Widget):
 
     color = ColorProperty()
 
-    def __init__(self, n: int, pos: tuple[float, float], para: NounParadigm, experience: int, **kwargs) -> None:
-        Speaker.__init__(self, n, pos, para, experience, False)
+    def __init__(self, name: str, pos: tuple[float, float], para: NounParadigm, experience: int, **kwargs) -> None:
+        Speaker.__init__(self, name, pos, para, experience, False)
         DragBehavior.__init__(self, **kwargs)
         Widget.__init__(self, **kwargs)
         self.size = SETTINGS.speakerdot_size
         self.update_color()
-        self.nametag = NameTag(text=str(n) + ': ' + self.name_tag())
+        self.nametag = NameTag(text=str(name) + ': ' + self.name_tag())
         self.nametag_on = False
         Window.bind(mouse_pos=self.on_mouse_pos)
         self.bind(pos=self.on_pos_changed)
@@ -280,8 +280,8 @@ class SpeakerDot(Speaker, DragBehavior, Widget):
     def fromspeaker(cls, speaker: Speaker) -> Self:
         """Copy an existing Speaker."""
         if speaker.is_broadcaster:
-            return BroadcasterSpeakerDot(speaker.n, speaker.pos, deepcopy(speaker.para), speaker.experience)
-        return SpeakerDot(speaker.n, speaker.pos, deepcopy(speaker.para), speaker.experience)
+            return BroadcasterSpeakerDot(speaker.name, speaker.pos, deepcopy(speaker.para), speaker.experience)
+        return SpeakerDot(speaker.name, speaker.pos, deepcopy(speaker.para), speaker.experience)
 
     def on_mouse_pos(self, _window, pos: tuple[float, float]) -> None:
         """Show/hide NameTag on hover."""
@@ -299,12 +299,12 @@ class SpeakerDot(Speaker, DragBehavior, Widget):
         pos = get_agora_layout().transform_inv.transform_point(*pos, 0)
         if self.collide_point(pos[0], pos[1]):
             if not self.nametag_on:
-                debug("SpeakerDot: Turning on nametag for %d" % self.n)
-                self.nametag.text = str(self.n) + ': ' + self.name_tag()
+                debug("SpeakerDot: Turning on nametag for %s" % self.name)
+                self.nametag.text = str(self.name) + ': ' + self.name_tag()
                 self.parent.add_widget(self.nametag)
                 self.nametag_on = True
         elif self.nametag_on:
-            debug("SpeakerDot: Turning off nametag for %d" % self.n)
+            debug("SpeakerDot: Turning off nametag for %s" % self.name)
             self.parent.remove_widget(self.nametag)
             self.nametag_on = False
 
@@ -324,7 +324,7 @@ class SpeakerDot(Speaker, DragBehavior, Widget):
             if touch.is_double_tap and touch.grab_current is self:
                 touch.ungrab(self)
                 get_agora().stop_sim()
-                self.popup = Popup(title=f"Brain view #{self.n}", content=BrainViewTable(self),
+                self.popup = Popup(title=f"Brain view: {self.name}", content=BrainViewTable(self),
                                    size_hint=(0.8, 0.9))
                 self.popup.open()
                 return True
@@ -353,8 +353,8 @@ class SpeakerDot(Speaker, DragBehavior, Widget):
 class BroadcasterSpeakerDot(SpeakerDot):
     """The GUI representation of a broadcasting speaker who never listens to anyone."""
 
-    def __init__(self, n: int, pos: tuple[float, float], para: NounParadigm, experience: int, **kwargs):
-        super().__init__(n, pos, para, experience, **kwargs)
+    def __init__(self, name: int, pos: tuple[float, float], para: NounParadigm, experience: int, **kwargs):
+        super().__init__(name, pos, para, experience, **kwargs)
         self.is_broadcaster = True
         self.update_color()
 
