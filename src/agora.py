@@ -158,9 +158,17 @@ class Agora:
                 coords = tuple(map(float, record[4].split(',')))
                 pos = [300-10+50*(coords[1]-mean_x),
                        300-10+50*(coords[0]-mean_y)]
-                while pos in map(lambda s: s.pos, speakers):
-                    pos[1] += 10
-                record[4] = pos
+                offset = (0, 0)
+                radius = 10
+                while (pos[0] + offset[0], pos[1] + offset[1]) in map(lambda s: s.pos, speakers):
+                    for offset in set(sum([[(x, radius-x), (-x, radius-x),
+                                            (radius-x, x), (radius-x, -x),
+                                            (x, -radius+x), (-x, -radius+x),
+                                            (-radius+x, x), (-radius+x, -x)] for x in range(0, radius, 10)], [])):
+                        if (pos[0] + offset[0], pos[1] + offset[1]) not in map(lambda s: s.pos, speakers):
+                            break
+                    radius += 10
+                record[4] = (pos[0] + offset[0], pos[1] + offset[1])
                 speakers.append(Speaker.from_csv(record))
             sim_iteration_total = 0
             # turn off all paradigm cells except one
