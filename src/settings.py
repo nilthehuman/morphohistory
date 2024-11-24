@@ -7,7 +7,12 @@ try:
 except ImportError:
     from strenum import StrEnum
 
-from kivy.graphics import Color
+from sys import modules
+if 'kivy.graphics' in modules:
+    Color = kivy.graphics.Color
+else:
+    def Color(*args):
+        return tuple.__new__(tuple, args)
 
 from .paradigm import NounParadigm
 
