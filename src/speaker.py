@@ -145,14 +145,15 @@ class Speaker:
             SETTINGS.LearningModel.RW_WEIGHTED : self._hear_noun_rw_weighted
         }
         learning_model_funcs[SETTINGS.sim_learning_model](index, form_a_used)
-        self.experience = self.experience + 1
+        self.experience += 1
         self.principal_bias_cached = None
 
     def _hear_noun_harmonic(self, index: CellIndex, form_a_used: bool) -> None:
         """The n'th interaction has +-1/n impact on the exact cell's bias."""
         delta = (1 if form_a_used else -1) / (self.experience + 1)
         self.para.nudge(delta, index)
-        self.para.propagate(delta, index)
+        if not SETTINGS.sim_single_cell:
+            self.para.propagate(delta, index)
 
     def _hear_noun_rw_vanilla(self, index: CellIndex, form_a_used: bool) -> None:
         """Vanilla implementation of the Rescorla-Wagner learning model.
